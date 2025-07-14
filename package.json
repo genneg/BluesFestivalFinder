@@ -11,16 +11,19 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "husky",
+    "docker:dev": "docker-compose up --build",
+    "docker:dev:detached": "docker-compose up --build -d",
+    "docker:prod": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build",
+    "docker:stop": "docker-compose down",
+    "docker:clean": "docker-compose down -v --rmi all",
+    "docker:logs": "docker-compose logs -f",
+    "docker:db": "docker-compose up postgres redis -d",
+    "docker:test": "docker-compose exec web npm test"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,css,md}": [
-      "prettier --write"
-    ]
+    "*.{js,jsx,ts,tsx}": "eslint --fix",
+    "*.{js,jsx,ts,tsx,json,css,md}": "prettier --write"
   },
   "dependencies": {
     "clsx": "^2.1.1",
