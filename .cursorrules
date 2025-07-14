@@ -1,0 +1,51 @@
+# Cursor AI Assistant Rules for Blues Dance Festival Finder
+
+## Project Context
+- Full-stack web application for discovering blues dance festivals
+- Tech stack: Next.js 14+, TypeScript, Tailwind CSS, PostgreSQL, Prisma
+- Focus on mobile-first design and performance optimization
+
+## Code Style & Standards
+- Use TypeScript for all JavaScript code
+- Follow ESLint and Prettier configurations
+- Use functional components with React hooks
+- Prefer composition over inheritance
+- Use meaningful variable and function names
+
+## File Organization
+- Components in `/src/components/` with co-located styles if needed
+- API routes in `/src/app/api/`
+- Types in `/src/types/`
+- Utilities in `/src/lib/`
+- Follow Next.js App Router conventions
+
+## Component Guidelines
+- Create reusable UI components
+- Use Tailwind CSS for styling
+- Implement proper TypeScript interfaces
+- Include proper error handling and loading states
+- Follow accessibility best practices
+
+## Database & API
+- Use Prisma for database operations
+- Follow RESTful API conventions
+- Implement proper error handling
+- Use proper HTTP status codes
+- Include input validation and sanitization
+
+## Performance
+- Optimize images with Next.js Image component
+- Implement proper caching strategies
+- Use lazy loading where appropriate
+- Minimize bundle size
+
+## Testing
+- Write unit tests for utilities and business logic
+- Include component tests for critical UI components
+- Test API endpoints thoroughly
+
+## Security
+- Never expose sensitive environment variables
+- Implement proper authentication and authorization
+- Validate all user inputs
+- Follow security best practices for web applications
