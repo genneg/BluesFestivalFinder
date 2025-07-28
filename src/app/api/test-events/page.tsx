@@ -67,10 +67,10 @@ export default function TestEventsPage() {
         setTestResults(prev => ({
           ...prev,
           api: true,
-          database: data.data?.events.length > 0,
+          database: data.data?.events.length > 0 ?? null,
           transformation: data.data?.events.every(event => 
             event.id && typeof event.startDate === 'string' && typeof event.endDate === 'string'
-          )
+          ) ?? null
         }))
       } else {
         setError(data.error || 'Failed to fetch events')
