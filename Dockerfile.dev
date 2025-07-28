@@ -1,5 +1,5 @@
 # Development Dockerfile for Blues Dance Festival Finder
-FROM node:18-alpine
+FROM node:24-alpine
 
 # Install dependencies for development
 RUN apk add --no-cache libc6-compat curl
