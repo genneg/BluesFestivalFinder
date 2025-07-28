@@ -3,12 +3,9 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { FestivalCardEnhanced } from '@/components/features/FestivalCardEnhanced'
-import { ArtistCardEnhanced } from '@/components/features/ArtistCardEnhanced'
+import { EventCard } from '@/components/features/EventCard'
 import { BottomNavigationEnhanced } from '@/components/layout/BottomNavigationEnhanced'
-import { SearchBarSimple } from '@/components/features/SearchBarSimple'
 import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
 import { Music, Sparkles, TrendingUp } from 'lucide-react'
 
 // Types for API responses
@@ -20,37 +17,47 @@ interface Festival {
   startDate: string
   endDate: string
   imageUrl?: string | null
-  pricing?: Array<{
-    price: number | null
-    currency: string | null
-    type: string | null
+  image?: string | null
+  prices?: Array<{
+    amount: number
+    currency: string
+    type: string
   }>
   venue?: {
     name: string | null
-    address: string | null
+    city: string
+    country: string
   } | null
   style: string | null
+  description?: string
+  teachers?: Array<{
+    id: string
+    name: string
+  }>
+  musicians?: Array<{
+    id: string
+    name: string
+  }>
+  website?: string
 }
 
-interface Artist {
+interface Teacher {
   id: string
   name: string
   bio?: string | null
   specialties?: string[]
-  genres?: string[]
   imageUrl?: string | null
 }
 
 export default function Home() {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState("home")
-  const [selectedCategory, setSelectedCategory] = useState("festivals")
   const [festivals, setFestivals] = useState<Festival[]>([])
-  const [artists, setArtists] = useState<Artist[]>([])
+  const [teachers, setTeachers] = useState<Teacher[]>([])
   const [isLoadingFestivals, setIsLoadingFestivals] = useState(true)
-  const [isLoadingArtists, setIsLoadingArtists] = useState(true)
+  const [isLoadingTeachers, setIsLoadingTeachers] = useState(true)
   const [festivalsError, setFestivalsError] = useState<string | null>(null)
-  const [artistsError, setArtistsError] = useState<string | null>(null)
+  const [teachersError, setTeachersError] = useState<string | null>(null)
 
   const handleSearch = (query: string) => {
     router.push(`/search?q=${encodeURIComponent(query)}`)
@@ -80,69 +87,29 @@ export default function Home() {
     fetchFestivals()
   }, [])
 
-  // Fetch artists from API
+  // Fetch teachers from API
   useEffect(() => {
-    const fetchArtists = async () => {
+    const fetchTeachers = async () => {
       try {
-        setIsLoadingArtists(true)
+        setIsLoadingTeachers(true)
         const response = await fetch('/api/teachers?limit=2')
         const data = await response.json()
         
         if (data.success) {
-          setArtists(data.data.teachers)
+          setTeachers(data.data.teachers)
         } else {
-          setArtistsError('Failed to load artists')
+          setTeachersError('Failed to load teachers')
         }
       } catch (error) {
-        setArtistsError('Failed to load artists')
-        console.error('Error fetching artists:', error)
+        setTeachersError('Failed to load teachers')
+        console.error('Error fetching teachers:', error)
       } finally {
-        setIsLoadingArtists(false)
+        setIsLoadingTeachers(false)
       }
     }
 
-    fetchArtists()
+    fetchTeachers()
   }, [])
-
-  // Transform festival data for FestivalCardEnhanced component
-  const transformFestivalForCard = (festival: Festival) => {
-    const startDate = new Date(festival.startDate)
-    const endDate = new Date(festival.endDate)
-    const dateRange = `${startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}-${endDate.getDate()}`
-    
-    const price = festival.pricing?.[0]?.price 
-      ? `${festival.pricing[0].currency || '$'}${festival.pricing[0].price}`
-      : 'TBA'
-    
-    return {
-      id: festival.id,
-      title: festival.name,
-      location: `${festival.city}, ${festival.country}`,
-      date: dateRange,
-      price,
-      genre: festival.style || 'Blues',
-      featured: true,
-      attendees: 0,
-      rating: 4.8,
-      imageUrl: festival.imageUrl || "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop",
-      artists: []
-    }
-  }
-
-  // Transform artist data for ArtistCardEnhanced component
-  const transformArtistForCard = (artist: Artist) => {
-    return {
-      id: artist.id,
-      name: artist.name,
-      instrument: artist.specialties?.[0] || 'Teacher',
-      location: 'Various',
-      nextShow: 'TBA',
-      followers: 0,
-      imageUrl: artist.imageUrl || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=200&fit=crop",
-      genres: artist.specialties || ['Blues'],
-      isFollowing: false
-    }
-  }
 
   const renderContent = () => {
     return (
@@ -170,17 +137,17 @@ export default function Home() {
           <div className="stats-card">
             <Music className="w-5 h-5 text-primary mx-auto mb-2" />
             <p className="text-2xl font-bold text-primary">127</p>
-            <p className="text-sm font-medium text-black">Festivals</p>
+            <p className="text-sm font-medium text-white">Festivals</p>
           </div>
           <div className="stats-card">
             <TrendingUp className="w-5 h-5 text-primary mx-auto mb-2" />
             <p className="text-2xl font-bold text-primary">1.2k</p>
-            <p className="text-sm font-medium text-black">Artists</p>
+            <p className="text-sm font-medium text-white">Artists</p>
           </div>
           <div className="stats-card">
             <Sparkles className="w-5 h-5 text-primary mx-auto mb-2" />
             <p className="text-2xl font-bold text-primary">89k</p>
-            <p className="text-sm font-medium text-black">Music Lovers</p>
+            <p className="text-sm font-medium text-white">Music Lovers</p>
           </div>
         </div>
 
@@ -222,7 +189,7 @@ export default function Home() {
             )}
             
             {!isLoadingFestivals && !festivalsError && festivals.map((festival) => (
-              <FestivalCardEnhanced key={festival.id} {...transformFestivalForCard(festival)} />
+              <EventCard key={festival.id} event={festival} />
             ))}
             
             {!isLoadingFestivals && !festivalsError && festivals.length === 0 && (
@@ -233,34 +200,34 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Artists Section */}
+        {/* Teachers Section */}
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h3 className="font-playfair text-2xl md:text-3xl font-semibold text-white">Trending Artists</h3>
-            <Link href="/musicians">
+            <h3 className="font-playfair text-2xl md:text-3xl font-semibold text-white">Featured Teachers</h3>
+            <Link href="/teachers">
               <Button variant="ghost" size="sm" className="text-primary">
                 View All
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-1 gap-6">
-            {isLoadingArtists && (
+          <div className="space-y-4">
+            {isLoadingTeachers && (
               <div className="card p-8 text-center">
                 <div className="spinner mx-auto mb-4"></div>
-                <p className="text-white/80">Finding legendary blues teachers and musicians...</p>
+                <p className="text-white/80">Finding legendary blues teachers...</p>
                 <p className="text-white/60 text-sm mt-2">Curating profiles from the global blues community</p>
               </div>
             )}
             
-            {artistsError && (
+            {teachersError && (
               <div className="card p-6 border-red-600/30 bg-red-900/20">
                 <div className="flex items-center mb-3">
                   <svg className="w-5 h-5 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                   </svg>
-                  <h4 className="text-red-300 font-medium">Unable to load artists</h4>
+                  <h4 className="text-red-300 font-medium">Unable to load teachers</h4>
                 </div>
-                <p className="text-red-200 text-sm mb-3">We're having trouble connecting to our artist database.</p>
+                <p className="text-red-200 text-sm mb-3">We're having trouble connecting to our teacher database.</p>
                 <button 
                   onClick={() => window.location.reload()} 
                   className="btn-secondary btn-sm"
@@ -270,13 +237,40 @@ export default function Home() {
               </div>
             )}
             
-            {!isLoadingArtists && !artistsError && artists.map((artist) => (
-              <ArtistCardEnhanced key={artist.id} {...transformArtistForCard(artist)} />
+            {!isLoadingTeachers && !teachersError && teachers.map((teacher) => (
+              <Link key={teacher.id} href={`/teachers/${teacher.id}`}>
+                <div className="card p-4 hover:bg-white/5 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary/30 to-primary/10 rounded-full flex items-center justify-center">
+                      {teacher.imageUrl ? (
+                        <img 
+                          src={teacher.imageUrl} 
+                          alt={teacher.name}
+                          className="w-full h-full object-cover rounded-full"
+                        />
+                      ) : (
+                        <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-white">{teacher.name}</h4>
+                      {teacher.specialties && teacher.specialties.length > 0 && (
+                        <p className="text-sm text-white/60">{teacher.specialties.join(', ')}</p>
+                      )}
+                    </div>
+                    <svg className="w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
             ))}
             
-            {!isLoadingArtists && !artistsError && artists.length === 0 && (
+            {!isLoadingTeachers && !teachersError && teachers.length === 0 && (
               <div className="card p-8 text-center">
-                <p className="text-white/80">No artists found</p>
+                <p className="text-white/80">No teachers found</p>
               </div>
             )}
           </div>

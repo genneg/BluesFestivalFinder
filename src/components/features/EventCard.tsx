@@ -34,7 +34,7 @@ export function EventCard({ event, className }: EventCardProps) {
     >
       <CardContent className="p-0">
         {/* Event Image */}
-        <div className="relative h-48 w-full overflow-hidden rounded-t-lg bg-gray-100">
+        <div className="relative h-48 w-full overflow-hidden rounded-t-lg bg-gray-800">
           {getImageUrl() ? (
             <img
               src={getImageUrl()!}
