@@ -8,8 +8,19 @@ import { apiResponse, apiError, handleApiError } from '@/lib/api/utils'
 
 export async function GET(request: NextRequest) {
   try {
-    const issues = []
-    const fixes = []
+    const issues: Array<{
+      type: string
+      id: string
+      name: string
+      imageUrl: string
+      issue: string
+    }> = []
+    const fixes: Array<{
+      type: string
+      id: string
+      name: string
+      action: string
+    }> = []
 
     // Check events
     const events = await db.event.findMany({
@@ -132,7 +143,12 @@ export async function POST(request: NextRequest) {
       return apiError('Invalid action. Use "remove-invalid-references"', 400)
     }
 
-    const fixes = []
+    const fixes: Array<{
+      type: string
+      id: string
+      name: string
+      action: string
+    }> = []
 
     // Fix events with missing images
     const events = await db.event.findMany({
