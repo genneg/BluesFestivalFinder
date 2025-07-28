@@ -3,18 +3,23 @@
   "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "es5",
-  "printWidth": 80,
+  "printWidth": 100,
   "useTabs": false,
   "bracketSpacing": true,
   "arrowParens": "avoid",
   "endOfLine": "lf",
+  "bracketSameLine": false,
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": false,
   "importOrder": [
     "^react$",
     "^next",
     "<THIRD_PARTY_MODULES>",
+    "^@festival-scout/",
     "^@/",
     "^[./]"
   ],
   "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
   "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Event Image Loading</title>
+    <style>
+        .event-card {
+            width: 300px;
+            height: 200px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px;
+            display: inline-block;
+        }
+        .event-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        body {
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Event Image Loading</h1>
+    
+    <h2>Event Image (should work - file exists):</h2>
+    <div class="event-card">
+        <img src="http://localhost:3000/api/uploads/events/083e3db9-94ea-4ca2-abe8-de50d1629cbc.png" alt="Lazy Blues 2025" onerror="console.log('Image failed to load:', this.src)">
+    </div>
+
+    <h2>Teacher Images (should show placeholders):</h2>
+    <div style="display: flex; flex-wrap: wrap;">
+        <div class="event-card">
+            <img src="http://localhost:3000/api/uploads/teachers/34738d98-89b2-4507-8a6f-73e70a53aa66.jpg" alt="Cédric & Caroline" onerror="console.log('Teacher image failed to load:', this.src)">
+        </div>
+        
+        <div class="event-card">
+            <img src="http://localhost:3000/api/uploads/teachers/f0f3db37-b429-43a0-9b4d-7c6d066bff8a.jpg" alt="Annette Kühnle" onerror="console.log('Teacher image failed to load:', this.src)">
+        </div>
+        
+        <div class="event-card">
+            <img src="http://localhost:3000/api/uploads/teachers/d1c90dcb-e493-45de-937d-784e23111232.jpg" alt="Edmilson Botelho" onerror="console.log('Teacher image failed to load:', this.src)">
+        </div>
+    </div>
+
+    <p>Open browser dev tools to see any error messages. The event image should load, teacher images should show placeholders.</p>
+</body>
+</html>

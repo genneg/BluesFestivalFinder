@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id                    Int                    @id @default(autoincrement())
+  name                  String                 @db.VarChar(255)
+  from_date             DateTime               @db.Date
+  to_date               DateTime               @db.Date
+  country               String                 @db.VarChar(100)
+  city                  String                 @db.VarChar(100)
+  website               String?                @db.VarChar(500)
+  style                 String?                @db.VarChar(100)
+  description           String?
+  ai_quality_score      Int?
+  ai_completeness_score Int?
+  extraction_method     String?                @db.VarChar(50)
+  created_at            DateTime?              @default(now()) @db.Timestamptz(6)
+  updated_at            DateTime?              @default(now()) @db.Timestamptz(6)
+  image_url             String?                @db.VarChar(500)
+  event_musicians       event_musicians[]
+  event_prices          event_prices[]
+  event_teachers        ExternalEventTeacher[]
+  venues                ExternalEventVenue[]
+
+  @@index([country, city], map: "idx_events_country_city")
+  @@index([created_at], map: "idx_events_created_at")
+  @@index([from_date, to_date], map: "idx_events_dates")
+  @@index([name], map: "idx_events_name")
+  @@map("events")
+}
+
+model ExternalEventTeacher {
+  event_id   Int
+  teacher_id Int
+  role       String? @db.VarChar(100)
+  events     Event   @relation(fields: [event_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  teachers   Teacher @relation(fields: [teacher_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([event_id, teacher_id])
+  @@map("event_teachers")
+}
+
+model ExternalEventVenue {
+  id       Int     @id @default(autoincrement())
+  event_id Int?
+  name     String? @db.VarChar(255)
+  address  String?
+  type     String? @db.VarChar(50)
+  events   Event?  @relation(fields: [event_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("venues")
+}
+
+model Teacher {
+  id                 Int                    @id @default(autoincrement())
+  name               String                 @db.VarChar(255)
+  bio                String?
+  website            String?                @db.VarChar(500)
+  ai_bio_summary     String?
+  ai_relevance_score Int?
+  image_url          String?
+  event_teachers     ExternalEventTeacher[]
+
+  @@map("teachers")
+}
+
+model Musician {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(255)
+  slug            String            @unique @db.VarChar(255)
+  bio             String?
+  avatar          String?           @db.VarChar(500)
+  verified        Boolean?          @default(false)
+  instruments     String[]
+  yearsActive     Int?
+  website         String?           @db.VarChar(500)
+  email           String?           @db.VarChar(255)
+  followerCount   Int?              @default(0)
+  eventCount      Int?              @default(0)
+  createdAt       DateTime?         @default(now()) @db.Timestamptz(6)
+  updatedAt       DateTime?         @default(now()) @updatedAt @db.Timestamptz(6)
+  image_url       String?
+  event_musicians event_musicians[]
+
+  @@map("musicians")
+}
+
+model event_musicians {
+  id          Int       @id @default(autoincrement())
+  event_id    Int?
+  musician_id Int?
+  role        String?   @db.VarChar(100)
+  set_times   String[]
+  created_at  DateTime? @default(now()) @db.Timestamptz(6)
+  events      Event?    @relation(fields: [event_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  musicians   Musician? @relation(fields: [musician_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model event_prices {
+  id          Int       @id @default(autoincrement())
+  event_id    Int?
+  type        String    @db.VarChar(100)
+  amount      Decimal   @db.Decimal(10, 2)
+  currency    String?   @default("EUR") @db.VarChar(10)
+  deadline    DateTime? @db.Date
+  description String?
+  available   Boolean?  @default(true)
+  created_at  DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime? @default(now()) @db.Timestamptz(6)
+  events      Event?    @relation(fields: [event_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model social_media {
+  id             Int       @id @default(autoincrement())
+  entity_type    String    @db.VarChar(20)
+  entity_id      Int
+  platform       String    @db.VarChar(50)
+  url            String    @db.VarChar(500)
+  username       String?   @db.VarChar(100)
+  is_verified    Boolean?  @default(false)
+  follower_count Int?      @default(0)
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@unique([entity_type, entity_id, platform])
+  @@index([entity_type, entity_id], map: "idx_social_media_entity")
+  @@index([platform], map: "idx_social_media_platform")
+}
