@@ -139,9 +139,9 @@ export async function createUserWithPassword(userData: {
         verified: false,
         preferences: {
           create: {
-            emailNotifications: true,
-            pushNotifications: true,
-            newEventNotifications: true,
+            email_notifications: true,
+            push_notifications: true,
+            new_event_notifications: true,
             deadlineReminders: true,
             weeklyDigest: true,
             followingUpdates: true,

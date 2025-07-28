@@ -144,7 +144,7 @@ export async function GET(request: NextRequest) {
       const searchTerm = searchQuery.toLowerCase()
       return musician.name.toLowerCase().includes(searchTerm) ||
              musician.bio?.toLowerCase().includes(searchTerm) ||
-             musician.genre.some(genre => 
+             musician.genre?.some(genre => 
                genre.toLowerCase().includes(searchTerm)
              )
     })
@@ -154,7 +154,7 @@ export async function GET(request: NextRequest) {
       const genreArray = params.genre.split(',').map(g => g.trim())
       filteredMusicians = filteredMusicians.filter(musician =>
         genreArray.some(genre =>
-          musician.genre.some(musicianGenre =>
+          musician.genre?.some(musicianGenre =>
             musicianGenre.toLowerCase().includes(genre.toLowerCase())
           )
         )

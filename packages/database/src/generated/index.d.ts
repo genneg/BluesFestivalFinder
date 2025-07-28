@@ -49,6 +49,41 @@ export type event_musicians = $Result.DefaultSelection<Prisma.$event_musiciansPa
  */
 export type event_prices = $Result.DefaultSelection<Prisma.$event_pricesPayload>
 /**
+ * Model User
+ * 
+ */
+export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model UserPreferences
+ * 
+ */
+export type UserPreferences = $Result.DefaultSelection<Prisma.$UserPreferencesPayload>
+/**
+ * Model SavedSearch
+ * 
+ */
+export type SavedSearch = $Result.DefaultSelection<Prisma.$SavedSearchPayload>
+/**
+ * Model UserFollowTeacher
+ * 
+ */
+export type UserFollowTeacher = $Result.DefaultSelection<Prisma.$UserFollowTeacherPayload>
+/**
+ * Model UserFollowMusician
+ * 
+ */
+export type UserFollowMusician = $Result.DefaultSelection<Prisma.$UserFollowMusicianPayload>
+/**
+ * Model UserFollowEvent
+ * 
+ */
+export type UserFollowEvent = $Result.DefaultSelection<Prisma.$UserFollowEventPayload>
+/**
+ * Model UserNotification
+ * 
+ */
+export type UserNotification = $Result.DefaultSelection<Prisma.$UserNotificationPayload>
+/**
  * Model social_media
  * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
  */
@@ -246,6 +281,76 @@ export class PrismaClient<
     * ```
     */
   get event_prices(): Prisma.event_pricesDelegate<ExtArgs>;
+
+  /**
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
+    * ```
+    */
+  get user(): Prisma.UserDelegate<ExtArgs>;
+
+  /**
+   * `prisma.userPreferences`: Exposes CRUD operations for the **UserPreferences** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserPreferences
+    * const userPreferences = await prisma.userPreferences.findMany()
+    * ```
+    */
+  get userPreferences(): Prisma.UserPreferencesDelegate<ExtArgs>;
+
+  /**
+   * `prisma.savedSearch`: Exposes CRUD operations for the **SavedSearch** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SavedSearches
+    * const savedSearches = await prisma.savedSearch.findMany()
+    * ```
+    */
+  get savedSearch(): Prisma.SavedSearchDelegate<ExtArgs>;
+
+  /**
+   * `prisma.userFollowTeacher`: Exposes CRUD operations for the **UserFollowTeacher** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserFollowTeachers
+    * const userFollowTeachers = await prisma.userFollowTeacher.findMany()
+    * ```
+    */
+  get userFollowTeacher(): Prisma.UserFollowTeacherDelegate<ExtArgs>;
+
+  /**
+   * `prisma.userFollowMusician`: Exposes CRUD operations for the **UserFollowMusician** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserFollowMusicians
+    * const userFollowMusicians = await prisma.userFollowMusician.findMany()
+    * ```
+    */
+  get userFollowMusician(): Prisma.UserFollowMusicianDelegate<ExtArgs>;
+
+  /**
+   * `prisma.userFollowEvent`: Exposes CRUD operations for the **UserFollowEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserFollowEvents
+    * const userFollowEvents = await prisma.userFollowEvent.findMany()
+    * ```
+    */
+  get userFollowEvent(): Prisma.UserFollowEventDelegate<ExtArgs>;
+
+  /**
+   * `prisma.userNotification`: Exposes CRUD operations for the **UserNotification** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserNotifications
+    * const userNotifications = await prisma.userNotification.findMany()
+    * ```
+    */
+  get userNotification(): Prisma.UserNotificationDelegate<ExtArgs>;
 
   /**
    * `prisma.social_media`: Exposes CRUD operations for the **social_media** model.
@@ -704,6 +809,13 @@ export namespace Prisma {
     Musician: 'Musician',
     event_musicians: 'event_musicians',
     event_prices: 'event_prices',
+    User: 'User',
+    UserPreferences: 'UserPreferences',
+    SavedSearch: 'SavedSearch',
+    UserFollowTeacher: 'UserFollowTeacher',
+    UserFollowMusician: 'UserFollowMusician',
+    UserFollowEvent: 'UserFollowEvent',
+    UserNotification: 'UserNotification',
     social_media: 'social_media'
   };
 
@@ -720,7 +832,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "event" | "externalEventTeacher" | "externalEventVenue" | "teacher" | "musician" | "event_musicians" | "event_prices" | "social_media"
+      modelProps: "event" | "externalEventTeacher" | "externalEventVenue" | "teacher" | "musician" | "event_musicians" | "event_prices" | "user" | "userPreferences" | "savedSearch" | "userFollowTeacher" | "userFollowMusician" | "userFollowEvent" | "userNotification" | "social_media"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1214,6 +1326,496 @@ export namespace Prisma {
           }
         }
       }
+      User: {
+        payload: Prisma.$UserPayload<ExtArgs>
+        fields: Prisma.UserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          findFirst: {
+            args: Prisma.UserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          findMany: {
+            args: Prisma.UserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          create: {
+            args: Prisma.UserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          createMany: {
+            args: Prisma.UserCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          delete: {
+            args: Prisma.UserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          update: {
+            args: Prisma.UserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          aggregate: {
+            args: Prisma.UserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUser>
+          }
+          groupBy: {
+            args: Prisma.UserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserCountArgs<ExtArgs>
+            result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserPreferences: {
+        payload: Prisma.$UserPreferencesPayload<ExtArgs>
+        fields: Prisma.UserPreferencesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserPreferencesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPreferencesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserPreferencesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPreferencesPayload>
+          }
+          findFirst: {
+            args: Prisma.UserPreferencesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPreferencesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserPreferencesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPreferencesPayload>
+          }
+          findMany: {
+            args: Prisma.UserPreferencesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPreferencesPayload>[]
+          }
+          create: {
+            args: Prisma.UserPreferencesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPreferencesPayload>
+          }
+          createMany: {
+            args: Prisma.UserPreferencesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserPreferencesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPreferencesPayload>[]
+          }
+          delete: {
+            args: Prisma.UserPreferencesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPreferencesPayload>
+          }
+          update: {
+            args: Prisma.UserPreferencesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPreferencesPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserPreferencesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserPreferencesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserPreferencesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPreferencesPayload>
+          }
+          aggregate: {
+            args: Prisma.UserPreferencesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserPreferences>
+          }
+          groupBy: {
+            args: Prisma.UserPreferencesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserPreferencesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserPreferencesCountArgs<ExtArgs>
+            result: $Utils.Optional<UserPreferencesCountAggregateOutputType> | number
+          }
+        }
+      }
+      SavedSearch: {
+        payload: Prisma.$SavedSearchPayload<ExtArgs>
+        fields: Prisma.SavedSearchFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SavedSearchFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedSearchPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SavedSearchFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedSearchPayload>
+          }
+          findFirst: {
+            args: Prisma.SavedSearchFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedSearchPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SavedSearchFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedSearchPayload>
+          }
+          findMany: {
+            args: Prisma.SavedSearchFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedSearchPayload>[]
+          }
+          create: {
+            args: Prisma.SavedSearchCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedSearchPayload>
+          }
+          createMany: {
+            args: Prisma.SavedSearchCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SavedSearchCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedSearchPayload>[]
+          }
+          delete: {
+            args: Prisma.SavedSearchDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedSearchPayload>
+          }
+          update: {
+            args: Prisma.SavedSearchUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedSearchPayload>
+          }
+          deleteMany: {
+            args: Prisma.SavedSearchDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SavedSearchUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SavedSearchUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SavedSearchPayload>
+          }
+          aggregate: {
+            args: Prisma.SavedSearchAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSavedSearch>
+          }
+          groupBy: {
+            args: Prisma.SavedSearchGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SavedSearchGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SavedSearchCountArgs<ExtArgs>
+            result: $Utils.Optional<SavedSearchCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserFollowTeacher: {
+        payload: Prisma.$UserFollowTeacherPayload<ExtArgs>
+        fields: Prisma.UserFollowTeacherFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserFollowTeacherFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowTeacherPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserFollowTeacherFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowTeacherPayload>
+          }
+          findFirst: {
+            args: Prisma.UserFollowTeacherFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowTeacherPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserFollowTeacherFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowTeacherPayload>
+          }
+          findMany: {
+            args: Prisma.UserFollowTeacherFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowTeacherPayload>[]
+          }
+          create: {
+            args: Prisma.UserFollowTeacherCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowTeacherPayload>
+          }
+          createMany: {
+            args: Prisma.UserFollowTeacherCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserFollowTeacherCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowTeacherPayload>[]
+          }
+          delete: {
+            args: Prisma.UserFollowTeacherDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowTeacherPayload>
+          }
+          update: {
+            args: Prisma.UserFollowTeacherUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowTeacherPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserFollowTeacherDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserFollowTeacherUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserFollowTeacherUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowTeacherPayload>
+          }
+          aggregate: {
+            args: Prisma.UserFollowTeacherAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserFollowTeacher>
+          }
+          groupBy: {
+            args: Prisma.UserFollowTeacherGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserFollowTeacherGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserFollowTeacherCountArgs<ExtArgs>
+            result: $Utils.Optional<UserFollowTeacherCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserFollowMusician: {
+        payload: Prisma.$UserFollowMusicianPayload<ExtArgs>
+        fields: Prisma.UserFollowMusicianFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserFollowMusicianFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowMusicianPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserFollowMusicianFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowMusicianPayload>
+          }
+          findFirst: {
+            args: Prisma.UserFollowMusicianFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowMusicianPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserFollowMusicianFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowMusicianPayload>
+          }
+          findMany: {
+            args: Prisma.UserFollowMusicianFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowMusicianPayload>[]
+          }
+          create: {
+            args: Prisma.UserFollowMusicianCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowMusicianPayload>
+          }
+          createMany: {
+            args: Prisma.UserFollowMusicianCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserFollowMusicianCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowMusicianPayload>[]
+          }
+          delete: {
+            args: Prisma.UserFollowMusicianDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowMusicianPayload>
+          }
+          update: {
+            args: Prisma.UserFollowMusicianUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowMusicianPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserFollowMusicianDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserFollowMusicianUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserFollowMusicianUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowMusicianPayload>
+          }
+          aggregate: {
+            args: Prisma.UserFollowMusicianAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserFollowMusician>
+          }
+          groupBy: {
+            args: Prisma.UserFollowMusicianGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserFollowMusicianGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserFollowMusicianCountArgs<ExtArgs>
+            result: $Utils.Optional<UserFollowMusicianCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserFollowEvent: {
+        payload: Prisma.$UserFollowEventPayload<ExtArgs>
+        fields: Prisma.UserFollowEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserFollowEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserFollowEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowEventPayload>
+          }
+          findFirst: {
+            args: Prisma.UserFollowEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserFollowEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowEventPayload>
+          }
+          findMany: {
+            args: Prisma.UserFollowEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowEventPayload>[]
+          }
+          create: {
+            args: Prisma.UserFollowEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowEventPayload>
+          }
+          createMany: {
+            args: Prisma.UserFollowEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserFollowEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowEventPayload>[]
+          }
+          delete: {
+            args: Prisma.UserFollowEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowEventPayload>
+          }
+          update: {
+            args: Prisma.UserFollowEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserFollowEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserFollowEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserFollowEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserFollowEventPayload>
+          }
+          aggregate: {
+            args: Prisma.UserFollowEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserFollowEvent>
+          }
+          groupBy: {
+            args: Prisma.UserFollowEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserFollowEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserFollowEventCountArgs<ExtArgs>
+            result: $Utils.Optional<UserFollowEventCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserNotification: {
+        payload: Prisma.$UserNotificationPayload<ExtArgs>
+        fields: Prisma.UserNotificationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserNotificationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserNotificationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserNotificationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserNotificationPayload>
+          }
+          findFirst: {
+            args: Prisma.UserNotificationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserNotificationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserNotificationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserNotificationPayload>
+          }
+          findMany: {
+            args: Prisma.UserNotificationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserNotificationPayload>[]
+          }
+          create: {
+            args: Prisma.UserNotificationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserNotificationPayload>
+          }
+          createMany: {
+            args: Prisma.UserNotificationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserNotificationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserNotificationPayload>[]
+          }
+          delete: {
+            args: Prisma.UserNotificationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserNotificationPayload>
+          }
+          update: {
+            args: Prisma.UserNotificationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserNotificationPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserNotificationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserNotificationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserNotificationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserNotificationPayload>
+          }
+          aggregate: {
+            args: Prisma.UserNotificationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserNotification>
+          }
+          groupBy: {
+            args: Prisma.UserNotificationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserNotificationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserNotificationCountArgs<ExtArgs>
+            result: $Utils.Optional<UserNotificationCountAggregateOutputType> | number
+          }
+        }
+      }
       social_media: {
         payload: Prisma.$social_mediaPayload<ExtArgs>
         fields: Prisma.social_mediaFieldRefs
@@ -1449,6 +2051,7 @@ export namespace Prisma {
     event_prices: number
     event_teachers: number
     venues: number
+    followers: number
   }
 
   export type EventCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1456,6 +2059,7 @@ export namespace Prisma {
     event_prices?: boolean | EventCountOutputTypeCountEvent_pricesArgs
     event_teachers?: boolean | EventCountOutputTypeCountEvent_teachersArgs
     venues?: boolean | EventCountOutputTypeCountVenuesArgs
+    followers?: boolean | EventCountOutputTypeCountFollowersArgs
   }
 
   // Custom InputTypes
@@ -1497,6 +2101,13 @@ export namespace Prisma {
     where?: ExternalEventVenueWhereInput
   }
 
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountFollowersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserFollowEventWhereInput
+  }
+
 
   /**
    * Count Type TeacherCountOutputType
@@ -1504,10 +2115,12 @@ export namespace Prisma {
 
   export type TeacherCountOutputType = {
     event_teachers: number
+    followers: number
   }
 
   export type TeacherCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     event_teachers?: boolean | TeacherCountOutputTypeCountEvent_teachersArgs
+    followers?: boolean | TeacherCountOutputTypeCountFollowersArgs
   }
 
   // Custom InputTypes
@@ -1528,6 +2141,13 @@ export namespace Prisma {
     where?: ExternalEventTeacherWhereInput
   }
 
+  /**
+   * TeacherCountOutputType without action
+   */
+  export type TeacherCountOutputTypeCountFollowersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserFollowTeacherWhereInput
+  }
+
 
   /**
    * Count Type MusicianCountOutputType
@@ -1535,10 +2155,12 @@ export namespace Prisma {
 
   export type MusicianCountOutputType = {
     event_musicians: number
+    followers: number
   }
 
   export type MusicianCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     event_musicians?: boolean | MusicianCountOutputTypeCountEvent_musiciansArgs
+    followers?: boolean | MusicianCountOutputTypeCountFollowersArgs
   }
 
   // Custom InputTypes
@@ -1557,6 +2179,80 @@ export namespace Prisma {
    */
   export type MusicianCountOutputTypeCountEvent_musiciansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: event_musiciansWhereInput
+  }
+
+  /**
+   * MusicianCountOutputType without action
+   */
+  export type MusicianCountOutputTypeCountFollowersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserFollowMusicianWhereInput
+  }
+
+
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    savedSearches: number
+    followedTeachers: number
+    followedMusicians: number
+    followedEvents: number
+    notifications: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    savedSearches?: boolean | UserCountOutputTypeCountSavedSearchesArgs
+    followedTeachers?: boolean | UserCountOutputTypeCountFollowedTeachersArgs
+    followedMusicians?: boolean | UserCountOutputTypeCountFollowedMusiciansArgs
+    followedEvents?: boolean | UserCountOutputTypeCountFollowedEventsArgs
+    notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSavedSearchesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SavedSearchWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFollowedTeachersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserFollowTeacherWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFollowedMusiciansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserFollowMusicianWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFollowedEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserFollowEventWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserNotificationWhereInput
   }
 
 
@@ -1854,6 +2550,7 @@ export namespace Prisma {
     event_prices?: boolean | Event$event_pricesArgs<ExtArgs>
     event_teachers?: boolean | Event$event_teachersArgs<ExtArgs>
     venues?: boolean | Event$venuesArgs<ExtArgs>
+    followers?: boolean | Event$followersArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
@@ -1898,6 +2595,7 @@ export namespace Prisma {
     event_prices?: boolean | Event$event_pricesArgs<ExtArgs>
     event_teachers?: boolean | Event$event_teachersArgs<ExtArgs>
     venues?: boolean | Event$venuesArgs<ExtArgs>
+    followers?: boolean | Event$followersArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1909,6 +2607,7 @@ export namespace Prisma {
       event_prices: Prisma.$event_pricesPayload<ExtArgs>[]
       event_teachers: Prisma.$ExternalEventTeacherPayload<ExtArgs>[]
       venues: Prisma.$ExternalEventVenuePayload<ExtArgs>[]
+      followers: Prisma.$UserFollowEventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2294,6 +2993,7 @@ export namespace Prisma {
     event_prices<T extends Event$event_pricesArgs<ExtArgs> = {}>(args?: Subset<T, Event$event_pricesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$event_pricesPayload<ExtArgs>, T, "findMany"> | Null>
     event_teachers<T extends Event$event_teachersArgs<ExtArgs> = {}>(args?: Subset<T, Event$event_teachersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalEventTeacherPayload<ExtArgs>, T, "findMany"> | Null>
     venues<T extends Event$venuesArgs<ExtArgs> = {}>(args?: Subset<T, Event$venuesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalEventVenuePayload<ExtArgs>, T, "findMany"> | Null>
+    followers<T extends Event$followersArgs<ExtArgs> = {}>(args?: Subset<T, Event$followersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2729,6 +3429,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExternalEventVenueScalarFieldEnum | ExternalEventVenueScalarFieldEnum[]
+  }
+
+  /**
+   * Event.followers
+   */
+  export type Event$followersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventInclude<ExtArgs> | null
+    where?: UserFollowEventWhereInput
+    orderBy?: UserFollowEventOrderByWithRelationInput | UserFollowEventOrderByWithRelationInput[]
+    cursor?: UserFollowEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserFollowEventScalarFieldEnum | UserFollowEventScalarFieldEnum[]
   }
 
   /**
@@ -4904,6 +5624,7 @@ export namespace Prisma {
     ai_relevance_score?: boolean
     image_url?: boolean
     event_teachers?: boolean | Teacher$event_teachersArgs<ExtArgs>
+    followers?: boolean | Teacher$followersArgs<ExtArgs>
     _count?: boolean | TeacherCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teacher"]>
 
@@ -4929,6 +5650,7 @@ export namespace Prisma {
 
   export type TeacherInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     event_teachers?: boolean | Teacher$event_teachersArgs<ExtArgs>
+    followers?: boolean | Teacher$followersArgs<ExtArgs>
     _count?: boolean | TeacherCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TeacherIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4937,6 +5659,7 @@ export namespace Prisma {
     name: "Teacher"
     objects: {
       event_teachers: Prisma.$ExternalEventTeacherPayload<ExtArgs>[]
+      followers: Prisma.$UserFollowTeacherPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5311,6 +6034,7 @@ export namespace Prisma {
   export interface Prisma__TeacherClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     event_teachers<T extends Teacher$event_teachersArgs<ExtArgs> = {}>(args?: Subset<T, Teacher$event_teachersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalEventTeacherPayload<ExtArgs>, T, "findMany"> | Null>
+    followers<T extends Teacher$followersArgs<ExtArgs> = {}>(args?: Subset<T, Teacher$followersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowTeacherPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5681,6 +6405,26 @@ export namespace Prisma {
   }
 
   /**
+   * Teacher.followers
+   */
+  export type Teacher$followersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherInclude<ExtArgs> | null
+    where?: UserFollowTeacherWhereInput
+    orderBy?: UserFollowTeacherOrderByWithRelationInput | UserFollowTeacherOrderByWithRelationInput[]
+    cursor?: UserFollowTeacherWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserFollowTeacherScalarFieldEnum | UserFollowTeacherScalarFieldEnum[]
+  }
+
+  /**
    * Teacher without action
    */
   export type TeacherDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5982,6 +6726,7 @@ export namespace Prisma {
     updatedAt?: boolean
     image_url?: boolean
     event_musicians?: boolean | Musician$event_musiciansArgs<ExtArgs>
+    followers?: boolean | Musician$followersArgs<ExtArgs>
     _count?: boolean | MusicianCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["musician"]>
 
@@ -6023,6 +6768,7 @@ export namespace Prisma {
 
   export type MusicianInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     event_musicians?: boolean | Musician$event_musiciansArgs<ExtArgs>
+    followers?: boolean | Musician$followersArgs<ExtArgs>
     _count?: boolean | MusicianCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MusicianIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6031,6 +6777,7 @@ export namespace Prisma {
     name: "Musician"
     objects: {
       event_musicians: Prisma.$event_musiciansPayload<ExtArgs>[]
+      followers: Prisma.$UserFollowMusicianPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -6413,6 +7160,7 @@ export namespace Prisma {
   export interface Prisma__MusicianClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     event_musicians<T extends Musician$event_musiciansArgs<ExtArgs> = {}>(args?: Subset<T, Musician$event_musiciansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$event_musiciansPayload<ExtArgs>, T, "findMany"> | Null>
+    followers<T extends Musician$followersArgs<ExtArgs> = {}>(args?: Subset<T, Musician$followersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6788,6 +7536,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Event_musiciansScalarFieldEnum | Event_musiciansScalarFieldEnum[]
+  }
+
+  /**
+   * Musician.followers
+   */
+  export type Musician$followersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianInclude<ExtArgs> | null
+    where?: UserFollowMusicianWhereInput
+    orderBy?: UserFollowMusicianOrderByWithRelationInput | UserFollowMusicianOrderByWithRelationInput[]
+    cursor?: UserFollowMusicianWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserFollowMusicianScalarFieldEnum | UserFollowMusicianScalarFieldEnum[]
   }
 
   /**
@@ -8875,6 +9643,6943 @@ export namespace Prisma {
 
 
   /**
+   * Model User
+   */
+
+  export type AggregateUser = {
+    _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type UserMinAggregateOutputType = {
+    id: number | null
+    email: string | null
+    name: string | null
+    avatar: string | null
+    verified: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type UserMaxAggregateOutputType = {
+    id: number | null
+    email: string | null
+    name: string | null
+    avatar: string | null
+    verified: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type UserCountAggregateOutputType = {
+    id: number
+    email: number
+    name: number
+    avatar: number
+    verified: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type UserAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    id?: true
+  }
+
+  export type UserMinAggregateInputType = {
+    id?: true
+    email?: true
+    name?: true
+    avatar?: true
+    verified?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type UserMaxAggregateInputType = {
+    id?: true
+    email?: true
+    name?: true
+    avatar?: true
+    verified?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type UserCountAggregateInputType = {
+    id?: true
+    email?: true
+    name?: true
+    avatar?: true
+    verified?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which User to aggregate.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Users
+    **/
+    _count?: true | UserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserMaxAggregateInputType
+  }
+
+  export type GetUserAggregateType<T extends UserAggregateArgs> = {
+        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUser[P]>
+      : GetScalarType<T[P], AggregateUser[P]>
+  }
+
+
+
+
+  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
+    by: UserScalarFieldEnum[] | UserScalarFieldEnum
+    having?: UserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
+    _min?: UserMinAggregateInputType
+    _max?: UserMaxAggregateInputType
+  }
+
+  export type UserGroupByOutputType = {
+    id: number
+    email: string
+    name: string | null
+    avatar: string | null
+    verified: boolean
+    created_at: Date
+    updated_at: Date
+    _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserGroupByOutputType[P]>
+            : GetScalarType<T[P], UserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    name?: boolean
+    avatar?: boolean
+    verified?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    preferences?: boolean | User$preferencesArgs<ExtArgs>
+    savedSearches?: boolean | User$savedSearchesArgs<ExtArgs>
+    followedTeachers?: boolean | User$followedTeachersArgs<ExtArgs>
+    followedMusicians?: boolean | User$followedMusiciansArgs<ExtArgs>
+    followedEvents?: boolean | User$followedEventsArgs<ExtArgs>
+    notifications?: boolean | User$notificationsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["user"]>
+
+  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    name?: boolean
+    avatar?: boolean
+    verified?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["user"]>
+
+  export type UserSelectScalar = {
+    id?: boolean
+    email?: boolean
+    name?: boolean
+    avatar?: boolean
+    verified?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    preferences?: boolean | User$preferencesArgs<ExtArgs>
+    savedSearches?: boolean | User$savedSearchesArgs<ExtArgs>
+    followedTeachers?: boolean | User$followedTeachersArgs<ExtArgs>
+    followedMusicians?: boolean | User$followedMusiciansArgs<ExtArgs>
+    followedEvents?: boolean | User$followedEventsArgs<ExtArgs>
+    notifications?: boolean | User$notificationsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "User"
+    objects: {
+      preferences: Prisma.$UserPreferencesPayload<ExtArgs> | null
+      savedSearches: Prisma.$SavedSearchPayload<ExtArgs>[]
+      followedTeachers: Prisma.$UserFollowTeacherPayload<ExtArgs>[]
+      followedMusicians: Prisma.$UserFollowMusicianPayload<ExtArgs>[]
+      followedEvents: Prisma.$UserFollowEventPayload<ExtArgs>[]
+      notifications: Prisma.$UserNotificationPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      email: string
+      name: string | null
+      avatar: string | null
+      verified: boolean
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["user"]>
+    composites: {}
+  }
+
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
+
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UserCountAggregateInputType | true
+    }
+
+  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
+    /**
+     * Find zero or one User that matches the filter.
+     * @param {UserFindUniqueArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one User that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first User that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first User that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Users that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Users
+     * const users = await prisma.user.findMany()
+     * 
+     * // Get first 10 Users
+     * const users = await prisma.user.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a User.
+     * @param {UserCreateArgs} args - Arguments to create a User.
+     * @example
+     * // Create one User
+     * const User = await prisma.user.create({
+     *   data: {
+     *     // ... data to create a User
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Users.
+     * @param {UserCreateManyArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Users and returns the data saved in the database.
+     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a User.
+     * @param {UserDeleteArgs} args - Arguments to delete one User.
+     * @example
+     * // Delete one User
+     * const User = await prisma.user.delete({
+     *   where: {
+     *     // ... filter to delete one User
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one User.
+     * @param {UserUpdateArgs} args - Arguments to update one User.
+     * @example
+     * // Update one User
+     * const user = await prisma.user.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Users.
+     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+     * @example
+     * // Delete a few Users
+     * const { count } = await prisma.user.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Users
+     * const user = await prisma.user.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one User.
+     * @param {UserUpsertArgs} args - Arguments to update or create a User.
+     * @example
+     * // Update or create a User
+     * const user = await prisma.user.upsert({
+     *   create: {
+     *     // ... data to create a User
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the User we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCountArgs} args - Arguments to filter Users to count.
+     * @example
+     * // Count the number of Users
+     * const count = await prisma.user.count({
+     *   where: {
+     *     // ... the filter for the Users we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserCountArgs>(
+      args?: Subset<T, UserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
+
+    /**
+     * Group by User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the User model
+   */
+  readonly fields: UserFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for User.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    preferences<T extends User$preferencesArgs<ExtArgs> = {}>(args?: Subset<T, User$preferencesArgs<ExtArgs>>): Prisma__UserPreferencesClient<$Result.GetResult<Prisma.$UserPreferencesPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    savedSearches<T extends User$savedSearchesArgs<ExtArgs> = {}>(args?: Subset<T, User$savedSearchesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SavedSearchPayload<ExtArgs>, T, "findMany"> | Null>
+    followedTeachers<T extends User$followedTeachersArgs<ExtArgs> = {}>(args?: Subset<T, User$followedTeachersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowTeacherPayload<ExtArgs>, T, "findMany"> | Null>
+    followedMusicians<T extends User$followedMusiciansArgs<ExtArgs> = {}>(args?: Subset<T, User$followedMusiciansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "findMany"> | Null>
+    followedEvents<T extends User$followedEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$followedEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "findMany"> | Null>
+    notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the User model
+   */ 
+  interface UserFieldRefs {
+    readonly id: FieldRef<"User", 'Int'>
+    readonly email: FieldRef<"User", 'String'>
+    readonly name: FieldRef<"User", 'String'>
+    readonly avatar: FieldRef<"User", 'String'>
+    readonly verified: FieldRef<"User", 'Boolean'>
+    readonly created_at: FieldRef<"User", 'DateTime'>
+    readonly updated_at: FieldRef<"User", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * User findUnique
+   */
+  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findUniqueOrThrow
+   */
+  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findFirst
+   */
+  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User findFirstOrThrow
+   */
+  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User findMany
+   */
+  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which Users to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User create
+   */
+  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The data needed to create a User.
+     */
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
+  }
+
+  /**
+   * User createMany
+   */
+  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * User createManyAndReturn
+   */
+  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * User update
+   */
+  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The data needed to update a User.
+     */
+    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    /**
+     * Choose, which User to update.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User updateMany
+   */
+  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+  }
+
+  /**
+   * User upsert
+   */
+  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The filter to search for the User to update in case it exists.
+     */
+    where: UserWhereUniqueInput
+    /**
+     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+     */
+    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    /**
+     * In case the User was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+  }
+
+  /**
+   * User delete
+   */
+  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter which User to delete.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User deleteMany
+   */
+  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Users to delete
+     */
+    where?: UserWhereInput
+  }
+
+  /**
+   * User.preferences
+   */
+  export type User$preferencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPreferences
+     */
+    select?: UserPreferencesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPreferencesInclude<ExtArgs> | null
+    where?: UserPreferencesWhereInput
+  }
+
+  /**
+   * User.savedSearches
+   */
+  export type User$savedSearchesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedSearch
+     */
+    select?: SavedSearchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedSearchInclude<ExtArgs> | null
+    where?: SavedSearchWhereInput
+    orderBy?: SavedSearchOrderByWithRelationInput | SavedSearchOrderByWithRelationInput[]
+    cursor?: SavedSearchWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SavedSearchScalarFieldEnum | SavedSearchScalarFieldEnum[]
+  }
+
+  /**
+   * User.followedTeachers
+   */
+  export type User$followedTeachersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherInclude<ExtArgs> | null
+    where?: UserFollowTeacherWhereInput
+    orderBy?: UserFollowTeacherOrderByWithRelationInput | UserFollowTeacherOrderByWithRelationInput[]
+    cursor?: UserFollowTeacherWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserFollowTeacherScalarFieldEnum | UserFollowTeacherScalarFieldEnum[]
+  }
+
+  /**
+   * User.followedMusicians
+   */
+  export type User$followedMusiciansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianInclude<ExtArgs> | null
+    where?: UserFollowMusicianWhereInput
+    orderBy?: UserFollowMusicianOrderByWithRelationInput | UserFollowMusicianOrderByWithRelationInput[]
+    cursor?: UserFollowMusicianWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserFollowMusicianScalarFieldEnum | UserFollowMusicianScalarFieldEnum[]
+  }
+
+  /**
+   * User.followedEvents
+   */
+  export type User$followedEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventInclude<ExtArgs> | null
+    where?: UserFollowEventWhereInput
+    orderBy?: UserFollowEventOrderByWithRelationInput | UserFollowEventOrderByWithRelationInput[]
+    cursor?: UserFollowEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserFollowEventScalarFieldEnum | UserFollowEventScalarFieldEnum[]
+  }
+
+  /**
+   * User.notifications
+   */
+  export type User$notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserNotification
+     */
+    select?: UserNotificationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserNotificationInclude<ExtArgs> | null
+    where?: UserNotificationWhereInput
+    orderBy?: UserNotificationOrderByWithRelationInput | UserNotificationOrderByWithRelationInput[]
+    cursor?: UserNotificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserNotificationScalarFieldEnum | UserNotificationScalarFieldEnum[]
+  }
+
+  /**
+   * User without action
+   */
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserPreferences
+   */
+
+  export type AggregateUserPreferences = {
+    _count: UserPreferencesCountAggregateOutputType | null
+    _avg: UserPreferencesAvgAggregateOutputType | null
+    _sum: UserPreferencesSumAggregateOutputType | null
+    _min: UserPreferencesMinAggregateOutputType | null
+    _max: UserPreferencesMaxAggregateOutputType | null
+  }
+
+  export type UserPreferencesAvgAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+  }
+
+  export type UserPreferencesSumAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+  }
+
+  export type UserPreferencesMinAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    email_notifications: boolean | null
+    push_notifications: boolean | null
+    new_event_notifications: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type UserPreferencesMaxAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    email_notifications: boolean | null
+    push_notifications: boolean | null
+    new_event_notifications: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type UserPreferencesCountAggregateOutputType = {
+    id: number
+    user_id: number
+    email_notifications: number
+    push_notifications: number
+    new_event_notifications: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type UserPreferencesAvgAggregateInputType = {
+    id?: true
+    user_id?: true
+  }
+
+  export type UserPreferencesSumAggregateInputType = {
+    id?: true
+    user_id?: true
+  }
+
+  export type UserPreferencesMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    email_notifications?: true
+    push_notifications?: true
+    new_event_notifications?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type UserPreferencesMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    email_notifications?: true
+    push_notifications?: true
+    new_event_notifications?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type UserPreferencesCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    email_notifications?: true
+    push_notifications?: true
+    new_event_notifications?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type UserPreferencesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserPreferences to aggregate.
+     */
+    where?: UserPreferencesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserPreferences to fetch.
+     */
+    orderBy?: UserPreferencesOrderByWithRelationInput | UserPreferencesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserPreferencesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserPreferences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserPreferences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserPreferences
+    **/
+    _count?: true | UserPreferencesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserPreferencesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserPreferencesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserPreferencesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserPreferencesMaxAggregateInputType
+  }
+
+  export type GetUserPreferencesAggregateType<T extends UserPreferencesAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserPreferences]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserPreferences[P]>
+      : GetScalarType<T[P], AggregateUserPreferences[P]>
+  }
+
+
+
+
+  export type UserPreferencesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserPreferencesWhereInput
+    orderBy?: UserPreferencesOrderByWithAggregationInput | UserPreferencesOrderByWithAggregationInput[]
+    by: UserPreferencesScalarFieldEnum[] | UserPreferencesScalarFieldEnum
+    having?: UserPreferencesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserPreferencesCountAggregateInputType | true
+    _avg?: UserPreferencesAvgAggregateInputType
+    _sum?: UserPreferencesSumAggregateInputType
+    _min?: UserPreferencesMinAggregateInputType
+    _max?: UserPreferencesMaxAggregateInputType
+  }
+
+  export type UserPreferencesGroupByOutputType = {
+    id: number
+    user_id: number
+    email_notifications: boolean
+    push_notifications: boolean
+    new_event_notifications: boolean
+    created_at: Date
+    updated_at: Date
+    _count: UserPreferencesCountAggregateOutputType | null
+    _avg: UserPreferencesAvgAggregateOutputType | null
+    _sum: UserPreferencesSumAggregateOutputType | null
+    _min: UserPreferencesMinAggregateOutputType | null
+    _max: UserPreferencesMaxAggregateOutputType | null
+  }
+
+  type GetUserPreferencesGroupByPayload<T extends UserPreferencesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserPreferencesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserPreferencesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserPreferencesGroupByOutputType[P]>
+            : GetScalarType<T[P], UserPreferencesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserPreferencesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    email_notifications?: boolean
+    push_notifications?: boolean
+    new_event_notifications?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userPreferences"]>
+
+  export type UserPreferencesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    email_notifications?: boolean
+    push_notifications?: boolean
+    new_event_notifications?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userPreferences"]>
+
+  export type UserPreferencesSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    email_notifications?: boolean
+    push_notifications?: boolean
+    new_event_notifications?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type UserPreferencesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserPreferencesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserPreferencesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserPreferences"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      user_id: number
+      email_notifications: boolean
+      push_notifications: boolean
+      new_event_notifications: boolean
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["userPreferences"]>
+    composites: {}
+  }
+
+  type UserPreferencesGetPayload<S extends boolean | null | undefined | UserPreferencesDefaultArgs> = $Result.GetResult<Prisma.$UserPreferencesPayload, S>
+
+  type UserPreferencesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserPreferencesFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UserPreferencesCountAggregateInputType | true
+    }
+
+  export interface UserPreferencesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserPreferences'], meta: { name: 'UserPreferences' } }
+    /**
+     * Find zero or one UserPreferences that matches the filter.
+     * @param {UserPreferencesFindUniqueArgs} args - Arguments to find a UserPreferences
+     * @example
+     * // Get one UserPreferences
+     * const userPreferences = await prisma.userPreferences.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserPreferencesFindUniqueArgs>(args: SelectSubset<T, UserPreferencesFindUniqueArgs<ExtArgs>>): Prisma__UserPreferencesClient<$Result.GetResult<Prisma.$UserPreferencesPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one UserPreferences that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {UserPreferencesFindUniqueOrThrowArgs} args - Arguments to find a UserPreferences
+     * @example
+     * // Get one UserPreferences
+     * const userPreferences = await prisma.userPreferences.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserPreferencesFindUniqueOrThrowArgs>(args: SelectSubset<T, UserPreferencesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserPreferencesClient<$Result.GetResult<Prisma.$UserPreferencesPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first UserPreferences that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPreferencesFindFirstArgs} args - Arguments to find a UserPreferences
+     * @example
+     * // Get one UserPreferences
+     * const userPreferences = await prisma.userPreferences.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserPreferencesFindFirstArgs>(args?: SelectSubset<T, UserPreferencesFindFirstArgs<ExtArgs>>): Prisma__UserPreferencesClient<$Result.GetResult<Prisma.$UserPreferencesPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first UserPreferences that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPreferencesFindFirstOrThrowArgs} args - Arguments to find a UserPreferences
+     * @example
+     * // Get one UserPreferences
+     * const userPreferences = await prisma.userPreferences.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserPreferencesFindFirstOrThrowArgs>(args?: SelectSubset<T, UserPreferencesFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserPreferencesClient<$Result.GetResult<Prisma.$UserPreferencesPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more UserPreferences that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPreferencesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserPreferences
+     * const userPreferences = await prisma.userPreferences.findMany()
+     * 
+     * // Get first 10 UserPreferences
+     * const userPreferences = await prisma.userPreferences.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userPreferencesWithIdOnly = await prisma.userPreferences.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserPreferencesFindManyArgs>(args?: SelectSubset<T, UserPreferencesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPreferencesPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a UserPreferences.
+     * @param {UserPreferencesCreateArgs} args - Arguments to create a UserPreferences.
+     * @example
+     * // Create one UserPreferences
+     * const UserPreferences = await prisma.userPreferences.create({
+     *   data: {
+     *     // ... data to create a UserPreferences
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserPreferencesCreateArgs>(args: SelectSubset<T, UserPreferencesCreateArgs<ExtArgs>>): Prisma__UserPreferencesClient<$Result.GetResult<Prisma.$UserPreferencesPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many UserPreferences.
+     * @param {UserPreferencesCreateManyArgs} args - Arguments to create many UserPreferences.
+     * @example
+     * // Create many UserPreferences
+     * const userPreferences = await prisma.userPreferences.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserPreferencesCreateManyArgs>(args?: SelectSubset<T, UserPreferencesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserPreferences and returns the data saved in the database.
+     * @param {UserPreferencesCreateManyAndReturnArgs} args - Arguments to create many UserPreferences.
+     * @example
+     * // Create many UserPreferences
+     * const userPreferences = await prisma.userPreferences.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserPreferences and only return the `id`
+     * const userPreferencesWithIdOnly = await prisma.userPreferences.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserPreferencesCreateManyAndReturnArgs>(args?: SelectSubset<T, UserPreferencesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPreferencesPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a UserPreferences.
+     * @param {UserPreferencesDeleteArgs} args - Arguments to delete one UserPreferences.
+     * @example
+     * // Delete one UserPreferences
+     * const UserPreferences = await prisma.userPreferences.delete({
+     *   where: {
+     *     // ... filter to delete one UserPreferences
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserPreferencesDeleteArgs>(args: SelectSubset<T, UserPreferencesDeleteArgs<ExtArgs>>): Prisma__UserPreferencesClient<$Result.GetResult<Prisma.$UserPreferencesPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one UserPreferences.
+     * @param {UserPreferencesUpdateArgs} args - Arguments to update one UserPreferences.
+     * @example
+     * // Update one UserPreferences
+     * const userPreferences = await prisma.userPreferences.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserPreferencesUpdateArgs>(args: SelectSubset<T, UserPreferencesUpdateArgs<ExtArgs>>): Prisma__UserPreferencesClient<$Result.GetResult<Prisma.$UserPreferencesPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more UserPreferences.
+     * @param {UserPreferencesDeleteManyArgs} args - Arguments to filter UserPreferences to delete.
+     * @example
+     * // Delete a few UserPreferences
+     * const { count } = await prisma.userPreferences.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserPreferencesDeleteManyArgs>(args?: SelectSubset<T, UserPreferencesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserPreferences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPreferencesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserPreferences
+     * const userPreferences = await prisma.userPreferences.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserPreferencesUpdateManyArgs>(args: SelectSubset<T, UserPreferencesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserPreferences.
+     * @param {UserPreferencesUpsertArgs} args - Arguments to update or create a UserPreferences.
+     * @example
+     * // Update or create a UserPreferences
+     * const userPreferences = await prisma.userPreferences.upsert({
+     *   create: {
+     *     // ... data to create a UserPreferences
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserPreferences we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserPreferencesUpsertArgs>(args: SelectSubset<T, UserPreferencesUpsertArgs<ExtArgs>>): Prisma__UserPreferencesClient<$Result.GetResult<Prisma.$UserPreferencesPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of UserPreferences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPreferencesCountArgs} args - Arguments to filter UserPreferences to count.
+     * @example
+     * // Count the number of UserPreferences
+     * const count = await prisma.userPreferences.count({
+     *   where: {
+     *     // ... the filter for the UserPreferences we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserPreferencesCountArgs>(
+      args?: Subset<T, UserPreferencesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserPreferencesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserPreferences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPreferencesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserPreferencesAggregateArgs>(args: Subset<T, UserPreferencesAggregateArgs>): Prisma.PrismaPromise<GetUserPreferencesAggregateType<T>>
+
+    /**
+     * Group by UserPreferences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPreferencesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserPreferencesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserPreferencesGroupByArgs['orderBy'] }
+        : { orderBy?: UserPreferencesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserPreferencesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserPreferencesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserPreferences model
+   */
+  readonly fields: UserPreferencesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserPreferences.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserPreferencesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserPreferences model
+   */ 
+  interface UserPreferencesFieldRefs {
+    readonly id: FieldRef<"UserPreferences", 'Int'>
+    readonly user_id: FieldRef<"UserPreferences", 'Int'>
+    readonly email_notifications: FieldRef<"UserPreferences", 'Boolean'>
+    readonly push_notifications: FieldRef<"UserPreferences", 'Boolean'>
+    readonly new_event_notifications: FieldRef<"UserPreferences", 'Boolean'>
+    readonly created_at: FieldRef<"UserPreferences", 'DateTime'>
+    readonly updated_at: FieldRef<"UserPreferences", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserPreferences findUnique
+   */
+  export type UserPreferencesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPreferences
+     */
+    select?: UserPreferencesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPreferencesInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPreferences to fetch.
+     */
+    where: UserPreferencesWhereUniqueInput
+  }
+
+  /**
+   * UserPreferences findUniqueOrThrow
+   */
+  export type UserPreferencesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPreferences
+     */
+    select?: UserPreferencesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPreferencesInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPreferences to fetch.
+     */
+    where: UserPreferencesWhereUniqueInput
+  }
+
+  /**
+   * UserPreferences findFirst
+   */
+  export type UserPreferencesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPreferences
+     */
+    select?: UserPreferencesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPreferencesInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPreferences to fetch.
+     */
+    where?: UserPreferencesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserPreferences to fetch.
+     */
+    orderBy?: UserPreferencesOrderByWithRelationInput | UserPreferencesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserPreferences.
+     */
+    cursor?: UserPreferencesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserPreferences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserPreferences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserPreferences.
+     */
+    distinct?: UserPreferencesScalarFieldEnum | UserPreferencesScalarFieldEnum[]
+  }
+
+  /**
+   * UserPreferences findFirstOrThrow
+   */
+  export type UserPreferencesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPreferences
+     */
+    select?: UserPreferencesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPreferencesInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPreferences to fetch.
+     */
+    where?: UserPreferencesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserPreferences to fetch.
+     */
+    orderBy?: UserPreferencesOrderByWithRelationInput | UserPreferencesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserPreferences.
+     */
+    cursor?: UserPreferencesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserPreferences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserPreferences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserPreferences.
+     */
+    distinct?: UserPreferencesScalarFieldEnum | UserPreferencesScalarFieldEnum[]
+  }
+
+  /**
+   * UserPreferences findMany
+   */
+  export type UserPreferencesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPreferences
+     */
+    select?: UserPreferencesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPreferencesInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPreferences to fetch.
+     */
+    where?: UserPreferencesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserPreferences to fetch.
+     */
+    orderBy?: UserPreferencesOrderByWithRelationInput | UserPreferencesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserPreferences.
+     */
+    cursor?: UserPreferencesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserPreferences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserPreferences.
+     */
+    skip?: number
+    distinct?: UserPreferencesScalarFieldEnum | UserPreferencesScalarFieldEnum[]
+  }
+
+  /**
+   * UserPreferences create
+   */
+  export type UserPreferencesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPreferences
+     */
+    select?: UserPreferencesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPreferencesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserPreferences.
+     */
+    data: XOR<UserPreferencesCreateInput, UserPreferencesUncheckedCreateInput>
+  }
+
+  /**
+   * UserPreferences createMany
+   */
+  export type UserPreferencesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserPreferences.
+     */
+    data: UserPreferencesCreateManyInput | UserPreferencesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserPreferences createManyAndReturn
+   */
+  export type UserPreferencesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPreferences
+     */
+    select?: UserPreferencesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many UserPreferences.
+     */
+    data: UserPreferencesCreateManyInput | UserPreferencesCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPreferencesIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserPreferences update
+   */
+  export type UserPreferencesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPreferences
+     */
+    select?: UserPreferencesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPreferencesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserPreferences.
+     */
+    data: XOR<UserPreferencesUpdateInput, UserPreferencesUncheckedUpdateInput>
+    /**
+     * Choose, which UserPreferences to update.
+     */
+    where: UserPreferencesWhereUniqueInput
+  }
+
+  /**
+   * UserPreferences updateMany
+   */
+  export type UserPreferencesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserPreferences.
+     */
+    data: XOR<UserPreferencesUpdateManyMutationInput, UserPreferencesUncheckedUpdateManyInput>
+    /**
+     * Filter which UserPreferences to update
+     */
+    where?: UserPreferencesWhereInput
+  }
+
+  /**
+   * UserPreferences upsert
+   */
+  export type UserPreferencesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPreferences
+     */
+    select?: UserPreferencesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPreferencesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserPreferences to update in case it exists.
+     */
+    where: UserPreferencesWhereUniqueInput
+    /**
+     * In case the UserPreferences found by the `where` argument doesn't exist, create a new UserPreferences with this data.
+     */
+    create: XOR<UserPreferencesCreateInput, UserPreferencesUncheckedCreateInput>
+    /**
+     * In case the UserPreferences was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserPreferencesUpdateInput, UserPreferencesUncheckedUpdateInput>
+  }
+
+  /**
+   * UserPreferences delete
+   */
+  export type UserPreferencesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPreferences
+     */
+    select?: UserPreferencesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPreferencesInclude<ExtArgs> | null
+    /**
+     * Filter which UserPreferences to delete.
+     */
+    where: UserPreferencesWhereUniqueInput
+  }
+
+  /**
+   * UserPreferences deleteMany
+   */
+  export type UserPreferencesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserPreferences to delete
+     */
+    where?: UserPreferencesWhereInput
+  }
+
+  /**
+   * UserPreferences without action
+   */
+  export type UserPreferencesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPreferences
+     */
+    select?: UserPreferencesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPreferencesInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SavedSearch
+   */
+
+  export type AggregateSavedSearch = {
+    _count: SavedSearchCountAggregateOutputType | null
+    _avg: SavedSearchAvgAggregateOutputType | null
+    _sum: SavedSearchSumAggregateOutputType | null
+    _min: SavedSearchMinAggregateOutputType | null
+    _max: SavedSearchMaxAggregateOutputType | null
+  }
+
+  export type SavedSearchAvgAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+  }
+
+  export type SavedSearchSumAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+  }
+
+  export type SavedSearchMinAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    name: string | null
+    created_at: Date | null
+  }
+
+  export type SavedSearchMaxAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    name: string | null
+    created_at: Date | null
+  }
+
+  export type SavedSearchCountAggregateOutputType = {
+    id: number
+    user_id: number
+    name: number
+    query: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type SavedSearchAvgAggregateInputType = {
+    id?: true
+    user_id?: true
+  }
+
+  export type SavedSearchSumAggregateInputType = {
+    id?: true
+    user_id?: true
+  }
+
+  export type SavedSearchMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    name?: true
+    created_at?: true
+  }
+
+  export type SavedSearchMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    name?: true
+    created_at?: true
+  }
+
+  export type SavedSearchCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    name?: true
+    query?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type SavedSearchAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SavedSearch to aggregate.
+     */
+    where?: SavedSearchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SavedSearches to fetch.
+     */
+    orderBy?: SavedSearchOrderByWithRelationInput | SavedSearchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SavedSearchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SavedSearches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SavedSearches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SavedSearches
+    **/
+    _count?: true | SavedSearchCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SavedSearchAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SavedSearchSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SavedSearchMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SavedSearchMaxAggregateInputType
+  }
+
+  export type GetSavedSearchAggregateType<T extends SavedSearchAggregateArgs> = {
+        [P in keyof T & keyof AggregateSavedSearch]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSavedSearch[P]>
+      : GetScalarType<T[P], AggregateSavedSearch[P]>
+  }
+
+
+
+
+  export type SavedSearchGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SavedSearchWhereInput
+    orderBy?: SavedSearchOrderByWithAggregationInput | SavedSearchOrderByWithAggregationInput[]
+    by: SavedSearchScalarFieldEnum[] | SavedSearchScalarFieldEnum
+    having?: SavedSearchScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SavedSearchCountAggregateInputType | true
+    _avg?: SavedSearchAvgAggregateInputType
+    _sum?: SavedSearchSumAggregateInputType
+    _min?: SavedSearchMinAggregateInputType
+    _max?: SavedSearchMaxAggregateInputType
+  }
+
+  export type SavedSearchGroupByOutputType = {
+    id: number
+    user_id: number
+    name: string
+    query: JsonValue
+    created_at: Date
+    _count: SavedSearchCountAggregateOutputType | null
+    _avg: SavedSearchAvgAggregateOutputType | null
+    _sum: SavedSearchSumAggregateOutputType | null
+    _min: SavedSearchMinAggregateOutputType | null
+    _max: SavedSearchMaxAggregateOutputType | null
+  }
+
+  type GetSavedSearchGroupByPayload<T extends SavedSearchGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SavedSearchGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SavedSearchGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SavedSearchGroupByOutputType[P]>
+            : GetScalarType<T[P], SavedSearchGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SavedSearchSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    name?: boolean
+    query?: boolean
+    created_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["savedSearch"]>
+
+  export type SavedSearchSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    name?: boolean
+    query?: boolean
+    created_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["savedSearch"]>
+
+  export type SavedSearchSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    name?: boolean
+    query?: boolean
+    created_at?: boolean
+  }
+
+  export type SavedSearchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SavedSearchIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $SavedSearchPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SavedSearch"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      user_id: number
+      name: string
+      query: Prisma.JsonValue
+      created_at: Date
+    }, ExtArgs["result"]["savedSearch"]>
+    composites: {}
+  }
+
+  type SavedSearchGetPayload<S extends boolean | null | undefined | SavedSearchDefaultArgs> = $Result.GetResult<Prisma.$SavedSearchPayload, S>
+
+  type SavedSearchCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SavedSearchFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SavedSearchCountAggregateInputType | true
+    }
+
+  export interface SavedSearchDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SavedSearch'], meta: { name: 'SavedSearch' } }
+    /**
+     * Find zero or one SavedSearch that matches the filter.
+     * @param {SavedSearchFindUniqueArgs} args - Arguments to find a SavedSearch
+     * @example
+     * // Get one SavedSearch
+     * const savedSearch = await prisma.savedSearch.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SavedSearchFindUniqueArgs>(args: SelectSubset<T, SavedSearchFindUniqueArgs<ExtArgs>>): Prisma__SavedSearchClient<$Result.GetResult<Prisma.$SavedSearchPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SavedSearch that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SavedSearchFindUniqueOrThrowArgs} args - Arguments to find a SavedSearch
+     * @example
+     * // Get one SavedSearch
+     * const savedSearch = await prisma.savedSearch.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SavedSearchFindUniqueOrThrowArgs>(args: SelectSubset<T, SavedSearchFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SavedSearchClient<$Result.GetResult<Prisma.$SavedSearchPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SavedSearch that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedSearchFindFirstArgs} args - Arguments to find a SavedSearch
+     * @example
+     * // Get one SavedSearch
+     * const savedSearch = await prisma.savedSearch.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SavedSearchFindFirstArgs>(args?: SelectSubset<T, SavedSearchFindFirstArgs<ExtArgs>>): Prisma__SavedSearchClient<$Result.GetResult<Prisma.$SavedSearchPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SavedSearch that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedSearchFindFirstOrThrowArgs} args - Arguments to find a SavedSearch
+     * @example
+     * // Get one SavedSearch
+     * const savedSearch = await prisma.savedSearch.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SavedSearchFindFirstOrThrowArgs>(args?: SelectSubset<T, SavedSearchFindFirstOrThrowArgs<ExtArgs>>): Prisma__SavedSearchClient<$Result.GetResult<Prisma.$SavedSearchPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SavedSearches that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedSearchFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SavedSearches
+     * const savedSearches = await prisma.savedSearch.findMany()
+     * 
+     * // Get first 10 SavedSearches
+     * const savedSearches = await prisma.savedSearch.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const savedSearchWithIdOnly = await prisma.savedSearch.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SavedSearchFindManyArgs>(args?: SelectSubset<T, SavedSearchFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SavedSearchPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SavedSearch.
+     * @param {SavedSearchCreateArgs} args - Arguments to create a SavedSearch.
+     * @example
+     * // Create one SavedSearch
+     * const SavedSearch = await prisma.savedSearch.create({
+     *   data: {
+     *     // ... data to create a SavedSearch
+     *   }
+     * })
+     * 
+     */
+    create<T extends SavedSearchCreateArgs>(args: SelectSubset<T, SavedSearchCreateArgs<ExtArgs>>): Prisma__SavedSearchClient<$Result.GetResult<Prisma.$SavedSearchPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SavedSearches.
+     * @param {SavedSearchCreateManyArgs} args - Arguments to create many SavedSearches.
+     * @example
+     * // Create many SavedSearches
+     * const savedSearch = await prisma.savedSearch.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SavedSearchCreateManyArgs>(args?: SelectSubset<T, SavedSearchCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SavedSearches and returns the data saved in the database.
+     * @param {SavedSearchCreateManyAndReturnArgs} args - Arguments to create many SavedSearches.
+     * @example
+     * // Create many SavedSearches
+     * const savedSearch = await prisma.savedSearch.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SavedSearches and only return the `id`
+     * const savedSearchWithIdOnly = await prisma.savedSearch.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SavedSearchCreateManyAndReturnArgs>(args?: SelectSubset<T, SavedSearchCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SavedSearchPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SavedSearch.
+     * @param {SavedSearchDeleteArgs} args - Arguments to delete one SavedSearch.
+     * @example
+     * // Delete one SavedSearch
+     * const SavedSearch = await prisma.savedSearch.delete({
+     *   where: {
+     *     // ... filter to delete one SavedSearch
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SavedSearchDeleteArgs>(args: SelectSubset<T, SavedSearchDeleteArgs<ExtArgs>>): Prisma__SavedSearchClient<$Result.GetResult<Prisma.$SavedSearchPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SavedSearch.
+     * @param {SavedSearchUpdateArgs} args - Arguments to update one SavedSearch.
+     * @example
+     * // Update one SavedSearch
+     * const savedSearch = await prisma.savedSearch.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SavedSearchUpdateArgs>(args: SelectSubset<T, SavedSearchUpdateArgs<ExtArgs>>): Prisma__SavedSearchClient<$Result.GetResult<Prisma.$SavedSearchPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SavedSearches.
+     * @param {SavedSearchDeleteManyArgs} args - Arguments to filter SavedSearches to delete.
+     * @example
+     * // Delete a few SavedSearches
+     * const { count } = await prisma.savedSearch.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SavedSearchDeleteManyArgs>(args?: SelectSubset<T, SavedSearchDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SavedSearches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedSearchUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SavedSearches
+     * const savedSearch = await prisma.savedSearch.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SavedSearchUpdateManyArgs>(args: SelectSubset<T, SavedSearchUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SavedSearch.
+     * @param {SavedSearchUpsertArgs} args - Arguments to update or create a SavedSearch.
+     * @example
+     * // Update or create a SavedSearch
+     * const savedSearch = await prisma.savedSearch.upsert({
+     *   create: {
+     *     // ... data to create a SavedSearch
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SavedSearch we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SavedSearchUpsertArgs>(args: SelectSubset<T, SavedSearchUpsertArgs<ExtArgs>>): Prisma__SavedSearchClient<$Result.GetResult<Prisma.$SavedSearchPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SavedSearches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedSearchCountArgs} args - Arguments to filter SavedSearches to count.
+     * @example
+     * // Count the number of SavedSearches
+     * const count = await prisma.savedSearch.count({
+     *   where: {
+     *     // ... the filter for the SavedSearches we want to count
+     *   }
+     * })
+    **/
+    count<T extends SavedSearchCountArgs>(
+      args?: Subset<T, SavedSearchCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SavedSearchCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SavedSearch.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedSearchAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SavedSearchAggregateArgs>(args: Subset<T, SavedSearchAggregateArgs>): Prisma.PrismaPromise<GetSavedSearchAggregateType<T>>
+
+    /**
+     * Group by SavedSearch.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SavedSearchGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SavedSearchGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SavedSearchGroupByArgs['orderBy'] }
+        : { orderBy?: SavedSearchGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SavedSearchGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSavedSearchGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SavedSearch model
+   */
+  readonly fields: SavedSearchFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SavedSearch.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SavedSearchClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SavedSearch model
+   */ 
+  interface SavedSearchFieldRefs {
+    readonly id: FieldRef<"SavedSearch", 'Int'>
+    readonly user_id: FieldRef<"SavedSearch", 'Int'>
+    readonly name: FieldRef<"SavedSearch", 'String'>
+    readonly query: FieldRef<"SavedSearch", 'Json'>
+    readonly created_at: FieldRef<"SavedSearch", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SavedSearch findUnique
+   */
+  export type SavedSearchFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedSearch
+     */
+    select?: SavedSearchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedSearchInclude<ExtArgs> | null
+    /**
+     * Filter, which SavedSearch to fetch.
+     */
+    where: SavedSearchWhereUniqueInput
+  }
+
+  /**
+   * SavedSearch findUniqueOrThrow
+   */
+  export type SavedSearchFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedSearch
+     */
+    select?: SavedSearchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedSearchInclude<ExtArgs> | null
+    /**
+     * Filter, which SavedSearch to fetch.
+     */
+    where: SavedSearchWhereUniqueInput
+  }
+
+  /**
+   * SavedSearch findFirst
+   */
+  export type SavedSearchFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedSearch
+     */
+    select?: SavedSearchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedSearchInclude<ExtArgs> | null
+    /**
+     * Filter, which SavedSearch to fetch.
+     */
+    where?: SavedSearchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SavedSearches to fetch.
+     */
+    orderBy?: SavedSearchOrderByWithRelationInput | SavedSearchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SavedSearches.
+     */
+    cursor?: SavedSearchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SavedSearches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SavedSearches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SavedSearches.
+     */
+    distinct?: SavedSearchScalarFieldEnum | SavedSearchScalarFieldEnum[]
+  }
+
+  /**
+   * SavedSearch findFirstOrThrow
+   */
+  export type SavedSearchFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedSearch
+     */
+    select?: SavedSearchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedSearchInclude<ExtArgs> | null
+    /**
+     * Filter, which SavedSearch to fetch.
+     */
+    where?: SavedSearchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SavedSearches to fetch.
+     */
+    orderBy?: SavedSearchOrderByWithRelationInput | SavedSearchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SavedSearches.
+     */
+    cursor?: SavedSearchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SavedSearches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SavedSearches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SavedSearches.
+     */
+    distinct?: SavedSearchScalarFieldEnum | SavedSearchScalarFieldEnum[]
+  }
+
+  /**
+   * SavedSearch findMany
+   */
+  export type SavedSearchFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedSearch
+     */
+    select?: SavedSearchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedSearchInclude<ExtArgs> | null
+    /**
+     * Filter, which SavedSearches to fetch.
+     */
+    where?: SavedSearchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SavedSearches to fetch.
+     */
+    orderBy?: SavedSearchOrderByWithRelationInput | SavedSearchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SavedSearches.
+     */
+    cursor?: SavedSearchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SavedSearches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SavedSearches.
+     */
+    skip?: number
+    distinct?: SavedSearchScalarFieldEnum | SavedSearchScalarFieldEnum[]
+  }
+
+  /**
+   * SavedSearch create
+   */
+  export type SavedSearchCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedSearch
+     */
+    select?: SavedSearchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedSearchInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SavedSearch.
+     */
+    data: XOR<SavedSearchCreateInput, SavedSearchUncheckedCreateInput>
+  }
+
+  /**
+   * SavedSearch createMany
+   */
+  export type SavedSearchCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SavedSearches.
+     */
+    data: SavedSearchCreateManyInput | SavedSearchCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SavedSearch createManyAndReturn
+   */
+  export type SavedSearchCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedSearch
+     */
+    select?: SavedSearchSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SavedSearches.
+     */
+    data: SavedSearchCreateManyInput | SavedSearchCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedSearchIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SavedSearch update
+   */
+  export type SavedSearchUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedSearch
+     */
+    select?: SavedSearchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedSearchInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SavedSearch.
+     */
+    data: XOR<SavedSearchUpdateInput, SavedSearchUncheckedUpdateInput>
+    /**
+     * Choose, which SavedSearch to update.
+     */
+    where: SavedSearchWhereUniqueInput
+  }
+
+  /**
+   * SavedSearch updateMany
+   */
+  export type SavedSearchUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SavedSearches.
+     */
+    data: XOR<SavedSearchUpdateManyMutationInput, SavedSearchUncheckedUpdateManyInput>
+    /**
+     * Filter which SavedSearches to update
+     */
+    where?: SavedSearchWhereInput
+  }
+
+  /**
+   * SavedSearch upsert
+   */
+  export type SavedSearchUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedSearch
+     */
+    select?: SavedSearchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedSearchInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SavedSearch to update in case it exists.
+     */
+    where: SavedSearchWhereUniqueInput
+    /**
+     * In case the SavedSearch found by the `where` argument doesn't exist, create a new SavedSearch with this data.
+     */
+    create: XOR<SavedSearchCreateInput, SavedSearchUncheckedCreateInput>
+    /**
+     * In case the SavedSearch was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SavedSearchUpdateInput, SavedSearchUncheckedUpdateInput>
+  }
+
+  /**
+   * SavedSearch delete
+   */
+  export type SavedSearchDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedSearch
+     */
+    select?: SavedSearchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedSearchInclude<ExtArgs> | null
+    /**
+     * Filter which SavedSearch to delete.
+     */
+    where: SavedSearchWhereUniqueInput
+  }
+
+  /**
+   * SavedSearch deleteMany
+   */
+  export type SavedSearchDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SavedSearches to delete
+     */
+    where?: SavedSearchWhereInput
+  }
+
+  /**
+   * SavedSearch without action
+   */
+  export type SavedSearchDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SavedSearch
+     */
+    select?: SavedSearchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SavedSearchInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserFollowTeacher
+   */
+
+  export type AggregateUserFollowTeacher = {
+    _count: UserFollowTeacherCountAggregateOutputType | null
+    _avg: UserFollowTeacherAvgAggregateOutputType | null
+    _sum: UserFollowTeacherSumAggregateOutputType | null
+    _min: UserFollowTeacherMinAggregateOutputType | null
+    _max: UserFollowTeacherMaxAggregateOutputType | null
+  }
+
+  export type UserFollowTeacherAvgAggregateOutputType = {
+    user_id: number | null
+    teacher_id: number | null
+  }
+
+  export type UserFollowTeacherSumAggregateOutputType = {
+    user_id: number | null
+    teacher_id: number | null
+  }
+
+  export type UserFollowTeacherMinAggregateOutputType = {
+    user_id: number | null
+    teacher_id: number | null
+    created_at: Date | null
+  }
+
+  export type UserFollowTeacherMaxAggregateOutputType = {
+    user_id: number | null
+    teacher_id: number | null
+    created_at: Date | null
+  }
+
+  export type UserFollowTeacherCountAggregateOutputType = {
+    user_id: number
+    teacher_id: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type UserFollowTeacherAvgAggregateInputType = {
+    user_id?: true
+    teacher_id?: true
+  }
+
+  export type UserFollowTeacherSumAggregateInputType = {
+    user_id?: true
+    teacher_id?: true
+  }
+
+  export type UserFollowTeacherMinAggregateInputType = {
+    user_id?: true
+    teacher_id?: true
+    created_at?: true
+  }
+
+  export type UserFollowTeacherMaxAggregateInputType = {
+    user_id?: true
+    teacher_id?: true
+    created_at?: true
+  }
+
+  export type UserFollowTeacherCountAggregateInputType = {
+    user_id?: true
+    teacher_id?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type UserFollowTeacherAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserFollowTeacher to aggregate.
+     */
+    where?: UserFollowTeacherWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserFollowTeachers to fetch.
+     */
+    orderBy?: UserFollowTeacherOrderByWithRelationInput | UserFollowTeacherOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserFollowTeacherWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserFollowTeachers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserFollowTeachers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserFollowTeachers
+    **/
+    _count?: true | UserFollowTeacherCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserFollowTeacherAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserFollowTeacherSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserFollowTeacherMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserFollowTeacherMaxAggregateInputType
+  }
+
+  export type GetUserFollowTeacherAggregateType<T extends UserFollowTeacherAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserFollowTeacher]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserFollowTeacher[P]>
+      : GetScalarType<T[P], AggregateUserFollowTeacher[P]>
+  }
+
+
+
+
+  export type UserFollowTeacherGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserFollowTeacherWhereInput
+    orderBy?: UserFollowTeacherOrderByWithAggregationInput | UserFollowTeacherOrderByWithAggregationInput[]
+    by: UserFollowTeacherScalarFieldEnum[] | UserFollowTeacherScalarFieldEnum
+    having?: UserFollowTeacherScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserFollowTeacherCountAggregateInputType | true
+    _avg?: UserFollowTeacherAvgAggregateInputType
+    _sum?: UserFollowTeacherSumAggregateInputType
+    _min?: UserFollowTeacherMinAggregateInputType
+    _max?: UserFollowTeacherMaxAggregateInputType
+  }
+
+  export type UserFollowTeacherGroupByOutputType = {
+    user_id: number
+    teacher_id: number
+    created_at: Date
+    _count: UserFollowTeacherCountAggregateOutputType | null
+    _avg: UserFollowTeacherAvgAggregateOutputType | null
+    _sum: UserFollowTeacherSumAggregateOutputType | null
+    _min: UserFollowTeacherMinAggregateOutputType | null
+    _max: UserFollowTeacherMaxAggregateOutputType | null
+  }
+
+  type GetUserFollowTeacherGroupByPayload<T extends UserFollowTeacherGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserFollowTeacherGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserFollowTeacherGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserFollowTeacherGroupByOutputType[P]>
+            : GetScalarType<T[P], UserFollowTeacherGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserFollowTeacherSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    user_id?: boolean
+    teacher_id?: boolean
+    created_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    teacher?: boolean | TeacherDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userFollowTeacher"]>
+
+  export type UserFollowTeacherSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    user_id?: boolean
+    teacher_id?: boolean
+    created_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    teacher?: boolean | TeacherDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userFollowTeacher"]>
+
+  export type UserFollowTeacherSelectScalar = {
+    user_id?: boolean
+    teacher_id?: boolean
+    created_at?: boolean
+  }
+
+  export type UserFollowTeacherInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    teacher?: boolean | TeacherDefaultArgs<ExtArgs>
+  }
+  export type UserFollowTeacherIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    teacher?: boolean | TeacherDefaultArgs<ExtArgs>
+  }
+
+  export type $UserFollowTeacherPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserFollowTeacher"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      teacher: Prisma.$TeacherPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      user_id: number
+      teacher_id: number
+      created_at: Date
+    }, ExtArgs["result"]["userFollowTeacher"]>
+    composites: {}
+  }
+
+  type UserFollowTeacherGetPayload<S extends boolean | null | undefined | UserFollowTeacherDefaultArgs> = $Result.GetResult<Prisma.$UserFollowTeacherPayload, S>
+
+  type UserFollowTeacherCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserFollowTeacherFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UserFollowTeacherCountAggregateInputType | true
+    }
+
+  export interface UserFollowTeacherDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserFollowTeacher'], meta: { name: 'UserFollowTeacher' } }
+    /**
+     * Find zero or one UserFollowTeacher that matches the filter.
+     * @param {UserFollowTeacherFindUniqueArgs} args - Arguments to find a UserFollowTeacher
+     * @example
+     * // Get one UserFollowTeacher
+     * const userFollowTeacher = await prisma.userFollowTeacher.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserFollowTeacherFindUniqueArgs>(args: SelectSubset<T, UserFollowTeacherFindUniqueArgs<ExtArgs>>): Prisma__UserFollowTeacherClient<$Result.GetResult<Prisma.$UserFollowTeacherPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one UserFollowTeacher that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {UserFollowTeacherFindUniqueOrThrowArgs} args - Arguments to find a UserFollowTeacher
+     * @example
+     * // Get one UserFollowTeacher
+     * const userFollowTeacher = await prisma.userFollowTeacher.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserFollowTeacherFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFollowTeacherFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserFollowTeacherClient<$Result.GetResult<Prisma.$UserFollowTeacherPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first UserFollowTeacher that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowTeacherFindFirstArgs} args - Arguments to find a UserFollowTeacher
+     * @example
+     * // Get one UserFollowTeacher
+     * const userFollowTeacher = await prisma.userFollowTeacher.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserFollowTeacherFindFirstArgs>(args?: SelectSubset<T, UserFollowTeacherFindFirstArgs<ExtArgs>>): Prisma__UserFollowTeacherClient<$Result.GetResult<Prisma.$UserFollowTeacherPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first UserFollowTeacher that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowTeacherFindFirstOrThrowArgs} args - Arguments to find a UserFollowTeacher
+     * @example
+     * // Get one UserFollowTeacher
+     * const userFollowTeacher = await prisma.userFollowTeacher.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserFollowTeacherFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFollowTeacherFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserFollowTeacherClient<$Result.GetResult<Prisma.$UserFollowTeacherPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more UserFollowTeachers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowTeacherFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserFollowTeachers
+     * const userFollowTeachers = await prisma.userFollowTeacher.findMany()
+     * 
+     * // Get first 10 UserFollowTeachers
+     * const userFollowTeachers = await prisma.userFollowTeacher.findMany({ take: 10 })
+     * 
+     * // Only select the `user_id`
+     * const userFollowTeacherWithUser_idOnly = await prisma.userFollowTeacher.findMany({ select: { user_id: true } })
+     * 
+     */
+    findMany<T extends UserFollowTeacherFindManyArgs>(args?: SelectSubset<T, UserFollowTeacherFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowTeacherPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a UserFollowTeacher.
+     * @param {UserFollowTeacherCreateArgs} args - Arguments to create a UserFollowTeacher.
+     * @example
+     * // Create one UserFollowTeacher
+     * const UserFollowTeacher = await prisma.userFollowTeacher.create({
+     *   data: {
+     *     // ... data to create a UserFollowTeacher
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserFollowTeacherCreateArgs>(args: SelectSubset<T, UserFollowTeacherCreateArgs<ExtArgs>>): Prisma__UserFollowTeacherClient<$Result.GetResult<Prisma.$UserFollowTeacherPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many UserFollowTeachers.
+     * @param {UserFollowTeacherCreateManyArgs} args - Arguments to create many UserFollowTeachers.
+     * @example
+     * // Create many UserFollowTeachers
+     * const userFollowTeacher = await prisma.userFollowTeacher.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserFollowTeacherCreateManyArgs>(args?: SelectSubset<T, UserFollowTeacherCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserFollowTeachers and returns the data saved in the database.
+     * @param {UserFollowTeacherCreateManyAndReturnArgs} args - Arguments to create many UserFollowTeachers.
+     * @example
+     * // Create many UserFollowTeachers
+     * const userFollowTeacher = await prisma.userFollowTeacher.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserFollowTeachers and only return the `user_id`
+     * const userFollowTeacherWithUser_idOnly = await prisma.userFollowTeacher.createManyAndReturn({ 
+     *   select: { user_id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserFollowTeacherCreateManyAndReturnArgs>(args?: SelectSubset<T, UserFollowTeacherCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowTeacherPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a UserFollowTeacher.
+     * @param {UserFollowTeacherDeleteArgs} args - Arguments to delete one UserFollowTeacher.
+     * @example
+     * // Delete one UserFollowTeacher
+     * const UserFollowTeacher = await prisma.userFollowTeacher.delete({
+     *   where: {
+     *     // ... filter to delete one UserFollowTeacher
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserFollowTeacherDeleteArgs>(args: SelectSubset<T, UserFollowTeacherDeleteArgs<ExtArgs>>): Prisma__UserFollowTeacherClient<$Result.GetResult<Prisma.$UserFollowTeacherPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one UserFollowTeacher.
+     * @param {UserFollowTeacherUpdateArgs} args - Arguments to update one UserFollowTeacher.
+     * @example
+     * // Update one UserFollowTeacher
+     * const userFollowTeacher = await prisma.userFollowTeacher.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserFollowTeacherUpdateArgs>(args: SelectSubset<T, UserFollowTeacherUpdateArgs<ExtArgs>>): Prisma__UserFollowTeacherClient<$Result.GetResult<Prisma.$UserFollowTeacherPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more UserFollowTeachers.
+     * @param {UserFollowTeacherDeleteManyArgs} args - Arguments to filter UserFollowTeachers to delete.
+     * @example
+     * // Delete a few UserFollowTeachers
+     * const { count } = await prisma.userFollowTeacher.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserFollowTeacherDeleteManyArgs>(args?: SelectSubset<T, UserFollowTeacherDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserFollowTeachers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowTeacherUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserFollowTeachers
+     * const userFollowTeacher = await prisma.userFollowTeacher.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserFollowTeacherUpdateManyArgs>(args: SelectSubset<T, UserFollowTeacherUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserFollowTeacher.
+     * @param {UserFollowTeacherUpsertArgs} args - Arguments to update or create a UserFollowTeacher.
+     * @example
+     * // Update or create a UserFollowTeacher
+     * const userFollowTeacher = await prisma.userFollowTeacher.upsert({
+     *   create: {
+     *     // ... data to create a UserFollowTeacher
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserFollowTeacher we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserFollowTeacherUpsertArgs>(args: SelectSubset<T, UserFollowTeacherUpsertArgs<ExtArgs>>): Prisma__UserFollowTeacherClient<$Result.GetResult<Prisma.$UserFollowTeacherPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of UserFollowTeachers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowTeacherCountArgs} args - Arguments to filter UserFollowTeachers to count.
+     * @example
+     * // Count the number of UserFollowTeachers
+     * const count = await prisma.userFollowTeacher.count({
+     *   where: {
+     *     // ... the filter for the UserFollowTeachers we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserFollowTeacherCountArgs>(
+      args?: Subset<T, UserFollowTeacherCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserFollowTeacherCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserFollowTeacher.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowTeacherAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserFollowTeacherAggregateArgs>(args: Subset<T, UserFollowTeacherAggregateArgs>): Prisma.PrismaPromise<GetUserFollowTeacherAggregateType<T>>
+
+    /**
+     * Group by UserFollowTeacher.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowTeacherGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserFollowTeacherGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserFollowTeacherGroupByArgs['orderBy'] }
+        : { orderBy?: UserFollowTeacherGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserFollowTeacherGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserFollowTeacherGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserFollowTeacher model
+   */
+  readonly fields: UserFollowTeacherFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserFollowTeacher.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserFollowTeacherClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    teacher<T extends TeacherDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TeacherDefaultArgs<ExtArgs>>): Prisma__TeacherClient<$Result.GetResult<Prisma.$TeacherPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserFollowTeacher model
+   */ 
+  interface UserFollowTeacherFieldRefs {
+    readonly user_id: FieldRef<"UserFollowTeacher", 'Int'>
+    readonly teacher_id: FieldRef<"UserFollowTeacher", 'Int'>
+    readonly created_at: FieldRef<"UserFollowTeacher", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserFollowTeacher findUnique
+   */
+  export type UserFollowTeacherFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowTeacher to fetch.
+     */
+    where: UserFollowTeacherWhereUniqueInput
+  }
+
+  /**
+   * UserFollowTeacher findUniqueOrThrow
+   */
+  export type UserFollowTeacherFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowTeacher to fetch.
+     */
+    where: UserFollowTeacherWhereUniqueInput
+  }
+
+  /**
+   * UserFollowTeacher findFirst
+   */
+  export type UserFollowTeacherFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowTeacher to fetch.
+     */
+    where?: UserFollowTeacherWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserFollowTeachers to fetch.
+     */
+    orderBy?: UserFollowTeacherOrderByWithRelationInput | UserFollowTeacherOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserFollowTeachers.
+     */
+    cursor?: UserFollowTeacherWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserFollowTeachers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserFollowTeachers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserFollowTeachers.
+     */
+    distinct?: UserFollowTeacherScalarFieldEnum | UserFollowTeacherScalarFieldEnum[]
+  }
+
+  /**
+   * UserFollowTeacher findFirstOrThrow
+   */
+  export type UserFollowTeacherFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowTeacher to fetch.
+     */
+    where?: UserFollowTeacherWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserFollowTeachers to fetch.
+     */
+    orderBy?: UserFollowTeacherOrderByWithRelationInput | UserFollowTeacherOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserFollowTeachers.
+     */
+    cursor?: UserFollowTeacherWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserFollowTeachers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserFollowTeachers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserFollowTeachers.
+     */
+    distinct?: UserFollowTeacherScalarFieldEnum | UserFollowTeacherScalarFieldEnum[]
+  }
+
+  /**
+   * UserFollowTeacher findMany
+   */
+  export type UserFollowTeacherFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowTeachers to fetch.
+     */
+    where?: UserFollowTeacherWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserFollowTeachers to fetch.
+     */
+    orderBy?: UserFollowTeacherOrderByWithRelationInput | UserFollowTeacherOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserFollowTeachers.
+     */
+    cursor?: UserFollowTeacherWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserFollowTeachers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserFollowTeachers.
+     */
+    skip?: number
+    distinct?: UserFollowTeacherScalarFieldEnum | UserFollowTeacherScalarFieldEnum[]
+  }
+
+  /**
+   * UserFollowTeacher create
+   */
+  export type UserFollowTeacherCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserFollowTeacher.
+     */
+    data: XOR<UserFollowTeacherCreateInput, UserFollowTeacherUncheckedCreateInput>
+  }
+
+  /**
+   * UserFollowTeacher createMany
+   */
+  export type UserFollowTeacherCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserFollowTeachers.
+     */
+    data: UserFollowTeacherCreateManyInput | UserFollowTeacherCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserFollowTeacher createManyAndReturn
+   */
+  export type UserFollowTeacherCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many UserFollowTeachers.
+     */
+    data: UserFollowTeacherCreateManyInput | UserFollowTeacherCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserFollowTeacher update
+   */
+  export type UserFollowTeacherUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserFollowTeacher.
+     */
+    data: XOR<UserFollowTeacherUpdateInput, UserFollowTeacherUncheckedUpdateInput>
+    /**
+     * Choose, which UserFollowTeacher to update.
+     */
+    where: UserFollowTeacherWhereUniqueInput
+  }
+
+  /**
+   * UserFollowTeacher updateMany
+   */
+  export type UserFollowTeacherUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserFollowTeachers.
+     */
+    data: XOR<UserFollowTeacherUpdateManyMutationInput, UserFollowTeacherUncheckedUpdateManyInput>
+    /**
+     * Filter which UserFollowTeachers to update
+     */
+    where?: UserFollowTeacherWhereInput
+  }
+
+  /**
+   * UserFollowTeacher upsert
+   */
+  export type UserFollowTeacherUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserFollowTeacher to update in case it exists.
+     */
+    where: UserFollowTeacherWhereUniqueInput
+    /**
+     * In case the UserFollowTeacher found by the `where` argument doesn't exist, create a new UserFollowTeacher with this data.
+     */
+    create: XOR<UserFollowTeacherCreateInput, UserFollowTeacherUncheckedCreateInput>
+    /**
+     * In case the UserFollowTeacher was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserFollowTeacherUpdateInput, UserFollowTeacherUncheckedUpdateInput>
+  }
+
+  /**
+   * UserFollowTeacher delete
+   */
+  export type UserFollowTeacherDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherInclude<ExtArgs> | null
+    /**
+     * Filter which UserFollowTeacher to delete.
+     */
+    where: UserFollowTeacherWhereUniqueInput
+  }
+
+  /**
+   * UserFollowTeacher deleteMany
+   */
+  export type UserFollowTeacherDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserFollowTeachers to delete
+     */
+    where?: UserFollowTeacherWhereInput
+  }
+
+  /**
+   * UserFollowTeacher without action
+   */
+  export type UserFollowTeacherDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowTeacher
+     */
+    select?: UserFollowTeacherSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowTeacherInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserFollowMusician
+   */
+
+  export type AggregateUserFollowMusician = {
+    _count: UserFollowMusicianCountAggregateOutputType | null
+    _avg: UserFollowMusicianAvgAggregateOutputType | null
+    _sum: UserFollowMusicianSumAggregateOutputType | null
+    _min: UserFollowMusicianMinAggregateOutputType | null
+    _max: UserFollowMusicianMaxAggregateOutputType | null
+  }
+
+  export type UserFollowMusicianAvgAggregateOutputType = {
+    user_id: number | null
+    musician_id: number | null
+  }
+
+  export type UserFollowMusicianSumAggregateOutputType = {
+    user_id: number | null
+    musician_id: number | null
+  }
+
+  export type UserFollowMusicianMinAggregateOutputType = {
+    user_id: number | null
+    musician_id: number | null
+    created_at: Date | null
+  }
+
+  export type UserFollowMusicianMaxAggregateOutputType = {
+    user_id: number | null
+    musician_id: number | null
+    created_at: Date | null
+  }
+
+  export type UserFollowMusicianCountAggregateOutputType = {
+    user_id: number
+    musician_id: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type UserFollowMusicianAvgAggregateInputType = {
+    user_id?: true
+    musician_id?: true
+  }
+
+  export type UserFollowMusicianSumAggregateInputType = {
+    user_id?: true
+    musician_id?: true
+  }
+
+  export type UserFollowMusicianMinAggregateInputType = {
+    user_id?: true
+    musician_id?: true
+    created_at?: true
+  }
+
+  export type UserFollowMusicianMaxAggregateInputType = {
+    user_id?: true
+    musician_id?: true
+    created_at?: true
+  }
+
+  export type UserFollowMusicianCountAggregateInputType = {
+    user_id?: true
+    musician_id?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type UserFollowMusicianAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserFollowMusician to aggregate.
+     */
+    where?: UserFollowMusicianWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserFollowMusicians to fetch.
+     */
+    orderBy?: UserFollowMusicianOrderByWithRelationInput | UserFollowMusicianOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserFollowMusicianWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserFollowMusicians from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserFollowMusicians.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserFollowMusicians
+    **/
+    _count?: true | UserFollowMusicianCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserFollowMusicianAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserFollowMusicianSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserFollowMusicianMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserFollowMusicianMaxAggregateInputType
+  }
+
+  export type GetUserFollowMusicianAggregateType<T extends UserFollowMusicianAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserFollowMusician]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserFollowMusician[P]>
+      : GetScalarType<T[P], AggregateUserFollowMusician[P]>
+  }
+
+
+
+
+  export type UserFollowMusicianGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserFollowMusicianWhereInput
+    orderBy?: UserFollowMusicianOrderByWithAggregationInput | UserFollowMusicianOrderByWithAggregationInput[]
+    by: UserFollowMusicianScalarFieldEnum[] | UserFollowMusicianScalarFieldEnum
+    having?: UserFollowMusicianScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserFollowMusicianCountAggregateInputType | true
+    _avg?: UserFollowMusicianAvgAggregateInputType
+    _sum?: UserFollowMusicianSumAggregateInputType
+    _min?: UserFollowMusicianMinAggregateInputType
+    _max?: UserFollowMusicianMaxAggregateInputType
+  }
+
+  export type UserFollowMusicianGroupByOutputType = {
+    user_id: number
+    musician_id: number
+    created_at: Date
+    _count: UserFollowMusicianCountAggregateOutputType | null
+    _avg: UserFollowMusicianAvgAggregateOutputType | null
+    _sum: UserFollowMusicianSumAggregateOutputType | null
+    _min: UserFollowMusicianMinAggregateOutputType | null
+    _max: UserFollowMusicianMaxAggregateOutputType | null
+  }
+
+  type GetUserFollowMusicianGroupByPayload<T extends UserFollowMusicianGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserFollowMusicianGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserFollowMusicianGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserFollowMusicianGroupByOutputType[P]>
+            : GetScalarType<T[P], UserFollowMusicianGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserFollowMusicianSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    user_id?: boolean
+    musician_id?: boolean
+    created_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    musician?: boolean | MusicianDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userFollowMusician"]>
+
+  export type UserFollowMusicianSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    user_id?: boolean
+    musician_id?: boolean
+    created_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    musician?: boolean | MusicianDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userFollowMusician"]>
+
+  export type UserFollowMusicianSelectScalar = {
+    user_id?: boolean
+    musician_id?: boolean
+    created_at?: boolean
+  }
+
+  export type UserFollowMusicianInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    musician?: boolean | MusicianDefaultArgs<ExtArgs>
+  }
+  export type UserFollowMusicianIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    musician?: boolean | MusicianDefaultArgs<ExtArgs>
+  }
+
+  export type $UserFollowMusicianPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserFollowMusician"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      musician: Prisma.$MusicianPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      user_id: number
+      musician_id: number
+      created_at: Date
+    }, ExtArgs["result"]["userFollowMusician"]>
+    composites: {}
+  }
+
+  type UserFollowMusicianGetPayload<S extends boolean | null | undefined | UserFollowMusicianDefaultArgs> = $Result.GetResult<Prisma.$UserFollowMusicianPayload, S>
+
+  type UserFollowMusicianCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserFollowMusicianFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UserFollowMusicianCountAggregateInputType | true
+    }
+
+  export interface UserFollowMusicianDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserFollowMusician'], meta: { name: 'UserFollowMusician' } }
+    /**
+     * Find zero or one UserFollowMusician that matches the filter.
+     * @param {UserFollowMusicianFindUniqueArgs} args - Arguments to find a UserFollowMusician
+     * @example
+     * // Get one UserFollowMusician
+     * const userFollowMusician = await prisma.userFollowMusician.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserFollowMusicianFindUniqueArgs>(args: SelectSubset<T, UserFollowMusicianFindUniqueArgs<ExtArgs>>): Prisma__UserFollowMusicianClient<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one UserFollowMusician that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {UserFollowMusicianFindUniqueOrThrowArgs} args - Arguments to find a UserFollowMusician
+     * @example
+     * // Get one UserFollowMusician
+     * const userFollowMusician = await prisma.userFollowMusician.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserFollowMusicianFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFollowMusicianFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserFollowMusicianClient<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first UserFollowMusician that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowMusicianFindFirstArgs} args - Arguments to find a UserFollowMusician
+     * @example
+     * // Get one UserFollowMusician
+     * const userFollowMusician = await prisma.userFollowMusician.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserFollowMusicianFindFirstArgs>(args?: SelectSubset<T, UserFollowMusicianFindFirstArgs<ExtArgs>>): Prisma__UserFollowMusicianClient<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first UserFollowMusician that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowMusicianFindFirstOrThrowArgs} args - Arguments to find a UserFollowMusician
+     * @example
+     * // Get one UserFollowMusician
+     * const userFollowMusician = await prisma.userFollowMusician.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserFollowMusicianFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFollowMusicianFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserFollowMusicianClient<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more UserFollowMusicians that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowMusicianFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserFollowMusicians
+     * const userFollowMusicians = await prisma.userFollowMusician.findMany()
+     * 
+     * // Get first 10 UserFollowMusicians
+     * const userFollowMusicians = await prisma.userFollowMusician.findMany({ take: 10 })
+     * 
+     * // Only select the `user_id`
+     * const userFollowMusicianWithUser_idOnly = await prisma.userFollowMusician.findMany({ select: { user_id: true } })
+     * 
+     */
+    findMany<T extends UserFollowMusicianFindManyArgs>(args?: SelectSubset<T, UserFollowMusicianFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a UserFollowMusician.
+     * @param {UserFollowMusicianCreateArgs} args - Arguments to create a UserFollowMusician.
+     * @example
+     * // Create one UserFollowMusician
+     * const UserFollowMusician = await prisma.userFollowMusician.create({
+     *   data: {
+     *     // ... data to create a UserFollowMusician
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserFollowMusicianCreateArgs>(args: SelectSubset<T, UserFollowMusicianCreateArgs<ExtArgs>>): Prisma__UserFollowMusicianClient<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many UserFollowMusicians.
+     * @param {UserFollowMusicianCreateManyArgs} args - Arguments to create many UserFollowMusicians.
+     * @example
+     * // Create many UserFollowMusicians
+     * const userFollowMusician = await prisma.userFollowMusician.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserFollowMusicianCreateManyArgs>(args?: SelectSubset<T, UserFollowMusicianCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserFollowMusicians and returns the data saved in the database.
+     * @param {UserFollowMusicianCreateManyAndReturnArgs} args - Arguments to create many UserFollowMusicians.
+     * @example
+     * // Create many UserFollowMusicians
+     * const userFollowMusician = await prisma.userFollowMusician.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserFollowMusicians and only return the `user_id`
+     * const userFollowMusicianWithUser_idOnly = await prisma.userFollowMusician.createManyAndReturn({ 
+     *   select: { user_id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserFollowMusicianCreateManyAndReturnArgs>(args?: SelectSubset<T, UserFollowMusicianCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a UserFollowMusician.
+     * @param {UserFollowMusicianDeleteArgs} args - Arguments to delete one UserFollowMusician.
+     * @example
+     * // Delete one UserFollowMusician
+     * const UserFollowMusician = await prisma.userFollowMusician.delete({
+     *   where: {
+     *     // ... filter to delete one UserFollowMusician
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserFollowMusicianDeleteArgs>(args: SelectSubset<T, UserFollowMusicianDeleteArgs<ExtArgs>>): Prisma__UserFollowMusicianClient<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one UserFollowMusician.
+     * @param {UserFollowMusicianUpdateArgs} args - Arguments to update one UserFollowMusician.
+     * @example
+     * // Update one UserFollowMusician
+     * const userFollowMusician = await prisma.userFollowMusician.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserFollowMusicianUpdateArgs>(args: SelectSubset<T, UserFollowMusicianUpdateArgs<ExtArgs>>): Prisma__UserFollowMusicianClient<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more UserFollowMusicians.
+     * @param {UserFollowMusicianDeleteManyArgs} args - Arguments to filter UserFollowMusicians to delete.
+     * @example
+     * // Delete a few UserFollowMusicians
+     * const { count } = await prisma.userFollowMusician.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserFollowMusicianDeleteManyArgs>(args?: SelectSubset<T, UserFollowMusicianDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserFollowMusicians.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowMusicianUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserFollowMusicians
+     * const userFollowMusician = await prisma.userFollowMusician.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserFollowMusicianUpdateManyArgs>(args: SelectSubset<T, UserFollowMusicianUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserFollowMusician.
+     * @param {UserFollowMusicianUpsertArgs} args - Arguments to update or create a UserFollowMusician.
+     * @example
+     * // Update or create a UserFollowMusician
+     * const userFollowMusician = await prisma.userFollowMusician.upsert({
+     *   create: {
+     *     // ... data to create a UserFollowMusician
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserFollowMusician we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserFollowMusicianUpsertArgs>(args: SelectSubset<T, UserFollowMusicianUpsertArgs<ExtArgs>>): Prisma__UserFollowMusicianClient<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of UserFollowMusicians.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowMusicianCountArgs} args - Arguments to filter UserFollowMusicians to count.
+     * @example
+     * // Count the number of UserFollowMusicians
+     * const count = await prisma.userFollowMusician.count({
+     *   where: {
+     *     // ... the filter for the UserFollowMusicians we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserFollowMusicianCountArgs>(
+      args?: Subset<T, UserFollowMusicianCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserFollowMusicianCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserFollowMusician.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowMusicianAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserFollowMusicianAggregateArgs>(args: Subset<T, UserFollowMusicianAggregateArgs>): Prisma.PrismaPromise<GetUserFollowMusicianAggregateType<T>>
+
+    /**
+     * Group by UserFollowMusician.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowMusicianGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserFollowMusicianGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserFollowMusicianGroupByArgs['orderBy'] }
+        : { orderBy?: UserFollowMusicianGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserFollowMusicianGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserFollowMusicianGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserFollowMusician model
+   */
+  readonly fields: UserFollowMusicianFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserFollowMusician.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserFollowMusicianClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    musician<T extends MusicianDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MusicianDefaultArgs<ExtArgs>>): Prisma__MusicianClient<$Result.GetResult<Prisma.$MusicianPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserFollowMusician model
+   */ 
+  interface UserFollowMusicianFieldRefs {
+    readonly user_id: FieldRef<"UserFollowMusician", 'Int'>
+    readonly musician_id: FieldRef<"UserFollowMusician", 'Int'>
+    readonly created_at: FieldRef<"UserFollowMusician", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserFollowMusician findUnique
+   */
+  export type UserFollowMusicianFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowMusician to fetch.
+     */
+    where: UserFollowMusicianWhereUniqueInput
+  }
+
+  /**
+   * UserFollowMusician findUniqueOrThrow
+   */
+  export type UserFollowMusicianFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowMusician to fetch.
+     */
+    where: UserFollowMusicianWhereUniqueInput
+  }
+
+  /**
+   * UserFollowMusician findFirst
+   */
+  export type UserFollowMusicianFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowMusician to fetch.
+     */
+    where?: UserFollowMusicianWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserFollowMusicians to fetch.
+     */
+    orderBy?: UserFollowMusicianOrderByWithRelationInput | UserFollowMusicianOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserFollowMusicians.
+     */
+    cursor?: UserFollowMusicianWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserFollowMusicians from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserFollowMusicians.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserFollowMusicians.
+     */
+    distinct?: UserFollowMusicianScalarFieldEnum | UserFollowMusicianScalarFieldEnum[]
+  }
+
+  /**
+   * UserFollowMusician findFirstOrThrow
+   */
+  export type UserFollowMusicianFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowMusician to fetch.
+     */
+    where?: UserFollowMusicianWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserFollowMusicians to fetch.
+     */
+    orderBy?: UserFollowMusicianOrderByWithRelationInput | UserFollowMusicianOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserFollowMusicians.
+     */
+    cursor?: UserFollowMusicianWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserFollowMusicians from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserFollowMusicians.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserFollowMusicians.
+     */
+    distinct?: UserFollowMusicianScalarFieldEnum | UserFollowMusicianScalarFieldEnum[]
+  }
+
+  /**
+   * UserFollowMusician findMany
+   */
+  export type UserFollowMusicianFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowMusicians to fetch.
+     */
+    where?: UserFollowMusicianWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserFollowMusicians to fetch.
+     */
+    orderBy?: UserFollowMusicianOrderByWithRelationInput | UserFollowMusicianOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserFollowMusicians.
+     */
+    cursor?: UserFollowMusicianWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserFollowMusicians from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserFollowMusicians.
+     */
+    skip?: number
+    distinct?: UserFollowMusicianScalarFieldEnum | UserFollowMusicianScalarFieldEnum[]
+  }
+
+  /**
+   * UserFollowMusician create
+   */
+  export type UserFollowMusicianCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserFollowMusician.
+     */
+    data: XOR<UserFollowMusicianCreateInput, UserFollowMusicianUncheckedCreateInput>
+  }
+
+  /**
+   * UserFollowMusician createMany
+   */
+  export type UserFollowMusicianCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserFollowMusicians.
+     */
+    data: UserFollowMusicianCreateManyInput | UserFollowMusicianCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserFollowMusician createManyAndReturn
+   */
+  export type UserFollowMusicianCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many UserFollowMusicians.
+     */
+    data: UserFollowMusicianCreateManyInput | UserFollowMusicianCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserFollowMusician update
+   */
+  export type UserFollowMusicianUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserFollowMusician.
+     */
+    data: XOR<UserFollowMusicianUpdateInput, UserFollowMusicianUncheckedUpdateInput>
+    /**
+     * Choose, which UserFollowMusician to update.
+     */
+    where: UserFollowMusicianWhereUniqueInput
+  }
+
+  /**
+   * UserFollowMusician updateMany
+   */
+  export type UserFollowMusicianUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserFollowMusicians.
+     */
+    data: XOR<UserFollowMusicianUpdateManyMutationInput, UserFollowMusicianUncheckedUpdateManyInput>
+    /**
+     * Filter which UserFollowMusicians to update
+     */
+    where?: UserFollowMusicianWhereInput
+  }
+
+  /**
+   * UserFollowMusician upsert
+   */
+  export type UserFollowMusicianUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserFollowMusician to update in case it exists.
+     */
+    where: UserFollowMusicianWhereUniqueInput
+    /**
+     * In case the UserFollowMusician found by the `where` argument doesn't exist, create a new UserFollowMusician with this data.
+     */
+    create: XOR<UserFollowMusicianCreateInput, UserFollowMusicianUncheckedCreateInput>
+    /**
+     * In case the UserFollowMusician was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserFollowMusicianUpdateInput, UserFollowMusicianUncheckedUpdateInput>
+  }
+
+  /**
+   * UserFollowMusician delete
+   */
+  export type UserFollowMusicianDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianInclude<ExtArgs> | null
+    /**
+     * Filter which UserFollowMusician to delete.
+     */
+    where: UserFollowMusicianWhereUniqueInput
+  }
+
+  /**
+   * UserFollowMusician deleteMany
+   */
+  export type UserFollowMusicianDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserFollowMusicians to delete
+     */
+    where?: UserFollowMusicianWhereInput
+  }
+
+  /**
+   * UserFollowMusician without action
+   */
+  export type UserFollowMusicianDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowMusician
+     */
+    select?: UserFollowMusicianSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowMusicianInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserFollowEvent
+   */
+
+  export type AggregateUserFollowEvent = {
+    _count: UserFollowEventCountAggregateOutputType | null
+    _avg: UserFollowEventAvgAggregateOutputType | null
+    _sum: UserFollowEventSumAggregateOutputType | null
+    _min: UserFollowEventMinAggregateOutputType | null
+    _max: UserFollowEventMaxAggregateOutputType | null
+  }
+
+  export type UserFollowEventAvgAggregateOutputType = {
+    user_id: number | null
+    event_id: number | null
+  }
+
+  export type UserFollowEventSumAggregateOutputType = {
+    user_id: number | null
+    event_id: number | null
+  }
+
+  export type UserFollowEventMinAggregateOutputType = {
+    user_id: number | null
+    event_id: number | null
+    created_at: Date | null
+  }
+
+  export type UserFollowEventMaxAggregateOutputType = {
+    user_id: number | null
+    event_id: number | null
+    created_at: Date | null
+  }
+
+  export type UserFollowEventCountAggregateOutputType = {
+    user_id: number
+    event_id: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type UserFollowEventAvgAggregateInputType = {
+    user_id?: true
+    event_id?: true
+  }
+
+  export type UserFollowEventSumAggregateInputType = {
+    user_id?: true
+    event_id?: true
+  }
+
+  export type UserFollowEventMinAggregateInputType = {
+    user_id?: true
+    event_id?: true
+    created_at?: true
+  }
+
+  export type UserFollowEventMaxAggregateInputType = {
+    user_id?: true
+    event_id?: true
+    created_at?: true
+  }
+
+  export type UserFollowEventCountAggregateInputType = {
+    user_id?: true
+    event_id?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type UserFollowEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserFollowEvent to aggregate.
+     */
+    where?: UserFollowEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserFollowEvents to fetch.
+     */
+    orderBy?: UserFollowEventOrderByWithRelationInput | UserFollowEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserFollowEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserFollowEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserFollowEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserFollowEvents
+    **/
+    _count?: true | UserFollowEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserFollowEventAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserFollowEventSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserFollowEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserFollowEventMaxAggregateInputType
+  }
+
+  export type GetUserFollowEventAggregateType<T extends UserFollowEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserFollowEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserFollowEvent[P]>
+      : GetScalarType<T[P], AggregateUserFollowEvent[P]>
+  }
+
+
+
+
+  export type UserFollowEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserFollowEventWhereInput
+    orderBy?: UserFollowEventOrderByWithAggregationInput | UserFollowEventOrderByWithAggregationInput[]
+    by: UserFollowEventScalarFieldEnum[] | UserFollowEventScalarFieldEnum
+    having?: UserFollowEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserFollowEventCountAggregateInputType | true
+    _avg?: UserFollowEventAvgAggregateInputType
+    _sum?: UserFollowEventSumAggregateInputType
+    _min?: UserFollowEventMinAggregateInputType
+    _max?: UserFollowEventMaxAggregateInputType
+  }
+
+  export type UserFollowEventGroupByOutputType = {
+    user_id: number
+    event_id: number
+    created_at: Date
+    _count: UserFollowEventCountAggregateOutputType | null
+    _avg: UserFollowEventAvgAggregateOutputType | null
+    _sum: UserFollowEventSumAggregateOutputType | null
+    _min: UserFollowEventMinAggregateOutputType | null
+    _max: UserFollowEventMaxAggregateOutputType | null
+  }
+
+  type GetUserFollowEventGroupByPayload<T extends UserFollowEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserFollowEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserFollowEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserFollowEventGroupByOutputType[P]>
+            : GetScalarType<T[P], UserFollowEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserFollowEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    user_id?: boolean
+    event_id?: boolean
+    created_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userFollowEvent"]>
+
+  export type UserFollowEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    user_id?: boolean
+    event_id?: boolean
+    created_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userFollowEvent"]>
+
+  export type UserFollowEventSelectScalar = {
+    user_id?: boolean
+    event_id?: boolean
+    created_at?: boolean
+  }
+
+  export type UserFollowEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+  export type UserFollowEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+
+  export type $UserFollowEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserFollowEvent"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      event: Prisma.$EventPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      user_id: number
+      event_id: number
+      created_at: Date
+    }, ExtArgs["result"]["userFollowEvent"]>
+    composites: {}
+  }
+
+  type UserFollowEventGetPayload<S extends boolean | null | undefined | UserFollowEventDefaultArgs> = $Result.GetResult<Prisma.$UserFollowEventPayload, S>
+
+  type UserFollowEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserFollowEventFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UserFollowEventCountAggregateInputType | true
+    }
+
+  export interface UserFollowEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserFollowEvent'], meta: { name: 'UserFollowEvent' } }
+    /**
+     * Find zero or one UserFollowEvent that matches the filter.
+     * @param {UserFollowEventFindUniqueArgs} args - Arguments to find a UserFollowEvent
+     * @example
+     * // Get one UserFollowEvent
+     * const userFollowEvent = await prisma.userFollowEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserFollowEventFindUniqueArgs>(args: SelectSubset<T, UserFollowEventFindUniqueArgs<ExtArgs>>): Prisma__UserFollowEventClient<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one UserFollowEvent that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {UserFollowEventFindUniqueOrThrowArgs} args - Arguments to find a UserFollowEvent
+     * @example
+     * // Get one UserFollowEvent
+     * const userFollowEvent = await prisma.userFollowEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserFollowEventFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFollowEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserFollowEventClient<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first UserFollowEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowEventFindFirstArgs} args - Arguments to find a UserFollowEvent
+     * @example
+     * // Get one UserFollowEvent
+     * const userFollowEvent = await prisma.userFollowEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserFollowEventFindFirstArgs>(args?: SelectSubset<T, UserFollowEventFindFirstArgs<ExtArgs>>): Prisma__UserFollowEventClient<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first UserFollowEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowEventFindFirstOrThrowArgs} args - Arguments to find a UserFollowEvent
+     * @example
+     * // Get one UserFollowEvent
+     * const userFollowEvent = await prisma.userFollowEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserFollowEventFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFollowEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserFollowEventClient<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more UserFollowEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserFollowEvents
+     * const userFollowEvents = await prisma.userFollowEvent.findMany()
+     * 
+     * // Get first 10 UserFollowEvents
+     * const userFollowEvents = await prisma.userFollowEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `user_id`
+     * const userFollowEventWithUser_idOnly = await prisma.userFollowEvent.findMany({ select: { user_id: true } })
+     * 
+     */
+    findMany<T extends UserFollowEventFindManyArgs>(args?: SelectSubset<T, UserFollowEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a UserFollowEvent.
+     * @param {UserFollowEventCreateArgs} args - Arguments to create a UserFollowEvent.
+     * @example
+     * // Create one UserFollowEvent
+     * const UserFollowEvent = await prisma.userFollowEvent.create({
+     *   data: {
+     *     // ... data to create a UserFollowEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserFollowEventCreateArgs>(args: SelectSubset<T, UserFollowEventCreateArgs<ExtArgs>>): Prisma__UserFollowEventClient<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many UserFollowEvents.
+     * @param {UserFollowEventCreateManyArgs} args - Arguments to create many UserFollowEvents.
+     * @example
+     * // Create many UserFollowEvents
+     * const userFollowEvent = await prisma.userFollowEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserFollowEventCreateManyArgs>(args?: SelectSubset<T, UserFollowEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserFollowEvents and returns the data saved in the database.
+     * @param {UserFollowEventCreateManyAndReturnArgs} args - Arguments to create many UserFollowEvents.
+     * @example
+     * // Create many UserFollowEvents
+     * const userFollowEvent = await prisma.userFollowEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserFollowEvents and only return the `user_id`
+     * const userFollowEventWithUser_idOnly = await prisma.userFollowEvent.createManyAndReturn({ 
+     *   select: { user_id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserFollowEventCreateManyAndReturnArgs>(args?: SelectSubset<T, UserFollowEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a UserFollowEvent.
+     * @param {UserFollowEventDeleteArgs} args - Arguments to delete one UserFollowEvent.
+     * @example
+     * // Delete one UserFollowEvent
+     * const UserFollowEvent = await prisma.userFollowEvent.delete({
+     *   where: {
+     *     // ... filter to delete one UserFollowEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserFollowEventDeleteArgs>(args: SelectSubset<T, UserFollowEventDeleteArgs<ExtArgs>>): Prisma__UserFollowEventClient<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one UserFollowEvent.
+     * @param {UserFollowEventUpdateArgs} args - Arguments to update one UserFollowEvent.
+     * @example
+     * // Update one UserFollowEvent
+     * const userFollowEvent = await prisma.userFollowEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserFollowEventUpdateArgs>(args: SelectSubset<T, UserFollowEventUpdateArgs<ExtArgs>>): Prisma__UserFollowEventClient<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more UserFollowEvents.
+     * @param {UserFollowEventDeleteManyArgs} args - Arguments to filter UserFollowEvents to delete.
+     * @example
+     * // Delete a few UserFollowEvents
+     * const { count } = await prisma.userFollowEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserFollowEventDeleteManyArgs>(args?: SelectSubset<T, UserFollowEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserFollowEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserFollowEvents
+     * const userFollowEvent = await prisma.userFollowEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserFollowEventUpdateManyArgs>(args: SelectSubset<T, UserFollowEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserFollowEvent.
+     * @param {UserFollowEventUpsertArgs} args - Arguments to update or create a UserFollowEvent.
+     * @example
+     * // Update or create a UserFollowEvent
+     * const userFollowEvent = await prisma.userFollowEvent.upsert({
+     *   create: {
+     *     // ... data to create a UserFollowEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserFollowEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserFollowEventUpsertArgs>(args: SelectSubset<T, UserFollowEventUpsertArgs<ExtArgs>>): Prisma__UserFollowEventClient<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of UserFollowEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowEventCountArgs} args - Arguments to filter UserFollowEvents to count.
+     * @example
+     * // Count the number of UserFollowEvents
+     * const count = await prisma.userFollowEvent.count({
+     *   where: {
+     *     // ... the filter for the UserFollowEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserFollowEventCountArgs>(
+      args?: Subset<T, UserFollowEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserFollowEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserFollowEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserFollowEventAggregateArgs>(args: Subset<T, UserFollowEventAggregateArgs>): Prisma.PrismaPromise<GetUserFollowEventAggregateType<T>>
+
+    /**
+     * Group by UserFollowEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFollowEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserFollowEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserFollowEventGroupByArgs['orderBy'] }
+        : { orderBy?: UserFollowEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserFollowEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserFollowEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserFollowEvent model
+   */
+  readonly fields: UserFollowEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserFollowEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserFollowEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    event<T extends EventDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventDefaultArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserFollowEvent model
+   */ 
+  interface UserFollowEventFieldRefs {
+    readonly user_id: FieldRef<"UserFollowEvent", 'Int'>
+    readonly event_id: FieldRef<"UserFollowEvent", 'Int'>
+    readonly created_at: FieldRef<"UserFollowEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserFollowEvent findUnique
+   */
+  export type UserFollowEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowEvent to fetch.
+     */
+    where: UserFollowEventWhereUniqueInput
+  }
+
+  /**
+   * UserFollowEvent findUniqueOrThrow
+   */
+  export type UserFollowEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowEvent to fetch.
+     */
+    where: UserFollowEventWhereUniqueInput
+  }
+
+  /**
+   * UserFollowEvent findFirst
+   */
+  export type UserFollowEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowEvent to fetch.
+     */
+    where?: UserFollowEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserFollowEvents to fetch.
+     */
+    orderBy?: UserFollowEventOrderByWithRelationInput | UserFollowEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserFollowEvents.
+     */
+    cursor?: UserFollowEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserFollowEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserFollowEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserFollowEvents.
+     */
+    distinct?: UserFollowEventScalarFieldEnum | UserFollowEventScalarFieldEnum[]
+  }
+
+  /**
+   * UserFollowEvent findFirstOrThrow
+   */
+  export type UserFollowEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowEvent to fetch.
+     */
+    where?: UserFollowEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserFollowEvents to fetch.
+     */
+    orderBy?: UserFollowEventOrderByWithRelationInput | UserFollowEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserFollowEvents.
+     */
+    cursor?: UserFollowEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserFollowEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserFollowEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserFollowEvents.
+     */
+    distinct?: UserFollowEventScalarFieldEnum | UserFollowEventScalarFieldEnum[]
+  }
+
+  /**
+   * UserFollowEvent findMany
+   */
+  export type UserFollowEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventInclude<ExtArgs> | null
+    /**
+     * Filter, which UserFollowEvents to fetch.
+     */
+    where?: UserFollowEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserFollowEvents to fetch.
+     */
+    orderBy?: UserFollowEventOrderByWithRelationInput | UserFollowEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserFollowEvents.
+     */
+    cursor?: UserFollowEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserFollowEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserFollowEvents.
+     */
+    skip?: number
+    distinct?: UserFollowEventScalarFieldEnum | UserFollowEventScalarFieldEnum[]
+  }
+
+  /**
+   * UserFollowEvent create
+   */
+  export type UserFollowEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserFollowEvent.
+     */
+    data: XOR<UserFollowEventCreateInput, UserFollowEventUncheckedCreateInput>
+  }
+
+  /**
+   * UserFollowEvent createMany
+   */
+  export type UserFollowEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserFollowEvents.
+     */
+    data: UserFollowEventCreateManyInput | UserFollowEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserFollowEvent createManyAndReturn
+   */
+  export type UserFollowEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many UserFollowEvents.
+     */
+    data: UserFollowEventCreateManyInput | UserFollowEventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserFollowEvent update
+   */
+  export type UserFollowEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserFollowEvent.
+     */
+    data: XOR<UserFollowEventUpdateInput, UserFollowEventUncheckedUpdateInput>
+    /**
+     * Choose, which UserFollowEvent to update.
+     */
+    where: UserFollowEventWhereUniqueInput
+  }
+
+  /**
+   * UserFollowEvent updateMany
+   */
+  export type UserFollowEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserFollowEvents.
+     */
+    data: XOR<UserFollowEventUpdateManyMutationInput, UserFollowEventUncheckedUpdateManyInput>
+    /**
+     * Filter which UserFollowEvents to update
+     */
+    where?: UserFollowEventWhereInput
+  }
+
+  /**
+   * UserFollowEvent upsert
+   */
+  export type UserFollowEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserFollowEvent to update in case it exists.
+     */
+    where: UserFollowEventWhereUniqueInput
+    /**
+     * In case the UserFollowEvent found by the `where` argument doesn't exist, create a new UserFollowEvent with this data.
+     */
+    create: XOR<UserFollowEventCreateInput, UserFollowEventUncheckedCreateInput>
+    /**
+     * In case the UserFollowEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserFollowEventUpdateInput, UserFollowEventUncheckedUpdateInput>
+  }
+
+  /**
+   * UserFollowEvent delete
+   */
+  export type UserFollowEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventInclude<ExtArgs> | null
+    /**
+     * Filter which UserFollowEvent to delete.
+     */
+    where: UserFollowEventWhereUniqueInput
+  }
+
+  /**
+   * UserFollowEvent deleteMany
+   */
+  export type UserFollowEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserFollowEvents to delete
+     */
+    where?: UserFollowEventWhereInput
+  }
+
+  /**
+   * UserFollowEvent without action
+   */
+  export type UserFollowEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserFollowEvent
+     */
+    select?: UserFollowEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserFollowEventInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserNotification
+   */
+
+  export type AggregateUserNotification = {
+    _count: UserNotificationCountAggregateOutputType | null
+    _avg: UserNotificationAvgAggregateOutputType | null
+    _sum: UserNotificationSumAggregateOutputType | null
+    _min: UserNotificationMinAggregateOutputType | null
+    _max: UserNotificationMaxAggregateOutputType | null
+  }
+
+  export type UserNotificationAvgAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+  }
+
+  export type UserNotificationSumAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+  }
+
+  export type UserNotificationMinAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    type: string | null
+    title: string | null
+    message: string | null
+    read: boolean | null
+    created_at: Date | null
+  }
+
+  export type UserNotificationMaxAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    type: string | null
+    title: string | null
+    message: string | null
+    read: boolean | null
+    created_at: Date | null
+  }
+
+  export type UserNotificationCountAggregateOutputType = {
+    id: number
+    user_id: number
+    type: number
+    title: number
+    message: number
+    read: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type UserNotificationAvgAggregateInputType = {
+    id?: true
+    user_id?: true
+  }
+
+  export type UserNotificationSumAggregateInputType = {
+    id?: true
+    user_id?: true
+  }
+
+  export type UserNotificationMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    type?: true
+    title?: true
+    message?: true
+    read?: true
+    created_at?: true
+  }
+
+  export type UserNotificationMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    type?: true
+    title?: true
+    message?: true
+    read?: true
+    created_at?: true
+  }
+
+  export type UserNotificationCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    type?: true
+    title?: true
+    message?: true
+    read?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type UserNotificationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserNotification to aggregate.
+     */
+    where?: UserNotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserNotifications to fetch.
+     */
+    orderBy?: UserNotificationOrderByWithRelationInput | UserNotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserNotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserNotifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserNotifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserNotifications
+    **/
+    _count?: true | UserNotificationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserNotificationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserNotificationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserNotificationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserNotificationMaxAggregateInputType
+  }
+
+  export type GetUserNotificationAggregateType<T extends UserNotificationAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserNotification]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserNotification[P]>
+      : GetScalarType<T[P], AggregateUserNotification[P]>
+  }
+
+
+
+
+  export type UserNotificationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserNotificationWhereInput
+    orderBy?: UserNotificationOrderByWithAggregationInput | UserNotificationOrderByWithAggregationInput[]
+    by: UserNotificationScalarFieldEnum[] | UserNotificationScalarFieldEnum
+    having?: UserNotificationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserNotificationCountAggregateInputType | true
+    _avg?: UserNotificationAvgAggregateInputType
+    _sum?: UserNotificationSumAggregateInputType
+    _min?: UserNotificationMinAggregateInputType
+    _max?: UserNotificationMaxAggregateInputType
+  }
+
+  export type UserNotificationGroupByOutputType = {
+    id: number
+    user_id: number
+    type: string
+    title: string
+    message: string
+    read: boolean
+    created_at: Date
+    _count: UserNotificationCountAggregateOutputType | null
+    _avg: UserNotificationAvgAggregateOutputType | null
+    _sum: UserNotificationSumAggregateOutputType | null
+    _min: UserNotificationMinAggregateOutputType | null
+    _max: UserNotificationMaxAggregateOutputType | null
+  }
+
+  type GetUserNotificationGroupByPayload<T extends UserNotificationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserNotificationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserNotificationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserNotificationGroupByOutputType[P]>
+            : GetScalarType<T[P], UserNotificationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserNotificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    type?: boolean
+    title?: boolean
+    message?: boolean
+    read?: boolean
+    created_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userNotification"]>
+
+  export type UserNotificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    type?: boolean
+    title?: boolean
+    message?: boolean
+    read?: boolean
+    created_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userNotification"]>
+
+  export type UserNotificationSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    type?: boolean
+    title?: boolean
+    message?: boolean
+    read?: boolean
+    created_at?: boolean
+  }
+
+  export type UserNotificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserNotificationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserNotificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserNotification"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      user_id: number
+      type: string
+      title: string
+      message: string
+      read: boolean
+      created_at: Date
+    }, ExtArgs["result"]["userNotification"]>
+    composites: {}
+  }
+
+  type UserNotificationGetPayload<S extends boolean | null | undefined | UserNotificationDefaultArgs> = $Result.GetResult<Prisma.$UserNotificationPayload, S>
+
+  type UserNotificationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserNotificationFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UserNotificationCountAggregateInputType | true
+    }
+
+  export interface UserNotificationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserNotification'], meta: { name: 'UserNotification' } }
+    /**
+     * Find zero or one UserNotification that matches the filter.
+     * @param {UserNotificationFindUniqueArgs} args - Arguments to find a UserNotification
+     * @example
+     * // Get one UserNotification
+     * const userNotification = await prisma.userNotification.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserNotificationFindUniqueArgs>(args: SelectSubset<T, UserNotificationFindUniqueArgs<ExtArgs>>): Prisma__UserNotificationClient<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one UserNotification that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {UserNotificationFindUniqueOrThrowArgs} args - Arguments to find a UserNotification
+     * @example
+     * // Get one UserNotification
+     * const userNotification = await prisma.userNotification.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserNotificationFindUniqueOrThrowArgs>(args: SelectSubset<T, UserNotificationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserNotificationClient<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first UserNotification that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserNotificationFindFirstArgs} args - Arguments to find a UserNotification
+     * @example
+     * // Get one UserNotification
+     * const userNotification = await prisma.userNotification.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserNotificationFindFirstArgs>(args?: SelectSubset<T, UserNotificationFindFirstArgs<ExtArgs>>): Prisma__UserNotificationClient<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first UserNotification that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserNotificationFindFirstOrThrowArgs} args - Arguments to find a UserNotification
+     * @example
+     * // Get one UserNotification
+     * const userNotification = await prisma.userNotification.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserNotificationFindFirstOrThrowArgs>(args?: SelectSubset<T, UserNotificationFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserNotificationClient<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more UserNotifications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserNotificationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserNotifications
+     * const userNotifications = await prisma.userNotification.findMany()
+     * 
+     * // Get first 10 UserNotifications
+     * const userNotifications = await prisma.userNotification.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userNotificationWithIdOnly = await prisma.userNotification.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserNotificationFindManyArgs>(args?: SelectSubset<T, UserNotificationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a UserNotification.
+     * @param {UserNotificationCreateArgs} args - Arguments to create a UserNotification.
+     * @example
+     * // Create one UserNotification
+     * const UserNotification = await prisma.userNotification.create({
+     *   data: {
+     *     // ... data to create a UserNotification
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserNotificationCreateArgs>(args: SelectSubset<T, UserNotificationCreateArgs<ExtArgs>>): Prisma__UserNotificationClient<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many UserNotifications.
+     * @param {UserNotificationCreateManyArgs} args - Arguments to create many UserNotifications.
+     * @example
+     * // Create many UserNotifications
+     * const userNotification = await prisma.userNotification.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserNotificationCreateManyArgs>(args?: SelectSubset<T, UserNotificationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserNotifications and returns the data saved in the database.
+     * @param {UserNotificationCreateManyAndReturnArgs} args - Arguments to create many UserNotifications.
+     * @example
+     * // Create many UserNotifications
+     * const userNotification = await prisma.userNotification.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserNotifications and only return the `id`
+     * const userNotificationWithIdOnly = await prisma.userNotification.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserNotificationCreateManyAndReturnArgs>(args?: SelectSubset<T, UserNotificationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a UserNotification.
+     * @param {UserNotificationDeleteArgs} args - Arguments to delete one UserNotification.
+     * @example
+     * // Delete one UserNotification
+     * const UserNotification = await prisma.userNotification.delete({
+     *   where: {
+     *     // ... filter to delete one UserNotification
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserNotificationDeleteArgs>(args: SelectSubset<T, UserNotificationDeleteArgs<ExtArgs>>): Prisma__UserNotificationClient<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one UserNotification.
+     * @param {UserNotificationUpdateArgs} args - Arguments to update one UserNotification.
+     * @example
+     * // Update one UserNotification
+     * const userNotification = await prisma.userNotification.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserNotificationUpdateArgs>(args: SelectSubset<T, UserNotificationUpdateArgs<ExtArgs>>): Prisma__UserNotificationClient<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more UserNotifications.
+     * @param {UserNotificationDeleteManyArgs} args - Arguments to filter UserNotifications to delete.
+     * @example
+     * // Delete a few UserNotifications
+     * const { count } = await prisma.userNotification.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserNotificationDeleteManyArgs>(args?: SelectSubset<T, UserNotificationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserNotifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserNotificationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserNotifications
+     * const userNotification = await prisma.userNotification.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserNotificationUpdateManyArgs>(args: SelectSubset<T, UserNotificationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserNotification.
+     * @param {UserNotificationUpsertArgs} args - Arguments to update or create a UserNotification.
+     * @example
+     * // Update or create a UserNotification
+     * const userNotification = await prisma.userNotification.upsert({
+     *   create: {
+     *     // ... data to create a UserNotification
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserNotification we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserNotificationUpsertArgs>(args: SelectSubset<T, UserNotificationUpsertArgs<ExtArgs>>): Prisma__UserNotificationClient<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of UserNotifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserNotificationCountArgs} args - Arguments to filter UserNotifications to count.
+     * @example
+     * // Count the number of UserNotifications
+     * const count = await prisma.userNotification.count({
+     *   where: {
+     *     // ... the filter for the UserNotifications we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserNotificationCountArgs>(
+      args?: Subset<T, UserNotificationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserNotificationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserNotification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserNotificationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserNotificationAggregateArgs>(args: Subset<T, UserNotificationAggregateArgs>): Prisma.PrismaPromise<GetUserNotificationAggregateType<T>>
+
+    /**
+     * Group by UserNotification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserNotificationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserNotificationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserNotificationGroupByArgs['orderBy'] }
+        : { orderBy?: UserNotificationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserNotificationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserNotificationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserNotification model
+   */
+  readonly fields: UserNotificationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserNotification.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserNotificationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserNotification model
+   */ 
+  interface UserNotificationFieldRefs {
+    readonly id: FieldRef<"UserNotification", 'Int'>
+    readonly user_id: FieldRef<"UserNotification", 'Int'>
+    readonly type: FieldRef<"UserNotification", 'String'>
+    readonly title: FieldRef<"UserNotification", 'String'>
+    readonly message: FieldRef<"UserNotification", 'String'>
+    readonly read: FieldRef<"UserNotification", 'Boolean'>
+    readonly created_at: FieldRef<"UserNotification", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserNotification findUnique
+   */
+  export type UserNotificationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserNotification
+     */
+    select?: UserNotificationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserNotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserNotification to fetch.
+     */
+    where: UserNotificationWhereUniqueInput
+  }
+
+  /**
+   * UserNotification findUniqueOrThrow
+   */
+  export type UserNotificationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserNotification
+     */
+    select?: UserNotificationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserNotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserNotification to fetch.
+     */
+    where: UserNotificationWhereUniqueInput
+  }
+
+  /**
+   * UserNotification findFirst
+   */
+  export type UserNotificationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserNotification
+     */
+    select?: UserNotificationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserNotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserNotification to fetch.
+     */
+    where?: UserNotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserNotifications to fetch.
+     */
+    orderBy?: UserNotificationOrderByWithRelationInput | UserNotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserNotifications.
+     */
+    cursor?: UserNotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserNotifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserNotifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserNotifications.
+     */
+    distinct?: UserNotificationScalarFieldEnum | UserNotificationScalarFieldEnum[]
+  }
+
+  /**
+   * UserNotification findFirstOrThrow
+   */
+  export type UserNotificationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserNotification
+     */
+    select?: UserNotificationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserNotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserNotification to fetch.
+     */
+    where?: UserNotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserNotifications to fetch.
+     */
+    orderBy?: UserNotificationOrderByWithRelationInput | UserNotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserNotifications.
+     */
+    cursor?: UserNotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserNotifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserNotifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserNotifications.
+     */
+    distinct?: UserNotificationScalarFieldEnum | UserNotificationScalarFieldEnum[]
+  }
+
+  /**
+   * UserNotification findMany
+   */
+  export type UserNotificationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserNotification
+     */
+    select?: UserNotificationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserNotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserNotifications to fetch.
+     */
+    where?: UserNotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserNotifications to fetch.
+     */
+    orderBy?: UserNotificationOrderByWithRelationInput | UserNotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserNotifications.
+     */
+    cursor?: UserNotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserNotifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserNotifications.
+     */
+    skip?: number
+    distinct?: UserNotificationScalarFieldEnum | UserNotificationScalarFieldEnum[]
+  }
+
+  /**
+   * UserNotification create
+   */
+  export type UserNotificationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserNotification
+     */
+    select?: UserNotificationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserNotificationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserNotification.
+     */
+    data: XOR<UserNotificationCreateInput, UserNotificationUncheckedCreateInput>
+  }
+
+  /**
+   * UserNotification createMany
+   */
+  export type UserNotificationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserNotifications.
+     */
+    data: UserNotificationCreateManyInput | UserNotificationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserNotification createManyAndReturn
+   */
+  export type UserNotificationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserNotification
+     */
+    select?: UserNotificationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many UserNotifications.
+     */
+    data: UserNotificationCreateManyInput | UserNotificationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserNotificationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserNotification update
+   */
+  export type UserNotificationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserNotification
+     */
+    select?: UserNotificationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserNotificationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserNotification.
+     */
+    data: XOR<UserNotificationUpdateInput, UserNotificationUncheckedUpdateInput>
+    /**
+     * Choose, which UserNotification to update.
+     */
+    where: UserNotificationWhereUniqueInput
+  }
+
+  /**
+   * UserNotification updateMany
+   */
+  export type UserNotificationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserNotifications.
+     */
+    data: XOR<UserNotificationUpdateManyMutationInput, UserNotificationUncheckedUpdateManyInput>
+    /**
+     * Filter which UserNotifications to update
+     */
+    where?: UserNotificationWhereInput
+  }
+
+  /**
+   * UserNotification upsert
+   */
+  export type UserNotificationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserNotification
+     */
+    select?: UserNotificationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserNotificationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserNotification to update in case it exists.
+     */
+    where: UserNotificationWhereUniqueInput
+    /**
+     * In case the UserNotification found by the `where` argument doesn't exist, create a new UserNotification with this data.
+     */
+    create: XOR<UserNotificationCreateInput, UserNotificationUncheckedCreateInput>
+    /**
+     * In case the UserNotification was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserNotificationUpdateInput, UserNotificationUncheckedUpdateInput>
+  }
+
+  /**
+   * UserNotification delete
+   */
+  export type UserNotificationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserNotification
+     */
+    select?: UserNotificationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserNotificationInclude<ExtArgs> | null
+    /**
+     * Filter which UserNotification to delete.
+     */
+    where: UserNotificationWhereUniqueInput
+  }
+
+  /**
+   * UserNotification deleteMany
+   */
+  export type UserNotificationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserNotifications to delete
+     */
+    where?: UserNotificationWhereInput
+  }
+
+  /**
+   * UserNotification without action
+   */
+  export type UserNotificationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserNotification
+     */
+    select?: UserNotificationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserNotificationInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model social_media
    */
 
@@ -9971,6 +17676,83 @@ export namespace Prisma {
   export type Event_pricesScalarFieldEnum = (typeof Event_pricesScalarFieldEnum)[keyof typeof Event_pricesScalarFieldEnum]
 
 
+  export const UserScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    name: 'name',
+    avatar: 'avatar',
+    verified: 'verified',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const UserPreferencesScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    email_notifications: 'email_notifications',
+    push_notifications: 'push_notifications',
+    new_event_notifications: 'new_event_notifications',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type UserPreferencesScalarFieldEnum = (typeof UserPreferencesScalarFieldEnum)[keyof typeof UserPreferencesScalarFieldEnum]
+
+
+  export const SavedSearchScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    name: 'name',
+    query: 'query',
+    created_at: 'created_at'
+  };
+
+  export type SavedSearchScalarFieldEnum = (typeof SavedSearchScalarFieldEnum)[keyof typeof SavedSearchScalarFieldEnum]
+
+
+  export const UserFollowTeacherScalarFieldEnum: {
+    user_id: 'user_id',
+    teacher_id: 'teacher_id',
+    created_at: 'created_at'
+  };
+
+  export type UserFollowTeacherScalarFieldEnum = (typeof UserFollowTeacherScalarFieldEnum)[keyof typeof UserFollowTeacherScalarFieldEnum]
+
+
+  export const UserFollowMusicianScalarFieldEnum: {
+    user_id: 'user_id',
+    musician_id: 'musician_id',
+    created_at: 'created_at'
+  };
+
+  export type UserFollowMusicianScalarFieldEnum = (typeof UserFollowMusicianScalarFieldEnum)[keyof typeof UserFollowMusicianScalarFieldEnum]
+
+
+  export const UserFollowEventScalarFieldEnum: {
+    user_id: 'user_id',
+    event_id: 'event_id',
+    created_at: 'created_at'
+  };
+
+  export type UserFollowEventScalarFieldEnum = (typeof UserFollowEventScalarFieldEnum)[keyof typeof UserFollowEventScalarFieldEnum]
+
+
+  export const UserNotificationScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    type: 'type',
+    title: 'title',
+    message: 'message',
+    read: 'read',
+    created_at: 'created_at'
+  };
+
+  export type UserNotificationScalarFieldEnum = (typeof UserNotificationScalarFieldEnum)[keyof typeof UserNotificationScalarFieldEnum]
+
+
   export const Social_mediaScalarFieldEnum: {
     id: 'id',
     entity_type: 'entity_type',
@@ -9995,6 +17777,13 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -10009,6 +17798,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -10080,6 +17878,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -10119,6 +17924,7 @@ export namespace Prisma {
     event_prices?: Event_pricesListRelationFilter
     event_teachers?: ExternalEventTeacherListRelationFilter
     venues?: ExternalEventVenueListRelationFilter
+    followers?: UserFollowEventListRelationFilter
   }
 
   export type EventOrderByWithRelationInput = {
@@ -10141,6 +17947,7 @@ export namespace Prisma {
     event_prices?: event_pricesOrderByRelationAggregateInput
     event_teachers?: ExternalEventTeacherOrderByRelationAggregateInput
     venues?: ExternalEventVenueOrderByRelationAggregateInput
+    followers?: UserFollowEventOrderByRelationAggregateInput
   }
 
   export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -10166,6 +17973,7 @@ export namespace Prisma {
     event_prices?: Event_pricesListRelationFilter
     event_teachers?: ExternalEventTeacherListRelationFilter
     venues?: ExternalEventVenueListRelationFilter
+    followers?: UserFollowEventListRelationFilter
   }, "id">
 
   export type EventOrderByWithAggregationInput = {
@@ -10332,6 +18140,7 @@ export namespace Prisma {
     ai_relevance_score?: IntNullableFilter<"Teacher"> | number | null
     image_url?: StringNullableFilter<"Teacher"> | string | null
     event_teachers?: ExternalEventTeacherListRelationFilter
+    followers?: UserFollowTeacherListRelationFilter
   }
 
   export type TeacherOrderByWithRelationInput = {
@@ -10343,6 +18152,7 @@ export namespace Prisma {
     ai_relevance_score?: SortOrderInput | SortOrder
     image_url?: SortOrderInput | SortOrder
     event_teachers?: ExternalEventTeacherOrderByRelationAggregateInput
+    followers?: UserFollowTeacherOrderByRelationAggregateInput
   }
 
   export type TeacherWhereUniqueInput = Prisma.AtLeast<{
@@ -10357,6 +18167,7 @@ export namespace Prisma {
     ai_relevance_score?: IntNullableFilter<"Teacher"> | number | null
     image_url?: StringNullableFilter<"Teacher"> | string | null
     event_teachers?: ExternalEventTeacherListRelationFilter
+    followers?: UserFollowTeacherListRelationFilter
   }, "id">
 
   export type TeacherOrderByWithAggregationInput = {
@@ -10407,6 +18218,7 @@ export namespace Prisma {
     updatedAt?: DateTimeNullableFilter<"Musician"> | Date | string | null
     image_url?: StringNullableFilter<"Musician"> | string | null
     event_musicians?: Event_musiciansListRelationFilter
+    followers?: UserFollowMusicianListRelationFilter
   }
 
   export type MusicianOrderByWithRelationInput = {
@@ -10426,6 +18238,7 @@ export namespace Prisma {
     updatedAt?: SortOrderInput | SortOrder
     image_url?: SortOrderInput | SortOrder
     event_musicians?: event_musiciansOrderByRelationAggregateInput
+    followers?: UserFollowMusicianOrderByRelationAggregateInput
   }
 
   export type MusicianWhereUniqueInput = Prisma.AtLeast<{
@@ -10448,6 +18261,7 @@ export namespace Prisma {
     updatedAt?: DateTimeNullableFilter<"Musician"> | Date | string | null
     image_url?: StringNullableFilter<"Musician"> | string | null
     event_musicians?: Event_musiciansListRelationFilter
+    followers?: UserFollowMusicianListRelationFilter
   }, "id" | "slug">
 
   export type MusicianOrderByWithAggregationInput = {
@@ -10641,6 +18455,432 @@ export namespace Prisma {
     updated_at?: DateTimeNullableWithAggregatesFilter<"event_prices"> | Date | string | null
   }
 
+  export type UserWhereInput = {
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    id?: IntFilter<"User"> | number
+    email?: StringFilter<"User"> | string
+    name?: StringNullableFilter<"User"> | string | null
+    avatar?: StringNullableFilter<"User"> | string | null
+    verified?: BoolFilter<"User"> | boolean
+    created_at?: DateTimeFilter<"User"> | Date | string
+    updated_at?: DateTimeFilter<"User"> | Date | string
+    preferences?: XOR<UserPreferencesNullableRelationFilter, UserPreferencesWhereInput> | null
+    savedSearches?: SavedSearchListRelationFilter
+    followedTeachers?: UserFollowTeacherListRelationFilter
+    followedMusicians?: UserFollowMusicianListRelationFilter
+    followedEvents?: UserFollowEventListRelationFilter
+    notifications?: UserNotificationListRelationFilter
+  }
+
+  export type UserOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrderInput | SortOrder
+    avatar?: SortOrderInput | SortOrder
+    verified?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    preferences?: UserPreferencesOrderByWithRelationInput
+    savedSearches?: SavedSearchOrderByRelationAggregateInput
+    followedTeachers?: UserFollowTeacherOrderByRelationAggregateInput
+    followedMusicians?: UserFollowMusicianOrderByRelationAggregateInput
+    followedEvents?: UserFollowEventOrderByRelationAggregateInput
+    notifications?: UserNotificationOrderByRelationAggregateInput
+  }
+
+  export type UserWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    email?: string
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    name?: StringNullableFilter<"User"> | string | null
+    avatar?: StringNullableFilter<"User"> | string | null
+    verified?: BoolFilter<"User"> | boolean
+    created_at?: DateTimeFilter<"User"> | Date | string
+    updated_at?: DateTimeFilter<"User"> | Date | string
+    preferences?: XOR<UserPreferencesNullableRelationFilter, UserPreferencesWhereInput> | null
+    savedSearches?: SavedSearchListRelationFilter
+    followedTeachers?: UserFollowTeacherListRelationFilter
+    followedMusicians?: UserFollowMusicianListRelationFilter
+    followedEvents?: UserFollowEventListRelationFilter
+    notifications?: UserNotificationListRelationFilter
+  }, "id" | "email">
+
+  export type UserOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrderInput | SortOrder
+    avatar?: SortOrderInput | SortOrder
+    verified?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
+    _max?: UserMaxOrderByAggregateInput
+    _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
+  }
+
+  export type UserScalarWhereWithAggregatesInput = {
+    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    OR?: UserScalarWhereWithAggregatesInput[]
+    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"User"> | number
+    email?: StringWithAggregatesFilter<"User"> | string
+    name?: StringNullableWithAggregatesFilter<"User"> | string | null
+    avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
+    verified?: BoolWithAggregatesFilter<"User"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type UserPreferencesWhereInput = {
+    AND?: UserPreferencesWhereInput | UserPreferencesWhereInput[]
+    OR?: UserPreferencesWhereInput[]
+    NOT?: UserPreferencesWhereInput | UserPreferencesWhereInput[]
+    id?: IntFilter<"UserPreferences"> | number
+    user_id?: IntFilter<"UserPreferences"> | number
+    email_notifications?: BoolFilter<"UserPreferences"> | boolean
+    push_notifications?: BoolFilter<"UserPreferences"> | boolean
+    new_event_notifications?: BoolFilter<"UserPreferences"> | boolean
+    created_at?: DateTimeFilter<"UserPreferences"> | Date | string
+    updated_at?: DateTimeFilter<"UserPreferences"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type UserPreferencesOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    email_notifications?: SortOrder
+    push_notifications?: SortOrder
+    new_event_notifications?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserPreferencesWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    user_id?: number
+    AND?: UserPreferencesWhereInput | UserPreferencesWhereInput[]
+    OR?: UserPreferencesWhereInput[]
+    NOT?: UserPreferencesWhereInput | UserPreferencesWhereInput[]
+    email_notifications?: BoolFilter<"UserPreferences"> | boolean
+    push_notifications?: BoolFilter<"UserPreferences"> | boolean
+    new_event_notifications?: BoolFilter<"UserPreferences"> | boolean
+    created_at?: DateTimeFilter<"UserPreferences"> | Date | string
+    updated_at?: DateTimeFilter<"UserPreferences"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id" | "user_id">
+
+  export type UserPreferencesOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    email_notifications?: SortOrder
+    push_notifications?: SortOrder
+    new_event_notifications?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: UserPreferencesCountOrderByAggregateInput
+    _avg?: UserPreferencesAvgOrderByAggregateInput
+    _max?: UserPreferencesMaxOrderByAggregateInput
+    _min?: UserPreferencesMinOrderByAggregateInput
+    _sum?: UserPreferencesSumOrderByAggregateInput
+  }
+
+  export type UserPreferencesScalarWhereWithAggregatesInput = {
+    AND?: UserPreferencesScalarWhereWithAggregatesInput | UserPreferencesScalarWhereWithAggregatesInput[]
+    OR?: UserPreferencesScalarWhereWithAggregatesInput[]
+    NOT?: UserPreferencesScalarWhereWithAggregatesInput | UserPreferencesScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"UserPreferences"> | number
+    user_id?: IntWithAggregatesFilter<"UserPreferences"> | number
+    email_notifications?: BoolWithAggregatesFilter<"UserPreferences"> | boolean
+    push_notifications?: BoolWithAggregatesFilter<"UserPreferences"> | boolean
+    new_event_notifications?: BoolWithAggregatesFilter<"UserPreferences"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"UserPreferences"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"UserPreferences"> | Date | string
+  }
+
+  export type SavedSearchWhereInput = {
+    AND?: SavedSearchWhereInput | SavedSearchWhereInput[]
+    OR?: SavedSearchWhereInput[]
+    NOT?: SavedSearchWhereInput | SavedSearchWhereInput[]
+    id?: IntFilter<"SavedSearch"> | number
+    user_id?: IntFilter<"SavedSearch"> | number
+    name?: StringFilter<"SavedSearch"> | string
+    query?: JsonFilter<"SavedSearch">
+    created_at?: DateTimeFilter<"SavedSearch"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type SavedSearchOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    name?: SortOrder
+    query?: SortOrder
+    created_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type SavedSearchWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: SavedSearchWhereInput | SavedSearchWhereInput[]
+    OR?: SavedSearchWhereInput[]
+    NOT?: SavedSearchWhereInput | SavedSearchWhereInput[]
+    user_id?: IntFilter<"SavedSearch"> | number
+    name?: StringFilter<"SavedSearch"> | string
+    query?: JsonFilter<"SavedSearch">
+    created_at?: DateTimeFilter<"SavedSearch"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type SavedSearchOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    name?: SortOrder
+    query?: SortOrder
+    created_at?: SortOrder
+    _count?: SavedSearchCountOrderByAggregateInput
+    _avg?: SavedSearchAvgOrderByAggregateInput
+    _max?: SavedSearchMaxOrderByAggregateInput
+    _min?: SavedSearchMinOrderByAggregateInput
+    _sum?: SavedSearchSumOrderByAggregateInput
+  }
+
+  export type SavedSearchScalarWhereWithAggregatesInput = {
+    AND?: SavedSearchScalarWhereWithAggregatesInput | SavedSearchScalarWhereWithAggregatesInput[]
+    OR?: SavedSearchScalarWhereWithAggregatesInput[]
+    NOT?: SavedSearchScalarWhereWithAggregatesInput | SavedSearchScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"SavedSearch"> | number
+    user_id?: IntWithAggregatesFilter<"SavedSearch"> | number
+    name?: StringWithAggregatesFilter<"SavedSearch"> | string
+    query?: JsonWithAggregatesFilter<"SavedSearch">
+    created_at?: DateTimeWithAggregatesFilter<"SavedSearch"> | Date | string
+  }
+
+  export type UserFollowTeacherWhereInput = {
+    AND?: UserFollowTeacherWhereInput | UserFollowTeacherWhereInput[]
+    OR?: UserFollowTeacherWhereInput[]
+    NOT?: UserFollowTeacherWhereInput | UserFollowTeacherWhereInput[]
+    user_id?: IntFilter<"UserFollowTeacher"> | number
+    teacher_id?: IntFilter<"UserFollowTeacher"> | number
+    created_at?: DateTimeFilter<"UserFollowTeacher"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    teacher?: XOR<TeacherRelationFilter, TeacherWhereInput>
+  }
+
+  export type UserFollowTeacherOrderByWithRelationInput = {
+    user_id?: SortOrder
+    teacher_id?: SortOrder
+    created_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    teacher?: TeacherOrderByWithRelationInput
+  }
+
+  export type UserFollowTeacherWhereUniqueInput = Prisma.AtLeast<{
+    user_id_teacher_id?: UserFollowTeacherUser_idTeacher_idCompoundUniqueInput
+    AND?: UserFollowTeacherWhereInput | UserFollowTeacherWhereInput[]
+    OR?: UserFollowTeacherWhereInput[]
+    NOT?: UserFollowTeacherWhereInput | UserFollowTeacherWhereInput[]
+    user_id?: IntFilter<"UserFollowTeacher"> | number
+    teacher_id?: IntFilter<"UserFollowTeacher"> | number
+    created_at?: DateTimeFilter<"UserFollowTeacher"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    teacher?: XOR<TeacherRelationFilter, TeacherWhereInput>
+  }, "user_id_teacher_id">
+
+  export type UserFollowTeacherOrderByWithAggregationInput = {
+    user_id?: SortOrder
+    teacher_id?: SortOrder
+    created_at?: SortOrder
+    _count?: UserFollowTeacherCountOrderByAggregateInput
+    _avg?: UserFollowTeacherAvgOrderByAggregateInput
+    _max?: UserFollowTeacherMaxOrderByAggregateInput
+    _min?: UserFollowTeacherMinOrderByAggregateInput
+    _sum?: UserFollowTeacherSumOrderByAggregateInput
+  }
+
+  export type UserFollowTeacherScalarWhereWithAggregatesInput = {
+    AND?: UserFollowTeacherScalarWhereWithAggregatesInput | UserFollowTeacherScalarWhereWithAggregatesInput[]
+    OR?: UserFollowTeacherScalarWhereWithAggregatesInput[]
+    NOT?: UserFollowTeacherScalarWhereWithAggregatesInput | UserFollowTeacherScalarWhereWithAggregatesInput[]
+    user_id?: IntWithAggregatesFilter<"UserFollowTeacher"> | number
+    teacher_id?: IntWithAggregatesFilter<"UserFollowTeacher"> | number
+    created_at?: DateTimeWithAggregatesFilter<"UserFollowTeacher"> | Date | string
+  }
+
+  export type UserFollowMusicianWhereInput = {
+    AND?: UserFollowMusicianWhereInput | UserFollowMusicianWhereInput[]
+    OR?: UserFollowMusicianWhereInput[]
+    NOT?: UserFollowMusicianWhereInput | UserFollowMusicianWhereInput[]
+    user_id?: IntFilter<"UserFollowMusician"> | number
+    musician_id?: IntFilter<"UserFollowMusician"> | number
+    created_at?: DateTimeFilter<"UserFollowMusician"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    musician?: XOR<MusicianRelationFilter, MusicianWhereInput>
+  }
+
+  export type UserFollowMusicianOrderByWithRelationInput = {
+    user_id?: SortOrder
+    musician_id?: SortOrder
+    created_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    musician?: MusicianOrderByWithRelationInput
+  }
+
+  export type UserFollowMusicianWhereUniqueInput = Prisma.AtLeast<{
+    user_id_musician_id?: UserFollowMusicianUser_idMusician_idCompoundUniqueInput
+    AND?: UserFollowMusicianWhereInput | UserFollowMusicianWhereInput[]
+    OR?: UserFollowMusicianWhereInput[]
+    NOT?: UserFollowMusicianWhereInput | UserFollowMusicianWhereInput[]
+    user_id?: IntFilter<"UserFollowMusician"> | number
+    musician_id?: IntFilter<"UserFollowMusician"> | number
+    created_at?: DateTimeFilter<"UserFollowMusician"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    musician?: XOR<MusicianRelationFilter, MusicianWhereInput>
+  }, "user_id_musician_id">
+
+  export type UserFollowMusicianOrderByWithAggregationInput = {
+    user_id?: SortOrder
+    musician_id?: SortOrder
+    created_at?: SortOrder
+    _count?: UserFollowMusicianCountOrderByAggregateInput
+    _avg?: UserFollowMusicianAvgOrderByAggregateInput
+    _max?: UserFollowMusicianMaxOrderByAggregateInput
+    _min?: UserFollowMusicianMinOrderByAggregateInput
+    _sum?: UserFollowMusicianSumOrderByAggregateInput
+  }
+
+  export type UserFollowMusicianScalarWhereWithAggregatesInput = {
+    AND?: UserFollowMusicianScalarWhereWithAggregatesInput | UserFollowMusicianScalarWhereWithAggregatesInput[]
+    OR?: UserFollowMusicianScalarWhereWithAggregatesInput[]
+    NOT?: UserFollowMusicianScalarWhereWithAggregatesInput | UserFollowMusicianScalarWhereWithAggregatesInput[]
+    user_id?: IntWithAggregatesFilter<"UserFollowMusician"> | number
+    musician_id?: IntWithAggregatesFilter<"UserFollowMusician"> | number
+    created_at?: DateTimeWithAggregatesFilter<"UserFollowMusician"> | Date | string
+  }
+
+  export type UserFollowEventWhereInput = {
+    AND?: UserFollowEventWhereInput | UserFollowEventWhereInput[]
+    OR?: UserFollowEventWhereInput[]
+    NOT?: UserFollowEventWhereInput | UserFollowEventWhereInput[]
+    user_id?: IntFilter<"UserFollowEvent"> | number
+    event_id?: IntFilter<"UserFollowEvent"> | number
+    created_at?: DateTimeFilter<"UserFollowEvent"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    event?: XOR<EventRelationFilter, EventWhereInput>
+  }
+
+  export type UserFollowEventOrderByWithRelationInput = {
+    user_id?: SortOrder
+    event_id?: SortOrder
+    created_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    event?: EventOrderByWithRelationInput
+  }
+
+  export type UserFollowEventWhereUniqueInput = Prisma.AtLeast<{
+    user_id_event_id?: UserFollowEventUser_idEvent_idCompoundUniqueInput
+    AND?: UserFollowEventWhereInput | UserFollowEventWhereInput[]
+    OR?: UserFollowEventWhereInput[]
+    NOT?: UserFollowEventWhereInput | UserFollowEventWhereInput[]
+    user_id?: IntFilter<"UserFollowEvent"> | number
+    event_id?: IntFilter<"UserFollowEvent"> | number
+    created_at?: DateTimeFilter<"UserFollowEvent"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    event?: XOR<EventRelationFilter, EventWhereInput>
+  }, "user_id_event_id">
+
+  export type UserFollowEventOrderByWithAggregationInput = {
+    user_id?: SortOrder
+    event_id?: SortOrder
+    created_at?: SortOrder
+    _count?: UserFollowEventCountOrderByAggregateInput
+    _avg?: UserFollowEventAvgOrderByAggregateInput
+    _max?: UserFollowEventMaxOrderByAggregateInput
+    _min?: UserFollowEventMinOrderByAggregateInput
+    _sum?: UserFollowEventSumOrderByAggregateInput
+  }
+
+  export type UserFollowEventScalarWhereWithAggregatesInput = {
+    AND?: UserFollowEventScalarWhereWithAggregatesInput | UserFollowEventScalarWhereWithAggregatesInput[]
+    OR?: UserFollowEventScalarWhereWithAggregatesInput[]
+    NOT?: UserFollowEventScalarWhereWithAggregatesInput | UserFollowEventScalarWhereWithAggregatesInput[]
+    user_id?: IntWithAggregatesFilter<"UserFollowEvent"> | number
+    event_id?: IntWithAggregatesFilter<"UserFollowEvent"> | number
+    created_at?: DateTimeWithAggregatesFilter<"UserFollowEvent"> | Date | string
+  }
+
+  export type UserNotificationWhereInput = {
+    AND?: UserNotificationWhereInput | UserNotificationWhereInput[]
+    OR?: UserNotificationWhereInput[]
+    NOT?: UserNotificationWhereInput | UserNotificationWhereInput[]
+    id?: IntFilter<"UserNotification"> | number
+    user_id?: IntFilter<"UserNotification"> | number
+    type?: StringFilter<"UserNotification"> | string
+    title?: StringFilter<"UserNotification"> | string
+    message?: StringFilter<"UserNotification"> | string
+    read?: BoolFilter<"UserNotification"> | boolean
+    created_at?: DateTimeFilter<"UserNotification"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type UserNotificationOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    read?: SortOrder
+    created_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserNotificationWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: UserNotificationWhereInput | UserNotificationWhereInput[]
+    OR?: UserNotificationWhereInput[]
+    NOT?: UserNotificationWhereInput | UserNotificationWhereInput[]
+    user_id?: IntFilter<"UserNotification"> | number
+    type?: StringFilter<"UserNotification"> | string
+    title?: StringFilter<"UserNotification"> | string
+    message?: StringFilter<"UserNotification"> | string
+    read?: BoolFilter<"UserNotification"> | boolean
+    created_at?: DateTimeFilter<"UserNotification"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type UserNotificationOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    read?: SortOrder
+    created_at?: SortOrder
+    _count?: UserNotificationCountOrderByAggregateInput
+    _avg?: UserNotificationAvgOrderByAggregateInput
+    _max?: UserNotificationMaxOrderByAggregateInput
+    _min?: UserNotificationMinOrderByAggregateInput
+    _sum?: UserNotificationSumOrderByAggregateInput
+  }
+
+  export type UserNotificationScalarWhereWithAggregatesInput = {
+    AND?: UserNotificationScalarWhereWithAggregatesInput | UserNotificationScalarWhereWithAggregatesInput[]
+    OR?: UserNotificationScalarWhereWithAggregatesInput[]
+    NOT?: UserNotificationScalarWhereWithAggregatesInput | UserNotificationScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"UserNotification"> | number
+    user_id?: IntWithAggregatesFilter<"UserNotification"> | number
+    type?: StringWithAggregatesFilter<"UserNotification"> | string
+    title?: StringWithAggregatesFilter<"UserNotification"> | string
+    message?: StringWithAggregatesFilter<"UserNotification"> | string
+    read?: BoolWithAggregatesFilter<"UserNotification"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"UserNotification"> | Date | string
+  }
+
   export type social_mediaWhereInput = {
     AND?: social_mediaWhereInput | social_mediaWhereInput[]
     OR?: social_mediaWhereInput[]
@@ -10740,6 +18980,7 @@ export namespace Prisma {
     event_prices?: event_pricesCreateNestedManyWithoutEventsInput
     event_teachers?: ExternalEventTeacherCreateNestedManyWithoutEventsInput
     venues?: ExternalEventVenueCreateNestedManyWithoutEventsInput
+    followers?: UserFollowEventCreateNestedManyWithoutEventInput
   }
 
   export type EventUncheckedCreateInput = {
@@ -10762,6 +19003,7 @@ export namespace Prisma {
     event_prices?: event_pricesUncheckedCreateNestedManyWithoutEventsInput
     event_teachers?: ExternalEventTeacherUncheckedCreateNestedManyWithoutEventsInput
     venues?: ExternalEventVenueUncheckedCreateNestedManyWithoutEventsInput
+    followers?: UserFollowEventUncheckedCreateNestedManyWithoutEventInput
   }
 
   export type EventUpdateInput = {
@@ -10783,6 +19025,7 @@ export namespace Prisma {
     event_prices?: event_pricesUpdateManyWithoutEventsNestedInput
     event_teachers?: ExternalEventTeacherUpdateManyWithoutEventsNestedInput
     venues?: ExternalEventVenueUpdateManyWithoutEventsNestedInput
+    followers?: UserFollowEventUpdateManyWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateInput = {
@@ -10805,6 +19048,7 @@ export namespace Prisma {
     event_prices?: event_pricesUncheckedUpdateManyWithoutEventsNestedInput
     event_teachers?: ExternalEventTeacherUncheckedUpdateManyWithoutEventsNestedInput
     venues?: ExternalEventVenueUncheckedUpdateManyWithoutEventsNestedInput
+    followers?: UserFollowEventUncheckedUpdateManyWithoutEventNestedInput
   }
 
   export type EventCreateManyInput = {
@@ -10960,6 +19204,7 @@ export namespace Prisma {
     ai_relevance_score?: number | null
     image_url?: string | null
     event_teachers?: ExternalEventTeacherCreateNestedManyWithoutTeachersInput
+    followers?: UserFollowTeacherCreateNestedManyWithoutTeacherInput
   }
 
   export type TeacherUncheckedCreateInput = {
@@ -10971,6 +19216,7 @@ export namespace Prisma {
     ai_relevance_score?: number | null
     image_url?: string | null
     event_teachers?: ExternalEventTeacherUncheckedCreateNestedManyWithoutTeachersInput
+    followers?: UserFollowTeacherUncheckedCreateNestedManyWithoutTeacherInput
   }
 
   export type TeacherUpdateInput = {
@@ -10981,6 +19227,7 @@ export namespace Prisma {
     ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     event_teachers?: ExternalEventTeacherUpdateManyWithoutTeachersNestedInput
+    followers?: UserFollowTeacherUpdateManyWithoutTeacherNestedInput
   }
 
   export type TeacherUncheckedUpdateInput = {
@@ -10992,6 +19239,7 @@ export namespace Prisma {
     ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     event_teachers?: ExternalEventTeacherUncheckedUpdateManyWithoutTeachersNestedInput
+    followers?: UserFollowTeacherUncheckedUpdateManyWithoutTeacherNestedInput
   }
 
   export type TeacherCreateManyInput = {
@@ -11039,6 +19287,7 @@ export namespace Prisma {
     updatedAt?: Date | string | null
     image_url?: string | null
     event_musicians?: event_musiciansCreateNestedManyWithoutMusiciansInput
+    followers?: UserFollowMusicianCreateNestedManyWithoutMusicianInput
   }
 
   export type MusicianUncheckedCreateInput = {
@@ -11058,6 +19307,7 @@ export namespace Prisma {
     updatedAt?: Date | string | null
     image_url?: string | null
     event_musicians?: event_musiciansUncheckedCreateNestedManyWithoutMusiciansInput
+    followers?: UserFollowMusicianUncheckedCreateNestedManyWithoutMusicianInput
   }
 
   export type MusicianUpdateInput = {
@@ -11076,6 +19326,7 @@ export namespace Prisma {
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     event_musicians?: event_musiciansUpdateManyWithoutMusiciansNestedInput
+    followers?: UserFollowMusicianUpdateManyWithoutMusicianNestedInput
   }
 
   export type MusicianUncheckedUpdateInput = {
@@ -11095,6 +19346,7 @@ export namespace Prisma {
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     event_musicians?: event_musiciansUncheckedUpdateManyWithoutMusiciansNestedInput
+    followers?: UserFollowMusicianUncheckedUpdateManyWithoutMusicianNestedInput
   }
 
   export type MusicianCreateManyInput = {
@@ -11295,6 +19547,401 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type UserCreateInput = {
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesCreateNestedOneWithoutUserInput
+    savedSearches?: SavedSearchCreateNestedManyWithoutUserInput
+    followedTeachers?: UserFollowTeacherCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateInput = {
+    id?: number
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserInput
+    savedSearches?: SavedSearchUncheckedCreateNestedManyWithoutUserInput
+    followedTeachers?: UserFollowTeacherUncheckedCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUpdateInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUpdateOneWithoutUserNestedInput
+    savedSearches?: SavedSearchUpdateManyWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUncheckedUpdateOneWithoutUserNestedInput
+    savedSearches?: SavedSearchUncheckedUpdateManyWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUncheckedUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateManyInput = {
+    id?: number
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type UserUpdateManyMutationInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserPreferencesCreateInput = {
+    email_notifications?: boolean
+    push_notifications?: boolean
+    new_event_notifications?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutPreferencesInput
+  }
+
+  export type UserPreferencesUncheckedCreateInput = {
+    id?: number
+    user_id: number
+    email_notifications?: boolean
+    push_notifications?: boolean
+    new_event_notifications?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type UserPreferencesUpdateInput = {
+    email_notifications?: BoolFieldUpdateOperationsInput | boolean
+    push_notifications?: BoolFieldUpdateOperationsInput | boolean
+    new_event_notifications?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPreferencesNestedInput
+  }
+
+  export type UserPreferencesUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    email_notifications?: BoolFieldUpdateOperationsInput | boolean
+    push_notifications?: BoolFieldUpdateOperationsInput | boolean
+    new_event_notifications?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserPreferencesCreateManyInput = {
+    id?: number
+    user_id: number
+    email_notifications?: boolean
+    push_notifications?: boolean
+    new_event_notifications?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type UserPreferencesUpdateManyMutationInput = {
+    email_notifications?: BoolFieldUpdateOperationsInput | boolean
+    push_notifications?: BoolFieldUpdateOperationsInput | boolean
+    new_event_notifications?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserPreferencesUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    email_notifications?: BoolFieldUpdateOperationsInput | boolean
+    push_notifications?: BoolFieldUpdateOperationsInput | boolean
+    new_event_notifications?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SavedSearchCreateInput = {
+    name: string
+    query: JsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    user: UserCreateNestedOneWithoutSavedSearchesInput
+  }
+
+  export type SavedSearchUncheckedCreateInput = {
+    id?: number
+    user_id: number
+    name: string
+    query: JsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+  }
+
+  export type SavedSearchUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    query?: JsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSavedSearchesNestedInput
+  }
+
+  export type SavedSearchUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    query?: JsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SavedSearchCreateManyInput = {
+    id?: number
+    user_id: number
+    name: string
+    query: JsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+  }
+
+  export type SavedSearchUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    query?: JsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SavedSearchUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    query?: JsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowTeacherCreateInput = {
+    created_at?: Date | string
+    user: UserCreateNestedOneWithoutFollowedTeachersInput
+    teacher: TeacherCreateNestedOneWithoutFollowersInput
+  }
+
+  export type UserFollowTeacherUncheckedCreateInput = {
+    user_id: number
+    teacher_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowTeacherUpdateInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFollowedTeachersNestedInput
+    teacher?: TeacherUpdateOneRequiredWithoutFollowersNestedInput
+  }
+
+  export type UserFollowTeacherUncheckedUpdateInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    teacher_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowTeacherCreateManyInput = {
+    user_id: number
+    teacher_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowTeacherUpdateManyMutationInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowTeacherUncheckedUpdateManyInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    teacher_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowMusicianCreateInput = {
+    created_at?: Date | string
+    user: UserCreateNestedOneWithoutFollowedMusiciansInput
+    musician: MusicianCreateNestedOneWithoutFollowersInput
+  }
+
+  export type UserFollowMusicianUncheckedCreateInput = {
+    user_id: number
+    musician_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowMusicianUpdateInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFollowedMusiciansNestedInput
+    musician?: MusicianUpdateOneRequiredWithoutFollowersNestedInput
+  }
+
+  export type UserFollowMusicianUncheckedUpdateInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    musician_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowMusicianCreateManyInput = {
+    user_id: number
+    musician_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowMusicianUpdateManyMutationInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowMusicianUncheckedUpdateManyInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    musician_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowEventCreateInput = {
+    created_at?: Date | string
+    user: UserCreateNestedOneWithoutFollowedEventsInput
+    event: EventCreateNestedOneWithoutFollowersInput
+  }
+
+  export type UserFollowEventUncheckedCreateInput = {
+    user_id: number
+    event_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowEventUpdateInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFollowedEventsNestedInput
+    event?: EventUpdateOneRequiredWithoutFollowersNestedInput
+  }
+
+  export type UserFollowEventUncheckedUpdateInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    event_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowEventCreateManyInput = {
+    user_id: number
+    event_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowEventUpdateManyMutationInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowEventUncheckedUpdateManyInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    event_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserNotificationCreateInput = {
+    type: string
+    title: string
+    message: string
+    read?: boolean
+    created_at?: Date | string
+    user: UserCreateNestedOneWithoutNotificationsInput
+  }
+
+  export type UserNotificationUncheckedCreateInput = {
+    id?: number
+    user_id: number
+    type: string
+    title: string
+    message: string
+    read?: boolean
+    created_at?: Date | string
+  }
+
+  export type UserNotificationUpdateInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    read?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutNotificationsNestedInput
+  }
+
+  export type UserNotificationUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    read?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserNotificationCreateManyInput = {
+    id?: number
+    user_id: number
+    type: string
+    title: string
+    message: string
+    read?: boolean
+    created_at?: Date | string
+  }
+
+  export type UserNotificationUpdateManyMutationInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    read?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserNotificationUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    read?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type social_mediaCreateInput = {
     entity_type: string
     entity_id: number
@@ -11481,6 +20128,12 @@ export namespace Prisma {
     none?: ExternalEventVenueWhereInput
   }
 
+  export type UserFollowEventListRelationFilter = {
+    every?: UserFollowEventWhereInput
+    some?: UserFollowEventWhereInput
+    none?: UserFollowEventWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -11499,6 +20152,10 @@ export namespace Prisma {
   }
 
   export type ExternalEventVenueOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserFollowEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11746,6 +20403,16 @@ export namespace Prisma {
     event_id?: SortOrder
   }
 
+  export type UserFollowTeacherListRelationFilter = {
+    every?: UserFollowTeacherWhereInput
+    some?: UserFollowTeacherWhereInput
+    none?: UserFollowTeacherWhereInput
+  }
+
+  export type UserFollowTeacherOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type TeacherCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -11797,6 +20464,16 @@ export namespace Prisma {
     hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
     hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
     isEmpty?: boolean
+  }
+
+  export type UserFollowMusicianListRelationFilter = {
+    every?: UserFollowMusicianWhereInput
+    some?: UserFollowMusicianWhereInput
+    none?: UserFollowMusicianWhereInput
+  }
+
+  export type UserFollowMusicianOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type MusicianCountOrderByAggregateInput = {
@@ -11993,6 +20670,350 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type UserPreferencesNullableRelationFilter = {
+    is?: UserPreferencesWhereInput | null
+    isNot?: UserPreferencesWhereInput | null
+  }
+
+  export type SavedSearchListRelationFilter = {
+    every?: SavedSearchWhereInput
+    some?: SavedSearchWhereInput
+    none?: SavedSearchWhereInput
+  }
+
+  export type UserNotificationListRelationFilter = {
+    every?: UserNotificationWhereInput
+    some?: UserNotificationWhereInput
+    none?: UserNotificationWhereInput
+  }
+
+  export type SavedSearchOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserNotificationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrder
+    avatar?: SortOrder
+    verified?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type UserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrder
+    avatar?: SortOrder
+    verified?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type UserMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrder
+    avatar?: SortOrder
+    verified?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type UserRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type UserPreferencesCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    email_notifications?: SortOrder
+    push_notifications?: SortOrder
+    new_event_notifications?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type UserPreferencesAvgOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type UserPreferencesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    email_notifications?: SortOrder
+    push_notifications?: SortOrder
+    new_event_notifications?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type UserPreferencesMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    email_notifications?: SortOrder
+    push_notifications?: SortOrder
+    new_event_notifications?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type UserPreferencesSumOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+  }
+  export type JsonFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type SavedSearchCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    name?: SortOrder
+    query?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type SavedSearchAvgOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type SavedSearchMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type SavedSearchMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type SavedSearchSumOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type UserFollowTeacherUser_idTeacher_idCompoundUniqueInput = {
+    user_id: number
+    teacher_id: number
+  }
+
+  export type UserFollowTeacherCountOrderByAggregateInput = {
+    user_id?: SortOrder
+    teacher_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UserFollowTeacherAvgOrderByAggregateInput = {
+    user_id?: SortOrder
+    teacher_id?: SortOrder
+  }
+
+  export type UserFollowTeacherMaxOrderByAggregateInput = {
+    user_id?: SortOrder
+    teacher_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UserFollowTeacherMinOrderByAggregateInput = {
+    user_id?: SortOrder
+    teacher_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UserFollowTeacherSumOrderByAggregateInput = {
+    user_id?: SortOrder
+    teacher_id?: SortOrder
+  }
+
+  export type MusicianRelationFilter = {
+    is?: MusicianWhereInput
+    isNot?: MusicianWhereInput
+  }
+
+  export type UserFollowMusicianUser_idMusician_idCompoundUniqueInput = {
+    user_id: number
+    musician_id: number
+  }
+
+  export type UserFollowMusicianCountOrderByAggregateInput = {
+    user_id?: SortOrder
+    musician_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UserFollowMusicianAvgOrderByAggregateInput = {
+    user_id?: SortOrder
+    musician_id?: SortOrder
+  }
+
+  export type UserFollowMusicianMaxOrderByAggregateInput = {
+    user_id?: SortOrder
+    musician_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UserFollowMusicianMinOrderByAggregateInput = {
+    user_id?: SortOrder
+    musician_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UserFollowMusicianSumOrderByAggregateInput = {
+    user_id?: SortOrder
+    musician_id?: SortOrder
+  }
+
+  export type UserFollowEventUser_idEvent_idCompoundUniqueInput = {
+    user_id: number
+    event_id: number
+  }
+
+  export type UserFollowEventCountOrderByAggregateInput = {
+    user_id?: SortOrder
+    event_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UserFollowEventAvgOrderByAggregateInput = {
+    user_id?: SortOrder
+    event_id?: SortOrder
+  }
+
+  export type UserFollowEventMaxOrderByAggregateInput = {
+    user_id?: SortOrder
+    event_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UserFollowEventMinOrderByAggregateInput = {
+    user_id?: SortOrder
+    event_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UserFollowEventSumOrderByAggregateInput = {
+    user_id?: SortOrder
+    event_id?: SortOrder
+  }
+
+  export type UserNotificationCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    read?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UserNotificationAvgOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type UserNotificationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    read?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UserNotificationMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    read?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UserNotificationSumOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+  }
+
   export type social_mediaEntity_typeEntity_idPlatformCompoundUniqueInput = {
     entity_type: string
     entity_id: number
@@ -12078,6 +21099,13 @@ export namespace Prisma {
     connect?: ExternalEventVenueWhereUniqueInput | ExternalEventVenueWhereUniqueInput[]
   }
 
+  export type UserFollowEventCreateNestedManyWithoutEventInput = {
+    create?: XOR<UserFollowEventCreateWithoutEventInput, UserFollowEventUncheckedCreateWithoutEventInput> | UserFollowEventCreateWithoutEventInput[] | UserFollowEventUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: UserFollowEventCreateOrConnectWithoutEventInput | UserFollowEventCreateOrConnectWithoutEventInput[]
+    createMany?: UserFollowEventCreateManyEventInputEnvelope
+    connect?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+  }
+
   export type event_musiciansUncheckedCreateNestedManyWithoutEventsInput = {
     create?: XOR<event_musiciansCreateWithoutEventsInput, event_musiciansUncheckedCreateWithoutEventsInput> | event_musiciansCreateWithoutEventsInput[] | event_musiciansUncheckedCreateWithoutEventsInput[]
     connectOrCreate?: event_musiciansCreateOrConnectWithoutEventsInput | event_musiciansCreateOrConnectWithoutEventsInput[]
@@ -12104,6 +21132,13 @@ export namespace Prisma {
     connectOrCreate?: ExternalEventVenueCreateOrConnectWithoutEventsInput | ExternalEventVenueCreateOrConnectWithoutEventsInput[]
     createMany?: ExternalEventVenueCreateManyEventsInputEnvelope
     connect?: ExternalEventVenueWhereUniqueInput | ExternalEventVenueWhereUniqueInput[]
+  }
+
+  export type UserFollowEventUncheckedCreateNestedManyWithoutEventInput = {
+    create?: XOR<UserFollowEventCreateWithoutEventInput, UserFollowEventUncheckedCreateWithoutEventInput> | UserFollowEventCreateWithoutEventInput[] | UserFollowEventUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: UserFollowEventCreateOrConnectWithoutEventInput | UserFollowEventCreateOrConnectWithoutEventInput[]
+    createMany?: UserFollowEventCreateManyEventInputEnvelope
+    connect?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -12186,6 +21221,20 @@ export namespace Prisma {
     deleteMany?: ExternalEventVenueScalarWhereInput | ExternalEventVenueScalarWhereInput[]
   }
 
+  export type UserFollowEventUpdateManyWithoutEventNestedInput = {
+    create?: XOR<UserFollowEventCreateWithoutEventInput, UserFollowEventUncheckedCreateWithoutEventInput> | UserFollowEventCreateWithoutEventInput[] | UserFollowEventUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: UserFollowEventCreateOrConnectWithoutEventInput | UserFollowEventCreateOrConnectWithoutEventInput[]
+    upsert?: UserFollowEventUpsertWithWhereUniqueWithoutEventInput | UserFollowEventUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: UserFollowEventCreateManyEventInputEnvelope
+    set?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    disconnect?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    delete?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    connect?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    update?: UserFollowEventUpdateWithWhereUniqueWithoutEventInput | UserFollowEventUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: UserFollowEventUpdateManyWithWhereWithoutEventInput | UserFollowEventUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: UserFollowEventScalarWhereInput | UserFollowEventScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -12250,6 +21299,20 @@ export namespace Prisma {
     deleteMany?: ExternalEventVenueScalarWhereInput | ExternalEventVenueScalarWhereInput[]
   }
 
+  export type UserFollowEventUncheckedUpdateManyWithoutEventNestedInput = {
+    create?: XOR<UserFollowEventCreateWithoutEventInput, UserFollowEventUncheckedCreateWithoutEventInput> | UserFollowEventCreateWithoutEventInput[] | UserFollowEventUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: UserFollowEventCreateOrConnectWithoutEventInput | UserFollowEventCreateOrConnectWithoutEventInput[]
+    upsert?: UserFollowEventUpsertWithWhereUniqueWithoutEventInput | UserFollowEventUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: UserFollowEventCreateManyEventInputEnvelope
+    set?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    disconnect?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    delete?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    connect?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    update?: UserFollowEventUpdateWithWhereUniqueWithoutEventInput | UserFollowEventUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: UserFollowEventUpdateManyWithWhereWithoutEventInput | UserFollowEventUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: UserFollowEventScalarWhereInput | UserFollowEventScalarWhereInput[]
+  }
+
   export type EventCreateNestedOneWithoutEvent_teachersInput = {
     create?: XOR<EventCreateWithoutEvent_teachersInput, EventUncheckedCreateWithoutEvent_teachersInput>
     connectOrCreate?: EventCreateOrConnectWithoutEvent_teachersInput
@@ -12301,11 +21364,25 @@ export namespace Prisma {
     connect?: ExternalEventTeacherWhereUniqueInput | ExternalEventTeacherWhereUniqueInput[]
   }
 
+  export type UserFollowTeacherCreateNestedManyWithoutTeacherInput = {
+    create?: XOR<UserFollowTeacherCreateWithoutTeacherInput, UserFollowTeacherUncheckedCreateWithoutTeacherInput> | UserFollowTeacherCreateWithoutTeacherInput[] | UserFollowTeacherUncheckedCreateWithoutTeacherInput[]
+    connectOrCreate?: UserFollowTeacherCreateOrConnectWithoutTeacherInput | UserFollowTeacherCreateOrConnectWithoutTeacherInput[]
+    createMany?: UserFollowTeacherCreateManyTeacherInputEnvelope
+    connect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+  }
+
   export type ExternalEventTeacherUncheckedCreateNestedManyWithoutTeachersInput = {
     create?: XOR<ExternalEventTeacherCreateWithoutTeachersInput, ExternalEventTeacherUncheckedCreateWithoutTeachersInput> | ExternalEventTeacherCreateWithoutTeachersInput[] | ExternalEventTeacherUncheckedCreateWithoutTeachersInput[]
     connectOrCreate?: ExternalEventTeacherCreateOrConnectWithoutTeachersInput | ExternalEventTeacherCreateOrConnectWithoutTeachersInput[]
     createMany?: ExternalEventTeacherCreateManyTeachersInputEnvelope
     connect?: ExternalEventTeacherWhereUniqueInput | ExternalEventTeacherWhereUniqueInput[]
+  }
+
+  export type UserFollowTeacherUncheckedCreateNestedManyWithoutTeacherInput = {
+    create?: XOR<UserFollowTeacherCreateWithoutTeacherInput, UserFollowTeacherUncheckedCreateWithoutTeacherInput> | UserFollowTeacherCreateWithoutTeacherInput[] | UserFollowTeacherUncheckedCreateWithoutTeacherInput[]
+    connectOrCreate?: UserFollowTeacherCreateOrConnectWithoutTeacherInput | UserFollowTeacherCreateOrConnectWithoutTeacherInput[]
+    createMany?: UserFollowTeacherCreateManyTeacherInputEnvelope
+    connect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
   }
 
   export type ExternalEventTeacherUpdateManyWithoutTeachersNestedInput = {
@@ -12322,6 +21399,20 @@ export namespace Prisma {
     deleteMany?: ExternalEventTeacherScalarWhereInput | ExternalEventTeacherScalarWhereInput[]
   }
 
+  export type UserFollowTeacherUpdateManyWithoutTeacherNestedInput = {
+    create?: XOR<UserFollowTeacherCreateWithoutTeacherInput, UserFollowTeacherUncheckedCreateWithoutTeacherInput> | UserFollowTeacherCreateWithoutTeacherInput[] | UserFollowTeacherUncheckedCreateWithoutTeacherInput[]
+    connectOrCreate?: UserFollowTeacherCreateOrConnectWithoutTeacherInput | UserFollowTeacherCreateOrConnectWithoutTeacherInput[]
+    upsert?: UserFollowTeacherUpsertWithWhereUniqueWithoutTeacherInput | UserFollowTeacherUpsertWithWhereUniqueWithoutTeacherInput[]
+    createMany?: UserFollowTeacherCreateManyTeacherInputEnvelope
+    set?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    disconnect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    delete?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    connect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    update?: UserFollowTeacherUpdateWithWhereUniqueWithoutTeacherInput | UserFollowTeacherUpdateWithWhereUniqueWithoutTeacherInput[]
+    updateMany?: UserFollowTeacherUpdateManyWithWhereWithoutTeacherInput | UserFollowTeacherUpdateManyWithWhereWithoutTeacherInput[]
+    deleteMany?: UserFollowTeacherScalarWhereInput | UserFollowTeacherScalarWhereInput[]
+  }
+
   export type ExternalEventTeacherUncheckedUpdateManyWithoutTeachersNestedInput = {
     create?: XOR<ExternalEventTeacherCreateWithoutTeachersInput, ExternalEventTeacherUncheckedCreateWithoutTeachersInput> | ExternalEventTeacherCreateWithoutTeachersInput[] | ExternalEventTeacherUncheckedCreateWithoutTeachersInput[]
     connectOrCreate?: ExternalEventTeacherCreateOrConnectWithoutTeachersInput | ExternalEventTeacherCreateOrConnectWithoutTeachersInput[]
@@ -12336,6 +21427,20 @@ export namespace Prisma {
     deleteMany?: ExternalEventTeacherScalarWhereInput | ExternalEventTeacherScalarWhereInput[]
   }
 
+  export type UserFollowTeacherUncheckedUpdateManyWithoutTeacherNestedInput = {
+    create?: XOR<UserFollowTeacherCreateWithoutTeacherInput, UserFollowTeacherUncheckedCreateWithoutTeacherInput> | UserFollowTeacherCreateWithoutTeacherInput[] | UserFollowTeacherUncheckedCreateWithoutTeacherInput[]
+    connectOrCreate?: UserFollowTeacherCreateOrConnectWithoutTeacherInput | UserFollowTeacherCreateOrConnectWithoutTeacherInput[]
+    upsert?: UserFollowTeacherUpsertWithWhereUniqueWithoutTeacherInput | UserFollowTeacherUpsertWithWhereUniqueWithoutTeacherInput[]
+    createMany?: UserFollowTeacherCreateManyTeacherInputEnvelope
+    set?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    disconnect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    delete?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    connect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    update?: UserFollowTeacherUpdateWithWhereUniqueWithoutTeacherInput | UserFollowTeacherUpdateWithWhereUniqueWithoutTeacherInput[]
+    updateMany?: UserFollowTeacherUpdateManyWithWhereWithoutTeacherInput | UserFollowTeacherUpdateManyWithWhereWithoutTeacherInput[]
+    deleteMany?: UserFollowTeacherScalarWhereInput | UserFollowTeacherScalarWhereInput[]
+  }
+
   export type MusicianCreateinstrumentsInput = {
     set: string[]
   }
@@ -12347,11 +21452,25 @@ export namespace Prisma {
     connect?: event_musiciansWhereUniqueInput | event_musiciansWhereUniqueInput[]
   }
 
+  export type UserFollowMusicianCreateNestedManyWithoutMusicianInput = {
+    create?: XOR<UserFollowMusicianCreateWithoutMusicianInput, UserFollowMusicianUncheckedCreateWithoutMusicianInput> | UserFollowMusicianCreateWithoutMusicianInput[] | UserFollowMusicianUncheckedCreateWithoutMusicianInput[]
+    connectOrCreate?: UserFollowMusicianCreateOrConnectWithoutMusicianInput | UserFollowMusicianCreateOrConnectWithoutMusicianInput[]
+    createMany?: UserFollowMusicianCreateManyMusicianInputEnvelope
+    connect?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+  }
+
   export type event_musiciansUncheckedCreateNestedManyWithoutMusiciansInput = {
     create?: XOR<event_musiciansCreateWithoutMusiciansInput, event_musiciansUncheckedCreateWithoutMusiciansInput> | event_musiciansCreateWithoutMusiciansInput[] | event_musiciansUncheckedCreateWithoutMusiciansInput[]
     connectOrCreate?: event_musiciansCreateOrConnectWithoutMusiciansInput | event_musiciansCreateOrConnectWithoutMusiciansInput[]
     createMany?: event_musiciansCreateManyMusiciansInputEnvelope
     connect?: event_musiciansWhereUniqueInput | event_musiciansWhereUniqueInput[]
+  }
+
+  export type UserFollowMusicianUncheckedCreateNestedManyWithoutMusicianInput = {
+    create?: XOR<UserFollowMusicianCreateWithoutMusicianInput, UserFollowMusicianUncheckedCreateWithoutMusicianInput> | UserFollowMusicianCreateWithoutMusicianInput[] | UserFollowMusicianUncheckedCreateWithoutMusicianInput[]
+    connectOrCreate?: UserFollowMusicianCreateOrConnectWithoutMusicianInput | UserFollowMusicianCreateOrConnectWithoutMusicianInput[]
+    createMany?: UserFollowMusicianCreateManyMusicianInputEnvelope
+    connect?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -12377,6 +21496,20 @@ export namespace Prisma {
     deleteMany?: event_musiciansScalarWhereInput | event_musiciansScalarWhereInput[]
   }
 
+  export type UserFollowMusicianUpdateManyWithoutMusicianNestedInput = {
+    create?: XOR<UserFollowMusicianCreateWithoutMusicianInput, UserFollowMusicianUncheckedCreateWithoutMusicianInput> | UserFollowMusicianCreateWithoutMusicianInput[] | UserFollowMusicianUncheckedCreateWithoutMusicianInput[]
+    connectOrCreate?: UserFollowMusicianCreateOrConnectWithoutMusicianInput | UserFollowMusicianCreateOrConnectWithoutMusicianInput[]
+    upsert?: UserFollowMusicianUpsertWithWhereUniqueWithoutMusicianInput | UserFollowMusicianUpsertWithWhereUniqueWithoutMusicianInput[]
+    createMany?: UserFollowMusicianCreateManyMusicianInputEnvelope
+    set?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    disconnect?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    delete?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    connect?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    update?: UserFollowMusicianUpdateWithWhereUniqueWithoutMusicianInput | UserFollowMusicianUpdateWithWhereUniqueWithoutMusicianInput[]
+    updateMany?: UserFollowMusicianUpdateManyWithWhereWithoutMusicianInput | UserFollowMusicianUpdateManyWithWhereWithoutMusicianInput[]
+    deleteMany?: UserFollowMusicianScalarWhereInput | UserFollowMusicianScalarWhereInput[]
+  }
+
   export type event_musiciansUncheckedUpdateManyWithoutMusiciansNestedInput = {
     create?: XOR<event_musiciansCreateWithoutMusiciansInput, event_musiciansUncheckedCreateWithoutMusiciansInput> | event_musiciansCreateWithoutMusiciansInput[] | event_musiciansUncheckedCreateWithoutMusiciansInput[]
     connectOrCreate?: event_musiciansCreateOrConnectWithoutMusiciansInput | event_musiciansCreateOrConnectWithoutMusiciansInput[]
@@ -12389,6 +21522,20 @@ export namespace Prisma {
     update?: event_musiciansUpdateWithWhereUniqueWithoutMusiciansInput | event_musiciansUpdateWithWhereUniqueWithoutMusiciansInput[]
     updateMany?: event_musiciansUpdateManyWithWhereWithoutMusiciansInput | event_musiciansUpdateManyWithWhereWithoutMusiciansInput[]
     deleteMany?: event_musiciansScalarWhereInput | event_musiciansScalarWhereInput[]
+  }
+
+  export type UserFollowMusicianUncheckedUpdateManyWithoutMusicianNestedInput = {
+    create?: XOR<UserFollowMusicianCreateWithoutMusicianInput, UserFollowMusicianUncheckedCreateWithoutMusicianInput> | UserFollowMusicianCreateWithoutMusicianInput[] | UserFollowMusicianUncheckedCreateWithoutMusicianInput[]
+    connectOrCreate?: UserFollowMusicianCreateOrConnectWithoutMusicianInput | UserFollowMusicianCreateOrConnectWithoutMusicianInput[]
+    upsert?: UserFollowMusicianUpsertWithWhereUniqueWithoutMusicianInput | UserFollowMusicianUpsertWithWhereUniqueWithoutMusicianInput[]
+    createMany?: UserFollowMusicianCreateManyMusicianInputEnvelope
+    set?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    disconnect?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    delete?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    connect?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    update?: UserFollowMusicianUpdateWithWhereUniqueWithoutMusicianInput | UserFollowMusicianUpdateWithWhereUniqueWithoutMusicianInput[]
+    updateMany?: UserFollowMusicianUpdateManyWithWhereWithoutMusicianInput | UserFollowMusicianUpdateManyWithWhereWithoutMusicianInput[]
+    deleteMany?: UserFollowMusicianScalarWhereInput | UserFollowMusicianScalarWhereInput[]
   }
 
   export type event_musiciansCreateset_timesInput = {
@@ -12454,6 +21601,378 @@ export namespace Prisma {
     delete?: EventWhereInput | boolean
     connect?: EventWhereUniqueInput
     update?: XOR<XOR<EventUpdateToOneWithWhereWithoutEvent_pricesInput, EventUpdateWithoutEvent_pricesInput>, EventUncheckedUpdateWithoutEvent_pricesInput>
+  }
+
+  export type UserPreferencesCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserInput
+    connect?: UserPreferencesWhereUniqueInput
+  }
+
+  export type SavedSearchCreateNestedManyWithoutUserInput = {
+    create?: XOR<SavedSearchCreateWithoutUserInput, SavedSearchUncheckedCreateWithoutUserInput> | SavedSearchCreateWithoutUserInput[] | SavedSearchUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SavedSearchCreateOrConnectWithoutUserInput | SavedSearchCreateOrConnectWithoutUserInput[]
+    createMany?: SavedSearchCreateManyUserInputEnvelope
+    connect?: SavedSearchWhereUniqueInput | SavedSearchWhereUniqueInput[]
+  }
+
+  export type UserFollowTeacherCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserFollowTeacherCreateWithoutUserInput, UserFollowTeacherUncheckedCreateWithoutUserInput> | UserFollowTeacherCreateWithoutUserInput[] | UserFollowTeacherUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserFollowTeacherCreateOrConnectWithoutUserInput | UserFollowTeacherCreateOrConnectWithoutUserInput[]
+    createMany?: UserFollowTeacherCreateManyUserInputEnvelope
+    connect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+  }
+
+  export type UserFollowMusicianCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserFollowMusicianCreateWithoutUserInput, UserFollowMusicianUncheckedCreateWithoutUserInput> | UserFollowMusicianCreateWithoutUserInput[] | UserFollowMusicianUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserFollowMusicianCreateOrConnectWithoutUserInput | UserFollowMusicianCreateOrConnectWithoutUserInput[]
+    createMany?: UserFollowMusicianCreateManyUserInputEnvelope
+    connect?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+  }
+
+  export type UserFollowEventCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserFollowEventCreateWithoutUserInput, UserFollowEventUncheckedCreateWithoutUserInput> | UserFollowEventCreateWithoutUserInput[] | UserFollowEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserFollowEventCreateOrConnectWithoutUserInput | UserFollowEventCreateOrConnectWithoutUserInput[]
+    createMany?: UserFollowEventCreateManyUserInputEnvelope
+    connect?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+  }
+
+  export type UserNotificationCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserNotificationCreateWithoutUserInput, UserNotificationUncheckedCreateWithoutUserInput> | UserNotificationCreateWithoutUserInput[] | UserNotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserNotificationCreateOrConnectWithoutUserInput | UserNotificationCreateOrConnectWithoutUserInput[]
+    createMany?: UserNotificationCreateManyUserInputEnvelope
+    connect?: UserNotificationWhereUniqueInput | UserNotificationWhereUniqueInput[]
+  }
+
+  export type UserPreferencesUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserInput
+    connect?: UserPreferencesWhereUniqueInput
+  }
+
+  export type SavedSearchUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SavedSearchCreateWithoutUserInput, SavedSearchUncheckedCreateWithoutUserInput> | SavedSearchCreateWithoutUserInput[] | SavedSearchUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SavedSearchCreateOrConnectWithoutUserInput | SavedSearchCreateOrConnectWithoutUserInput[]
+    createMany?: SavedSearchCreateManyUserInputEnvelope
+    connect?: SavedSearchWhereUniqueInput | SavedSearchWhereUniqueInput[]
+  }
+
+  export type UserFollowTeacherUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserFollowTeacherCreateWithoutUserInput, UserFollowTeacherUncheckedCreateWithoutUserInput> | UserFollowTeacherCreateWithoutUserInput[] | UserFollowTeacherUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserFollowTeacherCreateOrConnectWithoutUserInput | UserFollowTeacherCreateOrConnectWithoutUserInput[]
+    createMany?: UserFollowTeacherCreateManyUserInputEnvelope
+    connect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+  }
+
+  export type UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserFollowMusicianCreateWithoutUserInput, UserFollowMusicianUncheckedCreateWithoutUserInput> | UserFollowMusicianCreateWithoutUserInput[] | UserFollowMusicianUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserFollowMusicianCreateOrConnectWithoutUserInput | UserFollowMusicianCreateOrConnectWithoutUserInput[]
+    createMany?: UserFollowMusicianCreateManyUserInputEnvelope
+    connect?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+  }
+
+  export type UserFollowEventUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserFollowEventCreateWithoutUserInput, UserFollowEventUncheckedCreateWithoutUserInput> | UserFollowEventCreateWithoutUserInput[] | UserFollowEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserFollowEventCreateOrConnectWithoutUserInput | UserFollowEventCreateOrConnectWithoutUserInput[]
+    createMany?: UserFollowEventCreateManyUserInputEnvelope
+    connect?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+  }
+
+  export type UserNotificationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserNotificationCreateWithoutUserInput, UserNotificationUncheckedCreateWithoutUserInput> | UserNotificationCreateWithoutUserInput[] | UserNotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserNotificationCreateOrConnectWithoutUserInput | UserNotificationCreateOrConnectWithoutUserInput[]
+    createMany?: UserNotificationCreateManyUserInputEnvelope
+    connect?: UserNotificationWhereUniqueInput | UserNotificationWhereUniqueInput[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type UserPreferencesUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserInput
+    upsert?: UserPreferencesUpsertWithoutUserInput
+    disconnect?: UserPreferencesWhereInput | boolean
+    delete?: UserPreferencesWhereInput | boolean
+    connect?: UserPreferencesWhereUniqueInput
+    update?: XOR<XOR<UserPreferencesUpdateToOneWithWhereWithoutUserInput, UserPreferencesUpdateWithoutUserInput>, UserPreferencesUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SavedSearchUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SavedSearchCreateWithoutUserInput, SavedSearchUncheckedCreateWithoutUserInput> | SavedSearchCreateWithoutUserInput[] | SavedSearchUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SavedSearchCreateOrConnectWithoutUserInput | SavedSearchCreateOrConnectWithoutUserInput[]
+    upsert?: SavedSearchUpsertWithWhereUniqueWithoutUserInput | SavedSearchUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SavedSearchCreateManyUserInputEnvelope
+    set?: SavedSearchWhereUniqueInput | SavedSearchWhereUniqueInput[]
+    disconnect?: SavedSearchWhereUniqueInput | SavedSearchWhereUniqueInput[]
+    delete?: SavedSearchWhereUniqueInput | SavedSearchWhereUniqueInput[]
+    connect?: SavedSearchWhereUniqueInput | SavedSearchWhereUniqueInput[]
+    update?: SavedSearchUpdateWithWhereUniqueWithoutUserInput | SavedSearchUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SavedSearchUpdateManyWithWhereWithoutUserInput | SavedSearchUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SavedSearchScalarWhereInput | SavedSearchScalarWhereInput[]
+  }
+
+  export type UserFollowTeacherUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserFollowTeacherCreateWithoutUserInput, UserFollowTeacherUncheckedCreateWithoutUserInput> | UserFollowTeacherCreateWithoutUserInput[] | UserFollowTeacherUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserFollowTeacherCreateOrConnectWithoutUserInput | UserFollowTeacherCreateOrConnectWithoutUserInput[]
+    upsert?: UserFollowTeacherUpsertWithWhereUniqueWithoutUserInput | UserFollowTeacherUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserFollowTeacherCreateManyUserInputEnvelope
+    set?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    disconnect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    delete?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    connect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    update?: UserFollowTeacherUpdateWithWhereUniqueWithoutUserInput | UserFollowTeacherUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserFollowTeacherUpdateManyWithWhereWithoutUserInput | UserFollowTeacherUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserFollowTeacherScalarWhereInput | UserFollowTeacherScalarWhereInput[]
+  }
+
+  export type UserFollowMusicianUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserFollowMusicianCreateWithoutUserInput, UserFollowMusicianUncheckedCreateWithoutUserInput> | UserFollowMusicianCreateWithoutUserInput[] | UserFollowMusicianUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserFollowMusicianCreateOrConnectWithoutUserInput | UserFollowMusicianCreateOrConnectWithoutUserInput[]
+    upsert?: UserFollowMusicianUpsertWithWhereUniqueWithoutUserInput | UserFollowMusicianUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserFollowMusicianCreateManyUserInputEnvelope
+    set?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    disconnect?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    delete?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    connect?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    update?: UserFollowMusicianUpdateWithWhereUniqueWithoutUserInput | UserFollowMusicianUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserFollowMusicianUpdateManyWithWhereWithoutUserInput | UserFollowMusicianUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserFollowMusicianScalarWhereInput | UserFollowMusicianScalarWhereInput[]
+  }
+
+  export type UserFollowEventUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserFollowEventCreateWithoutUserInput, UserFollowEventUncheckedCreateWithoutUserInput> | UserFollowEventCreateWithoutUserInput[] | UserFollowEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserFollowEventCreateOrConnectWithoutUserInput | UserFollowEventCreateOrConnectWithoutUserInput[]
+    upsert?: UserFollowEventUpsertWithWhereUniqueWithoutUserInput | UserFollowEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserFollowEventCreateManyUserInputEnvelope
+    set?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    disconnect?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    delete?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    connect?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    update?: UserFollowEventUpdateWithWhereUniqueWithoutUserInput | UserFollowEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserFollowEventUpdateManyWithWhereWithoutUserInput | UserFollowEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserFollowEventScalarWhereInput | UserFollowEventScalarWhereInput[]
+  }
+
+  export type UserNotificationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserNotificationCreateWithoutUserInput, UserNotificationUncheckedCreateWithoutUserInput> | UserNotificationCreateWithoutUserInput[] | UserNotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserNotificationCreateOrConnectWithoutUserInput | UserNotificationCreateOrConnectWithoutUserInput[]
+    upsert?: UserNotificationUpsertWithWhereUniqueWithoutUserInput | UserNotificationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserNotificationCreateManyUserInputEnvelope
+    set?: UserNotificationWhereUniqueInput | UserNotificationWhereUniqueInput[]
+    disconnect?: UserNotificationWhereUniqueInput | UserNotificationWhereUniqueInput[]
+    delete?: UserNotificationWhereUniqueInput | UserNotificationWhereUniqueInput[]
+    connect?: UserNotificationWhereUniqueInput | UserNotificationWhereUniqueInput[]
+    update?: UserNotificationUpdateWithWhereUniqueWithoutUserInput | UserNotificationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserNotificationUpdateManyWithWhereWithoutUserInput | UserNotificationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserNotificationScalarWhereInput | UserNotificationScalarWhereInput[]
+  }
+
+  export type UserPreferencesUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserInput
+    upsert?: UserPreferencesUpsertWithoutUserInput
+    disconnect?: UserPreferencesWhereInput | boolean
+    delete?: UserPreferencesWhereInput | boolean
+    connect?: UserPreferencesWhereUniqueInput
+    update?: XOR<XOR<UserPreferencesUpdateToOneWithWhereWithoutUserInput, UserPreferencesUpdateWithoutUserInput>, UserPreferencesUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SavedSearchUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SavedSearchCreateWithoutUserInput, SavedSearchUncheckedCreateWithoutUserInput> | SavedSearchCreateWithoutUserInput[] | SavedSearchUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SavedSearchCreateOrConnectWithoutUserInput | SavedSearchCreateOrConnectWithoutUserInput[]
+    upsert?: SavedSearchUpsertWithWhereUniqueWithoutUserInput | SavedSearchUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SavedSearchCreateManyUserInputEnvelope
+    set?: SavedSearchWhereUniqueInput | SavedSearchWhereUniqueInput[]
+    disconnect?: SavedSearchWhereUniqueInput | SavedSearchWhereUniqueInput[]
+    delete?: SavedSearchWhereUniqueInput | SavedSearchWhereUniqueInput[]
+    connect?: SavedSearchWhereUniqueInput | SavedSearchWhereUniqueInput[]
+    update?: SavedSearchUpdateWithWhereUniqueWithoutUserInput | SavedSearchUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SavedSearchUpdateManyWithWhereWithoutUserInput | SavedSearchUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SavedSearchScalarWhereInput | SavedSearchScalarWhereInput[]
+  }
+
+  export type UserFollowTeacherUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserFollowTeacherCreateWithoutUserInput, UserFollowTeacherUncheckedCreateWithoutUserInput> | UserFollowTeacherCreateWithoutUserInput[] | UserFollowTeacherUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserFollowTeacherCreateOrConnectWithoutUserInput | UserFollowTeacherCreateOrConnectWithoutUserInput[]
+    upsert?: UserFollowTeacherUpsertWithWhereUniqueWithoutUserInput | UserFollowTeacherUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserFollowTeacherCreateManyUserInputEnvelope
+    set?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    disconnect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    delete?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    connect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+    update?: UserFollowTeacherUpdateWithWhereUniqueWithoutUserInput | UserFollowTeacherUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserFollowTeacherUpdateManyWithWhereWithoutUserInput | UserFollowTeacherUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserFollowTeacherScalarWhereInput | UserFollowTeacherScalarWhereInput[]
+  }
+
+  export type UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserFollowMusicianCreateWithoutUserInput, UserFollowMusicianUncheckedCreateWithoutUserInput> | UserFollowMusicianCreateWithoutUserInput[] | UserFollowMusicianUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserFollowMusicianCreateOrConnectWithoutUserInput | UserFollowMusicianCreateOrConnectWithoutUserInput[]
+    upsert?: UserFollowMusicianUpsertWithWhereUniqueWithoutUserInput | UserFollowMusicianUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserFollowMusicianCreateManyUserInputEnvelope
+    set?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    disconnect?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    delete?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    connect?: UserFollowMusicianWhereUniqueInput | UserFollowMusicianWhereUniqueInput[]
+    update?: UserFollowMusicianUpdateWithWhereUniqueWithoutUserInput | UserFollowMusicianUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserFollowMusicianUpdateManyWithWhereWithoutUserInput | UserFollowMusicianUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserFollowMusicianScalarWhereInput | UserFollowMusicianScalarWhereInput[]
+  }
+
+  export type UserFollowEventUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserFollowEventCreateWithoutUserInput, UserFollowEventUncheckedCreateWithoutUserInput> | UserFollowEventCreateWithoutUserInput[] | UserFollowEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserFollowEventCreateOrConnectWithoutUserInput | UserFollowEventCreateOrConnectWithoutUserInput[]
+    upsert?: UserFollowEventUpsertWithWhereUniqueWithoutUserInput | UserFollowEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserFollowEventCreateManyUserInputEnvelope
+    set?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    disconnect?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    delete?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    connect?: UserFollowEventWhereUniqueInput | UserFollowEventWhereUniqueInput[]
+    update?: UserFollowEventUpdateWithWhereUniqueWithoutUserInput | UserFollowEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserFollowEventUpdateManyWithWhereWithoutUserInput | UserFollowEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserFollowEventScalarWhereInput | UserFollowEventScalarWhereInput[]
+  }
+
+  export type UserNotificationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserNotificationCreateWithoutUserInput, UserNotificationUncheckedCreateWithoutUserInput> | UserNotificationCreateWithoutUserInput[] | UserNotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserNotificationCreateOrConnectWithoutUserInput | UserNotificationCreateOrConnectWithoutUserInput[]
+    upsert?: UserNotificationUpsertWithWhereUniqueWithoutUserInput | UserNotificationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserNotificationCreateManyUserInputEnvelope
+    set?: UserNotificationWhereUniqueInput | UserNotificationWhereUniqueInput[]
+    disconnect?: UserNotificationWhereUniqueInput | UserNotificationWhereUniqueInput[]
+    delete?: UserNotificationWhereUniqueInput | UserNotificationWhereUniqueInput[]
+    connect?: UserNotificationWhereUniqueInput | UserNotificationWhereUniqueInput[]
+    update?: UserNotificationUpdateWithWhereUniqueWithoutUserInput | UserNotificationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserNotificationUpdateManyWithWhereWithoutUserInput | UserNotificationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserNotificationScalarWhereInput | UserNotificationScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutPreferencesInput = {
+    create?: XOR<UserCreateWithoutPreferencesInput, UserUncheckedCreateWithoutPreferencesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPreferencesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutPreferencesNestedInput = {
+    create?: XOR<UserCreateWithoutPreferencesInput, UserUncheckedCreateWithoutPreferencesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPreferencesInput
+    upsert?: UserUpsertWithoutPreferencesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPreferencesInput, UserUpdateWithoutPreferencesInput>, UserUncheckedUpdateWithoutPreferencesInput>
+  }
+
+  export type UserCreateNestedOneWithoutSavedSearchesInput = {
+    create?: XOR<UserCreateWithoutSavedSearchesInput, UserUncheckedCreateWithoutSavedSearchesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSavedSearchesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutSavedSearchesNestedInput = {
+    create?: XOR<UserCreateWithoutSavedSearchesInput, UserUncheckedCreateWithoutSavedSearchesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSavedSearchesInput
+    upsert?: UserUpsertWithoutSavedSearchesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSavedSearchesInput, UserUpdateWithoutSavedSearchesInput>, UserUncheckedUpdateWithoutSavedSearchesInput>
+  }
+
+  export type UserCreateNestedOneWithoutFollowedTeachersInput = {
+    create?: XOR<UserCreateWithoutFollowedTeachersInput, UserUncheckedCreateWithoutFollowedTeachersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFollowedTeachersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type TeacherCreateNestedOneWithoutFollowersInput = {
+    create?: XOR<TeacherCreateWithoutFollowersInput, TeacherUncheckedCreateWithoutFollowersInput>
+    connectOrCreate?: TeacherCreateOrConnectWithoutFollowersInput
+    connect?: TeacherWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutFollowedTeachersNestedInput = {
+    create?: XOR<UserCreateWithoutFollowedTeachersInput, UserUncheckedCreateWithoutFollowedTeachersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFollowedTeachersInput
+    upsert?: UserUpsertWithoutFollowedTeachersInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFollowedTeachersInput, UserUpdateWithoutFollowedTeachersInput>, UserUncheckedUpdateWithoutFollowedTeachersInput>
+  }
+
+  export type TeacherUpdateOneRequiredWithoutFollowersNestedInput = {
+    create?: XOR<TeacherCreateWithoutFollowersInput, TeacherUncheckedCreateWithoutFollowersInput>
+    connectOrCreate?: TeacherCreateOrConnectWithoutFollowersInput
+    upsert?: TeacherUpsertWithoutFollowersInput
+    connect?: TeacherWhereUniqueInput
+    update?: XOR<XOR<TeacherUpdateToOneWithWhereWithoutFollowersInput, TeacherUpdateWithoutFollowersInput>, TeacherUncheckedUpdateWithoutFollowersInput>
+  }
+
+  export type UserCreateNestedOneWithoutFollowedMusiciansInput = {
+    create?: XOR<UserCreateWithoutFollowedMusiciansInput, UserUncheckedCreateWithoutFollowedMusiciansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFollowedMusiciansInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type MusicianCreateNestedOneWithoutFollowersInput = {
+    create?: XOR<MusicianCreateWithoutFollowersInput, MusicianUncheckedCreateWithoutFollowersInput>
+    connectOrCreate?: MusicianCreateOrConnectWithoutFollowersInput
+    connect?: MusicianWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutFollowedMusiciansNestedInput = {
+    create?: XOR<UserCreateWithoutFollowedMusiciansInput, UserUncheckedCreateWithoutFollowedMusiciansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFollowedMusiciansInput
+    upsert?: UserUpsertWithoutFollowedMusiciansInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFollowedMusiciansInput, UserUpdateWithoutFollowedMusiciansInput>, UserUncheckedUpdateWithoutFollowedMusiciansInput>
+  }
+
+  export type MusicianUpdateOneRequiredWithoutFollowersNestedInput = {
+    create?: XOR<MusicianCreateWithoutFollowersInput, MusicianUncheckedCreateWithoutFollowersInput>
+    connectOrCreate?: MusicianCreateOrConnectWithoutFollowersInput
+    upsert?: MusicianUpsertWithoutFollowersInput
+    connect?: MusicianWhereUniqueInput
+    update?: XOR<XOR<MusicianUpdateToOneWithWhereWithoutFollowersInput, MusicianUpdateWithoutFollowersInput>, MusicianUncheckedUpdateWithoutFollowersInput>
+  }
+
+  export type UserCreateNestedOneWithoutFollowedEventsInput = {
+    create?: XOR<UserCreateWithoutFollowedEventsInput, UserUncheckedCreateWithoutFollowedEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFollowedEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EventCreateNestedOneWithoutFollowersInput = {
+    create?: XOR<EventCreateWithoutFollowersInput, EventUncheckedCreateWithoutFollowersInput>
+    connectOrCreate?: EventCreateOrConnectWithoutFollowersInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutFollowedEventsNestedInput = {
+    create?: XOR<UserCreateWithoutFollowedEventsInput, UserUncheckedCreateWithoutFollowedEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFollowedEventsInput
+    upsert?: UserUpsertWithoutFollowedEventsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFollowedEventsInput, UserUpdateWithoutFollowedEventsInput>, UserUncheckedUpdateWithoutFollowedEventsInput>
+  }
+
+  export type EventUpdateOneRequiredWithoutFollowersNestedInput = {
+    create?: XOR<EventCreateWithoutFollowersInput, EventUncheckedCreateWithoutFollowersInput>
+    connectOrCreate?: EventCreateOrConnectWithoutFollowersInput
+    upsert?: EventUpsertWithoutFollowersInput
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutFollowersInput, EventUpdateWithoutFollowersInput>, EventUncheckedUpdateWithoutFollowersInput>
+  }
+
+  export type UserCreateNestedOneWithoutNotificationsInput = {
+    create?: XOR<UserCreateWithoutNotificationsInput, UserUncheckedCreateWithoutNotificationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
+    create?: XOR<UserCreateWithoutNotificationsInput, UserUncheckedCreateWithoutNotificationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationsInput
+    upsert?: UserUpsertWithoutNotificationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotificationsInput, UserUpdateWithoutNotificationsInput>, UserUncheckedUpdateWithoutNotificationsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -12684,6 +22203,41 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type event_musiciansCreateWithoutEventsInput = {
     role?: string | null
     set_times?: event_musiciansCreateset_timesInput | string[]
@@ -12782,6 +22336,26 @@ export namespace Prisma {
 
   export type ExternalEventVenueCreateManyEventsInputEnvelope = {
     data: ExternalEventVenueCreateManyEventsInput | ExternalEventVenueCreateManyEventsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserFollowEventCreateWithoutEventInput = {
+    created_at?: Date | string
+    user: UserCreateNestedOneWithoutFollowedEventsInput
+  }
+
+  export type UserFollowEventUncheckedCreateWithoutEventInput = {
+    user_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowEventCreateOrConnectWithoutEventInput = {
+    where: UserFollowEventWhereUniqueInput
+    create: XOR<UserFollowEventCreateWithoutEventInput, UserFollowEventUncheckedCreateWithoutEventInput>
+  }
+
+  export type UserFollowEventCreateManyEventInputEnvelope = {
+    data: UserFollowEventCreateManyEventInput | UserFollowEventCreateManyEventInput[]
     skipDuplicates?: boolean
   }
 
@@ -12897,6 +22471,31 @@ export namespace Prisma {
     type?: StringNullableFilter<"ExternalEventVenue"> | string | null
   }
 
+  export type UserFollowEventUpsertWithWhereUniqueWithoutEventInput = {
+    where: UserFollowEventWhereUniqueInput
+    update: XOR<UserFollowEventUpdateWithoutEventInput, UserFollowEventUncheckedUpdateWithoutEventInput>
+    create: XOR<UserFollowEventCreateWithoutEventInput, UserFollowEventUncheckedCreateWithoutEventInput>
+  }
+
+  export type UserFollowEventUpdateWithWhereUniqueWithoutEventInput = {
+    where: UserFollowEventWhereUniqueInput
+    data: XOR<UserFollowEventUpdateWithoutEventInput, UserFollowEventUncheckedUpdateWithoutEventInput>
+  }
+
+  export type UserFollowEventUpdateManyWithWhereWithoutEventInput = {
+    where: UserFollowEventScalarWhereInput
+    data: XOR<UserFollowEventUpdateManyMutationInput, UserFollowEventUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type UserFollowEventScalarWhereInput = {
+    AND?: UserFollowEventScalarWhereInput | UserFollowEventScalarWhereInput[]
+    OR?: UserFollowEventScalarWhereInput[]
+    NOT?: UserFollowEventScalarWhereInput | UserFollowEventScalarWhereInput[]
+    user_id?: IntFilter<"UserFollowEvent"> | number
+    event_id?: IntFilter<"UserFollowEvent"> | number
+    created_at?: DateTimeFilter<"UserFollowEvent"> | Date | string
+  }
+
   export type EventCreateWithoutEvent_teachersInput = {
     name: string
     from_date: Date | string
@@ -12915,6 +22514,7 @@ export namespace Prisma {
     event_musicians?: event_musiciansCreateNestedManyWithoutEventsInput
     event_prices?: event_pricesCreateNestedManyWithoutEventsInput
     venues?: ExternalEventVenueCreateNestedManyWithoutEventsInput
+    followers?: UserFollowEventCreateNestedManyWithoutEventInput
   }
 
   export type EventUncheckedCreateWithoutEvent_teachersInput = {
@@ -12936,6 +22536,7 @@ export namespace Prisma {
     event_musicians?: event_musiciansUncheckedCreateNestedManyWithoutEventsInput
     event_prices?: event_pricesUncheckedCreateNestedManyWithoutEventsInput
     venues?: ExternalEventVenueUncheckedCreateNestedManyWithoutEventsInput
+    followers?: UserFollowEventUncheckedCreateNestedManyWithoutEventInput
   }
 
   export type EventCreateOrConnectWithoutEvent_teachersInput = {
@@ -12950,6 +22551,7 @@ export namespace Prisma {
     ai_bio_summary?: string | null
     ai_relevance_score?: number | null
     image_url?: string | null
+    followers?: UserFollowTeacherCreateNestedManyWithoutTeacherInput
   }
 
   export type TeacherUncheckedCreateWithoutEvent_teachersInput = {
@@ -12960,6 +22562,7 @@ export namespace Prisma {
     ai_bio_summary?: string | null
     ai_relevance_score?: number | null
     image_url?: string | null
+    followers?: UserFollowTeacherUncheckedCreateNestedManyWithoutTeacherInput
   }
 
   export type TeacherCreateOrConnectWithoutEvent_teachersInput = {
@@ -12996,6 +22599,7 @@ export namespace Prisma {
     event_musicians?: event_musiciansUpdateManyWithoutEventsNestedInput
     event_prices?: event_pricesUpdateManyWithoutEventsNestedInput
     venues?: ExternalEventVenueUpdateManyWithoutEventsNestedInput
+    followers?: UserFollowEventUpdateManyWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateWithoutEvent_teachersInput = {
@@ -13017,6 +22621,7 @@ export namespace Prisma {
     event_musicians?: event_musiciansUncheckedUpdateManyWithoutEventsNestedInput
     event_prices?: event_pricesUncheckedUpdateManyWithoutEventsNestedInput
     venues?: ExternalEventVenueUncheckedUpdateManyWithoutEventsNestedInput
+    followers?: UserFollowEventUncheckedUpdateManyWithoutEventNestedInput
   }
 
   export type TeacherUpsertWithoutEvent_teachersInput = {
@@ -13037,6 +22642,7 @@ export namespace Prisma {
     ai_bio_summary?: NullableStringFieldUpdateOperationsInput | string | null
     ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    followers?: UserFollowTeacherUpdateManyWithoutTeacherNestedInput
   }
 
   export type TeacherUncheckedUpdateWithoutEvent_teachersInput = {
@@ -13047,6 +22653,7 @@ export namespace Prisma {
     ai_bio_summary?: NullableStringFieldUpdateOperationsInput | string | null
     ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    followers?: UserFollowTeacherUncheckedUpdateManyWithoutTeacherNestedInput
   }
 
   export type EventCreateWithoutVenuesInput = {
@@ -13067,6 +22674,7 @@ export namespace Prisma {
     event_musicians?: event_musiciansCreateNestedManyWithoutEventsInput
     event_prices?: event_pricesCreateNestedManyWithoutEventsInput
     event_teachers?: ExternalEventTeacherCreateNestedManyWithoutEventsInput
+    followers?: UserFollowEventCreateNestedManyWithoutEventInput
   }
 
   export type EventUncheckedCreateWithoutVenuesInput = {
@@ -13088,6 +22696,7 @@ export namespace Prisma {
     event_musicians?: event_musiciansUncheckedCreateNestedManyWithoutEventsInput
     event_prices?: event_pricesUncheckedCreateNestedManyWithoutEventsInput
     event_teachers?: ExternalEventTeacherUncheckedCreateNestedManyWithoutEventsInput
+    followers?: UserFollowEventUncheckedCreateNestedManyWithoutEventInput
   }
 
   export type EventCreateOrConnectWithoutVenuesInput = {
@@ -13124,6 +22733,7 @@ export namespace Prisma {
     event_musicians?: event_musiciansUpdateManyWithoutEventsNestedInput
     event_prices?: event_pricesUpdateManyWithoutEventsNestedInput
     event_teachers?: ExternalEventTeacherUpdateManyWithoutEventsNestedInput
+    followers?: UserFollowEventUpdateManyWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateWithoutVenuesInput = {
@@ -13145,6 +22755,7 @@ export namespace Prisma {
     event_musicians?: event_musiciansUncheckedUpdateManyWithoutEventsNestedInput
     event_prices?: event_pricesUncheckedUpdateManyWithoutEventsNestedInput
     event_teachers?: ExternalEventTeacherUncheckedUpdateManyWithoutEventsNestedInput
+    followers?: UserFollowEventUncheckedUpdateManyWithoutEventNestedInput
   }
 
   export type ExternalEventTeacherCreateWithoutTeachersInput = {
@@ -13167,6 +22778,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserFollowTeacherCreateWithoutTeacherInput = {
+    created_at?: Date | string
+    user: UserCreateNestedOneWithoutFollowedTeachersInput
+  }
+
+  export type UserFollowTeacherUncheckedCreateWithoutTeacherInput = {
+    user_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowTeacherCreateOrConnectWithoutTeacherInput = {
+    where: UserFollowTeacherWhereUniqueInput
+    create: XOR<UserFollowTeacherCreateWithoutTeacherInput, UserFollowTeacherUncheckedCreateWithoutTeacherInput>
+  }
+
+  export type UserFollowTeacherCreateManyTeacherInputEnvelope = {
+    data: UserFollowTeacherCreateManyTeacherInput | UserFollowTeacherCreateManyTeacherInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ExternalEventTeacherUpsertWithWhereUniqueWithoutTeachersInput = {
     where: ExternalEventTeacherWhereUniqueInput
     update: XOR<ExternalEventTeacherUpdateWithoutTeachersInput, ExternalEventTeacherUncheckedUpdateWithoutTeachersInput>
@@ -13181,6 +22812,31 @@ export namespace Prisma {
   export type ExternalEventTeacherUpdateManyWithWhereWithoutTeachersInput = {
     where: ExternalEventTeacherScalarWhereInput
     data: XOR<ExternalEventTeacherUpdateManyMutationInput, ExternalEventTeacherUncheckedUpdateManyWithoutTeachersInput>
+  }
+
+  export type UserFollowTeacherUpsertWithWhereUniqueWithoutTeacherInput = {
+    where: UserFollowTeacherWhereUniqueInput
+    update: XOR<UserFollowTeacherUpdateWithoutTeacherInput, UserFollowTeacherUncheckedUpdateWithoutTeacherInput>
+    create: XOR<UserFollowTeacherCreateWithoutTeacherInput, UserFollowTeacherUncheckedCreateWithoutTeacherInput>
+  }
+
+  export type UserFollowTeacherUpdateWithWhereUniqueWithoutTeacherInput = {
+    where: UserFollowTeacherWhereUniqueInput
+    data: XOR<UserFollowTeacherUpdateWithoutTeacherInput, UserFollowTeacherUncheckedUpdateWithoutTeacherInput>
+  }
+
+  export type UserFollowTeacherUpdateManyWithWhereWithoutTeacherInput = {
+    where: UserFollowTeacherScalarWhereInput
+    data: XOR<UserFollowTeacherUpdateManyMutationInput, UserFollowTeacherUncheckedUpdateManyWithoutTeacherInput>
+  }
+
+  export type UserFollowTeacherScalarWhereInput = {
+    AND?: UserFollowTeacherScalarWhereInput | UserFollowTeacherScalarWhereInput[]
+    OR?: UserFollowTeacherScalarWhereInput[]
+    NOT?: UserFollowTeacherScalarWhereInput | UserFollowTeacherScalarWhereInput[]
+    user_id?: IntFilter<"UserFollowTeacher"> | number
+    teacher_id?: IntFilter<"UserFollowTeacher"> | number
+    created_at?: DateTimeFilter<"UserFollowTeacher"> | Date | string
   }
 
   export type event_musiciansCreateWithoutMusiciansInput = {
@@ -13208,6 +22864,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserFollowMusicianCreateWithoutMusicianInput = {
+    created_at?: Date | string
+    user: UserCreateNestedOneWithoutFollowedMusiciansInput
+  }
+
+  export type UserFollowMusicianUncheckedCreateWithoutMusicianInput = {
+    user_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowMusicianCreateOrConnectWithoutMusicianInput = {
+    where: UserFollowMusicianWhereUniqueInput
+    create: XOR<UserFollowMusicianCreateWithoutMusicianInput, UserFollowMusicianUncheckedCreateWithoutMusicianInput>
+  }
+
+  export type UserFollowMusicianCreateManyMusicianInputEnvelope = {
+    data: UserFollowMusicianCreateManyMusicianInput | UserFollowMusicianCreateManyMusicianInput[]
+    skipDuplicates?: boolean
+  }
+
   export type event_musiciansUpsertWithWhereUniqueWithoutMusiciansInput = {
     where: event_musiciansWhereUniqueInput
     update: XOR<event_musiciansUpdateWithoutMusiciansInput, event_musiciansUncheckedUpdateWithoutMusiciansInput>
@@ -13222,6 +22898,31 @@ export namespace Prisma {
   export type event_musiciansUpdateManyWithWhereWithoutMusiciansInput = {
     where: event_musiciansScalarWhereInput
     data: XOR<event_musiciansUpdateManyMutationInput, event_musiciansUncheckedUpdateManyWithoutMusiciansInput>
+  }
+
+  export type UserFollowMusicianUpsertWithWhereUniqueWithoutMusicianInput = {
+    where: UserFollowMusicianWhereUniqueInput
+    update: XOR<UserFollowMusicianUpdateWithoutMusicianInput, UserFollowMusicianUncheckedUpdateWithoutMusicianInput>
+    create: XOR<UserFollowMusicianCreateWithoutMusicianInput, UserFollowMusicianUncheckedCreateWithoutMusicianInput>
+  }
+
+  export type UserFollowMusicianUpdateWithWhereUniqueWithoutMusicianInput = {
+    where: UserFollowMusicianWhereUniqueInput
+    data: XOR<UserFollowMusicianUpdateWithoutMusicianInput, UserFollowMusicianUncheckedUpdateWithoutMusicianInput>
+  }
+
+  export type UserFollowMusicianUpdateManyWithWhereWithoutMusicianInput = {
+    where: UserFollowMusicianScalarWhereInput
+    data: XOR<UserFollowMusicianUpdateManyMutationInput, UserFollowMusicianUncheckedUpdateManyWithoutMusicianInput>
+  }
+
+  export type UserFollowMusicianScalarWhereInput = {
+    AND?: UserFollowMusicianScalarWhereInput | UserFollowMusicianScalarWhereInput[]
+    OR?: UserFollowMusicianScalarWhereInput[]
+    NOT?: UserFollowMusicianScalarWhereInput | UserFollowMusicianScalarWhereInput[]
+    user_id?: IntFilter<"UserFollowMusician"> | number
+    musician_id?: IntFilter<"UserFollowMusician"> | number
+    created_at?: DateTimeFilter<"UserFollowMusician"> | Date | string
   }
 
   export type EventCreateWithoutEvent_musiciansInput = {
@@ -13242,6 +22943,7 @@ export namespace Prisma {
     event_prices?: event_pricesCreateNestedManyWithoutEventsInput
     event_teachers?: ExternalEventTeacherCreateNestedManyWithoutEventsInput
     venues?: ExternalEventVenueCreateNestedManyWithoutEventsInput
+    followers?: UserFollowEventCreateNestedManyWithoutEventInput
   }
 
   export type EventUncheckedCreateWithoutEvent_musiciansInput = {
@@ -13263,6 +22965,7 @@ export namespace Prisma {
     event_prices?: event_pricesUncheckedCreateNestedManyWithoutEventsInput
     event_teachers?: ExternalEventTeacherUncheckedCreateNestedManyWithoutEventsInput
     venues?: ExternalEventVenueUncheckedCreateNestedManyWithoutEventsInput
+    followers?: UserFollowEventUncheckedCreateNestedManyWithoutEventInput
   }
 
   export type EventCreateOrConnectWithoutEvent_musiciansInput = {
@@ -13285,6 +22988,7 @@ export namespace Prisma {
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     image_url?: string | null
+    followers?: UserFollowMusicianCreateNestedManyWithoutMusicianInput
   }
 
   export type MusicianUncheckedCreateWithoutEvent_musiciansInput = {
@@ -13303,6 +23007,7 @@ export namespace Prisma {
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     image_url?: string | null
+    followers?: UserFollowMusicianUncheckedCreateNestedManyWithoutMusicianInput
   }
 
   export type MusicianCreateOrConnectWithoutEvent_musiciansInput = {
@@ -13339,6 +23044,7 @@ export namespace Prisma {
     event_prices?: event_pricesUpdateManyWithoutEventsNestedInput
     event_teachers?: ExternalEventTeacherUpdateManyWithoutEventsNestedInput
     venues?: ExternalEventVenueUpdateManyWithoutEventsNestedInput
+    followers?: UserFollowEventUpdateManyWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateWithoutEvent_musiciansInput = {
@@ -13360,6 +23066,7 @@ export namespace Prisma {
     event_prices?: event_pricesUncheckedUpdateManyWithoutEventsNestedInput
     event_teachers?: ExternalEventTeacherUncheckedUpdateManyWithoutEventsNestedInput
     venues?: ExternalEventVenueUncheckedUpdateManyWithoutEventsNestedInput
+    followers?: UserFollowEventUncheckedUpdateManyWithoutEventNestedInput
   }
 
   export type MusicianUpsertWithoutEvent_musiciansInput = {
@@ -13388,6 +23095,7 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    followers?: UserFollowMusicianUpdateManyWithoutMusicianNestedInput
   }
 
   export type MusicianUncheckedUpdateWithoutEvent_musiciansInput = {
@@ -13406,6 +23114,7 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    followers?: UserFollowMusicianUncheckedUpdateManyWithoutMusicianNestedInput
   }
 
   export type EventCreateWithoutEvent_pricesInput = {
@@ -13426,6 +23135,7 @@ export namespace Prisma {
     event_musicians?: event_musiciansCreateNestedManyWithoutEventsInput
     event_teachers?: ExternalEventTeacherCreateNestedManyWithoutEventsInput
     venues?: ExternalEventVenueCreateNestedManyWithoutEventsInput
+    followers?: UserFollowEventCreateNestedManyWithoutEventInput
   }
 
   export type EventUncheckedCreateWithoutEvent_pricesInput = {
@@ -13447,6 +23157,7 @@ export namespace Prisma {
     event_musicians?: event_musiciansUncheckedCreateNestedManyWithoutEventsInput
     event_teachers?: ExternalEventTeacherUncheckedCreateNestedManyWithoutEventsInput
     venues?: ExternalEventVenueUncheckedCreateNestedManyWithoutEventsInput
+    followers?: UserFollowEventUncheckedCreateNestedManyWithoutEventInput
   }
 
   export type EventCreateOrConnectWithoutEvent_pricesInput = {
@@ -13483,6 +23194,7 @@ export namespace Prisma {
     event_musicians?: event_musiciansUpdateManyWithoutEventsNestedInput
     event_teachers?: ExternalEventTeacherUpdateManyWithoutEventsNestedInput
     venues?: ExternalEventVenueUpdateManyWithoutEventsNestedInput
+    followers?: UserFollowEventUpdateManyWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateWithoutEvent_pricesInput = {
@@ -13504,6 +23216,965 @@ export namespace Prisma {
     event_musicians?: event_musiciansUncheckedUpdateManyWithoutEventsNestedInput
     event_teachers?: ExternalEventTeacherUncheckedUpdateManyWithoutEventsNestedInput
     venues?: ExternalEventVenueUncheckedUpdateManyWithoutEventsNestedInput
+    followers?: UserFollowEventUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type UserPreferencesCreateWithoutUserInput = {
+    email_notifications?: boolean
+    push_notifications?: boolean
+    new_event_notifications?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type UserPreferencesUncheckedCreateWithoutUserInput = {
+    id?: number
+    email_notifications?: boolean
+    push_notifications?: boolean
+    new_event_notifications?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type UserPreferencesCreateOrConnectWithoutUserInput = {
+    where: UserPreferencesWhereUniqueInput
+    create: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
+  }
+
+  export type SavedSearchCreateWithoutUserInput = {
+    name: string
+    query: JsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+  }
+
+  export type SavedSearchUncheckedCreateWithoutUserInput = {
+    id?: number
+    name: string
+    query: JsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+  }
+
+  export type SavedSearchCreateOrConnectWithoutUserInput = {
+    where: SavedSearchWhereUniqueInput
+    create: XOR<SavedSearchCreateWithoutUserInput, SavedSearchUncheckedCreateWithoutUserInput>
+  }
+
+  export type SavedSearchCreateManyUserInputEnvelope = {
+    data: SavedSearchCreateManyUserInput | SavedSearchCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserFollowTeacherCreateWithoutUserInput = {
+    created_at?: Date | string
+    teacher: TeacherCreateNestedOneWithoutFollowersInput
+  }
+
+  export type UserFollowTeacherUncheckedCreateWithoutUserInput = {
+    teacher_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowTeacherCreateOrConnectWithoutUserInput = {
+    where: UserFollowTeacherWhereUniqueInput
+    create: XOR<UserFollowTeacherCreateWithoutUserInput, UserFollowTeacherUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserFollowTeacherCreateManyUserInputEnvelope = {
+    data: UserFollowTeacherCreateManyUserInput | UserFollowTeacherCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserFollowMusicianCreateWithoutUserInput = {
+    created_at?: Date | string
+    musician: MusicianCreateNestedOneWithoutFollowersInput
+  }
+
+  export type UserFollowMusicianUncheckedCreateWithoutUserInput = {
+    musician_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowMusicianCreateOrConnectWithoutUserInput = {
+    where: UserFollowMusicianWhereUniqueInput
+    create: XOR<UserFollowMusicianCreateWithoutUserInput, UserFollowMusicianUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserFollowMusicianCreateManyUserInputEnvelope = {
+    data: UserFollowMusicianCreateManyUserInput | UserFollowMusicianCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserFollowEventCreateWithoutUserInput = {
+    created_at?: Date | string
+    event: EventCreateNestedOneWithoutFollowersInput
+  }
+
+  export type UserFollowEventUncheckedCreateWithoutUserInput = {
+    event_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowEventCreateOrConnectWithoutUserInput = {
+    where: UserFollowEventWhereUniqueInput
+    create: XOR<UserFollowEventCreateWithoutUserInput, UserFollowEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserFollowEventCreateManyUserInputEnvelope = {
+    data: UserFollowEventCreateManyUserInput | UserFollowEventCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserNotificationCreateWithoutUserInput = {
+    type: string
+    title: string
+    message: string
+    read?: boolean
+    created_at?: Date | string
+  }
+
+  export type UserNotificationUncheckedCreateWithoutUserInput = {
+    id?: number
+    type: string
+    title: string
+    message: string
+    read?: boolean
+    created_at?: Date | string
+  }
+
+  export type UserNotificationCreateOrConnectWithoutUserInput = {
+    where: UserNotificationWhereUniqueInput
+    create: XOR<UserNotificationCreateWithoutUserInput, UserNotificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserNotificationCreateManyUserInputEnvelope = {
+    data: UserNotificationCreateManyUserInput | UserNotificationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserPreferencesUpsertWithoutUserInput = {
+    update: XOR<UserPreferencesUpdateWithoutUserInput, UserPreferencesUncheckedUpdateWithoutUserInput>
+    create: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
+    where?: UserPreferencesWhereInput
+  }
+
+  export type UserPreferencesUpdateToOneWithWhereWithoutUserInput = {
+    where?: UserPreferencesWhereInput
+    data: XOR<UserPreferencesUpdateWithoutUserInput, UserPreferencesUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserPreferencesUpdateWithoutUserInput = {
+    email_notifications?: BoolFieldUpdateOperationsInput | boolean
+    push_notifications?: BoolFieldUpdateOperationsInput | boolean
+    new_event_notifications?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserPreferencesUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email_notifications?: BoolFieldUpdateOperationsInput | boolean
+    push_notifications?: BoolFieldUpdateOperationsInput | boolean
+    new_event_notifications?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SavedSearchUpsertWithWhereUniqueWithoutUserInput = {
+    where: SavedSearchWhereUniqueInput
+    update: XOR<SavedSearchUpdateWithoutUserInput, SavedSearchUncheckedUpdateWithoutUserInput>
+    create: XOR<SavedSearchCreateWithoutUserInput, SavedSearchUncheckedCreateWithoutUserInput>
+  }
+
+  export type SavedSearchUpdateWithWhereUniqueWithoutUserInput = {
+    where: SavedSearchWhereUniqueInput
+    data: XOR<SavedSearchUpdateWithoutUserInput, SavedSearchUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SavedSearchUpdateManyWithWhereWithoutUserInput = {
+    where: SavedSearchScalarWhereInput
+    data: XOR<SavedSearchUpdateManyMutationInput, SavedSearchUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SavedSearchScalarWhereInput = {
+    AND?: SavedSearchScalarWhereInput | SavedSearchScalarWhereInput[]
+    OR?: SavedSearchScalarWhereInput[]
+    NOT?: SavedSearchScalarWhereInput | SavedSearchScalarWhereInput[]
+    id?: IntFilter<"SavedSearch"> | number
+    user_id?: IntFilter<"SavedSearch"> | number
+    name?: StringFilter<"SavedSearch"> | string
+    query?: JsonFilter<"SavedSearch">
+    created_at?: DateTimeFilter<"SavedSearch"> | Date | string
+  }
+
+  export type UserFollowTeacherUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserFollowTeacherWhereUniqueInput
+    update: XOR<UserFollowTeacherUpdateWithoutUserInput, UserFollowTeacherUncheckedUpdateWithoutUserInput>
+    create: XOR<UserFollowTeacherCreateWithoutUserInput, UserFollowTeacherUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserFollowTeacherUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserFollowTeacherWhereUniqueInput
+    data: XOR<UserFollowTeacherUpdateWithoutUserInput, UserFollowTeacherUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserFollowTeacherUpdateManyWithWhereWithoutUserInput = {
+    where: UserFollowTeacherScalarWhereInput
+    data: XOR<UserFollowTeacherUpdateManyMutationInput, UserFollowTeacherUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserFollowMusicianUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserFollowMusicianWhereUniqueInput
+    update: XOR<UserFollowMusicianUpdateWithoutUserInput, UserFollowMusicianUncheckedUpdateWithoutUserInput>
+    create: XOR<UserFollowMusicianCreateWithoutUserInput, UserFollowMusicianUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserFollowMusicianUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserFollowMusicianWhereUniqueInput
+    data: XOR<UserFollowMusicianUpdateWithoutUserInput, UserFollowMusicianUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserFollowMusicianUpdateManyWithWhereWithoutUserInput = {
+    where: UserFollowMusicianScalarWhereInput
+    data: XOR<UserFollowMusicianUpdateManyMutationInput, UserFollowMusicianUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserFollowEventUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserFollowEventWhereUniqueInput
+    update: XOR<UserFollowEventUpdateWithoutUserInput, UserFollowEventUncheckedUpdateWithoutUserInput>
+    create: XOR<UserFollowEventCreateWithoutUserInput, UserFollowEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserFollowEventUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserFollowEventWhereUniqueInput
+    data: XOR<UserFollowEventUpdateWithoutUserInput, UserFollowEventUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserFollowEventUpdateManyWithWhereWithoutUserInput = {
+    where: UserFollowEventScalarWhereInput
+    data: XOR<UserFollowEventUpdateManyMutationInput, UserFollowEventUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserNotificationUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserNotificationWhereUniqueInput
+    update: XOR<UserNotificationUpdateWithoutUserInput, UserNotificationUncheckedUpdateWithoutUserInput>
+    create: XOR<UserNotificationCreateWithoutUserInput, UserNotificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserNotificationUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserNotificationWhereUniqueInput
+    data: XOR<UserNotificationUpdateWithoutUserInput, UserNotificationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserNotificationUpdateManyWithWhereWithoutUserInput = {
+    where: UserNotificationScalarWhereInput
+    data: XOR<UserNotificationUpdateManyMutationInput, UserNotificationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserNotificationScalarWhereInput = {
+    AND?: UserNotificationScalarWhereInput | UserNotificationScalarWhereInput[]
+    OR?: UserNotificationScalarWhereInput[]
+    NOT?: UserNotificationScalarWhereInput | UserNotificationScalarWhereInput[]
+    id?: IntFilter<"UserNotification"> | number
+    user_id?: IntFilter<"UserNotification"> | number
+    type?: StringFilter<"UserNotification"> | string
+    title?: StringFilter<"UserNotification"> | string
+    message?: StringFilter<"UserNotification"> | string
+    read?: BoolFilter<"UserNotification"> | boolean
+    created_at?: DateTimeFilter<"UserNotification"> | Date | string
+  }
+
+  export type UserCreateWithoutPreferencesInput = {
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    savedSearches?: SavedSearchCreateNestedManyWithoutUserInput
+    followedTeachers?: UserFollowTeacherCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPreferencesInput = {
+    id?: number
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    savedSearches?: SavedSearchUncheckedCreateNestedManyWithoutUserInput
+    followedTeachers?: UserFollowTeacherUncheckedCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPreferencesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPreferencesInput, UserUncheckedCreateWithoutPreferencesInput>
+  }
+
+  export type UserUpsertWithoutPreferencesInput = {
+    update: XOR<UserUpdateWithoutPreferencesInput, UserUncheckedUpdateWithoutPreferencesInput>
+    create: XOR<UserCreateWithoutPreferencesInput, UserUncheckedCreateWithoutPreferencesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPreferencesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPreferencesInput, UserUncheckedUpdateWithoutPreferencesInput>
+  }
+
+  export type UserUpdateWithoutPreferencesInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    savedSearches?: SavedSearchUpdateManyWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPreferencesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    savedSearches?: SavedSearchUncheckedUpdateManyWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUncheckedUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutSavedSearchesInput = {
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesCreateNestedOneWithoutUserInput
+    followedTeachers?: UserFollowTeacherCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSavedSearchesInput = {
+    id?: number
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserInput
+    followedTeachers?: UserFollowTeacherUncheckedCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSavedSearchesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSavedSearchesInput, UserUncheckedCreateWithoutSavedSearchesInput>
+  }
+
+  export type UserUpsertWithoutSavedSearchesInput = {
+    update: XOR<UserUpdateWithoutSavedSearchesInput, UserUncheckedUpdateWithoutSavedSearchesInput>
+    create: XOR<UserCreateWithoutSavedSearchesInput, UserUncheckedCreateWithoutSavedSearchesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSavedSearchesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSavedSearchesInput, UserUncheckedUpdateWithoutSavedSearchesInput>
+  }
+
+  export type UserUpdateWithoutSavedSearchesInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUpdateOneWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSavedSearchesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUncheckedUpdateOneWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUncheckedUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutFollowedTeachersInput = {
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesCreateNestedOneWithoutUserInput
+    savedSearches?: SavedSearchCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutFollowedTeachersInput = {
+    id?: number
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserInput
+    savedSearches?: SavedSearchUncheckedCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutFollowedTeachersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFollowedTeachersInput, UserUncheckedCreateWithoutFollowedTeachersInput>
+  }
+
+  export type TeacherCreateWithoutFollowersInput = {
+    name: string
+    bio?: string | null
+    website?: string | null
+    ai_bio_summary?: string | null
+    ai_relevance_score?: number | null
+    image_url?: string | null
+    event_teachers?: ExternalEventTeacherCreateNestedManyWithoutTeachersInput
+  }
+
+  export type TeacherUncheckedCreateWithoutFollowersInput = {
+    id?: number
+    name: string
+    bio?: string | null
+    website?: string | null
+    ai_bio_summary?: string | null
+    ai_relevance_score?: number | null
+    image_url?: string | null
+    event_teachers?: ExternalEventTeacherUncheckedCreateNestedManyWithoutTeachersInput
+  }
+
+  export type TeacherCreateOrConnectWithoutFollowersInput = {
+    where: TeacherWhereUniqueInput
+    create: XOR<TeacherCreateWithoutFollowersInput, TeacherUncheckedCreateWithoutFollowersInput>
+  }
+
+  export type UserUpsertWithoutFollowedTeachersInput = {
+    update: XOR<UserUpdateWithoutFollowedTeachersInput, UserUncheckedUpdateWithoutFollowedTeachersInput>
+    create: XOR<UserCreateWithoutFollowedTeachersInput, UserUncheckedCreateWithoutFollowedTeachersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFollowedTeachersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFollowedTeachersInput, UserUncheckedUpdateWithoutFollowedTeachersInput>
+  }
+
+  export type UserUpdateWithoutFollowedTeachersInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUpdateOneWithoutUserNestedInput
+    savedSearches?: SavedSearchUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFollowedTeachersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUncheckedUpdateOneWithoutUserNestedInput
+    savedSearches?: SavedSearchUncheckedUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type TeacherUpsertWithoutFollowersInput = {
+    update: XOR<TeacherUpdateWithoutFollowersInput, TeacherUncheckedUpdateWithoutFollowersInput>
+    create: XOR<TeacherCreateWithoutFollowersInput, TeacherUncheckedCreateWithoutFollowersInput>
+    where?: TeacherWhereInput
+  }
+
+  export type TeacherUpdateToOneWithWhereWithoutFollowersInput = {
+    where?: TeacherWhereInput
+    data: XOR<TeacherUpdateWithoutFollowersInput, TeacherUncheckedUpdateWithoutFollowersInput>
+  }
+
+  export type TeacherUpdateWithoutFollowersInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_bio_summary?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    event_teachers?: ExternalEventTeacherUpdateManyWithoutTeachersNestedInput
+  }
+
+  export type TeacherUncheckedUpdateWithoutFollowersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_bio_summary?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    event_teachers?: ExternalEventTeacherUncheckedUpdateManyWithoutTeachersNestedInput
+  }
+
+  export type UserCreateWithoutFollowedMusiciansInput = {
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesCreateNestedOneWithoutUserInput
+    savedSearches?: SavedSearchCreateNestedManyWithoutUserInput
+    followedTeachers?: UserFollowTeacherCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutFollowedMusiciansInput = {
+    id?: number
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserInput
+    savedSearches?: SavedSearchUncheckedCreateNestedManyWithoutUserInput
+    followedTeachers?: UserFollowTeacherUncheckedCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutFollowedMusiciansInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFollowedMusiciansInput, UserUncheckedCreateWithoutFollowedMusiciansInput>
+  }
+
+  export type MusicianCreateWithoutFollowersInput = {
+    name: string
+    slug: string
+    bio?: string | null
+    avatar?: string | null
+    verified?: boolean | null
+    instruments?: MusicianCreateinstrumentsInput | string[]
+    yearsActive?: number | null
+    website?: string | null
+    email?: string | null
+    followerCount?: number | null
+    eventCount?: number | null
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    image_url?: string | null
+    event_musicians?: event_musiciansCreateNestedManyWithoutMusiciansInput
+  }
+
+  export type MusicianUncheckedCreateWithoutFollowersInput = {
+    id?: number
+    name: string
+    slug: string
+    bio?: string | null
+    avatar?: string | null
+    verified?: boolean | null
+    instruments?: MusicianCreateinstrumentsInput | string[]
+    yearsActive?: number | null
+    website?: string | null
+    email?: string | null
+    followerCount?: number | null
+    eventCount?: number | null
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    image_url?: string | null
+    event_musicians?: event_musiciansUncheckedCreateNestedManyWithoutMusiciansInput
+  }
+
+  export type MusicianCreateOrConnectWithoutFollowersInput = {
+    where: MusicianWhereUniqueInput
+    create: XOR<MusicianCreateWithoutFollowersInput, MusicianUncheckedCreateWithoutFollowersInput>
+  }
+
+  export type UserUpsertWithoutFollowedMusiciansInput = {
+    update: XOR<UserUpdateWithoutFollowedMusiciansInput, UserUncheckedUpdateWithoutFollowedMusiciansInput>
+    create: XOR<UserCreateWithoutFollowedMusiciansInput, UserUncheckedCreateWithoutFollowedMusiciansInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFollowedMusiciansInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFollowedMusiciansInput, UserUncheckedUpdateWithoutFollowedMusiciansInput>
+  }
+
+  export type UserUpdateWithoutFollowedMusiciansInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUpdateOneWithoutUserNestedInput
+    savedSearches?: SavedSearchUpdateManyWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFollowedMusiciansInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUncheckedUpdateOneWithoutUserNestedInput
+    savedSearches?: SavedSearchUncheckedUpdateManyWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUncheckedUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type MusicianUpsertWithoutFollowersInput = {
+    update: XOR<MusicianUpdateWithoutFollowersInput, MusicianUncheckedUpdateWithoutFollowersInput>
+    create: XOR<MusicianCreateWithoutFollowersInput, MusicianUncheckedCreateWithoutFollowersInput>
+    where?: MusicianWhereInput
+  }
+
+  export type MusicianUpdateToOneWithWhereWithoutFollowersInput = {
+    where?: MusicianWhereInput
+    data: XOR<MusicianUpdateWithoutFollowersInput, MusicianUncheckedUpdateWithoutFollowersInput>
+  }
+
+  export type MusicianUpdateWithoutFollowersInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    instruments?: MusicianUpdateinstrumentsInput | string[]
+    yearsActive?: NullableIntFieldUpdateOperationsInput | number | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    followerCount?: NullableIntFieldUpdateOperationsInput | number | null
+    eventCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    event_musicians?: event_musiciansUpdateManyWithoutMusiciansNestedInput
+  }
+
+  export type MusicianUncheckedUpdateWithoutFollowersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    instruments?: MusicianUpdateinstrumentsInput | string[]
+    yearsActive?: NullableIntFieldUpdateOperationsInput | number | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    followerCount?: NullableIntFieldUpdateOperationsInput | number | null
+    eventCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    event_musicians?: event_musiciansUncheckedUpdateManyWithoutMusiciansNestedInput
+  }
+
+  export type UserCreateWithoutFollowedEventsInput = {
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesCreateNestedOneWithoutUserInput
+    savedSearches?: SavedSearchCreateNestedManyWithoutUserInput
+    followedTeachers?: UserFollowTeacherCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutFollowedEventsInput = {
+    id?: number
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserInput
+    savedSearches?: SavedSearchUncheckedCreateNestedManyWithoutUserInput
+    followedTeachers?: UserFollowTeacherUncheckedCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutFollowedEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFollowedEventsInput, UserUncheckedCreateWithoutFollowedEventsInput>
+  }
+
+  export type EventCreateWithoutFollowersInput = {
+    name: string
+    from_date: Date | string
+    to_date: Date | string
+    country: string
+    city: string
+    website?: string | null
+    style?: string | null
+    description?: string | null
+    ai_quality_score?: number | null
+    ai_completeness_score?: number | null
+    extraction_method?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    image_url?: string | null
+    event_musicians?: event_musiciansCreateNestedManyWithoutEventsInput
+    event_prices?: event_pricesCreateNestedManyWithoutEventsInput
+    event_teachers?: ExternalEventTeacherCreateNestedManyWithoutEventsInput
+    venues?: ExternalEventVenueCreateNestedManyWithoutEventsInput
+  }
+
+  export type EventUncheckedCreateWithoutFollowersInput = {
+    id?: number
+    name: string
+    from_date: Date | string
+    to_date: Date | string
+    country: string
+    city: string
+    website?: string | null
+    style?: string | null
+    description?: string | null
+    ai_quality_score?: number | null
+    ai_completeness_score?: number | null
+    extraction_method?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    image_url?: string | null
+    event_musicians?: event_musiciansUncheckedCreateNestedManyWithoutEventsInput
+    event_prices?: event_pricesUncheckedCreateNestedManyWithoutEventsInput
+    event_teachers?: ExternalEventTeacherUncheckedCreateNestedManyWithoutEventsInput
+    venues?: ExternalEventVenueUncheckedCreateNestedManyWithoutEventsInput
+  }
+
+  export type EventCreateOrConnectWithoutFollowersInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutFollowersInput, EventUncheckedCreateWithoutFollowersInput>
+  }
+
+  export type UserUpsertWithoutFollowedEventsInput = {
+    update: XOR<UserUpdateWithoutFollowedEventsInput, UserUncheckedUpdateWithoutFollowedEventsInput>
+    create: XOR<UserCreateWithoutFollowedEventsInput, UserUncheckedCreateWithoutFollowedEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFollowedEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFollowedEventsInput, UserUncheckedUpdateWithoutFollowedEventsInput>
+  }
+
+  export type UserUpdateWithoutFollowedEventsInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUpdateOneWithoutUserNestedInput
+    savedSearches?: SavedSearchUpdateManyWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFollowedEventsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUncheckedUpdateOneWithoutUserNestedInput
+    savedSearches?: SavedSearchUncheckedUpdateManyWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUncheckedUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type EventUpsertWithoutFollowersInput = {
+    update: XOR<EventUpdateWithoutFollowersInput, EventUncheckedUpdateWithoutFollowersInput>
+    create: XOR<EventCreateWithoutFollowersInput, EventUncheckedCreateWithoutFollowersInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutFollowersInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutFollowersInput, EventUncheckedUpdateWithoutFollowersInput>
+  }
+
+  export type EventUpdateWithoutFollowersInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    from_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    to_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    style?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
+    ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
+    extraction_method?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    event_musicians?: event_musiciansUpdateManyWithoutEventsNestedInput
+    event_prices?: event_pricesUpdateManyWithoutEventsNestedInput
+    event_teachers?: ExternalEventTeacherUpdateManyWithoutEventsNestedInput
+    venues?: ExternalEventVenueUpdateManyWithoutEventsNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutFollowersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    from_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    to_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    style?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
+    ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
+    extraction_method?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    event_musicians?: event_musiciansUncheckedUpdateManyWithoutEventsNestedInput
+    event_prices?: event_pricesUncheckedUpdateManyWithoutEventsNestedInput
+    event_teachers?: ExternalEventTeacherUncheckedUpdateManyWithoutEventsNestedInput
+    venues?: ExternalEventVenueUncheckedUpdateManyWithoutEventsNestedInput
+  }
+
+  export type UserCreateWithoutNotificationsInput = {
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesCreateNestedOneWithoutUserInput
+    savedSearches?: SavedSearchCreateNestedManyWithoutUserInput
+    followedTeachers?: UserFollowTeacherCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNotificationsInput = {
+    id?: number
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserInput
+    savedSearches?: SavedSearchUncheckedCreateNestedManyWithoutUserInput
+    followedTeachers?: UserFollowTeacherUncheckedCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNotificationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutNotificationsInput, UserUncheckedCreateWithoutNotificationsInput>
+  }
+
+  export type UserUpsertWithoutNotificationsInput = {
+    update: XOR<UserUpdateWithoutNotificationsInput, UserUncheckedUpdateWithoutNotificationsInput>
+    create: XOR<UserCreateWithoutNotificationsInput, UserUncheckedCreateWithoutNotificationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNotificationsInput, UserUncheckedUpdateWithoutNotificationsInput>
+  }
+
+  export type UserUpdateWithoutNotificationsInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUpdateOneWithoutUserNestedInput
+    savedSearches?: SavedSearchUpdateManyWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNotificationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUncheckedUpdateOneWithoutUserNestedInput
+    savedSearches?: SavedSearchUncheckedUpdateManyWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUncheckedUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type event_musiciansCreateManyEventsInput = {
@@ -13536,6 +24207,11 @@ export namespace Prisma {
     name?: string | null
     address?: string | null
     type?: string | null
+  }
+
+  export type UserFollowEventCreateManyEventInput = {
+    user_id: number
+    created_at?: Date | string
   }
 
   export type event_musiciansUpdateWithoutEventsInput = {
@@ -13631,9 +24307,29 @@ export namespace Prisma {
     type?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type UserFollowEventUpdateWithoutEventInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFollowedEventsNestedInput
+  }
+
+  export type UserFollowEventUncheckedUpdateWithoutEventInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowEventUncheckedUpdateManyWithoutEventInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ExternalEventTeacherCreateManyTeachersInput = {
     event_id: number
     role?: string | null
+  }
+
+  export type UserFollowTeacherCreateManyTeacherInput = {
+    user_id: number
+    created_at?: Date | string
   }
 
   export type ExternalEventTeacherUpdateWithoutTeachersInput = {
@@ -13651,12 +24347,32 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type UserFollowTeacherUpdateWithoutTeacherInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFollowedTeachersNestedInput
+  }
+
+  export type UserFollowTeacherUncheckedUpdateWithoutTeacherInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowTeacherUncheckedUpdateManyWithoutTeacherInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type event_musiciansCreateManyMusiciansInput = {
     id?: number
     event_id?: number | null
     role?: string | null
     set_times?: event_musiciansCreateset_timesInput | string[]
     created_at?: Date | string | null
+  }
+
+  export type UserFollowMusicianCreateManyMusicianInput = {
+    user_id: number
+    created_at?: Date | string
   }
 
   export type event_musiciansUpdateWithoutMusiciansInput = {
@@ -13682,6 +24398,143 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type UserFollowMusicianUpdateWithoutMusicianInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFollowedMusiciansNestedInput
+  }
+
+  export type UserFollowMusicianUncheckedUpdateWithoutMusicianInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowMusicianUncheckedUpdateManyWithoutMusicianInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SavedSearchCreateManyUserInput = {
+    id?: number
+    name: string
+    query: JsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+  }
+
+  export type UserFollowTeacherCreateManyUserInput = {
+    teacher_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowMusicianCreateManyUserInput = {
+    musician_id: number
+    created_at?: Date | string
+  }
+
+  export type UserFollowEventCreateManyUserInput = {
+    event_id: number
+    created_at?: Date | string
+  }
+
+  export type UserNotificationCreateManyUserInput = {
+    id?: number
+    type: string
+    title: string
+    message: string
+    read?: boolean
+    created_at?: Date | string
+  }
+
+  export type SavedSearchUpdateWithoutUserInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    query?: JsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SavedSearchUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    query?: JsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SavedSearchUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    query?: JsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowTeacherUpdateWithoutUserInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    teacher?: TeacherUpdateOneRequiredWithoutFollowersNestedInput
+  }
+
+  export type UserFollowTeacherUncheckedUpdateWithoutUserInput = {
+    teacher_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowTeacherUncheckedUpdateManyWithoutUserInput = {
+    teacher_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowMusicianUpdateWithoutUserInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    musician?: MusicianUpdateOneRequiredWithoutFollowersNestedInput
+  }
+
+  export type UserFollowMusicianUncheckedUpdateWithoutUserInput = {
+    musician_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowMusicianUncheckedUpdateManyWithoutUserInput = {
+    musician_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowEventUpdateWithoutUserInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    event?: EventUpdateOneRequiredWithoutFollowersNestedInput
+  }
+
+  export type UserFollowEventUncheckedUpdateWithoutUserInput = {
+    event_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserFollowEventUncheckedUpdateManyWithoutUserInput = {
+    event_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserNotificationUpdateWithoutUserInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    read?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserNotificationUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    read?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserNotificationUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    read?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
 
 
   /**
@@ -13699,6 +24552,10 @@ export namespace Prisma {
      * @deprecated Use MusicianCountOutputTypeDefaultArgs instead
      */
     export type MusicianCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MusicianCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserCountOutputTypeDefaultArgs instead
+     */
+    export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use EventDefaultArgs instead
      */
@@ -13727,6 +24584,34 @@ export namespace Prisma {
      * @deprecated Use event_pricesDefaultArgs instead
      */
     export type event_pricesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = event_pricesDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserDefaultArgs instead
+     */
+    export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserPreferencesDefaultArgs instead
+     */
+    export type UserPreferencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserPreferencesDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SavedSearchDefaultArgs instead
+     */
+    export type SavedSearchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SavedSearchDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserFollowTeacherDefaultArgs instead
+     */
+    export type UserFollowTeacherArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserFollowTeacherDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserFollowMusicianDefaultArgs instead
+     */
+    export type UserFollowMusicianArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserFollowMusicianDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserFollowEventDefaultArgs instead
+     */
+    export type UserFollowEventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserFollowEventDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserNotificationDefaultArgs instead
+     */
+    export type UserNotificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserNotificationDefaultArgs<ExtArgs>
     /**
      * @deprecated Use social_mediaDefaultArgs instead
      */

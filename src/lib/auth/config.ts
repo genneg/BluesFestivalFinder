@@ -124,9 +124,9 @@ export const authOptions: NextAuthOptions = {
               verified: false, // Will be set to true after email verification
               preferences: {
                 create: {
-                  emailNotifications: true,
-                  pushNotifications: true,
-                  newEventNotifications: true,
+                  email_notifications: true,
+                  push_notifications: true,
+                  new_event_notifications: true,
                   deadlineReminders: true,
                   weeklyDigest: true,
                   followingUpdates: true,
@@ -136,9 +136,9 @@ export const authOptions: NextAuthOptions = {
               }
             }
           })
-          user.id = newUser.id
+          user.id = newUser.id.toString()
         } else {
-          user.id = existingUser.id
+          user.id = existingUser.id.toString()
           
           // Update user info if changed
           if (existingUser.name !== user.name || existingUser.avatar !== user.image) {

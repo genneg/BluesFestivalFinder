@@ -345,12 +345,11 @@ export async function getSearchSuggestions(
     // Event name suggestions
     db.event.findMany({
       where: {
-        name: { contains: query, mode: 'insensitive' },
-        status: 'PUBLISHED'
+        name: { contains: query, mode: 'insensitive' }
       },
       select: { name: true },
       take: limit,
-      orderBy: { featured: 'desc' }
+      orderBy: { created_at: 'desc' }
     }),
     
     // Teacher suggestions
@@ -360,7 +359,7 @@ export async function getSearchSuggestions(
       },
       select: { name: true },
       take: limit,
-      orderBy: { followerCount: 'desc' }
+      orderBy: { id: 'desc' }
     }),
     
     // Musician suggestions
@@ -370,11 +369,11 @@ export async function getSearchSuggestions(
       },
       select: { name: true },
       take: limit,
-      orderBy: { followerCount: 'desc' }
+      orderBy: { id: 'desc' }
     }),
     
-    // Location suggestions
-    db.venue.findMany({
+    // Location suggestions from events
+    db.event.findMany({
       where: {
         OR: [
           { city: { contains: query, mode: 'insensitive' } },
@@ -388,13 +387,13 @@ export async function getSearchSuggestions(
   ])
   
   return {
-    events: events.map(e => e.name),
-    teachers: teachers.map(t => t.name),
-    musicians: musicians.map(m => m.name),
+    events: events.map((e: any) => e.name),
+    teachers: teachers.map((t: any) => t.name),
+    musicians: musicians.map((m: any) => m.name),
     locations: Array.from(new Set([
-      ...venues.map(v => v.city),
-      ...venues.map(v => v.country),
-      ...venues.map(v => `${v.city}, ${v.country}`)
+      ...venues.map((v: any) => v.city),
+      ...venues.map((v: any) => v.country),
+      ...venues.map((v: any) => `${v.city}, ${v.country}`)
     ])).slice(0, limit)
   }
 }

@@ -204,6 +204,62 @@ exports.Prisma.Event_pricesScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  name: 'name',
+  avatar: 'avatar',
+  verified: 'verified',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.UserPreferencesScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  email_notifications: 'email_notifications',
+  push_notifications: 'push_notifications',
+  new_event_notifications: 'new_event_notifications',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.SavedSearchScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  name: 'name',
+  query: 'query',
+  created_at: 'created_at'
+};
+
+exports.Prisma.UserFollowTeacherScalarFieldEnum = {
+  user_id: 'user_id',
+  teacher_id: 'teacher_id',
+  created_at: 'created_at'
+};
+
+exports.Prisma.UserFollowMusicianScalarFieldEnum = {
+  user_id: 'user_id',
+  musician_id: 'musician_id',
+  created_at: 'created_at'
+};
+
+exports.Prisma.UserFollowEventScalarFieldEnum = {
+  user_id: 'user_id',
+  event_id: 'event_id',
+  created_at: 'created_at'
+};
+
+exports.Prisma.UserNotificationScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  read: 'read',
+  created_at: 'created_at'
+};
+
 exports.Prisma.Social_mediaScalarFieldEnum = {
   id: 'id',
   entity_type: 'entity_type',
@@ -222,6 +278,10 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -230,6 +290,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 
 
@@ -241,6 +307,13 @@ exports.Prisma.ModelName = {
   Musician: 'Musician',
   event_musicians: 'event_musicians',
   event_prices: 'event_prices',
+  User: 'User',
+  UserPreferences: 'UserPreferences',
+  SavedSearch: 'SavedSearch',
+  UserFollowTeacher: 'UserFollowTeacher',
+  UserFollowMusician: 'UserFollowMusician',
+  UserFollowEvent: 'UserFollowEvent',
+  UserNotification: 'UserNotification',
   social_media: 'social_media'
 };
 

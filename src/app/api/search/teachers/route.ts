@@ -127,7 +127,7 @@ export async function GET(request: NextRequest) {
       const searchTerm = searchQuery.toLowerCase()
       return teacher.name.toLowerCase().includes(searchTerm) ||
              teacher.bio?.toLowerCase().includes(searchTerm) ||
-             teacher.specialties.some(specialty => 
+             teacher.specialties?.some(specialty => 
                specialty.toLowerCase().includes(searchTerm)
              )
     })
@@ -137,7 +137,7 @@ export async function GET(request: NextRequest) {
       const specialtiesArray = params.specialties.split(',').map(s => s.trim())
       filteredTeachers = filteredTeachers.filter(teacher =>
         specialtiesArray.some(specialty =>
-          teacher.specialties.some(teacherSpecialty =>
+          teacher.specialties?.some(teacherSpecialty =>
             teacherSpecialty.toLowerCase().includes(specialty.toLowerCase())
           )
         )
