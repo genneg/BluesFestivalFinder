@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
         if (!existsSync(fullPath)) {
           issues.push({
             type: 'event',
-            id: event.id,
+            id: event.id.toString(),
             name: event.name,
             imageUrl: event.image_url,
             issue: 'File does not exist'
@@ -76,7 +76,7 @@ export async function GET(request: NextRequest) {
         if (!existsSync(fullPath)) {
           issues.push({
             type: 'teacher',
-            id: teacher.id,
+            id: teacher.id.toString(),
             name: teacher.name,
             imageUrl: teacher.image_url,
             issue: 'File does not exist'
@@ -107,7 +107,7 @@ export async function GET(request: NextRequest) {
         if (!existsSync(fullPath)) {
           issues.push({
             type: 'musician',
-            id: musician.id,
+            id: musician.id.toString(),
             name: musician.name,
             imageUrl: musician.image_url,
             issue: 'File does not exist'
@@ -177,7 +177,7 @@ export async function POST(request: NextRequest) {
           
           fixes.push({
             type: 'event',
-            id: event.id,
+            id: event.id.toString(),
             name: event.name,
             action: 'Removed invalid image reference'
           })
