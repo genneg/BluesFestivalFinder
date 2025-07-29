@@ -1,5 +1,8 @@
 import { NextRequest } from 'next/server'
 
+// Force dynamic runtime
+export const dynamic = 'force-dynamic'
+
 import { 
   apiResponse, 
   apiError, 

@@ -1,5 +1,8 @@
 import { NextRequest } from 'next/server'
 
+// Force dynamic runtime
+export const dynamic = 'force-dynamic'
+
 import { db } from '@festival-scout/database'
 
 import { apiResponse, handleApiError } from '@/lib/api/utils'

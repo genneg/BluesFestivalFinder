@@ -1,6 +1,9 @@
 import { NextRequest } from 'next/server'
 import { z } from 'zod'
 
+// Force dynamic runtime
+export const dynamic = 'force-dynamic'
+
 import { 
   apiResponse, 
   apiError, 

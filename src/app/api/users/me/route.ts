@@ -1,6 +1,9 @@
 import { NextRequest } from 'next/server'
 import { getServerSession } from 'next-auth'
 
+// Force dynamic runtime
+export const dynamic = 'force-dynamic'
+
 import { db } from '@festival-scout/database'
 import { authOptions } from '@/lib/auth/config'
 
