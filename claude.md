@@ -40,4 +40,5 @@ blues-dance-finder/
 ## Image Management Notes
 - Per aggiungere le nuove immagini ricordarsi di copiarle da C:\Users\genne\AgentProjects\DataEntry\server\uploads
 
-[Rest of the existing content remains unchanged]
+## Supabase Integration Tasks
+- Aggiungi le informazioni per connettersi a supabase e copiarci i dati

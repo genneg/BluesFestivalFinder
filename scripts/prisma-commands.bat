@@ -10,7 +10,7 @@ REM Check if DATABASE_URL is set
 if "%DATABASE_URL%"=="" (
   echo ❌ DATABASE_URL environment variable not set
   echo Set it to your Supabase connection string:
-  echo set DATABASE_URL=postgresql://postgres:password@db.ref.supabase.co:5432/postgres
+  echo set DATABASE_URL=postgresql://postgres:mVVzMkwCK6fP4RG@db.ref.supabase.co:5432/postgres
   pause
   exit /b 1
 )

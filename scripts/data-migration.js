@@ -14,7 +14,7 @@
  *   TARGET_DATABASE_URL - your Supabase database URL
  */
 
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require('../packages/database/src/generated');
 const fs = require('fs');
 const path = require('path');
 

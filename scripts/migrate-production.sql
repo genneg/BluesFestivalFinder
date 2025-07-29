@@ -40,61 +40,65 @@ Expected tables from Prisma schema:
 -- Create indexes for better performance (Prisma will create these too)
 -- These are additional performance indexes
 
--- Full text search indexes
-CREATE INDEX IF NOT EXISTS idx_events_fulltext 
-ON events USING GIN (to_tsvector('english', name || ' ' || COALESCE(description, '')));
+-- Full text search indexes (run after Prisma migration)
+-- Uncomment these after running: npx prisma migrate deploy
 
-CREATE INDEX IF NOT EXISTS idx_teachers_fulltext 
-ON teachers USING GIN (to_tsvector('english', name || ' ' || COALESCE(bio, '')));
+-- CREATE INDEX IF NOT EXISTS idx_events_fulltext 
+-- ON events USING GIN (to_tsvector('english', name || ' ' || COALESCE(description, '')));
 
-CREATE INDEX IF NOT EXISTS idx_musicians_fulltext 
-ON musicians USING GIN (to_tsvector('english', name || ' ' || COALESCE(bio, '')));
+-- CREATE INDEX IF NOT EXISTS idx_teachers_fulltext 
+-- ON teachers USING GIN (to_tsvector('english', name || ' ' || COALESCE(bio, '')));
+
+-- CREATE INDEX IF NOT EXISTS idx_musicians_fulltext 
+-- ON musicians USING GIN (to_tsvector('english', name || ' ' || COALESCE(bio, '')));
 
 -- Additional performance indexes
-CREATE INDEX IF NOT EXISTS idx_events_date_range 
-ON events (from_date, to_date) WHERE from_date >= CURRENT_DATE;
+-- CREATE INDEX IF NOT EXISTS idx_events_date_range 
+-- ON events (from_date, to_date) WHERE from_date >= CURRENT_DATE;
 
-CREATE INDEX IF NOT EXISTS idx_events_location 
-ON events (country, city) WHERE from_date >= CURRENT_DATE;
+-- CREATE INDEX IF NOT EXISTS idx_events_location 
+-- ON events (country, city) WHERE from_date >= CURRENT_DATE;
 
--- Create initial admin user (update with your email)
-INSERT INTO users (email, name, verified, created_at, updated_at)
-VALUES ('admin@festivalscout.com', 'Festival Scout Admin', true, NOW(), NOW())
-ON CONFLICT (email) DO NOTHING;
+-- Create initial admin user (run after Prisma migration)
+-- Uncomment these after running: npx prisma migrate deploy
+
+-- INSERT INTO users (email, name, verified, created_at, updated_at)
+-- VALUES ('admin@festivalscout.com', 'Festival Scout Admin', true, NOW(), NOW())
+-- ON CONFLICT (email) DO NOTHING;
 
 -- Insert default user preferences for admin
-INSERT INTO user_preferences (
-  user_id, 
-  email_notifications, 
-  push_notifications, 
-  new_event_notifications,
-  deadlineReminders,
-  weeklyDigest,
-  followingUpdates,
-  theme,
-  language,
-  defaultCountry,
-  timezone,
-  created_at,
-  updated_at
-)
-SELECT 
-  u.id,
-  true,
-  true, 
-  true,
-  true,
-  true,
-  true,
-  'light',
-  'en',
-  'US',
-  'UTC',
-  NOW(),
-  NOW()
-FROM users u 
-WHERE u.email = 'admin@festivalscout.com'
-ON CONFLICT (user_id) DO NOTHING;
+-- INSERT INTO user_preferences (
+--   user_id, 
+--   email_notifications, 
+--   push_notifications, 
+--   new_event_notifications,
+--   deadlineReminders,
+--   weeklyDigest,
+--   followingUpdates,
+--   theme,
+--   language,
+--   defaultCountry,
+--   timezone,
+--   created_at,
+--   updated_at
+-- )
+-- SELECT 
+--   u.id,
+--   true,
+--   true, 
+--   true,
+--   true,
+--   true,
+--   true,
+--   'light',
+--   'en',
+--   'US',
+--   'UTC',
+--   NOW(),
+--   NOW()
+-- FROM users u 
+-- WHERE u.email = 'admin@festivalscout.com'
+-- ON CONFLICT (user_id) DO NOTHING;
 
 -- Insert sample event styles/categories
 CREATE TABLE IF NOT EXISTS temp_event_styles (style VARCHAR(100));

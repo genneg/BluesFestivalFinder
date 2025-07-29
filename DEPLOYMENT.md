@@ -1,8 +1,12 @@
 # Deployment Guide - Blues Dance Festival Finder
 
-## Deployment Status ✅ READY
+## ✅ Migration Status: COMPLETED - Ready for Production
 
-Your application is ready for deployment with the following configurations:
+### Database Migration Summary
+- **Source**: Local PostgreSQL (`swing_events`)
+- **Target**: Supabase PostgreSQL (Project: `tqvvseagpkmdnsiuwabv`)
+- **Migration Date**: 2025-07-29
+- **Records Migrated**: 79 total records successfully
 
 ### 🚀 Quick Deploy to Vercel
 
@@ -14,9 +18,9 @@ Your application is ready for deployment with the following configurations:
    ```
 
 2. **Set Environment Variables in Vercel Dashboard:**
-   - `DATABASE_URL` - Your production PostgreSQL database
-   - `NEXTAUTH_SECRET` - Generate with: `openssl rand -base64 32`
-   - `NEXTAUTH_URL` - Your domain URL
+   - `DATABASE_URL="postgresql://postgres.tqvvseagpkmdnsiuwabv:mVVzMkwCK6fP4RG@aws-0-eu-central-1.pooler.supabase.com:5432/postgres"`
+   - `NEXTAUTH_SECRET="e3d210be4bc4bf83ccfdf0f9fc13226edb92578b4a8854a0cedba7ce4cb25f51"`
+   - `NEXTAUTH_URL` - Your domain URL (e.g., https://your-app.vercel.app)
    - `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET` - OAuth credentials
    - `FACEBOOK_CLIENT_ID` & `FACEBOOK_CLIENT_SECRET` - OAuth credentials
    - `GOOGLE_MAPS_API_KEY` - For venue locations
@@ -49,13 +53,25 @@ Your application is ready for deployment with the following configurations:
 - [x] ✅ Database schema integrated
 - [x] ✅ API endpoints functional
 
-### 🗄️ Database Setup
+### 🗄️ Database Setup - ✅ COMPLETED
 
-**Current:** Connected to local PostgreSQL with existing data
-**Production:** You'll need to:
-1. Set up a production PostgreSQL database (Supabase/Neon/Railway)
-2. Run Prisma migrations: `npx prisma migrate deploy`
-3. Seed with initial data if needed
+**Previous:** Local PostgreSQL with test data
+**Current:** Supabase PostgreSQL in production
+
+**Migration Results:**
+- ✅ Events: 5 records
+- ✅ Teachers: 19 records  
+- ✅ Musicians: 9 records
+- ✅ Venues: 9 records
+- ✅ Event-Teacher relationships: 19 records
+- ✅ Event-Musician relationships: 9 records
+- ✅ Event prices: 9 records
+
+**Technical Details:**
+- **Host**: `aws-0-eu-central-1.pooler.supabase.com` (IPv4 pooler for compatibility)
+- **Port**: `5432` (Connection pooling enabled)
+- **Region**: EU Central 1 (Frankfurt)
+- **SSL**: Enabled by default
 
 ### 🔐 Security Configuration
 
