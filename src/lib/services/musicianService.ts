@@ -5,7 +5,7 @@
  * handling the complexity of the external database structure internally.
  */
 
-import { db } from '../../../packages/database/src'
+import { db } from '@festival-scout/database'
 
 export interface InternalMusician {
   id: string
