@@ -126,12 +126,7 @@ export const authOptions: NextAuthOptions = {
                 create: {
                   email_notifications: true,
                   push_notifications: true,
-                  new_event_notifications: true,
-                  deadlineReminders: true,
-                  weeklyDigest: true,
-                  followingUpdates: true,
-                  theme: 'light',
-                  language: 'en'
+                  new_event_notifications: true
                 }
               }
             }

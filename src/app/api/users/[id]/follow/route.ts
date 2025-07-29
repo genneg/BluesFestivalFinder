@@ -20,9 +20,7 @@ interface RouteParams {
 // Validation schema for follow request
 const followSchema = z.object({
   targetId: z.string().min(1, 'Target ID is required'),
-  targetType: z.enum(['teacher', 'musician', 'festival'], {
-    errorMap: () => ({ message: 'Target type must be teacher, musician, or festival' })
-  })
+  targetType: z.enum(['teacher', 'musician', 'festival'])
 })
 
 /**

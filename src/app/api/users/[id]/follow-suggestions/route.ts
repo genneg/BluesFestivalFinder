@@ -214,10 +214,10 @@ async function generateFollowSuggestions(
   // Popular teachers suggestion
   if (!filters.type || filters.type === 'teacher') {
     for (const teacher of mockTeachers) {
-      if (!currentFollowing.has(teacher.id)) {
+      if (!currentFollowing.has(teacher.id.toString())) {
         suggestions.push({
           id: `suggestion_${teacher.id}`,
-          targetId: teacher.id,
+          targetId: teacher.id.toString(),
           targetType: 'teacher',
           target: teacher,
           algorithm: 'popular',
@@ -231,10 +231,10 @@ async function generateFollowSuggestions(
   // Location-based musicians suggestion
   if (!filters.type || filters.type === 'musician') {
     for (const musician of mockMusicians) {
-      if (!currentFollowing.has(musician.id)) {
+      if (!currentFollowing.has(musician.id.toString())) {
         suggestions.push({
           id: `suggestion_${musician.id}`,
-          targetId: musician.id,
+          targetId: musician.id.toString(),
           targetType: 'musician',
           target: musician,
           algorithm: 'location',
@@ -248,10 +248,10 @@ async function generateFollowSuggestions(
   // Upcoming events suggestion
   if (!filters.type || filters.type === 'festival') {
     for (const festival of mockFestivals) {
-      if (!currentFollowing.has(festival.id)) {
+      if (!currentFollowing.has(festival.id.toString())) {
         suggestions.push({
           id: `suggestion_${festival.id}`,
-          targetId: festival.id,
+          targetId: festival.id.toString(),
           targetType: 'festival',
           target: festival,
           algorithm: 'upcoming',

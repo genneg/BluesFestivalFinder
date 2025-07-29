@@ -60,7 +60,7 @@ export async function GET(
 
     // Get notifications with pagination
     const [notifications, total] = await Promise.all([
-      db.notification.findMany({
+      db.userNotification.findMany({
         where,
         skip,
         take,
@@ -75,7 +75,7 @@ export async function GET(
           createdAt: true,
         }
       }),
-      db.notification.count({ where })
+      db.userNotification.count({ where })
     ])
 
     const paginationMeta = calculatePaginationMeta(total, page, limit)
@@ -85,7 +85,7 @@ export async function GET(
       pagination: paginationMeta,
       summary: {
         total,
-        unread: unreadOnly ? total : await db.notification.count({ 
+        unread: unreadOnly ? total : await db.userNotification.count({ 
           where: { userId: id, read: false } 
         }),
       }
@@ -119,7 +119,7 @@ export async function PUT(
 
     if (all) {
       // Mark all notifications as read
-      const updated = await db.notification.updateMany({
+      const updated = await db.userNotification.updateMany({
         where: { userId: id, read: false },
         data: { read: true },
       })
@@ -130,7 +130,7 @@ export async function PUT(
       })
     } else if (notificationIds && notificationIds.length > 0) {
       // Mark specific notifications as read
-      const updated = await db.notification.updateMany({
+      const updated = await db.userNotification.updateMany({
         where: { 
           userId: id, 
           id: { in: notificationIds },
@@ -179,7 +179,7 @@ export async function DELETE(
 
     if (all) {
       // Delete all notifications
-      const deleted = await db.notification.deleteMany({
+      const deleted = await db.userNotification.deleteMany({
         where: { userId: id },
       })
 
@@ -189,7 +189,7 @@ export async function DELETE(
       })
     } else if (notificationIds && notificationIds.length > 0) {
       // Delete specific notifications
-      const deleted = await db.notification.deleteMany({
+      const deleted = await db.userNotification.deleteMany({
         where: { 
           userId: id, 
           id: { in: notificationIds }
