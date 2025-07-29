@@ -214,12 +214,29 @@ exports.Prisma.UserScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.AccountScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  type: 'type',
+  provider: 'provider',
+  providerAccountId: 'providerAccountId',
+  password: 'password',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.UserPreferencesScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
   email_notifications: 'email_notifications',
   push_notifications: 'push_notifications',
   new_event_notifications: 'new_event_notifications',
+  deadlineReminders: 'deadlineReminders',
+  weeklyDigest: 'weeklyDigest',
+  followingUpdates: 'followingUpdates',
+  theme: 'theme',
+  language: 'language',
+  defaultCountry: 'defaultCountry',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -308,6 +325,7 @@ exports.Prisma.ModelName = {
   event_musicians: 'event_musicians',
   event_prices: 'event_prices',
   User: 'User',
+  Account: 'Account',
   UserPreferences: 'UserPreferences',
   SavedSearch: 'SavedSearch',
   UserFollowTeacher: 'UserFollowTeacher',

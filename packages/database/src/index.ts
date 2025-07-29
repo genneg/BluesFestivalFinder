@@ -24,6 +24,7 @@ export type {
   Teacher,
   Musician,
   User,
+  Account,
   UserPreferences,
   SavedSearch,
   UserFollowTeacher,

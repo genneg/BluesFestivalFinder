@@ -54,6 +54,11 @@ export type event_prices = $Result.DefaultSelection<Prisma.$event_pricesPayload>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model Account
+ * 
+ */
+export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
+/**
  * Model UserPreferences
  * 
  */
@@ -291,6 +296,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs>;
+
+  /**
+   * `prisma.account`: Exposes CRUD operations for the **Account** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Accounts
+    * const accounts = await prisma.account.findMany()
+    * ```
+    */
+  get account(): Prisma.AccountDelegate<ExtArgs>;
 
   /**
    * `prisma.userPreferences`: Exposes CRUD operations for the **UserPreferences** model.
@@ -810,6 +825,7 @@ export namespace Prisma {
     event_musicians: 'event_musicians',
     event_prices: 'event_prices',
     User: 'User',
+    Account: 'Account',
     UserPreferences: 'UserPreferences',
     SavedSearch: 'SavedSearch',
     UserFollowTeacher: 'UserFollowTeacher',
@@ -832,7 +848,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "event" | "externalEventTeacher" | "externalEventVenue" | "teacher" | "musician" | "event_musicians" | "event_prices" | "user" | "userPreferences" | "savedSearch" | "userFollowTeacher" | "userFollowMusician" | "userFollowEvent" | "userNotification" | "social_media"
+      modelProps: "event" | "externalEventTeacher" | "externalEventVenue" | "teacher" | "musician" | "event_musicians" | "event_prices" | "user" | "account" | "userPreferences" | "savedSearch" | "userFollowTeacher" | "userFollowMusician" | "userFollowEvent" | "userNotification" | "social_media"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1393,6 +1409,76 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Account: {
+        payload: Prisma.$AccountPayload<ExtArgs>
+        fields: Prisma.AccountFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AccountFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccountPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AccountFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccountPayload>
+          }
+          findFirst: {
+            args: Prisma.AccountFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccountPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AccountFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccountPayload>
+          }
+          findMany: {
+            args: Prisma.AccountFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccountPayload>[]
+          }
+          create: {
+            args: Prisma.AccountCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccountPayload>
+          }
+          createMany: {
+            args: Prisma.AccountCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AccountCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccountPayload>[]
+          }
+          delete: {
+            args: Prisma.AccountDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccountPayload>
+          }
+          update: {
+            args: Prisma.AccountUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccountPayload>
+          }
+          deleteMany: {
+            args: Prisma.AccountDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AccountUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AccountUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccountPayload>
+          }
+          aggregate: {
+            args: Prisma.AccountAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAccount>
+          }
+          groupBy: {
+            args: Prisma.AccountGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AccountGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AccountCountArgs<ExtArgs>
+            result: $Utils.Optional<AccountCountAggregateOutputType> | number
           }
         }
       }
@@ -2199,6 +2285,7 @@ export namespace Prisma {
     followedMusicians: number
     followedEvents: number
     notifications: number
+    accounts: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2207,6 +2294,7 @@ export namespace Prisma {
     followedMusicians?: boolean | UserCountOutputTypeCountFollowedMusiciansArgs
     followedEvents?: boolean | UserCountOutputTypeCountFollowedEventsArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+    accounts?: boolean | UserCountOutputTypeCountAccountsArgs
   }
 
   // Custom InputTypes
@@ -2253,6 +2341,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserNotificationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccountWhereInput
   }
 
 
@@ -9862,6 +9957,7 @@ export namespace Prisma {
     followedMusicians?: boolean | User$followedMusiciansArgs<ExtArgs>
     followedEvents?: boolean | User$followedEventsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
+    accounts?: boolean | User$accountsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -9892,6 +9988,7 @@ export namespace Prisma {
     followedMusicians?: boolean | User$followedMusiciansArgs<ExtArgs>
     followedEvents?: boolean | User$followedEventsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
+    accounts?: boolean | User$accountsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -9905,6 +10002,7 @@ export namespace Prisma {
       followedMusicians: Prisma.$UserFollowMusicianPayload<ExtArgs>[]
       followedEvents: Prisma.$UserFollowEventPayload<ExtArgs>[]
       notifications: Prisma.$UserNotificationPayload<ExtArgs>[]
+      accounts: Prisma.$AccountPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -10284,6 +10382,7 @@ export namespace Prisma {
     followedMusicians<T extends User$followedMusiciansArgs<ExtArgs> = {}>(args?: Subset<T, User$followedMusiciansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowMusicianPayload<ExtArgs>, T, "findMany"> | Null>
     followedEvents<T extends User$followedEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$followedEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFollowEventPayload<ExtArgs>, T, "findMany"> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "findMany"> | Null>
+    accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10749,6 +10848,26 @@ export namespace Prisma {
   }
 
   /**
+   * User.accounts
+   */
+  export type User$accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    where?: AccountWhereInput
+    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
+    cursor?: AccountWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10760,6 +10879,1013 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Account
+   */
+
+  export type AggregateAccount = {
+    _count: AccountCountAggregateOutputType | null
+    _avg: AccountAvgAggregateOutputType | null
+    _sum: AccountSumAggregateOutputType | null
+    _min: AccountMinAggregateOutputType | null
+    _max: AccountMaxAggregateOutputType | null
+  }
+
+  export type AccountAvgAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+  }
+
+  export type AccountSumAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+  }
+
+  export type AccountMinAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    type: string | null
+    provider: string | null
+    providerAccountId: string | null
+    password: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type AccountMaxAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    type: string | null
+    provider: string | null
+    providerAccountId: string | null
+    password: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type AccountCountAggregateOutputType = {
+    id: number
+    user_id: number
+    type: number
+    provider: number
+    providerAccountId: number
+    password: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type AccountAvgAggregateInputType = {
+    id?: true
+    user_id?: true
+  }
+
+  export type AccountSumAggregateInputType = {
+    id?: true
+    user_id?: true
+  }
+
+  export type AccountMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    type?: true
+    provider?: true
+    providerAccountId?: true
+    password?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type AccountMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    type?: true
+    provider?: true
+    providerAccountId?: true
+    password?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type AccountCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    type?: true
+    provider?: true
+    providerAccountId?: true
+    password?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type AccountAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Account to aggregate.
+     */
+    where?: AccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Accounts to fetch.
+     */
+    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Accounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Accounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Accounts
+    **/
+    _count?: true | AccountCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AccountAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AccountSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AccountMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AccountMaxAggregateInputType
+  }
+
+  export type GetAccountAggregateType<T extends AccountAggregateArgs> = {
+        [P in keyof T & keyof AggregateAccount]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAccount[P]>
+      : GetScalarType<T[P], AggregateAccount[P]>
+  }
+
+
+
+
+  export type AccountGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccountWhereInput
+    orderBy?: AccountOrderByWithAggregationInput | AccountOrderByWithAggregationInput[]
+    by: AccountScalarFieldEnum[] | AccountScalarFieldEnum
+    having?: AccountScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AccountCountAggregateInputType | true
+    _avg?: AccountAvgAggregateInputType
+    _sum?: AccountSumAggregateInputType
+    _min?: AccountMinAggregateInputType
+    _max?: AccountMaxAggregateInputType
+  }
+
+  export type AccountGroupByOutputType = {
+    id: number
+    user_id: number
+    type: string
+    provider: string
+    providerAccountId: string
+    password: string | null
+    created_at: Date
+    updated_at: Date
+    _count: AccountCountAggregateOutputType | null
+    _avg: AccountAvgAggregateOutputType | null
+    _sum: AccountSumAggregateOutputType | null
+    _min: AccountMinAggregateOutputType | null
+    _max: AccountMaxAggregateOutputType | null
+  }
+
+  type GetAccountGroupByPayload<T extends AccountGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AccountGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AccountGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AccountGroupByOutputType[P]>
+            : GetScalarType<T[P], AccountGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AccountSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    type?: boolean
+    provider?: boolean
+    providerAccountId?: boolean
+    password?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["account"]>
+
+  export type AccountSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    type?: boolean
+    provider?: boolean
+    providerAccountId?: boolean
+    password?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["account"]>
+
+  export type AccountSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    type?: boolean
+    provider?: boolean
+    providerAccountId?: boolean
+    password?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $AccountPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Account"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      user_id: number
+      type: string
+      provider: string
+      providerAccountId: string
+      password: string | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["account"]>
+    composites: {}
+  }
+
+  type AccountGetPayload<S extends boolean | null | undefined | AccountDefaultArgs> = $Result.GetResult<Prisma.$AccountPayload, S>
+
+  type AccountCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<AccountFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: AccountCountAggregateInputType | true
+    }
+
+  export interface AccountDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Account'], meta: { name: 'Account' } }
+    /**
+     * Find zero or one Account that matches the filter.
+     * @param {AccountFindUniqueArgs} args - Arguments to find a Account
+     * @example
+     * // Get one Account
+     * const account = await prisma.account.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AccountFindUniqueArgs>(args: SelectSubset<T, AccountFindUniqueArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Account that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {AccountFindUniqueOrThrowArgs} args - Arguments to find a Account
+     * @example
+     * // Get one Account
+     * const account = await prisma.account.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AccountFindUniqueOrThrowArgs>(args: SelectSubset<T, AccountFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Account that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccountFindFirstArgs} args - Arguments to find a Account
+     * @example
+     * // Get one Account
+     * const account = await prisma.account.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AccountFindFirstArgs>(args?: SelectSubset<T, AccountFindFirstArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Account that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccountFindFirstOrThrowArgs} args - Arguments to find a Account
+     * @example
+     * // Get one Account
+     * const account = await prisma.account.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AccountFindFirstOrThrowArgs>(args?: SelectSubset<T, AccountFindFirstOrThrowArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Accounts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccountFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Accounts
+     * const accounts = await prisma.account.findMany()
+     * 
+     * // Get first 10 Accounts
+     * const accounts = await prisma.account.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const accountWithIdOnly = await prisma.account.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AccountFindManyArgs>(args?: SelectSubset<T, AccountFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Account.
+     * @param {AccountCreateArgs} args - Arguments to create a Account.
+     * @example
+     * // Create one Account
+     * const Account = await prisma.account.create({
+     *   data: {
+     *     // ... data to create a Account
+     *   }
+     * })
+     * 
+     */
+    create<T extends AccountCreateArgs>(args: SelectSubset<T, AccountCreateArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Accounts.
+     * @param {AccountCreateManyArgs} args - Arguments to create many Accounts.
+     * @example
+     * // Create many Accounts
+     * const account = await prisma.account.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AccountCreateManyArgs>(args?: SelectSubset<T, AccountCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Accounts and returns the data saved in the database.
+     * @param {AccountCreateManyAndReturnArgs} args - Arguments to create many Accounts.
+     * @example
+     * // Create many Accounts
+     * const account = await prisma.account.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Accounts and only return the `id`
+     * const accountWithIdOnly = await prisma.account.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AccountCreateManyAndReturnArgs>(args?: SelectSubset<T, AccountCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Account.
+     * @param {AccountDeleteArgs} args - Arguments to delete one Account.
+     * @example
+     * // Delete one Account
+     * const Account = await prisma.account.delete({
+     *   where: {
+     *     // ... filter to delete one Account
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AccountDeleteArgs>(args: SelectSubset<T, AccountDeleteArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Account.
+     * @param {AccountUpdateArgs} args - Arguments to update one Account.
+     * @example
+     * // Update one Account
+     * const account = await prisma.account.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AccountUpdateArgs>(args: SelectSubset<T, AccountUpdateArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Accounts.
+     * @param {AccountDeleteManyArgs} args - Arguments to filter Accounts to delete.
+     * @example
+     * // Delete a few Accounts
+     * const { count } = await prisma.account.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AccountDeleteManyArgs>(args?: SelectSubset<T, AccountDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Accounts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccountUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Accounts
+     * const account = await prisma.account.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AccountUpdateManyArgs>(args: SelectSubset<T, AccountUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Account.
+     * @param {AccountUpsertArgs} args - Arguments to update or create a Account.
+     * @example
+     * // Update or create a Account
+     * const account = await prisma.account.upsert({
+     *   create: {
+     *     // ... data to create a Account
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Account we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AccountUpsertArgs>(args: SelectSubset<T, AccountUpsertArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Accounts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccountCountArgs} args - Arguments to filter Accounts to count.
+     * @example
+     * // Count the number of Accounts
+     * const count = await prisma.account.count({
+     *   where: {
+     *     // ... the filter for the Accounts we want to count
+     *   }
+     * })
+    **/
+    count<T extends AccountCountArgs>(
+      args?: Subset<T, AccountCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AccountCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Account.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccountAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AccountAggregateArgs>(args: Subset<T, AccountAggregateArgs>): Prisma.PrismaPromise<GetAccountAggregateType<T>>
+
+    /**
+     * Group by Account.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccountGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AccountGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AccountGroupByArgs['orderBy'] }
+        : { orderBy?: AccountGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AccountGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAccountGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Account model
+   */
+  readonly fields: AccountFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Account.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AccountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Account model
+   */ 
+  interface AccountFieldRefs {
+    readonly id: FieldRef<"Account", 'Int'>
+    readonly user_id: FieldRef<"Account", 'Int'>
+    readonly type: FieldRef<"Account", 'String'>
+    readonly provider: FieldRef<"Account", 'String'>
+    readonly providerAccountId: FieldRef<"Account", 'String'>
+    readonly password: FieldRef<"Account", 'String'>
+    readonly created_at: FieldRef<"Account", 'DateTime'>
+    readonly updated_at: FieldRef<"Account", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Account findUnique
+   */
+  export type AccountFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    /**
+     * Filter, which Account to fetch.
+     */
+    where: AccountWhereUniqueInput
+  }
+
+  /**
+   * Account findUniqueOrThrow
+   */
+  export type AccountFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    /**
+     * Filter, which Account to fetch.
+     */
+    where: AccountWhereUniqueInput
+  }
+
+  /**
+   * Account findFirst
+   */
+  export type AccountFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    /**
+     * Filter, which Account to fetch.
+     */
+    where?: AccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Accounts to fetch.
+     */
+    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Accounts.
+     */
+    cursor?: AccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Accounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Accounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Accounts.
+     */
+    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
+  }
+
+  /**
+   * Account findFirstOrThrow
+   */
+  export type AccountFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    /**
+     * Filter, which Account to fetch.
+     */
+    where?: AccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Accounts to fetch.
+     */
+    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Accounts.
+     */
+    cursor?: AccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Accounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Accounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Accounts.
+     */
+    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
+  }
+
+  /**
+   * Account findMany
+   */
+  export type AccountFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    /**
+     * Filter, which Accounts to fetch.
+     */
+    where?: AccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Accounts to fetch.
+     */
+    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Accounts.
+     */
+    cursor?: AccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Accounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Accounts.
+     */
+    skip?: number
+    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
+  }
+
+  /**
+   * Account create
+   */
+  export type AccountCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Account.
+     */
+    data: XOR<AccountCreateInput, AccountUncheckedCreateInput>
+  }
+
+  /**
+   * Account createMany
+   */
+  export type AccountCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Accounts.
+     */
+    data: AccountCreateManyInput | AccountCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Account createManyAndReturn
+   */
+  export type AccountCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Accounts.
+     */
+    data: AccountCreateManyInput | AccountCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Account update
+   */
+  export type AccountUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Account.
+     */
+    data: XOR<AccountUpdateInput, AccountUncheckedUpdateInput>
+    /**
+     * Choose, which Account to update.
+     */
+    where: AccountWhereUniqueInput
+  }
+
+  /**
+   * Account updateMany
+   */
+  export type AccountUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Accounts.
+     */
+    data: XOR<AccountUpdateManyMutationInput, AccountUncheckedUpdateManyInput>
+    /**
+     * Filter which Accounts to update
+     */
+    where?: AccountWhereInput
+  }
+
+  /**
+   * Account upsert
+   */
+  export type AccountUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Account to update in case it exists.
+     */
+    where: AccountWhereUniqueInput
+    /**
+     * In case the Account found by the `where` argument doesn't exist, create a new Account with this data.
+     */
+    create: XOR<AccountCreateInput, AccountUncheckedCreateInput>
+    /**
+     * In case the Account was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AccountUpdateInput, AccountUncheckedUpdateInput>
+  }
+
+  /**
+   * Account delete
+   */
+  export type AccountDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    /**
+     * Filter which Account to delete.
+     */
+    where: AccountWhereUniqueInput
+  }
+
+  /**
+   * Account deleteMany
+   */
+  export type AccountDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Accounts to delete
+     */
+    where?: AccountWhereInput
+  }
+
+  /**
+   * Account without action
+   */
+  export type AccountDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
   }
 
 
@@ -10791,6 +11917,12 @@ export namespace Prisma {
     email_notifications: boolean | null
     push_notifications: boolean | null
     new_event_notifications: boolean | null
+    deadlineReminders: boolean | null
+    weeklyDigest: boolean | null
+    followingUpdates: boolean | null
+    theme: string | null
+    language: string | null
+    defaultCountry: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -10801,6 +11933,12 @@ export namespace Prisma {
     email_notifications: boolean | null
     push_notifications: boolean | null
     new_event_notifications: boolean | null
+    deadlineReminders: boolean | null
+    weeklyDigest: boolean | null
+    followingUpdates: boolean | null
+    theme: string | null
+    language: string | null
+    defaultCountry: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -10811,6 +11949,12 @@ export namespace Prisma {
     email_notifications: number
     push_notifications: number
     new_event_notifications: number
+    deadlineReminders: number
+    weeklyDigest: number
+    followingUpdates: number
+    theme: number
+    language: number
+    defaultCountry: number
     created_at: number
     updated_at: number
     _all: number
@@ -10833,6 +11977,12 @@ export namespace Prisma {
     email_notifications?: true
     push_notifications?: true
     new_event_notifications?: true
+    deadlineReminders?: true
+    weeklyDigest?: true
+    followingUpdates?: true
+    theme?: true
+    language?: true
+    defaultCountry?: true
     created_at?: true
     updated_at?: true
   }
@@ -10843,6 +11993,12 @@ export namespace Prisma {
     email_notifications?: true
     push_notifications?: true
     new_event_notifications?: true
+    deadlineReminders?: true
+    weeklyDigest?: true
+    followingUpdates?: true
+    theme?: true
+    language?: true
+    defaultCountry?: true
     created_at?: true
     updated_at?: true
   }
@@ -10853,6 +12009,12 @@ export namespace Prisma {
     email_notifications?: true
     push_notifications?: true
     new_event_notifications?: true
+    deadlineReminders?: true
+    weeklyDigest?: true
+    followingUpdates?: true
+    theme?: true
+    language?: true
+    defaultCountry?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -10950,6 +12112,12 @@ export namespace Prisma {
     email_notifications: boolean
     push_notifications: boolean
     new_event_notifications: boolean
+    deadlineReminders: boolean
+    weeklyDigest: boolean
+    followingUpdates: boolean
+    theme: string
+    language: string
+    defaultCountry: string | null
     created_at: Date
     updated_at: Date
     _count: UserPreferencesCountAggregateOutputType | null
@@ -10979,6 +12147,12 @@ export namespace Prisma {
     email_notifications?: boolean
     push_notifications?: boolean
     new_event_notifications?: boolean
+    deadlineReminders?: boolean
+    weeklyDigest?: boolean
+    followingUpdates?: boolean
+    theme?: boolean
+    language?: boolean
+    defaultCountry?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -10990,6 +12164,12 @@ export namespace Prisma {
     email_notifications?: boolean
     push_notifications?: boolean
     new_event_notifications?: boolean
+    deadlineReminders?: boolean
+    weeklyDigest?: boolean
+    followingUpdates?: boolean
+    theme?: boolean
+    language?: boolean
+    defaultCountry?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -11001,6 +12181,12 @@ export namespace Prisma {
     email_notifications?: boolean
     push_notifications?: boolean
     new_event_notifications?: boolean
+    deadlineReminders?: boolean
+    weeklyDigest?: boolean
+    followingUpdates?: boolean
+    theme?: boolean
+    language?: boolean
+    defaultCountry?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
@@ -11023,6 +12209,12 @@ export namespace Prisma {
       email_notifications: boolean
       push_notifications: boolean
       new_event_notifications: boolean
+      deadlineReminders: boolean
+      weeklyDigest: boolean
+      followingUpdates: boolean
+      theme: string
+      language: string
+      defaultCountry: string | null
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["userPreferences"]>
@@ -11424,6 +12616,12 @@ export namespace Prisma {
     readonly email_notifications: FieldRef<"UserPreferences", 'Boolean'>
     readonly push_notifications: FieldRef<"UserPreferences", 'Boolean'>
     readonly new_event_notifications: FieldRef<"UserPreferences", 'Boolean'>
+    readonly deadlineReminders: FieldRef<"UserPreferences", 'Boolean'>
+    readonly weeklyDigest: FieldRef<"UserPreferences", 'Boolean'>
+    readonly followingUpdates: FieldRef<"UserPreferences", 'Boolean'>
+    readonly theme: FieldRef<"UserPreferences", 'String'>
+    readonly language: FieldRef<"UserPreferences", 'String'>
+    readonly defaultCountry: FieldRef<"UserPreferences", 'String'>
     readonly created_at: FieldRef<"UserPreferences", 'DateTime'>
     readonly updated_at: FieldRef<"UserPreferences", 'DateTime'>
   }
@@ -17689,12 +18887,32 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const AccountScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    type: 'type',
+    provider: 'provider',
+    providerAccountId: 'providerAccountId',
+    password: 'password',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
+
+
   export const UserPreferencesScalarFieldEnum: {
     id: 'id',
     user_id: 'user_id',
     email_notifications: 'email_notifications',
     push_notifications: 'push_notifications',
     new_event_notifications: 'new_event_notifications',
+    deadlineReminders: 'deadlineReminders',
+    weeklyDigest: 'weeklyDigest',
+    followingUpdates: 'followingUpdates',
+    theme: 'theme',
+    language: 'language',
+    defaultCountry: 'defaultCountry',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -18472,6 +19690,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianListRelationFilter
     followedEvents?: UserFollowEventListRelationFilter
     notifications?: UserNotificationListRelationFilter
+    accounts?: AccountListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -18488,6 +19707,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianOrderByRelationAggregateInput
     followedEvents?: UserFollowEventOrderByRelationAggregateInput
     notifications?: UserNotificationOrderByRelationAggregateInput
+    accounts?: AccountOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -18507,6 +19727,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianListRelationFilter
     followedEvents?: UserFollowEventListRelationFilter
     notifications?: UserNotificationListRelationFilter
+    accounts?: AccountListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -18537,6 +19758,79 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
+  export type AccountWhereInput = {
+    AND?: AccountWhereInput | AccountWhereInput[]
+    OR?: AccountWhereInput[]
+    NOT?: AccountWhereInput | AccountWhereInput[]
+    id?: IntFilter<"Account"> | number
+    user_id?: IntFilter<"Account"> | number
+    type?: StringFilter<"Account"> | string
+    provider?: StringFilter<"Account"> | string
+    providerAccountId?: StringFilter<"Account"> | string
+    password?: StringNullableFilter<"Account"> | string | null
+    created_at?: DateTimeFilter<"Account"> | Date | string
+    updated_at?: DateTimeFilter<"Account"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type AccountOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    type?: SortOrder
+    provider?: SortOrder
+    providerAccountId?: SortOrder
+    password?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type AccountWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    provider_providerAccountId?: AccountProviderProviderAccountIdCompoundUniqueInput
+    AND?: AccountWhereInput | AccountWhereInput[]
+    OR?: AccountWhereInput[]
+    NOT?: AccountWhereInput | AccountWhereInput[]
+    user_id?: IntFilter<"Account"> | number
+    type?: StringFilter<"Account"> | string
+    provider?: StringFilter<"Account"> | string
+    providerAccountId?: StringFilter<"Account"> | string
+    password?: StringNullableFilter<"Account"> | string | null
+    created_at?: DateTimeFilter<"Account"> | Date | string
+    updated_at?: DateTimeFilter<"Account"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id" | "provider_providerAccountId">
+
+  export type AccountOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    type?: SortOrder
+    provider?: SortOrder
+    providerAccountId?: SortOrder
+    password?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: AccountCountOrderByAggregateInput
+    _avg?: AccountAvgOrderByAggregateInput
+    _max?: AccountMaxOrderByAggregateInput
+    _min?: AccountMinOrderByAggregateInput
+    _sum?: AccountSumOrderByAggregateInput
+  }
+
+  export type AccountScalarWhereWithAggregatesInput = {
+    AND?: AccountScalarWhereWithAggregatesInput | AccountScalarWhereWithAggregatesInput[]
+    OR?: AccountScalarWhereWithAggregatesInput[]
+    NOT?: AccountScalarWhereWithAggregatesInput | AccountScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Account"> | number
+    user_id?: IntWithAggregatesFilter<"Account"> | number
+    type?: StringWithAggregatesFilter<"Account"> | string
+    provider?: StringWithAggregatesFilter<"Account"> | string
+    providerAccountId?: StringWithAggregatesFilter<"Account"> | string
+    password?: StringNullableWithAggregatesFilter<"Account"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"Account"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Account"> | Date | string
+  }
+
   export type UserPreferencesWhereInput = {
     AND?: UserPreferencesWhereInput | UserPreferencesWhereInput[]
     OR?: UserPreferencesWhereInput[]
@@ -18546,6 +19840,12 @@ export namespace Prisma {
     email_notifications?: BoolFilter<"UserPreferences"> | boolean
     push_notifications?: BoolFilter<"UserPreferences"> | boolean
     new_event_notifications?: BoolFilter<"UserPreferences"> | boolean
+    deadlineReminders?: BoolFilter<"UserPreferences"> | boolean
+    weeklyDigest?: BoolFilter<"UserPreferences"> | boolean
+    followingUpdates?: BoolFilter<"UserPreferences"> | boolean
+    theme?: StringFilter<"UserPreferences"> | string
+    language?: StringFilter<"UserPreferences"> | string
+    defaultCountry?: StringNullableFilter<"UserPreferences"> | string | null
     created_at?: DateTimeFilter<"UserPreferences"> | Date | string
     updated_at?: DateTimeFilter<"UserPreferences"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -18557,6 +19857,12 @@ export namespace Prisma {
     email_notifications?: SortOrder
     push_notifications?: SortOrder
     new_event_notifications?: SortOrder
+    deadlineReminders?: SortOrder
+    weeklyDigest?: SortOrder
+    followingUpdates?: SortOrder
+    theme?: SortOrder
+    language?: SortOrder
+    defaultCountry?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -18571,6 +19877,12 @@ export namespace Prisma {
     email_notifications?: BoolFilter<"UserPreferences"> | boolean
     push_notifications?: BoolFilter<"UserPreferences"> | boolean
     new_event_notifications?: BoolFilter<"UserPreferences"> | boolean
+    deadlineReminders?: BoolFilter<"UserPreferences"> | boolean
+    weeklyDigest?: BoolFilter<"UserPreferences"> | boolean
+    followingUpdates?: BoolFilter<"UserPreferences"> | boolean
+    theme?: StringFilter<"UserPreferences"> | string
+    language?: StringFilter<"UserPreferences"> | string
+    defaultCountry?: StringNullableFilter<"UserPreferences"> | string | null
     created_at?: DateTimeFilter<"UserPreferences"> | Date | string
     updated_at?: DateTimeFilter<"UserPreferences"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -18582,6 +19894,12 @@ export namespace Prisma {
     email_notifications?: SortOrder
     push_notifications?: SortOrder
     new_event_notifications?: SortOrder
+    deadlineReminders?: SortOrder
+    weeklyDigest?: SortOrder
+    followingUpdates?: SortOrder
+    theme?: SortOrder
+    language?: SortOrder
+    defaultCountry?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: UserPreferencesCountOrderByAggregateInput
@@ -18600,6 +19918,12 @@ export namespace Prisma {
     email_notifications?: BoolWithAggregatesFilter<"UserPreferences"> | boolean
     push_notifications?: BoolWithAggregatesFilter<"UserPreferences"> | boolean
     new_event_notifications?: BoolWithAggregatesFilter<"UserPreferences"> | boolean
+    deadlineReminders?: BoolWithAggregatesFilter<"UserPreferences"> | boolean
+    weeklyDigest?: BoolWithAggregatesFilter<"UserPreferences"> | boolean
+    followingUpdates?: BoolWithAggregatesFilter<"UserPreferences"> | boolean
+    theme?: StringWithAggregatesFilter<"UserPreferences"> | string
+    language?: StringWithAggregatesFilter<"UserPreferences"> | string
+    defaultCountry?: StringNullableWithAggregatesFilter<"UserPreferences"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"UserPreferences"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"UserPreferences"> | Date | string
   }
@@ -19560,6 +20884,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
     followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
     notifications?: UserNotificationCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -19576,6 +20901,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
     followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
     notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -19591,6 +20917,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
     followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
     notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -19607,6 +20934,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
     followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
     notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -19638,10 +20966,89 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AccountCreateInput = {
+    type: string
+    provider: string
+    providerAccountId: string
+    password?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutAccountsInput
+  }
+
+  export type AccountUncheckedCreateInput = {
+    id?: number
+    user_id: number
+    type: string
+    provider: string
+    providerAccountId: string
+    password?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AccountUpdateInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAccountsNestedInput
+  }
+
+  export type AccountUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccountCreateManyInput = {
+    id?: number
+    user_id: number
+    type: string
+    provider: string
+    providerAccountId: string
+    password?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AccountUpdateManyMutationInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccountUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserPreferencesCreateInput = {
     email_notifications?: boolean
     push_notifications?: boolean
     new_event_notifications?: boolean
+    deadlineReminders?: boolean
+    weeklyDigest?: boolean
+    followingUpdates?: boolean
+    theme?: string
+    language?: string
+    defaultCountry?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutPreferencesInput
@@ -19653,6 +21060,12 @@ export namespace Prisma {
     email_notifications?: boolean
     push_notifications?: boolean
     new_event_notifications?: boolean
+    deadlineReminders?: boolean
+    weeklyDigest?: boolean
+    followingUpdates?: boolean
+    theme?: string
+    language?: string
+    defaultCountry?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -19661,6 +21074,12 @@ export namespace Prisma {
     email_notifications?: BoolFieldUpdateOperationsInput | boolean
     push_notifications?: BoolFieldUpdateOperationsInput | boolean
     new_event_notifications?: BoolFieldUpdateOperationsInput | boolean
+    deadlineReminders?: BoolFieldUpdateOperationsInput | boolean
+    weeklyDigest?: BoolFieldUpdateOperationsInput | boolean
+    followingUpdates?: BoolFieldUpdateOperationsInput | boolean
+    theme?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    defaultCountry?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPreferencesNestedInput
@@ -19672,6 +21091,12 @@ export namespace Prisma {
     email_notifications?: BoolFieldUpdateOperationsInput | boolean
     push_notifications?: BoolFieldUpdateOperationsInput | boolean
     new_event_notifications?: BoolFieldUpdateOperationsInput | boolean
+    deadlineReminders?: BoolFieldUpdateOperationsInput | boolean
+    weeklyDigest?: BoolFieldUpdateOperationsInput | boolean
+    followingUpdates?: BoolFieldUpdateOperationsInput | boolean
+    theme?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    defaultCountry?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19682,6 +21107,12 @@ export namespace Prisma {
     email_notifications?: boolean
     push_notifications?: boolean
     new_event_notifications?: boolean
+    deadlineReminders?: boolean
+    weeklyDigest?: boolean
+    followingUpdates?: boolean
+    theme?: string
+    language?: string
+    defaultCountry?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -19690,6 +21121,12 @@ export namespace Prisma {
     email_notifications?: BoolFieldUpdateOperationsInput | boolean
     push_notifications?: BoolFieldUpdateOperationsInput | boolean
     new_event_notifications?: BoolFieldUpdateOperationsInput | boolean
+    deadlineReminders?: BoolFieldUpdateOperationsInput | boolean
+    weeklyDigest?: BoolFieldUpdateOperationsInput | boolean
+    followingUpdates?: BoolFieldUpdateOperationsInput | boolean
+    theme?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    defaultCountry?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19700,6 +21137,12 @@ export namespace Prisma {
     email_notifications?: BoolFieldUpdateOperationsInput | boolean
     push_notifications?: BoolFieldUpdateOperationsInput | boolean
     new_event_notifications?: BoolFieldUpdateOperationsInput | boolean
+    deadlineReminders?: BoolFieldUpdateOperationsInput | boolean
+    weeklyDigest?: BoolFieldUpdateOperationsInput | boolean
+    followingUpdates?: BoolFieldUpdateOperationsInput | boolean
+    theme?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    defaultCountry?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20692,11 +22135,21 @@ export namespace Prisma {
     none?: UserNotificationWhereInput
   }
 
+  export type AccountListRelationFilter = {
+    every?: AccountWhereInput
+    some?: AccountWhereInput
+    none?: AccountWhereInput
+  }
+
   export type SavedSearchOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type UserNotificationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -20751,12 +22204,66 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type AccountProviderProviderAccountIdCompoundUniqueInput = {
+    provider: string
+    providerAccountId: string
+  }
+
+  export type AccountCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    type?: SortOrder
+    provider?: SortOrder
+    providerAccountId?: SortOrder
+    password?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AccountAvgOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type AccountMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    type?: SortOrder
+    provider?: SortOrder
+    providerAccountId?: SortOrder
+    password?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AccountMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    type?: SortOrder
+    provider?: SortOrder
+    providerAccountId?: SortOrder
+    password?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AccountSumOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+  }
+
   export type UserPreferencesCountOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
     email_notifications?: SortOrder
     push_notifications?: SortOrder
     new_event_notifications?: SortOrder
+    deadlineReminders?: SortOrder
+    weeklyDigest?: SortOrder
+    followingUpdates?: SortOrder
+    theme?: SortOrder
+    language?: SortOrder
+    defaultCountry?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -20772,6 +22279,12 @@ export namespace Prisma {
     email_notifications?: SortOrder
     push_notifications?: SortOrder
     new_event_notifications?: SortOrder
+    deadlineReminders?: SortOrder
+    weeklyDigest?: SortOrder
+    followingUpdates?: SortOrder
+    theme?: SortOrder
+    language?: SortOrder
+    defaultCountry?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -20782,6 +22295,12 @@ export namespace Prisma {
     email_notifications?: SortOrder
     push_notifications?: SortOrder
     new_event_notifications?: SortOrder
+    deadlineReminders?: SortOrder
+    weeklyDigest?: SortOrder
+    followingUpdates?: SortOrder
+    theme?: SortOrder
+    language?: SortOrder
+    defaultCountry?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -21644,6 +23163,13 @@ export namespace Prisma {
     connect?: UserNotificationWhereUniqueInput | UserNotificationWhereUniqueInput[]
   }
 
+  export type AccountCreateNestedManyWithoutUserInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  }
+
   export type UserPreferencesUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
     connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserInput
@@ -21683,6 +23209,13 @@ export namespace Prisma {
     connectOrCreate?: UserNotificationCreateOrConnectWithoutUserInput | UserNotificationCreateOrConnectWithoutUserInput[]
     createMany?: UserNotificationCreateManyUserInputEnvelope
     connect?: UserNotificationWhereUniqueInput | UserNotificationWhereUniqueInput[]
+  }
+
+  export type AccountUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -21769,6 +23302,20 @@ export namespace Prisma {
     deleteMany?: UserNotificationScalarWhereInput | UserNotificationScalarWhereInput[]
   }
 
+  export type AccountUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  }
+
   export type UserPreferencesUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
     connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserInput
@@ -21847,6 +23394,34 @@ export namespace Prisma {
     update?: UserNotificationUpdateWithWhereUniqueWithoutUserInput | UserNotificationUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserNotificationUpdateManyWithWhereWithoutUserInput | UserNotificationUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserNotificationScalarWhereInput | UserNotificationScalarWhereInput[]
+  }
+
+  export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutAccountsInput = {
+    create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
+    create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
+    upsert?: UserUpsertWithoutAccountsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAccountsInput, UserUpdateWithoutAccountsInput>, UserUncheckedUpdateWithoutAccountsInput>
   }
 
   export type UserCreateNestedOneWithoutPreferencesInput = {
@@ -23223,6 +24798,12 @@ export namespace Prisma {
     email_notifications?: boolean
     push_notifications?: boolean
     new_event_notifications?: boolean
+    deadlineReminders?: boolean
+    weeklyDigest?: boolean
+    followingUpdates?: boolean
+    theme?: string
+    language?: string
+    defaultCountry?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -23232,6 +24813,12 @@ export namespace Prisma {
     email_notifications?: boolean
     push_notifications?: boolean
     new_event_notifications?: boolean
+    deadlineReminders?: boolean
+    weeklyDigest?: boolean
+    followingUpdates?: boolean
+    theme?: string
+    language?: string
+    defaultCountry?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -23351,6 +24938,35 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AccountCreateWithoutUserInput = {
+    type: string
+    provider: string
+    providerAccountId: string
+    password?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AccountUncheckedCreateWithoutUserInput = {
+    id?: number
+    type: string
+    provider: string
+    providerAccountId: string
+    password?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AccountCreateOrConnectWithoutUserInput = {
+    where: AccountWhereUniqueInput
+    create: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput>
+  }
+
+  export type AccountCreateManyUserInputEnvelope = {
+    data: AccountCreateManyUserInput | AccountCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserPreferencesUpsertWithoutUserInput = {
     update: XOR<UserPreferencesUpdateWithoutUserInput, UserPreferencesUncheckedUpdateWithoutUserInput>
     create: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
@@ -23366,6 +24982,12 @@ export namespace Prisma {
     email_notifications?: BoolFieldUpdateOperationsInput | boolean
     push_notifications?: BoolFieldUpdateOperationsInput | boolean
     new_event_notifications?: BoolFieldUpdateOperationsInput | boolean
+    deadlineReminders?: BoolFieldUpdateOperationsInput | boolean
+    weeklyDigest?: BoolFieldUpdateOperationsInput | boolean
+    followingUpdates?: BoolFieldUpdateOperationsInput | boolean
+    theme?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    defaultCountry?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23375,6 +24997,12 @@ export namespace Prisma {
     email_notifications?: BoolFieldUpdateOperationsInput | boolean
     push_notifications?: BoolFieldUpdateOperationsInput | boolean
     new_event_notifications?: BoolFieldUpdateOperationsInput | boolean
+    deadlineReminders?: BoolFieldUpdateOperationsInput | boolean
+    weeklyDigest?: BoolFieldUpdateOperationsInput | boolean
+    followingUpdates?: BoolFieldUpdateOperationsInput | boolean
+    theme?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    defaultCountry?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23483,6 +25111,114 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"UserNotification"> | Date | string
   }
 
+  export type AccountUpsertWithWhereUniqueWithoutUserInput = {
+    where: AccountWhereUniqueInput
+    update: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
+    create: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput>
+  }
+
+  export type AccountUpdateWithWhereUniqueWithoutUserInput = {
+    where: AccountWhereUniqueInput
+    data: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AccountUpdateManyWithWhereWithoutUserInput = {
+    where: AccountScalarWhereInput
+    data: XOR<AccountUpdateManyMutationInput, AccountUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AccountScalarWhereInput = {
+    AND?: AccountScalarWhereInput | AccountScalarWhereInput[]
+    OR?: AccountScalarWhereInput[]
+    NOT?: AccountScalarWhereInput | AccountScalarWhereInput[]
+    id?: IntFilter<"Account"> | number
+    user_id?: IntFilter<"Account"> | number
+    type?: StringFilter<"Account"> | string
+    provider?: StringFilter<"Account"> | string
+    providerAccountId?: StringFilter<"Account"> | string
+    password?: StringNullableFilter<"Account"> | string | null
+    created_at?: DateTimeFilter<"Account"> | Date | string
+    updated_at?: DateTimeFilter<"Account"> | Date | string
+  }
+
+  export type UserCreateWithoutAccountsInput = {
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesCreateNestedOneWithoutUserInput
+    savedSearches?: SavedSearchCreateNestedManyWithoutUserInput
+    followedTeachers?: UserFollowTeacherCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAccountsInput = {
+    id?: number
+    email: string
+    name?: string | null
+    avatar?: string | null
+    verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    preferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserInput
+    savedSearches?: SavedSearchUncheckedCreateNestedManyWithoutUserInput
+    followedTeachers?: UserFollowTeacherUncheckedCreateNestedManyWithoutUserInput
+    followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
+    followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
+    notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAccountsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
+  }
+
+  export type UserUpsertWithoutAccountsInput = {
+    update: XOR<UserUpdateWithoutAccountsInput, UserUncheckedUpdateWithoutAccountsInput>
+    create: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAccountsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAccountsInput, UserUncheckedUpdateWithoutAccountsInput>
+  }
+
+  export type UserUpdateWithoutAccountsInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUpdateOneWithoutUserNestedInput
+    savedSearches?: SavedSearchUpdateManyWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAccountsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    preferences?: UserPreferencesUncheckedUpdateOneWithoutUserNestedInput
+    savedSearches?: SavedSearchUncheckedUpdateManyWithoutUserNestedInput
+    followedTeachers?: UserFollowTeacherUncheckedUpdateManyWithoutUserNestedInput
+    followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
+    followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutPreferencesInput = {
     email: string
     name?: string | null
@@ -23495,6 +25231,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
     followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
     notifications?: UserNotificationCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPreferencesInput = {
@@ -23510,6 +25247,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
     followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
     notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPreferencesInput = {
@@ -23540,6 +25278,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
     followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
     notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreferencesInput = {
@@ -23555,6 +25294,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
     followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
     notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSavedSearchesInput = {
@@ -23569,6 +25309,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
     followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
     notifications?: UserNotificationCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSavedSearchesInput = {
@@ -23584,6 +25325,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
     followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
     notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSavedSearchesInput = {
@@ -23614,6 +25356,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
     followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
     notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSavedSearchesInput = {
@@ -23629,6 +25372,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
     followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
     notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutFollowedTeachersInput = {
@@ -23643,6 +25387,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
     followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
     notifications?: UserNotificationCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowedTeachersInput = {
@@ -23658,6 +25403,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
     followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
     notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowedTeachersInput = {
@@ -23714,6 +25460,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
     followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
     notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowedTeachersInput = {
@@ -23729,6 +25476,7 @@ export namespace Prisma {
     followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
     followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
     notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TeacherUpsertWithoutFollowersInput = {
@@ -23775,6 +25523,7 @@ export namespace Prisma {
     followedTeachers?: UserFollowTeacherCreateNestedManyWithoutUserInput
     followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
     notifications?: UserNotificationCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowedMusiciansInput = {
@@ -23790,6 +25539,7 @@ export namespace Prisma {
     followedTeachers?: UserFollowTeacherUncheckedCreateNestedManyWithoutUserInput
     followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
     notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowedMusiciansInput = {
@@ -23862,6 +25612,7 @@ export namespace Prisma {
     followedTeachers?: UserFollowTeacherUpdateManyWithoutUserNestedInput
     followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
     notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowedMusiciansInput = {
@@ -23877,6 +25628,7 @@ export namespace Prisma {
     followedTeachers?: UserFollowTeacherUncheckedUpdateManyWithoutUserNestedInput
     followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
     notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MusicianUpsertWithoutFollowersInput = {
@@ -23939,6 +25691,7 @@ export namespace Prisma {
     followedTeachers?: UserFollowTeacherCreateNestedManyWithoutUserInput
     followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
     notifications?: UserNotificationCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowedEventsInput = {
@@ -23954,6 +25707,7 @@ export namespace Prisma {
     followedTeachers?: UserFollowTeacherUncheckedCreateNestedManyWithoutUserInput
     followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
     notifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowedEventsInput = {
@@ -24032,6 +25786,7 @@ export namespace Prisma {
     followedTeachers?: UserFollowTeacherUpdateManyWithoutUserNestedInput
     followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
     notifications?: UserNotificationUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowedEventsInput = {
@@ -24047,6 +25802,7 @@ export namespace Prisma {
     followedTeachers?: UserFollowTeacherUncheckedUpdateManyWithoutUserNestedInput
     followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
     notifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type EventUpsertWithoutFollowersInput = {
@@ -24115,6 +25871,7 @@ export namespace Prisma {
     followedTeachers?: UserFollowTeacherCreateNestedManyWithoutUserInput
     followedMusicians?: UserFollowMusicianCreateNestedManyWithoutUserInput
     followedEvents?: UserFollowEventCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -24130,6 +25887,7 @@ export namespace Prisma {
     followedTeachers?: UserFollowTeacherUncheckedCreateNestedManyWithoutUserInput
     followedMusicians?: UserFollowMusicianUncheckedCreateNestedManyWithoutUserInput
     followedEvents?: UserFollowEventUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -24160,6 +25918,7 @@ export namespace Prisma {
     followedTeachers?: UserFollowTeacherUpdateManyWithoutUserNestedInput
     followedMusicians?: UserFollowMusicianUpdateManyWithoutUserNestedInput
     followedEvents?: UserFollowEventUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -24175,6 +25934,7 @@ export namespace Prisma {
     followedTeachers?: UserFollowTeacherUncheckedUpdateManyWithoutUserNestedInput
     followedMusicians?: UserFollowMusicianUncheckedUpdateManyWithoutUserNestedInput
     followedEvents?: UserFollowEventUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type event_musiciansCreateManyEventsInput = {
@@ -24444,6 +26204,16 @@ export namespace Prisma {
     created_at?: Date | string
   }
 
+  export type AccountCreateManyUserInput = {
+    id?: number
+    type: string
+    provider: string
+    providerAccountId: string
+    password?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type SavedSearchUpdateWithoutUserInput = {
     name?: StringFieldUpdateOperationsInput | string
     query?: JsonNullValueInput | InputJsonValue
@@ -24535,6 +26305,35 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AccountUpdateWithoutUserInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccountUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccountUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
 
 
   /**
@@ -24588,6 +26387,10 @@ export namespace Prisma {
      * @deprecated Use UserDefaultArgs instead
      */
     export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use AccountDefaultArgs instead
+     */
+    export type AccountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AccountDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserPreferencesDefaultArgs instead
      */
