@@ -48,7 +48,7 @@ export async function GET(
     const type = searchParams.get('type') // Filter by notification type
 
     // Build where clause
-    const where: any = { userId: id }
+    const where: any = { user_id: parseInt(id) }
     
     if (unreadOnly) {
       where.read = false
@@ -64,15 +64,14 @@ export async function GET(
         where,
         skip,
         take,
-        orderBy: { createdAt: 'desc' },
+        orderBy: { created_at: 'desc' },
         select: {
           id: true,
           type: true,
           title: true,
           message: true,
-          data: true,
           read: true,
-          createdAt: true,
+          created_at: true,
         }
       }),
       db.userNotification.count({ where })
@@ -86,7 +85,7 @@ export async function GET(
       summary: {
         total,
         unread: unreadOnly ? total : await db.userNotification.count({ 
-          where: { userId: id, read: false } 
+          where: { user_id: parseInt(id), read: false } 
         }),
       }
     })
@@ -120,7 +119,7 @@ export async function PUT(
     if (all) {
       // Mark all notifications as read
       const updated = await db.userNotification.updateMany({
-        where: { userId: id, read: false },
+        where: { user_id: parseInt(id), read: false },
         data: { read: true },
       })
 
@@ -132,8 +131,8 @@ export async function PUT(
       // Mark specific notifications as read
       const updated = await db.userNotification.updateMany({
         where: { 
-          userId: id, 
-          id: { in: notificationIds },
+          user_id: parseInt(id), 
+          id: { in: notificationIds.map(id => parseInt(id)) },
           read: false 
         },
         data: { read: true },
@@ -180,7 +179,7 @@ export async function DELETE(
     if (all) {
       // Delete all notifications
       const deleted = await db.userNotification.deleteMany({
-        where: { userId: id },
+        where: { user_id: parseInt(id) },
       })
 
       return apiResponse({
@@ -191,8 +190,8 @@ export async function DELETE(
       // Delete specific notifications
       const deleted = await db.userNotification.deleteMany({
         where: { 
-          userId: id, 
-          id: { in: notificationIds }
+          user_id: parseInt(id), 
+          id: { in: notificationIds.map(id => parseInt(id)) }
         },
       })
 

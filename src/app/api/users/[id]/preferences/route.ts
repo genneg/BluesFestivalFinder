@@ -10,9 +10,9 @@ import { apiResponse, apiError, handleApiError } from '@/lib/api/utils'
 // Validation schema for user preferences
 const preferencesSchema = z.object({
   // Notification settings
-  emailNotifications: z.boolean().optional(),
-  pushNotifications: z.boolean().optional(),
-  newEventNotifications: z.boolean().optional(),
+  email_notifications: z.boolean().optional(),
+  push_notifications: z.boolean().optional(),
+  new_event_notifications: z.boolean().optional(),
   deadlineReminders: z.boolean().optional(),
   weeklyDigest: z.boolean().optional(),
   followingUpdates: z.boolean().optional(),
@@ -48,12 +48,12 @@ export async function GET(
 
     // Get or create user preferences
     let preferences = await db.userPreferences.findUnique({
-      where: { userId: id },
+      where: { user_id: parseInt(id) },
       select: {
         id: true,
-        emailNotifications: true,
-        pushNotifications: true,
-        newEventNotifications: true,
+        email_notifications: true,
+        push_notifications: true,
+        new_event_notifications: true,
         deadlineReminders: true,
         weeklyDigest: true,
         followingUpdates: true,
@@ -72,10 +72,10 @@ export async function GET(
     if (!preferences) {
       preferences = await db.userPreferences.create({
         data: {
-          userId: id,
-          emailNotifications: true,
-          pushNotifications: true,
-          newEventNotifications: true,
+          user_id: parseInt(id),
+          email_notifications: true,
+          push_notifications: true,
+          new_event_notifications: true,
           deadlineReminders: true,
           weeklyDigest: true,
           followingUpdates: true,
@@ -85,9 +85,9 @@ export async function GET(
         },
         select: {
           id: true,
-          emailNotifications: true,
-          pushNotifications: true,
-          newEventNotifications: true,
+          email_notifications: true,
+          push_notifications: true,
+          new_event_notifications: true,
           deadlineReminders: true,
           weeklyDigest: true,
           followingUpdates: true,
@@ -133,7 +133,7 @@ export async function PUT(
 
     // Check if preferences exist
     const existingPreferences = await db.userPreferences.findUnique({
-      where: { userId: id }
+      where: { user_id: parseInt(id) }
     })
 
     let updatedPreferences
@@ -141,13 +141,13 @@ export async function PUT(
     if (existingPreferences) {
       // Update existing preferences
       updatedPreferences = await db.userPreferences.update({
-        where: { userId: id },
+        where: { user_id: parseInt(id) },
         data: updateData,
         select: {
           id: true,
-          emailNotifications: true,
-          pushNotifications: true,
-          newEventNotifications: true,
+          email_notifications: true,
+          push_notifications: true,
+          new_event_notifications: true,
           deadlineReminders: true,
           weeklyDigest: true,
           followingUpdates: true,
@@ -165,10 +165,10 @@ export async function PUT(
       // Create new preferences with defaults merged with update data
       updatedPreferences = await db.userPreferences.create({
         data: {
-          userId: id,
-          emailNotifications: true,
-          pushNotifications: true,
-          newEventNotifications: true,
+          user_id: parseInt(id),
+          email_notifications: true,
+          push_notifications: true,
+          new_event_notifications: true,
           deadlineReminders: true,
           weeklyDigest: true,
           followingUpdates: true,
@@ -179,9 +179,9 @@ export async function PUT(
         },
         select: {
           id: true,
-          emailNotifications: true,
-          pushNotifications: true,
-          newEventNotifications: true,
+          email_notifications: true,
+          push_notifications: true,
+          new_event_notifications: true,
           deadlineReminders: true,
           weeklyDigest: true,
           followingUpdates: true,
@@ -228,11 +228,11 @@ export async function DELETE(
 
     // Reset to default preferences
     const defaultPreferences = await db.userPreferences.upsert({
-      where: { userId: id },
+      where: { user_id: parseInt(id) },
       update: {
-        emailNotifications: true,
-        pushNotifications: true,
-        newEventNotifications: true,
+        email_notifications: true,
+        push_notifications: true,
+        new_event_notifications: true,
         deadlineReminders: true,
         weeklyDigest: true,
         followingUpdates: true,
@@ -244,10 +244,10 @@ export async function DELETE(
         timezone: null,
       },
       create: {
-        userId: id,
-        emailNotifications: true,
-        pushNotifications: true,
-        newEventNotifications: true,
+        user_id: parseInt(id),
+        email_notifications: true,
+        push_notifications: true,
+        new_event_notifications: true,
         deadlineReminders: true,
         weeklyDigest: true,
         followingUpdates: true,
@@ -257,9 +257,9 @@ export async function DELETE(
       },
       select: {
         id: true,
-        emailNotifications: true,
-        pushNotifications: true,
-        newEventNotifications: true,
+        email_notifications: true,
+        push_notifications: true,
+        new_event_notifications: true,
         deadlineReminders: true,
         weeklyDigest: true,
         followingUpdates: true,
