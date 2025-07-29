@@ -11904,11 +11904,13 @@ export namespace Prisma {
   export type UserPreferencesAvgAggregateOutputType = {
     id: number | null
     user_id: number | null
+    searchRadius: number | null
   }
 
   export type UserPreferencesSumAggregateOutputType = {
     id: number | null
     user_id: number | null
+    searchRadius: number | null
   }
 
   export type UserPreferencesMinAggregateOutputType = {
@@ -11923,6 +11925,8 @@ export namespace Prisma {
     theme: string | null
     language: string | null
     defaultCountry: string | null
+    defaultCity: string | null
+    searchRadius: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -11939,6 +11943,8 @@ export namespace Prisma {
     theme: string | null
     language: string | null
     defaultCountry: string | null
+    defaultCity: string | null
+    searchRadius: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -11955,6 +11961,8 @@ export namespace Prisma {
     theme: number
     language: number
     defaultCountry: number
+    defaultCity: number
+    searchRadius: number
     created_at: number
     updated_at: number
     _all: number
@@ -11964,11 +11972,13 @@ export namespace Prisma {
   export type UserPreferencesAvgAggregateInputType = {
     id?: true
     user_id?: true
+    searchRadius?: true
   }
 
   export type UserPreferencesSumAggregateInputType = {
     id?: true
     user_id?: true
+    searchRadius?: true
   }
 
   export type UserPreferencesMinAggregateInputType = {
@@ -11983,6 +11993,8 @@ export namespace Prisma {
     theme?: true
     language?: true
     defaultCountry?: true
+    defaultCity?: true
+    searchRadius?: true
     created_at?: true
     updated_at?: true
   }
@@ -11999,6 +12011,8 @@ export namespace Prisma {
     theme?: true
     language?: true
     defaultCountry?: true
+    defaultCity?: true
+    searchRadius?: true
     created_at?: true
     updated_at?: true
   }
@@ -12015,6 +12029,8 @@ export namespace Prisma {
     theme?: true
     language?: true
     defaultCountry?: true
+    defaultCity?: true
+    searchRadius?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -12118,6 +12134,8 @@ export namespace Prisma {
     theme: string
     language: string
     defaultCountry: string | null
+    defaultCity: string | null
+    searchRadius: number | null
     created_at: Date
     updated_at: Date
     _count: UserPreferencesCountAggregateOutputType | null
@@ -12153,6 +12171,8 @@ export namespace Prisma {
     theme?: boolean
     language?: boolean
     defaultCountry?: boolean
+    defaultCity?: boolean
+    searchRadius?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -12170,6 +12190,8 @@ export namespace Prisma {
     theme?: boolean
     language?: boolean
     defaultCountry?: boolean
+    defaultCity?: boolean
+    searchRadius?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -12187,6 +12209,8 @@ export namespace Prisma {
     theme?: boolean
     language?: boolean
     defaultCountry?: boolean
+    defaultCity?: boolean
+    searchRadius?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
@@ -12215,6 +12239,8 @@ export namespace Prisma {
       theme: string
       language: string
       defaultCountry: string | null
+      defaultCity: string | null
+      searchRadius: number | null
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["userPreferences"]>
@@ -12622,6 +12648,8 @@ export namespace Prisma {
     readonly theme: FieldRef<"UserPreferences", 'String'>
     readonly language: FieldRef<"UserPreferences", 'String'>
     readonly defaultCountry: FieldRef<"UserPreferences", 'String'>
+    readonly defaultCity: FieldRef<"UserPreferences", 'String'>
+    readonly searchRadius: FieldRef<"UserPreferences", 'Int'>
     readonly created_at: FieldRef<"UserPreferences", 'DateTime'>
     readonly updated_at: FieldRef<"UserPreferences", 'DateTime'>
   }
@@ -18913,6 +18941,8 @@ export namespace Prisma {
     theme: 'theme',
     language: 'language',
     defaultCountry: 'defaultCountry',
+    defaultCity: 'defaultCity',
+    searchRadius: 'searchRadius',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -19846,6 +19876,8 @@ export namespace Prisma {
     theme?: StringFilter<"UserPreferences"> | string
     language?: StringFilter<"UserPreferences"> | string
     defaultCountry?: StringNullableFilter<"UserPreferences"> | string | null
+    defaultCity?: StringNullableFilter<"UserPreferences"> | string | null
+    searchRadius?: IntNullableFilter<"UserPreferences"> | number | null
     created_at?: DateTimeFilter<"UserPreferences"> | Date | string
     updated_at?: DateTimeFilter<"UserPreferences"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -19863,6 +19895,8 @@ export namespace Prisma {
     theme?: SortOrder
     language?: SortOrder
     defaultCountry?: SortOrderInput | SortOrder
+    defaultCity?: SortOrderInput | SortOrder
+    searchRadius?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -19883,6 +19917,8 @@ export namespace Prisma {
     theme?: StringFilter<"UserPreferences"> | string
     language?: StringFilter<"UserPreferences"> | string
     defaultCountry?: StringNullableFilter<"UserPreferences"> | string | null
+    defaultCity?: StringNullableFilter<"UserPreferences"> | string | null
+    searchRadius?: IntNullableFilter<"UserPreferences"> | number | null
     created_at?: DateTimeFilter<"UserPreferences"> | Date | string
     updated_at?: DateTimeFilter<"UserPreferences"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -19900,6 +19936,8 @@ export namespace Prisma {
     theme?: SortOrder
     language?: SortOrder
     defaultCountry?: SortOrderInput | SortOrder
+    defaultCity?: SortOrderInput | SortOrder
+    searchRadius?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: UserPreferencesCountOrderByAggregateInput
@@ -19924,6 +19962,8 @@ export namespace Prisma {
     theme?: StringWithAggregatesFilter<"UserPreferences"> | string
     language?: StringWithAggregatesFilter<"UserPreferences"> | string
     defaultCountry?: StringNullableWithAggregatesFilter<"UserPreferences"> | string | null
+    defaultCity?: StringNullableWithAggregatesFilter<"UserPreferences"> | string | null
+    searchRadius?: IntNullableWithAggregatesFilter<"UserPreferences"> | number | null
     created_at?: DateTimeWithAggregatesFilter<"UserPreferences"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"UserPreferences"> | Date | string
   }
@@ -21049,6 +21089,8 @@ export namespace Prisma {
     theme?: string
     language?: string
     defaultCountry?: string | null
+    defaultCity?: string | null
+    searchRadius?: number | null
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutPreferencesInput
@@ -21066,6 +21108,8 @@ export namespace Prisma {
     theme?: string
     language?: string
     defaultCountry?: string | null
+    defaultCity?: string | null
+    searchRadius?: number | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -21080,6 +21124,8 @@ export namespace Prisma {
     theme?: StringFieldUpdateOperationsInput | string
     language?: StringFieldUpdateOperationsInput | string
     defaultCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    defaultCity?: NullableStringFieldUpdateOperationsInput | string | null
+    searchRadius?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPreferencesNestedInput
@@ -21097,6 +21143,8 @@ export namespace Prisma {
     theme?: StringFieldUpdateOperationsInput | string
     language?: StringFieldUpdateOperationsInput | string
     defaultCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    defaultCity?: NullableStringFieldUpdateOperationsInput | string | null
+    searchRadius?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21113,6 +21161,8 @@ export namespace Prisma {
     theme?: string
     language?: string
     defaultCountry?: string | null
+    defaultCity?: string | null
+    searchRadius?: number | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -21127,6 +21177,8 @@ export namespace Prisma {
     theme?: StringFieldUpdateOperationsInput | string
     language?: StringFieldUpdateOperationsInput | string
     defaultCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    defaultCity?: NullableStringFieldUpdateOperationsInput | string | null
+    searchRadius?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21143,6 +21195,8 @@ export namespace Prisma {
     theme?: StringFieldUpdateOperationsInput | string
     language?: StringFieldUpdateOperationsInput | string
     defaultCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    defaultCity?: NullableStringFieldUpdateOperationsInput | string | null
+    searchRadius?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22264,6 +22318,8 @@ export namespace Prisma {
     theme?: SortOrder
     language?: SortOrder
     defaultCountry?: SortOrder
+    defaultCity?: SortOrder
+    searchRadius?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -22271,6 +22327,7 @@ export namespace Prisma {
   export type UserPreferencesAvgOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
+    searchRadius?: SortOrder
   }
 
   export type UserPreferencesMaxOrderByAggregateInput = {
@@ -22285,6 +22342,8 @@ export namespace Prisma {
     theme?: SortOrder
     language?: SortOrder
     defaultCountry?: SortOrder
+    defaultCity?: SortOrder
+    searchRadius?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -22301,6 +22360,8 @@ export namespace Prisma {
     theme?: SortOrder
     language?: SortOrder
     defaultCountry?: SortOrder
+    defaultCity?: SortOrder
+    searchRadius?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -22308,6 +22369,7 @@ export namespace Prisma {
   export type UserPreferencesSumOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
+    searchRadius?: SortOrder
   }
   export type JsonFilter<$PrismaModel = never> = 
     | PatchUndefined<
@@ -24804,6 +24866,8 @@ export namespace Prisma {
     theme?: string
     language?: string
     defaultCountry?: string | null
+    defaultCity?: string | null
+    searchRadius?: number | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -24819,6 +24883,8 @@ export namespace Prisma {
     theme?: string
     language?: string
     defaultCountry?: string | null
+    defaultCity?: string | null
+    searchRadius?: number | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -24988,6 +25054,8 @@ export namespace Prisma {
     theme?: StringFieldUpdateOperationsInput | string
     language?: StringFieldUpdateOperationsInput | string
     defaultCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    defaultCity?: NullableStringFieldUpdateOperationsInput | string | null
+    searchRadius?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25003,6 +25071,8 @@ export namespace Prisma {
     theme?: StringFieldUpdateOperationsInput | string
     language?: StringFieldUpdateOperationsInput | string
     defaultCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    defaultCity?: NullableStringFieldUpdateOperationsInput | string | null
+    searchRadius?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

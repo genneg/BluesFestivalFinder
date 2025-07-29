@@ -11,9 +11,20 @@ import { FollowButton } from './FollowButton'
 interface EventCardProps {
   event: Festival
   className?: string
+  onClick?: () => void
+  compact?: boolean
+  showDistance?: boolean
+  highlightQuery?: string
 }
 
-export function EventCard({ event, className }: EventCardProps) {
+export function EventCard({ 
+  event, 
+  className, 
+  onClick, 
+  compact = false, 
+  showDistance = false, 
+  highlightQuery 
+}: EventCardProps) {
 
   const getLowestPrice = () => {
     if (!event.prices || event.prices.length === 0) return null

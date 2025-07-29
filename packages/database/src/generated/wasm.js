@@ -237,6 +237,8 @@ exports.Prisma.UserPreferencesScalarFieldEnum = {
   theme: 'theme',
   language: 'language',
   defaultCountry: 'defaultCountry',
+  defaultCity: 'defaultCity',
+  searchRadius: 'searchRadius',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };

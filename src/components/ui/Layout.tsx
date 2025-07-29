@@ -79,7 +79,7 @@ Section.displayName = 'Section'
 
 // Grid Component
 interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
-  cols?: 1 | 2 | 3 | 4 | 5 | 6 | 8 | 12 | 'auto-fit' | 'auto-fill'
+  cols?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'auto-fit' | 'auto-fill'
   gap?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
   responsive?: boolean
 }
@@ -101,7 +101,11 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
         case 4: return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
         case 5: return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'
         case 6: return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'
+        case 7: return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7'
         case 8: return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8'
+        case 9: return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-9'
+        case 10: return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-10'
+        case 11: return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-11'
         case 12: return 'grid-cols-12'
         default: return baseGrid
       }

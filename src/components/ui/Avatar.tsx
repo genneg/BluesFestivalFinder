@@ -5,13 +5,14 @@ import { cn } from '@/lib/utils'
 interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string
   alt?: string
+  name?: string
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
   fallback?: string
   loading?: boolean
 }
 
 const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
-  ({ className, src, alt, size = 'md', fallback, loading = false, ...props }, ref) => {
+  ({ className, src, alt, name, size = 'md', fallback, loading = false, ...props }, ref) => {
     const sizes = {
       xs: 'w-6 h-6 text-xs',
       sm: 'w-8 h-8 text-sm',

@@ -170,6 +170,9 @@ model UserPreferences {
   theme                  String  @default("light") @db.VarChar(10)
   language               String  @default("en") @db.VarChar(2)
   defaultCountry         String? @db.VarChar(2)
+  defaultCity            String? @db.VarChar(100)
+  searchRadius           Int?    @default(50)
+  timezone               String? @default("UTC") @db.VarChar(50)
   created_at              DateTime @default(now()) @db.Timestamptz(6)
   updated_at              DateTime @default(now()) @db.Timestamptz(6)
   

@@ -5,23 +5,45 @@ import { useEffect } from 'react'
 import { cn } from '@/lib/utils'
 
 interface ModalProps {
-  open: boolean
-  onOpenChange: (open: boolean) => void
+  open?: boolean
+  isOpen?: boolean // Alias for open for compatibility
+  onOpenChange?: (open: boolean) => void
+  onClose?: () => void
+  onOpen?: () => void
   title?: string
   description?: string
   children: React.ReactNode
   className?: string
+  maxWidth?: string
 }
 
-export function Modal({ open, onOpenChange, title, description, children, className }: ModalProps) {
+export function Modal({ 
+  open, 
+  isOpen, 
+  onOpenChange, 
+  onClose, 
+  onOpen, 
+  title, 
+  description, 
+  children, 
+  className, 
+  maxWidth 
+}: ModalProps) {
+  // Handle compatibility with isOpen prop - fallback to false if neither is provided
+  const isModalOpen = isOpen !== undefined ? isOpen : (open !== undefined ? open : false)
+  
+  const handleClose = () => {
+    onClose?.()
+    onOpenChange?.(false)
+  }
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onOpenChange(false)
+        handleClose()
       }
     }
 
-    if (open) {
+    if (isModalOpen) {
       document.addEventListener('keydown', handleEscape)
       document.body.style.overflow = 'hidden'
     }
@@ -30,18 +52,18 @@ export function Modal({ open, onOpenChange, title, description, children, classN
       document.removeEventListener('keydown', handleEscape)
       document.body.style.overflow = 'unset'
     }
-  }, [open, onOpenChange])
+  }, [isModalOpen, handleClose])
 
-  if (!open) {
-return null
-}
+  if (!isModalOpen) {
+    return null
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={() => onOpenChange(false)}
+        onClick={handleClose}
       />
       
       {/* Modal */}
@@ -63,7 +85,7 @@ return null
             
             {/* Close button */}
             <button
-              onClick={() => onOpenChange(false)}
+              onClick={handleClose}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

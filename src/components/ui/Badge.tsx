@@ -3,7 +3,7 @@ import { forwardRef } from 'react'
 import { cn } from '@/lib/utils'
 
 interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'neutral' | 'gold' | 'elegant' | 'jazz'
+  variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'neutral' | 'gold' | 'elegant' | 'jazz' | 'outline'
   size?: 'sm' | 'md' | 'lg'
   dot?: boolean
 }
@@ -21,7 +21,8 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       neutral: 'bg-gray-600/20 text-gray-300 border border-gray-600/30',
       gold: 'bg-gradient-to-r from-gold-600 to-gold-700 text-navy-900 border border-gold-600',
       elegant: 'bg-navy-800/50 text-gold-600 border border-gold-600/30 backdrop-blur-sm',
-      jazz: 'bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-300 border border-purple-400/30'
+      jazz: 'bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-300 border border-purple-400/30',
+      outline: 'bg-transparent text-gray-300 border border-gray-600/50'
     }
     
     const sizes = {

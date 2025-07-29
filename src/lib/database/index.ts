@@ -1,5 +1,8 @@
 // Database utilities
-// TODO: Implement with Prisma
+import { PrismaClient } from 'packages/database/src/generated'
+
+// Re-export PrismaClient
+export { PrismaClient }
 
 export interface DatabaseConfig {
   url: string

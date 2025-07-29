@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@/lib/database'
 
 // Test database instance
 let testDb: PrismaClient
