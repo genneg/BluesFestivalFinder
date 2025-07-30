@@ -70,7 +70,7 @@ export function SearchBar({
   // Fetch suggestions when debounced query changes
   useEffect(() => {
     if (debouncedQuery.length >= 2) {
-      suggestionsApi.get(`/search/suggestions?q=${encodeURIComponent(debouncedQuery)}`)
+      suggestionsApi.get(`/search/suggestions?query=${encodeURIComponent(debouncedQuery)}`)
     }
   }, [debouncedQuery, suggestionsApi])
 
