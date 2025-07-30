@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { db } from '../../../../packages/database/src/index'
+import { db } from '@/lib/database'
 
 export const dynamic = 'force-dynamic'
 

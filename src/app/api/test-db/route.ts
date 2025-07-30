@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { db } from '@festival-scout/database'
+import { db } from '@/lib/database'
 import { apiResponse, apiError } from '@/lib/api/utils'
 
 export async function GET(request: NextRequest) {
