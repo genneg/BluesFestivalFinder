@@ -128,7 +128,7 @@ export function EventCard({
 
           {/* Venue */}
           <p className="text-base font-medium text-white mb-4">
-            {event.venue.name}
+            {event.venue?.name || 'Venue TBD'}
           </p>
 
           {/* Description */}
