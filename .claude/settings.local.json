@@ -53,7 +53,8 @@
       "Bash(git remote add:*)",
       "Bash(git branch:*)",
       "Bash(git push:*)",
-      "Bash(del \"packages\\database\\src\\generated\\query_engine-windows.dll.node.tmp*\")"
+      "Bash(del \"packages\\database\\src\\generated\\query_engine-windows.dll.node.tmp*\")",
+      "WebFetch(domain:blues-festival-finder.vercel.app)"
     ],
     "deny": []
   }
