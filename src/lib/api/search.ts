@@ -1,4 +1,4 @@
-import { db } from '@festival-scout/database'
+import { db } from '@/lib/database'
 
 /**
  * Advanced search utilities for the Festival Scout application
