@@ -5,7 +5,7 @@
  * handling the complexity of the external database structure internally.
  */
 
-import { db } from '../../../packages/database/src/index'
+import { db } from '@/lib/database'
 
 export interface InternalMusician {
   id: string
