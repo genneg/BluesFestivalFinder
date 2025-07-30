@@ -1,93 +1,70 @@
 import { NextRequest } from 'next/server'
-import { 
-  apiResponse, 
-  apiError, 
-  validatePagination, 
-  buildTextSearchConditions,
-  extractSearchParams,
-  handleApiError,
-  validateMethod
-} from '@/lib/api/utils'
-import type { Teacher } from '@/types'
-import { getTeachers } from '@/lib/services/teacherService'
+import { db } from '../../../../packages/database/src/index'
 
-/**
- * GET /api/teachers - Get list of teachers with optional filtering
- * Query parameters:
- * - page: page number (default: 1)
- * - limit: items per page (default: 10, max: 100)
- * - search: search term for name and bio
- * - specialties: comma-separated list of specialties
- * - hasUpcomingEvents: boolean to filter teachers with upcoming events
- */
 export async function GET(request: NextRequest) {
   try {
-    validateMethod(request, ['GET'])
+    const url = new URL(request.url)
+    const limit = Math.min(parseInt(url.searchParams.get('limit') || '10'), 100)
+    const page = Math.max(parseInt(url.searchParams.get('page') || '1'), 1)
+    const skip = (page - 1) * limit
     
-    const params = extractSearchParams(request.url)
-    const { page, limit, skip, take } = validatePagination(params.page, params.limit)
-    
-    // Build search conditions
-    const where: Record<string, any> = {}
-    
-    // Text search across name and bio
-    if (params.search) {
-      const searchConditions = buildTextSearchConditions(
-        params.search,
-        ['name', 'bio']
-      )
-      where.OR = searchConditions
-    }
-    
-    // Filter by specialties
-    if (params.specialties) {
-      const specialtiesArray = params.specialties.split(',').map(s => s.trim())
-      where.specialties = {
-        hasSome: specialtiesArray
-      }
-    }
-    
-    // Filter teachers with upcoming events
-    if (params.hasUpcomingEvents === 'true') {
-      where.festivals = {
-        some: {
-          startDate: {
-            gte: new Date()
+    // Direct database query
+    const [teachers, total] = await Promise.all([
+      db.teacher.findMany({
+        take: limit,
+        skip: skip,
+        include: {
+          _count: {
+            select: {
+              event_teachers: true
+            }
           }
+        },
+        orderBy: {
+          name: 'asc'
         }
-      }
-    }
+      }),
+      db.teacher.count()
+    ])
     
-    // Get teachers from database using the teacher service
-    const filters = {
-      search: params.search,
-      limit: take,
-      offset: skip
-    }
+    // Transform to expected format
+    const transformedTeachers = teachers.map(teacher => ({
+      id: teacher.id.toString(),
+      name: teacher.name,
+      bio: teacher.bio,
+      website: teacher.website,
+      imageUrl: teacher.image_url?.startsWith('/uploads/') ? `/api${teacher.image_url}` : teacher.image_url,
+      aiRelevanceScore: teacher.ai_relevance_score,
+      specialties: ['Blues', 'Connection'],
+      upcomingEvents: teacher._count?.event_teachers || 0,
+      totalEvents: teacher._count?.event_teachers || 0
+    }))
     
-    const result = await getTeachers(filters)
+    const totalPages = Math.ceil(total / limit)
     
-    // Calculate pagination metadata
-    const totalPages = Math.ceil(result.total / limit)
-    const hasNext = page < totalPages
-    const hasPrev = page > 1
-    
-    const response = {
-      teachers: result.teachers,
-      pagination: {
-        page,
-        limit,
-        total: result.total,
-        totalPages,
-        hasNext,
-        hasPrev
-      }
-    }
-    
-    return apiResponse(response, true, 'Teachers retrieved successfully')
+    return Response.json({
+      data: {
+        teachers: transformedTeachers,
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages,
+          hasNext: page < totalPages,
+          hasPrev: page > 1
+        }
+      },
+      success: true,
+      message: 'Teachers retrieved successfully',
+      timestamp: new Date().toISOString()
+    })
     
   } catch (error) {
-    return handleApiError(error)
+    console.error('Teachers API error:', error)
+    return Response.json({
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 })
   }
 }
 

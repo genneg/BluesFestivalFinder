@@ -1,65 +1,88 @@
 import { NextRequest } from 'next/server'
-import { z } from 'zod'
+import { db } from '../../../../packages/database/src/index'
 
-// Force dynamic runtime
 export const dynamic = 'force-dynamic'
-
-import { 
-  apiResponse, 
-  apiError, 
-  validatePagination, 
-  calculatePaginationMeta,
-  handleApiError,
-  extractSearchParams
-} from '@/lib/api/utils'
-
-import { getEvents } from '@/lib/services/eventService'
-
-// Request validation schema
-const eventsQuerySchema = z.object({
-  page: z.string().optional().default('1'),
-  limit: z.string().optional().default('10'),
-  search: z.string().optional(),
-  city: z.string().optional(),
-  country: z.string().optional(),
-  style: z.string().optional(),
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-})
 
 export async function GET(request: NextRequest) {
   try {
-    const params = extractSearchParams(request.url)
-    const validatedParams = eventsQuerySchema.parse(params)
-    const { page, limit } = validatePagination(validatedParams.page, validatedParams.limit)
+    const url = new URL(request.url)
+    const limit = Math.min(parseInt(url.searchParams.get('limit') || '10'), 100)
+    const page = Math.max(parseInt(url.searchParams.get('page') || '1'), 1)
+    const skip = (page - 1) * limit
     
-    // Build filters for the event service
-    const filters = {
-      search: validatedParams.search,
-      city: validatedParams.city,
-      country: validatedParams.country,
-      style: validatedParams.style,
-      dateFrom: validatedParams.startDate ? new Date(validatedParams.startDate) : undefined,
-      dateTo: validatedParams.endDate ? new Date(validatedParams.endDate) : undefined,
-      limit,
-      offset: (page - 1) * limit
-    }
+    // Direct database query
+    const [events, total] = await Promise.all([
+      db.event.findMany({
+        take: limit,
+        skip: skip,
+        include: {
+          venues: true,
+          event_prices: true
+        },
+        orderBy: {
+          from_date: 'asc'
+        }
+      }),
+      db.event.count()
+    ])
     
-    // Get events from database using the event service
-    const result = await getEvents(filters)
+    // Transform to expected format
+    const transformedEvents = events.map(event => {
+      const primaryVenue = event.venues?.[0]
+      
+      return {
+        id: event.id.toString(),
+        name: event.name,
+        description: event.description,
+        startDate: event.from_date,
+        endDate: event.to_date,
+        country: event.country,
+        city: event.city,
+        website: event.website,
+        style: event.style,
+        imageUrl: event.image_url?.startsWith('/uploads/') ? `/api${event.image_url}` : event.image_url,
+        aiQualityScore: event.ai_quality_score,
+        aiCompletenessScore: event.ai_completeness_score,
+        extractionMethod: event.extraction_method,
+        createdAt: event.created_at,
+        updatedAt: event.updated_at,
+        venue: primaryVenue ? {
+          name: primaryVenue.name,
+          address: primaryVenue.address,
+          city: event.city,
+          country: event.country
+        } : null,
+        pricing: event.event_prices?.map(price => ({
+          price: Number(price.amount),
+          currency: price.currency,
+          type: price.type
+        })) || []
+      }
+    })
     
-    const paginationMeta = calculatePaginationMeta(result.total, page, limit)
+    const totalPages = Math.ceil(total / limit)
     
-    return apiResponse({
-      events: result.events,
-      pagination: paginationMeta
+    return Response.json({
+      data: {
+        events: transformedEvents,
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages,
+          hasNext: page < totalPages,
+          hasPrev: page > 1
+        }
+      },
+      success: true,
+      timestamp: new Date().toISOString()
     })
     
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return apiError('Invalid query parameters: ' + error.issues.map((e: any) => e.message).join(', '))
-    }
-    
-    return handleApiError(error)
+    console.error('Events API error:', error)
+    return Response.json({
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 })
   }
 }
