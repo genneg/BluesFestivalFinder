@@ -91,7 +91,7 @@ export function EventCard({
           {/* Date and Location */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-base mb-3 gap-2">
             <span className="font-semibold text-primary">{getRelativeDate(event.startDate)}</span>
-            <span className="text-base font-medium text-white">{event.venue.city}, {event.venue.country}</span>
+            <span className="text-base font-medium text-white">{event.venue?.city || event.city}, {event.venue?.country || event.country}</span>
           </div>
           
           {/* Registration Deadline Warning */}
