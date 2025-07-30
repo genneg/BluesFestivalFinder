@@ -147,7 +147,7 @@ export function EventCard({
                   Teachers
                 </h4>
                 <div className="flex flex-wrap gap-1">
-                  {(event.teachers || []).slice(0, 2).map((teacher) => (
+                  {(event.teachers || []).slice(0, 2).filter(teacher => teacher && teacher.name).map((teacher) => (
                     <span
                       key={teacher.id}
                       className="inline-block bg-primary/20 text-primary text-sm px-3 py-1.5 rounded-full hover:bg-primary/30 transition-colors cursor-pointer font-medium"
@@ -176,7 +176,7 @@ export function EventCard({
                   Musicians
                 </h4>
                 <div className="flex flex-wrap gap-1">
-                  {(event.musicians || []).slice(0, 2).map((musician) => (
+                  {(event.musicians || []).slice(0, 2).filter(musician => musician && musician.name).map((musician) => (
                     <span
                       key={musician.id}
                       className="inline-block bg-primary/20 text-primary text-sm px-3 py-1.5 rounded-full hover:bg-primary/30 transition-colors cursor-pointer font-medium"
