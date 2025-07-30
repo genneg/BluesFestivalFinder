@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
 import { z } from 'zod'
 
-import { db } from '@festival-scout/database'
+import { db } from '@/lib/database'
 
 import { apiResponse, apiError, handleApiError } from '@/lib/api/utils'
 
