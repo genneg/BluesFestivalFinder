@@ -248,7 +248,7 @@ export default function SearchPage() {
                           
                           <div className="flex flex-wrap gap-2 text-xs text-white/60 mb-2">
                             <span>📅 {new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}</span>
-                            <span>📍 {event.venue.city}, {event.venue.country}</span>
+                            <span>📍 {event.venue?.city || event.city}, {event.venue?.country || event.country}</span>
                             {event.distance && (
                               <span>📏 {event.distance.toFixed(1)} km away</span>
                             )}
