@@ -1,109 +1,110 @@
 import { NextRequest } from 'next/server'
 import { z } from 'zod'
-import { 
-  apiResponse, 
-  apiError, 
-  validatePagination,
-  extractSearchParams,
-  handleApiError,
-  validateMethod
-} from '@/lib/api/utils'
-import { getTeacherByIdWithEvents } from '@/lib/services/teacherService'
-import type { Teacher, Festival } from '@/types'
+import { db } from '@/lib/database'
 
-interface RouteParams {
-  params: {
-    id: string
-  }
-}
-
-/**
- * GET /api/teachers/[id] - Get specific teacher with event history
- * Query parameters:
- * - includeEvents: boolean to include associated events (default: true)
- * - eventsPage: page number for events (default: 1)
- * - eventsLimit: items per page for events (default: 10, max: 50)
- * - upcomingOnly: boolean to show only upcoming events (default: false)
- */
-export async function GET(request: NextRequest, { params }: RouteParams) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
-    validateMethod(request, ['GET'])
-    
     const { id } = params
+    
     if (!id) {
-      return apiError('Teacher ID is required', 400)
+      return Response.json({
+        success: false,
+        error: 'Teacher ID is required'
+      }, { status: 400 })
     }
     
-    // Validate ID format
-    const idSchema = z.string().min(1)
-    const validatedId = idSchema.parse(id)
+    // Parse ID as integer
+    const numericId = parseInt(id, 10)
     
-    // Get teacher from database with events
-    const teacher = await getTeacherByIdWithEvents(validatedId)
+    if (isNaN(numericId)) {
+      return Response.json({
+        success: false,
+        error: 'Invalid teacher ID. Must be a number.'
+      }, { status: 400 })
+    }
+    
+    // Fetch teacher with full details
+    const teacher = await db.teacher.findUnique({
+      where: {
+        id: numericId
+      },
+      include: {
+        event_teachers: {
+          include: {
+            events: {
+              select: {
+                id: true,
+                name: true,
+                from_date: true,
+                to_date: true,
+                city: true,
+                country: true,
+                image_url: true
+              }
+            }
+          }
+        }
+      }
+    })
     
     if (!teacher) {
-      return apiError('Teacher not found', 404)
+      return Response.json({
+        success: false,
+        error: 'Teacher not found'
+      }, { status: 404 })
     }
     
-    // Transform to match the expected Teacher interface
+    // Transform image URL from /uploads/ to /api/uploads/
+    const transformImageUrl = (url: string | null): string | null => {
+      if (!url) return null
+      if (url.startsWith('/uploads/')) {
+        return `/api${url}`
+      }
+      return url
+    }
+    
+    // Transform to expected format
     const transformedTeacher = {
-      id: teacher.id,
+      id: teacher.id.toString(),
       name: teacher.name,
       bio: teacher.bio,
-      specialties: teacher.specialties,
+      specialties: ['Blues', 'Connection'], // Default specialties
       website: teacher.website,
-      imageUrl: teacher.imageUrl, // Add teacher image
-      socialLinks: {}, // TODO: Add social links when available in database
-      followers: [], // TODO: Get actual followers
-      festivals: teacher.events || [], // Include actual events
+      imageUrl: transformImageUrl(teacher.image_url),
+      socialLinks: {},
+      followers: [],
+      festivals: teacher.event_teachers?.map((et: any) => ({
+        id: et.events.id.toString(),
+        name: et.events.name,
+        startDate: et.events.from_date,
+        endDate: et.events.to_date,
+        city: et.events.city,
+        country: et.events.country,
+        image: transformImageUrl(et.events.image_url)
+      })) || [],
       stats: {
-        totalEvents: teacher.totalEvents,
-        upcomingEvents: teacher.upcomingEvents,
-        totalFollowers: 0 // TODO: Get actual follower count
+        totalEvents: teacher.event_teachers?.length || 0,
+        upcomingEvents: teacher.event_teachers?.filter((et: any) => 
+          new Date(et.events.from_date) > new Date()
+        ).length || 0,
+        totalFollowers: 0
       }
     }
     
-    return apiResponse(transformedTeacher, true, 'Teacher retrieved successfully')
+    return Response.json({
+      data: transformedTeacher,
+      success: true,
+      timestamp: new Date().toISOString()
+    })
     
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return apiError('Invalid teacher ID format')
-    }
-    
-    return handleApiError(error)
-  }
-}
-
-/**
- * PUT /api/teachers/[id] - Update teacher information (for future admin functionality)
- */
-export async function PUT(request: NextRequest, { params }: RouteParams) {
-  try {
-    validateMethod(request, ['PUT'])
-    
-    // TODO: Implement authentication check for admin users
-    // TODO: Implement teacher update with Prisma
-    
-    return apiError('Teacher update not implemented yet', 501)
-    
-  } catch (error) {
-    return handleApiError(error)
-  }
-}
-
-/**
- * DELETE /api/teachers/[id] - Delete teacher (for future admin functionality)
- */
-export async function DELETE(request: NextRequest, { params }: RouteParams) {
-  try {
-    validateMethod(request, ['DELETE'])
-    
-    // TODO: Implement authentication check for admin users
-    // TODO: Implement teacher deletion with Prisma
-    
-    return apiError('Teacher deletion not implemented yet', 501)
-    
-  } catch (error) {
-    return handleApiError(error)
+    console.error('Teacher API error:', error)
+    return Response.json({
+      success: false,
+      error: error instanceof Error ? error.message : 'Failed to fetch teacher'
+    }, { status: 500 })
   }
 }
