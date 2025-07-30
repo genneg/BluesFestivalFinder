@@ -29,7 +29,13 @@ export default function MusicianProfilePage() {
           throw new Error('Failed to load musician profile')
         }
         
-        const musicianData = await response.json()
+        const apiResponse = await response.json()
+        
+        if (!apiResponse.success) {
+          throw new Error(apiResponse.error || 'Failed to load musician')
+        }
+        
+        const musicianData = apiResponse.data
         setMusician(musicianData)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred')
