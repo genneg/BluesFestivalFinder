@@ -1,14 +1,6 @@
 import { NextRequest } from 'next/server'
 import { z } from 'zod'
-
-import { 
-  apiResponse, 
-  apiError, 
-  validatePagination, 
-  calculatePaginationMeta,
-  extractSearchParams
-} from '@/lib/api/utils'
-import { searchEvents } from '@/lib/services/eventService'
+import { db } from '@/lib/database'
 
 // Simplified search schema for mock data
 const searchSchema = z.object({
@@ -23,48 +15,129 @@ const searchSchema = z.object({
 
 export async function GET(request: NextRequest) {
   try {
-    const params = extractSearchParams(request.url)
-    const validatedParams = searchSchema.parse(params)
-    const { page, limit } = validatePagination(validatedParams.page, validatedParams.limit)
+    const url = new URL(request.url)
     
-    // Build filters for the event service
-    const filters = {
-      city: validatedParams.city,
-      country: validatedParams.country,
-      limit,
-      offset: (page - 1) * limit
+    // Parse parameters manually to avoid dependency issues
+    const page = Math.max(parseInt(url.searchParams.get('page') || '1'), 1)
+    const limit = Math.min(parseInt(url.searchParams.get('limit') || '20'), 100)
+    const query = url.searchParams.get('query') || ''
+    const city = url.searchParams.get('city') || ''
+    const country = url.searchParams.get('country') || ''
+    const sortBy = url.searchParams.get('sortBy') || 'relevance'
+    const sortOrder = url.searchParams.get('sortOrder') || 'desc'
+    
+    const skip = (page - 1) * limit
+    
+    // Build where clause for search
+    const where: any = {}
+    
+    // Text search across multiple fields
+    if (query) {
+      where.OR = [
+        { name: { contains: query, mode: 'insensitive' } },
+        { description: { contains: query, mode: 'insensitive' } },
+        { city: { contains: query, mode: 'insensitive' } },
+        { country: { contains: query, mode: 'insensitive' } },
+        { style: { contains: query, mode: 'insensitive' } }
+      ]
     }
     
-    // Get events from database using the search service
-    const result = await searchEvents(validatedParams.query || '', filters)
-    
-    const paginationMeta = calculatePaginationMeta(result.total, page, limit)
-    
-    // Build search metadata
-    const searchMeta = {
-      query: validatedParams.query,
-      sorting: {
-        sortBy: validatedParams.sortBy,
-        sortOrder: validatedParams.sortOrder
-      },
-      filters: {
-        city: validatedParams.city,
-        country: validatedParams.country
-      },
-      totalMatches: result.total
+    // Filter by city
+    if (city) {
+      where.city = { contains: city, mode: 'insensitive' }
     }
     
-    return apiResponse({
-      events: result.events,
-      pagination: paginationMeta,
-      searchMeta
+    // Filter by country
+    if (country) {
+      where.country = { contains: country, mode: 'insensitive' }
+    }
+    
+    // Build order by clause
+    let orderBy: any = { from_date: 'asc' } // Default sort by date
+    if (sortBy === 'date') {
+      orderBy = { from_date: sortOrder as 'asc' | 'desc' }
+    } else if (sortBy === 'popularity') {
+      orderBy = { name: sortOrder as 'asc' | 'desc' } // Simple name sort for now
+    }
+    
+    // Get events and total count
+    const [events, total] = await Promise.all([
+      db.event.findMany({
+        where,
+        take: limit,
+        skip: skip,
+        include: {
+          venues: true,
+          event_prices: true
+        },
+        orderBy
+      }),
+      db.event.count({ where })
+    ])
+    
+    // Transform to expected format
+    const transformedEvents = events.map(event => {
+      const primaryVenue = event.venues?.[0]
+      
+      return {
+        id: event.id.toString(),
+        name: event.name,
+        description: event.description,
+        startDate: event.from_date,
+        endDate: event.to_date,
+        country: event.country,
+        city: event.city,
+        website: event.website,
+        style: event.style,
+        imageUrl: event.image_url?.startsWith('/uploads/') ? `/api${event.image_url}` : event.image_url,
+        aiQualityScore: event.ai_quality_score,
+        aiCompletenessScore: event.ai_completeness_score,
+        extractionMethod: event.extraction_method,
+        createdAt: event.created_at,
+        updatedAt: event.updated_at,
+        venue: primaryVenue ? {
+          name: primaryVenue.name,
+          address: primaryVenue.address,
+          city: event.city,
+          country: event.country
+        } : null,
+        pricing: event.event_prices?.map(price => ({
+          price: Number(price.amount),
+          currency: price.currency,
+          type: price.type
+        })) || []
+      }
+    })
+    
+    const totalPages = Math.ceil(total / limit)
+    
+    return Response.json({
+      data: {
+        events: transformedEvents,
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages,
+          hasNext: page < totalPages,
+          hasPrev: page > 1
+        },
+        searchMeta: {
+          query,
+          sorting: { sortBy, sortOrder },
+          filters: { city, country },
+          totalMatches: total
+        }
+      },
+      success: true,
+      timestamp: new Date().toISOString()
     })
     
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return apiError('Invalid query parameters: ' + error.issues.map((e: any) => e.message).join(', '))
-    }
-    
-    return apiError('Search failed: ' + (error as Error).message)
+    console.error('Search events error:', error)
+    return Response.json({
+      success: false,
+      error: error instanceof Error ? error.message : 'Search failed'
+    }, { status: 500 })
   }
 }
