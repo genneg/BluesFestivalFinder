@@ -6,7 +6,7 @@
  * (with startDate, endDate, etc.)
  */
 
-import { Event as ExternalEvent, event_prices, ExternalEventVenue } from '@festival-scout/database'
+import { Event as ExternalEvent, event_prices, ExternalEventVenue } from '../../../packages/database/src/index'
 
 // Internal event interface that matches our application expectations
 export interface InternalEvent {
