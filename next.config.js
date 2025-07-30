@@ -9,6 +9,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Fix Prisma bundling for Vercel
+  experimental: {
+    serverComponentsExternalPackages: ['@prisma/client', '@prisma/engines'],
+  },
   images: {
     domains: [
       'example.com',
