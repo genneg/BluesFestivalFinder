@@ -2,6 +2,9 @@ import { NextRequest } from 'next/server'
 import { z } from 'zod'
 import { db } from '@/lib/database'
 
+// Mark route as dynamic
+export const dynamic = 'force-dynamic'
+
 // Simplified search schema for mock data
 const searchSchema = z.object({
   page: z.string().optional().default('1'),
@@ -15,6 +18,9 @@ const searchSchema = z.object({
 
 export async function GET(request: NextRequest) {
   try {
+    // Ensure database connection is healthy
+    await db.$connect()
+    
     const url = new URL(request.url)
     
     // Parse parameters manually to avoid dependency issues
@@ -60,20 +66,27 @@ export async function GET(request: NextRequest) {
       orderBy = { name: sortOrder as 'asc' | 'desc' } // Simple name sort for now
     }
     
-    // Get events and total count
-    const [events, total] = await Promise.all([
-      db.event.findMany({
-        where,
-        take: limit,
-        skip: skip,
-        include: {
-          venues: true,
-          event_prices: true
-        },
-        orderBy
-      }),
-      db.event.count({ where })
-    ])
+    // Get events and total count with timeout protection
+    const queryTimeout = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Database query timeout')), 30000)
+    )
+    
+    const [events, total] = await Promise.race([
+      Promise.all([
+        db.event.findMany({
+          where,
+          take: limit,
+          skip: skip,
+          include: {
+            venues: true,
+            event_prices: true
+          },
+          orderBy
+        }),
+        db.event.count({ where })
+      ]),
+      queryTimeout
+    ]) as [any[], number]
     
     // Transform to expected format
     const transformedEvents = events.map(event => {
@@ -135,9 +148,32 @@ export async function GET(request: NextRequest) {
     
   } catch (error) {
     console.error('Search events error:', error)
+    
+    // Handle specific database connection errors
+    if (error instanceof Error) {
+      if (error.message.includes('connection pool') || error.message.includes('timeout')) {
+        return Response.json({
+          success: false,
+          error: 'Database is temporarily unavailable. Please try again in a moment.'
+        }, { status: 503 })
+      }
+      
+      if (error.message.includes('Database query timeout')) {
+        return Response.json({
+          success: false,
+          error: 'Search request timed out. Please try with more specific filters.'
+        }, { status: 408 })
+      }
+    }
+    
     return Response.json({
       success: false,
       error: error instanceof Error ? error.message : 'Search failed'
     }, { status: 500 })
+  } finally {
+    // Don't disconnect in serverless environments - let connection pooling handle it
+    if (process.env.NODE_ENV === 'development') {
+      await db.$disconnect().catch(() => {}) // Silent fail for cleanup
+    }
   }
 }

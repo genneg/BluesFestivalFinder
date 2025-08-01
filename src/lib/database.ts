@@ -6,9 +6,42 @@ declare global {
   var __prisma: PrismaClient | undefined
 }
 
+// Configure database URL with connection pooling
+function getDatabaseUrl() {
+  const url = process.env.DATABASE_URL
+  if (!url) {
+    throw new Error('DATABASE_URL environment variable is not set')
+  }
+
+  // For production/serverless environments, add connection pool parameters
+  if (process.env.NODE_ENV === 'production' || process.env.VERCEL) {
+    const urlObj = new URL(url)
+    
+    // Add connection pool parameters if not already present
+    if (!urlObj.searchParams.has('connection_limit')) {
+      urlObj.searchParams.set('connection_limit', '20')
+    }
+    if (!urlObj.searchParams.has('pool_timeout')) {
+      urlObj.searchParams.set('pool_timeout', '30')
+    }
+    if (!urlObj.searchParams.has('connect_timeout')) {
+      urlObj.searchParams.set('connect_timeout', '60')
+    }
+    
+    return urlObj.toString()
+  }
+  
+  return url
+}
+
 // Create singleton Prisma client
 export const db = globalThis.__prisma ?? new PrismaClient({
   log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
+  datasources: {
+    db: {
+      url: getDatabaseUrl(),
+    },
+  },
 })
 
 if (process.env.NODE_ENV !== 'production') {
