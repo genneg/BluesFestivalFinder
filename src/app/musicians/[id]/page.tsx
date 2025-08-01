@@ -280,7 +280,6 @@ export default function MusicianProfilePage() {
             </Button>
           </Link>
         </div>
-        </div>
 
         {/* Bottom Navigation */}
         <BottomNavigationEnhanced activeTab={activeTab} onTabChange={setActiveTab} />
