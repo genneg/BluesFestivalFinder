@@ -329,6 +329,7 @@ score += 25
 
 /**
  * Optimized search aggregation for autocomplete suggestions
+ * Reduces database calls and implements timeout protection
  */
 export async function getSearchSuggestions(
   query: string,
@@ -339,61 +340,100 @@ export async function getSearchSuggestions(
   musicians: string[]
   locations: string[]
 }> {
-  const queryPattern = `%${query.toLowerCase()}%`
-  
-  const [events, teachers, musicians, venues] = await Promise.all([
-    // Event name suggestions
-    db.event.findMany({
-      where: {
-        name: { contains: query, mode: 'insensitive' }
-      },
-      select: { name: true },
-      take: limit,
-      orderBy: { created_at: 'desc' }
-    }),
+  try {
+    // Ensure connection is available
+    await db.$connect()
     
-    // Teacher suggestions
-    db.teacher.findMany({
-      where: {
-        name: { contains: query, mode: 'insensitive' }
-      },
-      select: { name: true },
-      take: limit,
-      orderBy: { id: 'desc' }
-    }),
+    // Use a single query with timeout protection instead of 4 parallel queries
+    const queryTimeout = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Suggestions query timeout')), 10000)
+    )
     
-    // Musician suggestions
-    db.musician.findMany({
-      where: {
-        name: { contains: query, mode: 'insensitive' }
-      },
-      select: { name: true },
-      take: limit,
-      orderBy: { id: 'desc' }
-    }),
+    // Prioritize event suggestions as they're most important
+    const eventSuggestions = await Promise.race([
+      db.event.findMany({
+        where: {
+          OR: [
+            { name: { contains: query, mode: 'insensitive' } },
+            { city: { contains: query, mode: 'insensitive' } },
+            { country: { contains: query, mode: 'insensitive' } }
+          ]
+        },
+        select: { 
+          name: true, 
+          city: true, 
+          country: true 
+        },
+        take: limit * 2, // Get more to have variety
+        orderBy: { from_date: 'desc' }
+      }),
+      queryTimeout
+    ]) as any[]
+
+    // Sequential queries to avoid overwhelming the connection pool
+    let teachers: any[] = []
+    let musicians: any[] = []
     
-    // Location suggestions from events
-    db.event.findMany({
-      where: {
-        OR: [
-          { city: { contains: query, mode: 'insensitive' } },
-          { country: { contains: query, mode: 'insensitive' } }
-        ]
-      },
-      select: { city: true, country: true },
-      take: limit,
-      distinct: ['city', 'country']
-    })
-  ])
-  
-  return {
-    events: events.map((e: any) => e.name),
-    teachers: teachers.map((t: any) => t.name),
-    musicians: musicians.map((m: any) => m.name),
-    locations: Array.from(new Set([
-      ...venues.map((v: any) => v.city),
-      ...venues.map((v: any) => v.country),
-      ...venues.map((v: any) => `${v.city}, ${v.country}`)
+    try {
+      teachers = await Promise.race([
+        db.teacher.findMany({
+          where: {
+            name: { contains: query, mode: 'insensitive' }
+          },
+          select: { name: true },
+          take: Math.ceil(limit / 2),
+          orderBy: { id: 'desc' }
+        }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Teachers timeout')), 5000))
+      ]) as any[]
+    } catch (error) {
+      console.warn('Teachers search failed:', error)
+    }
+
+    try {
+      musicians = await Promise.race([
+        db.musician.findMany({
+          where: {
+            name: { contains: query, mode: 'insensitive' }
+          },
+          select: { name: true },
+          take: Math.ceil(limit / 2),
+          orderBy: { id: 'desc' }
+        }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Musicians timeout')), 5000))
+      ]) as any[]
+    } catch (error) {
+      console.warn('Musicians search failed:', error)
+    }
+
+    // Extract unique locations from events
+    const uniqueLocations = Array.from(new Set([
+      ...eventSuggestions.map((e: any) => e.city).filter(Boolean),
+      ...eventSuggestions.map((e: any) => e.country).filter(Boolean),
+      ...eventSuggestions.map((e: any) => `${e.city}, ${e.country}`).filter(city => city !== ', ')
     ])).slice(0, limit)
+
+    return {
+      events: eventSuggestions.map((e: any) => e.name).slice(0, limit),
+      teachers: teachers.map((t: any) => t.name),
+      musicians: musicians.map((m: any) => m.name),
+      locations: uniqueLocations
+    }
+    
+  } catch (error) {
+    console.error('Search suggestions error:', error)
+    
+    // Return empty results on error
+    return {
+      events: [],
+      teachers: [],
+      musicians: [],
+      locations: []
+    }
+  } finally {
+    // Don't disconnect in serverless environments
+    if (process.env.NODE_ENV === 'development') {
+      await db.$disconnect().catch(() => {})
+    }
   }
 }

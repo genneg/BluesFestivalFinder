@@ -59,6 +59,19 @@ export async function GET(request: NextRequest) {
       return apiError('Invalid query parameters: ' + error.issues.map((e: any) => e.message).join(', '))
     }
     
+    // Handle database connection errors gracefully
+    if (error instanceof Error && error.message.includes('connection pool')) {
+      return Response.json({
+        events: [],
+        teachers: [],
+        musicians: [],
+        locations: []
+      }, { 
+        status: 200, // Return success with empty results
+        headers: { 'Cache-Control': 'no-cache' }
+      })
+    }
+    
     return handleApiError(error)
   }
 }
