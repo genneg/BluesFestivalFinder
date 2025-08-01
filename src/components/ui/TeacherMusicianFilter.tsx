@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { Input } from '@/components/ui/Input'
 import { cn } from '@/lib/utils'
@@ -13,32 +13,15 @@ interface TeacherMusicianFilterProps {
   className?: string
 }
 
-// Mock data - in a real app, this would come from an API
-const popularTeachers = [
-  'Damon Stone',
-  'Tina Daniels',
-  'Lisa Clarke',
-  'Josh Hillis',
-  'Naomi Uyama',
-  'Sarah Breck',
-  'Jonathan Stout',
-  'Hilary Alexander',
-  'Mike Faltesek',
-  'Keesha Beckford'
-]
+interface Teacher {
+  id: string
+  name: string
+}
 
-const popularMusicians = [
-  'Jonathan Stout and his Campus Five',
-  'Meschiya Lake',
-  'Gordon Webster',
-  'The Smoking Time Jazz Club',
-  'Midnite Serenaders',
-  'Aurora Nealand',
-  'The Speakeasy Serenaders',
-  'Brooklyn Blues',
-  'Elise Roth',
-  'Glenn Crytzer'
-]
+interface Musician {
+  id: string
+  name: string
+}
 
 export function TeacherMusicianFilter({
   selectedTeachers = [],
@@ -51,15 +34,47 @@ export function TeacherMusicianFilter({
   const [musicianQuery, setMusicianQuery] = useState('')
   const [showTeacherSuggestions, setShowTeacherSuggestions] = useState(false)
   const [showMusicianSuggestions, setShowMusicianSuggestions] = useState(false)
+  const [popularTeachers, setPopularTeachers] = useState<Teacher[]>([])
+  const [popularMusicians, setPopularMusicians] = useState<Musician[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Fetch teachers and musicians from API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true)
+        const [teachersRes, musiciansRes] = await Promise.all([
+          fetch('/api/teachers?limit=10'),
+          fetch('/api/musicians?limit=10')
+        ])
+
+        const teachersData = await teachersRes.json()
+        const musiciansData = await musiciansRes.json()
+
+        if (teachersData.success) {
+          setPopularTeachers(teachersData.data.teachers || [])
+        }
+        if (musiciansData.success) {
+          setPopularMusicians(musiciansData.data.musicians || [])
+        }
+      } catch (error) {
+        console.error('Error fetching teachers/musicians:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   const filteredTeachers = popularTeachers.filter(teacher => 
-    teacher.toLowerCase().includes(teacherQuery.toLowerCase()) &&
-    !selectedTeachers.includes(teacher)
+    teacher.name.toLowerCase().includes(teacherQuery.toLowerCase()) &&
+    !selectedTeachers.includes(teacher.name)
   ).slice(0, 5)
 
   const filteredMusicians = popularMusicians.filter(musician => 
-    musician.toLowerCase().includes(musicianQuery.toLowerCase()) &&
-    !selectedMusicians.includes(musician)
+    musician.name.toLowerCase().includes(musicianQuery.toLowerCase()) &&
+    !selectedMusicians.includes(musician.name)
   ).slice(0, 5)
 
   const addTeacher = (teacher: string) => {
@@ -154,15 +169,15 @@ export function TeacherMusicianFilter({
             <div className="absolute z-10 w-full mt-1 bg-navy-900 border border-primary/30 rounded-lg shadow-lg max-h-40 overflow-y-auto">
               {filteredTeachers.map((teacher) => (
                 <button
-                  key={teacher}
+                  key={teacher.id}
                   type="button"
-                  onClick={() => addTeacher(teacher)}
+                  onClick={() => addTeacher(teacher.name)}
                   className="w-full px-3 py-2 text-left text-base font-medium text-white hover:bg-primary/20 focus:bg-primary/20 focus:outline-none first:rounded-t-lg last:rounded-b-lg"
                 >
-                  {teacher}
+                  {teacher.name}
                 </button>
               ))}
-              {teacherQuery.length > 0 && !filteredTeachers.some(t => t.toLowerCase() === teacherQuery.toLowerCase()) && (
+              {teacherQuery.length > 0 && !filteredTeachers.some(t => t.name.toLowerCase() === teacherQuery.toLowerCase()) && (
                 <button
                   type="button"
                   onClick={() => addTeacher(teacherQuery)}
@@ -178,19 +193,26 @@ export function TeacherMusicianFilter({
         {/* Popular Teachers */}
         <div className="mt-3">
           <p className="text-sm font-medium text-primary mb-3">Popular teachers:</p>
-          <div className="flex flex-wrap gap-1">
-            {popularTeachers.slice(0, 6).map((teacher) => (
-              <button
-                key={teacher}
-                type="button"
-                onClick={() => addTeacher(teacher)}
-                disabled={selectedTeachers.includes(teacher)}
-                className="px-3 py-1.5 text-sm bg-primary/20 hover:bg-primary/30 disabled:bg-white/10 disabled:text-white/50 text-primary rounded-lg transition-colors font-medium"
-              >
-                {teacher}
-              </button>
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="flex items-center text-white/60 text-sm">
+              <div className="spinner mr-2 !w-3 !h-3"></div>
+              Loading teachers...
+            </div>
+          ) : (
+            <div className="flex flex-wrap gap-1">
+              {popularTeachers.slice(0, 6).map((teacher) => (
+                <button
+                  key={teacher.id}
+                  type="button"
+                  onClick={() => addTeacher(teacher.name)}
+                  disabled={selectedTeachers.includes(teacher.name)}
+                  className="px-3 py-1.5 text-sm bg-primary/20 hover:bg-primary/30 disabled:bg-white/10 disabled:text-white/50 text-primary rounded-lg transition-colors font-medium"
+                >
+                  {teacher.name}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -242,15 +264,15 @@ export function TeacherMusicianFilter({
             <div className="absolute z-10 w-full mt-1 bg-navy-900 border border-primary/30 rounded-lg shadow-lg max-h-40 overflow-y-auto">
               {filteredMusicians.map((musician) => (
                 <button
-                  key={musician}
+                  key={musician.id}
                   type="button"
-                  onClick={() => addMusician(musician)}
+                  onClick={() => addMusician(musician.name)}
                   className="w-full px-3 py-2 text-left text-base font-medium text-white hover:bg-primary/20 focus:bg-primary/20 focus:outline-none first:rounded-t-lg last:rounded-b-lg"
                 >
-                  {musician}
+                  {musician.name}
                 </button>
               ))}
-              {musicianQuery.length > 0 && !filteredMusicians.some(m => m.toLowerCase() === musicianQuery.toLowerCase()) && (
+              {musicianQuery.length > 0 && !filteredMusicians.some(m => m.name.toLowerCase() === musicianQuery.toLowerCase()) && (
                 <button
                   type="button"
                   onClick={() => addMusician(musicianQuery)}
@@ -266,19 +288,26 @@ export function TeacherMusicianFilter({
         {/* Popular Musicians */}
         <div className="mt-3">
           <p className="text-sm font-medium text-primary mb-3">Popular musicians:</p>
-          <div className="flex flex-wrap gap-1">
-            {popularMusicians.slice(0, 4).map((musician) => (
-              <button
-                key={musician}
-                type="button"
-                onClick={() => addMusician(musician)}
-                disabled={selectedMusicians.includes(musician)}
-                className="px-3 py-1.5 text-sm bg-primary/20 hover:bg-primary/30 disabled:bg-white/10 disabled:text-white/50 text-primary rounded-lg transition-colors font-medium"
-              >
-                {musician.length > 20 ? musician.substring(0, 20) + '...' : musician}
-              </button>
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="flex items-center text-white/60 text-sm">
+              <div className="spinner mr-2 !w-3 !h-3"></div>
+              Loading musicians...
+            </div>
+          ) : (
+            <div className="flex flex-wrap gap-1">
+              {popularMusicians.slice(0, 4).map((musician) => (
+                <button
+                  key={musician.id}
+                  type="button"
+                  onClick={() => addMusician(musician.name)}
+                  disabled={selectedMusicians.includes(musician.name)}
+                  className="px-3 py-1.5 text-sm bg-primary/20 hover:bg-primary/30 disabled:bg-white/10 disabled:text-white/50 text-primary rounded-lg transition-colors font-medium"
+                >
+                  {musician.name.length > 20 ? musician.name.substring(0, 20) + '...' : musician.name}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

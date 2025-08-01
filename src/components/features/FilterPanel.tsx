@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Input } from '@/components/ui/Input'
 import { DateRangePicker } from '@/components/ui/DateRangePicker'
-import { LocationFilter } from '@/components/ui/LocationFilter'
 import { TeacherMusicianFilter } from '@/components/ui/TeacherMusicianFilter'
 
 interface FilterOptions {
@@ -25,8 +24,6 @@ interface FilterOptions {
     min: number
     max: number
   }
-  eventTypes: string[]
-  skillLevels: string[]
 }
 
 interface FilterPanelProps {
@@ -53,21 +50,6 @@ export function FilterPanel({
     })
   }
 
-  const eventTypes = [
-    'Workshop Weekend',
-    'Festival',
-    'Exchange',
-    'Competition',
-    'Social Dance',
-    'Blues Camp'
-  ]
-
-  const skillLevels = [
-    'Beginner',
-    'Intermediate', 
-    'Advanced',
-    'All Levels'
-  ]
 
   return (
     <Card className={className}>
@@ -107,24 +89,19 @@ export function FilterPanel({
         />
 
         {/* Location */}
-        <LocationFilter
-          label="Location"
-          city={filters.location?.city || ''}
-          country={filters.location?.country || ''}
-          radius={filters.location?.radius || 50}
-          onCityChange={(city) => updateFilter('location', {
-            ...filters.location,
-            city
-          })}
-          onCountryChange={(country) => updateFilter('location', {
-            ...filters.location,
-            country
-          })}
-          onRadiusChange={(radius) => updateFilter('location', {
-            ...filters.location,
-            radius
-          })}
-        />
+        <div>
+          <h3 className="text-base font-semibold text-primary mb-4">Location</h3>
+          <Input
+            type="text"
+            placeholder="e.g. London, UK or Paris, France"
+            value={filters.location?.city || ''}
+            onChange={(e) => updateFilter('location', {
+              city: e.target.value,
+              country: '',
+              radius: 50
+            })}
+          />
+        </div>
 
         {/* Price Range */}
         <div>
@@ -153,53 +130,6 @@ export function FilterPanel({
           </div>
         </div>
 
-        {/* Event Types */}
-        <div>
-          <h3 className="text-base font-semibold text-primary mb-4">Event Types</h3>
-          <div className="space-y-3">
-            {eventTypes.map((type) => (
-              <label key={type} className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={filters.eventTypes?.includes(type) || false}
-                  onChange={(e) => {
-                    const currentTypes = filters.eventTypes || []
-                    const newTypes = e.target.checked
-                      ? [...currentTypes, type]
-                      : currentTypes.filter(t => t !== type)
-                    updateFilter('eventTypes', newTypes)
-                  }}
-                  className="form-checkbox"
-                />
-                <span className="ml-3 text-base font-medium text-white">{type}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        {/* Skill Levels */}
-        <div>
-          <h3 className="text-base font-semibold text-primary mb-4">Skill Level</h3>
-          <div className="space-y-3">
-            {skillLevels.map((level) => (
-              <label key={level} className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={filters.skillLevels?.includes(level) || false}
-                  onChange={(e) => {
-                    const currentLevels = filters.skillLevels || []
-                    const newLevels = e.target.checked
-                      ? [...currentLevels, level]
-                      : currentLevels.filter(l => l !== level)
-                    updateFilter('skillLevels', newLevels)
-                  }}
-                  className="form-checkbox"
-                />
-                <span className="ml-3 text-base font-medium text-white">{level}</span>
-              </label>
-            ))}
-          </div>
-        </div>
 
         {/* Teachers and Musicians */}
         <TeacherMusicianFilter

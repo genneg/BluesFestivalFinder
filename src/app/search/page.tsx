@@ -21,8 +21,6 @@ interface FilterOptions {
     min: number
     max: number
   }
-  eventTypes: string[]
-  skillLevels: string[]
 }
 
 export default function SearchPage() {
@@ -59,9 +57,7 @@ export default function SearchPage() {
       } : undefined,
       teachers: newFilters.teachers,
       musicians: newFilters.musicians,
-      priceRange: newFilters.priceRange,
-      eventTypes: newFilters.eventTypes,
-      skillLevels: newFilters.skillLevels
+      priceRange: newFilters.priceRange
     }
     
     updateFilters(searchFilters)
@@ -121,8 +117,6 @@ export default function SearchPage() {
                   teachers: filters.teachers || [],
                   musicians: filters.musicians || [],
                   priceRange: filters.priceRange,
-                  eventTypes: filters.eventTypes || [],
-                  skillLevels: filters.skillLevels || []
                 }}
                 onFiltersChange={handleFiltersChange}
                 onApply={handleApplyFilters}
@@ -177,16 +171,6 @@ export default function SearchPage() {
                 {filters.musicians?.map(musician => (
                   <span key={musician} className="badge-secondary">
                     Musician: {musician}
-                  </span>
-                ))}
-                {filters.eventTypes?.map(type => (
-                  <span key={type} className="badge-success">
-                    {type}
-                  </span>
-                ))}
-                {filters.skillLevels?.map(level => (
-                  <span key={level} className="badge-primary">
-                    {level}
                   </span>
                 ))}
               </div>
