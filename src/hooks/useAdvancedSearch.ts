@@ -171,40 +171,42 @@ params.set('featured', searchFilters.featured.toString())
     return params
   }, [])
   
-  // Perform search - stable function to avoid loops
-  const search = useCallback(async (
-    customFilters?: SearchFilters,
-    customOptions?: SearchOptions
-  ) => {
+  // Perform search - rewritten to be completely stable
+  const search = useCallback(() => {
     setIsLoading(true)
     setError(null)
     
-    try {
-      // Use current state if no custom filters/options provided
-      const searchFilters = customFilters || filters
-      const searchOptions = customOptions || options
-      
-      const params = buildSearchParams(searchFilters, searchOptions)
-      const response = await fetch(`/api/search/events?${params.toString()}`)
-      
-      if (!response.ok) {
-        throw new Error(`Search failed: ${response.statusText}`)
-      }
-      
-      const data = await response.json()
-      
-      if (!data.success) {
-        throw new Error(data.error || 'Search failed')
-      }
-      
-      setResults(data.data)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Search failed')
-      setResults(null)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [buildSearchParams]) // Only buildSearchParams as dependency
+    // Get current state values to avoid stale closures
+    setFilters(currentFilters => {
+      setOptions(currentOptions => {
+        const params = buildSearchParams(currentFilters, currentOptions)
+        
+        fetch(`/api/search/events?${params.toString()}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`Search failed: ${response.statusText}`)
+            }
+            return response.json()
+          })
+          .then(data => {
+            if (!data.success) {
+              throw new Error(data.error || 'Search failed')
+            }
+            setResults(data.data)
+          })
+          .catch(err => {
+            setError(err instanceof Error ? err.message : 'Search failed')
+            setResults(null)
+          })
+          .finally(() => {
+            setIsLoading(false)
+          })
+        
+        return currentOptions
+      })
+      return currentFilters
+    })
+  }, [buildSearchParams])
   
   // Get search suggestions
   const getSuggestions = useCallback(async (query: string) => {
@@ -241,7 +243,7 @@ params.set('featured', searchFilters.featured.toString())
     getSuggestions(debouncedQuery)
   }, [debouncedQuery, getSuggestions])
   
-  // Update filters - simplified to avoid dependency loops
+  // Update filters
   const updateFilters = useCallback((newFilters: Partial<SearchFilters>) => {
     setFilters(prev => ({ ...prev, ...newFilters }))
     setOptions(prev => ({ ...prev, page: 1 })) // Reset to first page
@@ -267,9 +269,23 @@ params.set('featured', searchFilters.featured.toString())
   
   // Navigate to page
   const goToPage = useCallback((page: number) => {
-    setOptions(prev => ({ ...prev, page }))
-    search(filters, { ...options, page })
-  }, [filters, options, search])
+    const newOptions = { ...options, page }
+    setOptions(newOptions)
+    // Direct API call to avoid dependency issues
+    const params = buildSearchParams(filters, newOptions)
+    setIsLoading(true)
+    fetch(`/api/search/events?${params.toString()}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          setResults(data.data)
+        } else {
+          setError(data.error || 'Search failed')
+        }
+      })
+      .catch(err => setError('Search failed'))
+      .finally(() => setIsLoading(false))
+  }, [filters, options, buildSearchParams])
   
   // Check if any filters are active
   const hasActiveFilters = useCallback(() => {
