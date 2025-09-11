@@ -18,6 +18,7 @@ const nextConfig = {
       'example.com',
       'localhost',
       'images.unsplash.com', // For fallback images
+      'tqvvseagpkmdnsiuwabv.supabase.co', // Supabase storage
     ],
     // Allow API routes for images
     remotePatterns: [
@@ -30,6 +31,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'tqvvseagpkmdnsiuwabv.supabase.co',
+        pathname: '/storage/v1/object/public/bluesbucket/**',
       },
     ],
   },

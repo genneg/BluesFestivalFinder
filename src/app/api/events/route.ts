@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server'
+
 import { db } from '@/lib/database'
 
 export const dynamic = 'force-dynamic'
@@ -9,7 +10,7 @@ export async function GET(request: NextRequest) {
     const limit = Math.min(parseInt(url.searchParams.get('limit') || '10'), 100)
     const page = Math.max(parseInt(url.searchParams.get('page') || '1'), 1)
     const skip = (page - 1) * limit
-    
+
     // Direct database query
     const [events, total] = await Promise.all([
       db.event.findMany({
@@ -17,19 +18,19 @@ export async function GET(request: NextRequest) {
         skip: skip,
         include: {
           venues: true,
-          event_prices: true
+          event_prices: true,
         },
         orderBy: {
-          from_date: 'asc'
-        }
+          from_date: 'asc',
+        },
       }),
-      db.event.count()
+      db.event.count(),
     ])
-    
+
     // Transform to expected format
     const transformedEvents = events.map(event => {
       const primaryVenue = event.venues?.[0]
-      
+
       return {
         id: event.id.toString(),
         name: event.name,
@@ -40,28 +41,33 @@ export async function GET(request: NextRequest) {
         city: event.city,
         website: event.website,
         style: event.style,
-        imageUrl: event.image_url?.startsWith('/uploads/') ? `/api${event.image_url}` : event.image_url,
+        imageUrl: event.image_url?.startsWith('/uploads/')
+          ? `https://tqvvseagpkmdnsiuwabv.supabase.co/storage/v1/object/public/bluesbucket/${event.image_url.replace('/uploads/', '')}`
+          : event.image_url,
         aiQualityScore: event.ai_quality_score,
         aiCompletenessScore: event.ai_completeness_score,
         extractionMethod: event.extraction_method,
         createdAt: event.created_at,
         updatedAt: event.updated_at,
-        venue: primaryVenue ? {
-          name: primaryVenue.name,
-          address: primaryVenue.address,
-          city: event.city,
-          country: event.country
-        } : null,
-        pricing: event.event_prices?.map(price => ({
-          price: Number(price.amount),
-          currency: price.currency,
-          type: price.type
-        })) || []
+        venue: primaryVenue
+          ? {
+              name: primaryVenue.name,
+              address: primaryVenue.address,
+              city: event.city,
+              country: event.country,
+            }
+          : null,
+        pricing:
+          event.event_prices?.map(price => ({
+            price: Number(price.amount),
+            currency: price.currency,
+            type: price.type,
+          })) || [],
       }
     })
-    
+
     const totalPages = Math.ceil(total / limit)
-    
+
     return Response.json({
       data: {
         events: transformedEvents,
@@ -71,18 +77,20 @@ export async function GET(request: NextRequest) {
           total,
           totalPages,
           hasNext: page < totalPages,
-          hasPrev: page > 1
-        }
+          hasPrev: page > 1,
+        },
       },
       success: true,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     })
-    
   } catch (error) {
     console.error('Events API error:', error)
-    return Response.json({
-      success: false,
-      error: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 })
+    return Response.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 }
+    )
   }
 }

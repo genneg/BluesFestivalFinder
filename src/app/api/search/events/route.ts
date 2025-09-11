@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server'
 import { z } from 'zod'
+
 import { db } from '@/lib/database'
 
 // Mark route as dynamic
@@ -12,7 +13,10 @@ const searchSchema = z.object({
   query: z.string().optional(),
   city: z.string().optional(),
   country: z.string().optional(),
-  sortBy: z.enum(['relevance', 'date', 'distance', 'popularity', 'price']).optional().default('relevance'),
+  sortBy: z
+    .enum(['relevance', 'date', 'distance', 'popularity', 'price'])
+    .optional()
+    .default('relevance'),
   sortOrder: z.enum(['asc', 'desc']).optional().default('desc'),
 })
 
@@ -20,9 +24,9 @@ export async function GET(request: NextRequest) {
   try {
     // Ensure database connection is healthy
     await db.$connect()
-    
+
     const url = new URL(request.url)
-    
+
     // Parse parameters manually to avoid dependency issues
     const page = Math.max(parseInt(url.searchParams.get('page') || '1'), 1)
     const limit = Math.min(parseInt(url.searchParams.get('limit') || '20'), 100)
@@ -31,12 +35,12 @@ export async function GET(request: NextRequest) {
     const country = url.searchParams.get('country') || ''
     const sortBy = url.searchParams.get('sortBy') || 'relevance'
     const sortOrder = url.searchParams.get('sortOrder') || 'desc'
-    
+
     const skip = (page - 1) * limit
-    
+
     // Build where clause for search
     const where: any = {}
-    
+
     // Text search across multiple fields
     if (query) {
       where.OR = [
@@ -44,20 +48,20 @@ export async function GET(request: NextRequest) {
         { description: { contains: query, mode: 'insensitive' } },
         { city: { contains: query, mode: 'insensitive' } },
         { country: { contains: query, mode: 'insensitive' } },
-        { style: { contains: query, mode: 'insensitive' } }
+        { style: { contains: query, mode: 'insensitive' } },
       ]
     }
-    
+
     // Filter by city
     if (city) {
       where.city = { contains: city, mode: 'insensitive' }
     }
-    
+
     // Filter by country
     if (country) {
       where.country = { contains: country, mode: 'insensitive' }
     }
-    
+
     // Build order by clause
     let orderBy: any = { from_date: 'asc' } // Default sort by date
     if (sortBy === 'date') {
@@ -65,13 +69,13 @@ export async function GET(request: NextRequest) {
     } else if (sortBy === 'popularity') {
       orderBy = { name: sortOrder as 'asc' | 'desc' } // Simple name sort for now
     }
-    
+
     // Get events and total count with timeout protection
-    const queryTimeout = new Promise((_, reject) => 
+    const queryTimeout = new Promise((_, reject) =>
       setTimeout(() => reject(new Error('Database query timeout')), 30000)
     )
-    
-    const [events, total] = await Promise.race([
+
+    const [events, total] = (await Promise.race([
       Promise.all([
         db.event.findMany({
           where,
@@ -79,19 +83,19 @@ export async function GET(request: NextRequest) {
           skip: skip,
           include: {
             venues: true,
-            event_prices: true
+            event_prices: true,
           },
-          orderBy
+          orderBy,
         }),
-        db.event.count({ where })
+        db.event.count({ where }),
       ]),
-      queryTimeout
-    ]) as [any[], number]
-    
+      queryTimeout,
+    ])) as [any[], number]
+
     // Transform to expected format
     const transformedEvents = events.map(event => {
       const primaryVenue = event.venues?.[0]
-      
+
       return {
         id: event.id.toString(),
         name: event.name,
@@ -102,28 +106,33 @@ export async function GET(request: NextRequest) {
         city: event.city,
         website: event.website,
         style: event.style,
-        imageUrl: event.image_url?.startsWith('/uploads/') ? `/api${event.image_url}` : event.image_url,
+        imageUrl: event.image_url?.startsWith('/uploads/')
+          ? `https://tqvvseagpkmdnsiuwabv.supabase.co/storage/v1/object/public/bluesbucket/${event.image_url.replace('/uploads/', '')}`
+          : event.image_url,
         aiQualityScore: event.ai_quality_score,
         aiCompletenessScore: event.ai_completeness_score,
         extractionMethod: event.extraction_method,
         createdAt: event.created_at,
         updatedAt: event.updated_at,
-        venue: primaryVenue ? {
-          name: primaryVenue.name,
-          address: primaryVenue.address,
-          city: event.city,
-          country: event.country
-        } : null,
-        pricing: event.event_prices?.map(price => ({
-          price: Number(price.amount),
-          currency: price.currency,
-          type: price.type
-        })) || []
+        venue: primaryVenue
+          ? {
+              name: primaryVenue.name,
+              address: primaryVenue.address,
+              city: event.city,
+              country: event.country,
+            }
+          : null,
+        pricing:
+          event.event_prices?.map(price => ({
+            price: Number(price.amount),
+            currency: price.currency,
+            type: price.type,
+          })) || [],
       }
     })
-    
+
     const totalPages = Math.ceil(total / limit)
-    
+
     return Response.json({
       data: {
         events: transformedEvents,
@@ -133,43 +142,51 @@ export async function GET(request: NextRequest) {
           total,
           totalPages,
           hasNext: page < totalPages,
-          hasPrev: page > 1
+          hasPrev: page > 1,
         },
         searchMeta: {
           query,
           sorting: { sortBy, sortOrder },
           filters: { city, country },
-          totalMatches: total
-        }
+          totalMatches: total,
+        },
       },
       success: true,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     })
-    
   } catch (error) {
     console.error('Search events error:', error)
-    
+
     // Handle specific database connection errors
     if (error instanceof Error) {
       if (error.message.includes('connection pool') || error.message.includes('timeout')) {
-        return Response.json({
-          success: false,
-          error: 'Database is temporarily unavailable. Please try again in a moment.'
-        }, { status: 503 })
+        return Response.json(
+          {
+            success: false,
+            error: 'Database is temporarily unavailable. Please try again in a moment.',
+          },
+          { status: 503 }
+        )
       }
-      
+
       if (error.message.includes('Database query timeout')) {
-        return Response.json({
-          success: false,
-          error: 'Search request timed out. Please try with more specific filters.'
-        }, { status: 408 })
+        return Response.json(
+          {
+            success: false,
+            error: 'Search request timed out. Please try with more specific filters.',
+          },
+          { status: 408 }
+        )
       }
     }
-    
-    return Response.json({
-      success: false,
-      error: error instanceof Error ? error.message : 'Search failed'
-    }, { status: 500 })
+
+    return Response.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : 'Search failed',
+      },
+      { status: 500 }
+    )
   } finally {
     // Don't disconnect in serverless environments - let connection pooling handle it
     if (process.env.NODE_ENV === 'development') {
