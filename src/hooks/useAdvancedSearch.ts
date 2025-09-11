@@ -238,10 +238,15 @@ params.set('featured', searchFilters.featured.toString())
   }, [debouncedQuery, getSuggestions])
   
   // Update filters
-  const updateFilters = useCallback((newFilters: Partial<SearchFilters>) => {
+  const updateFilters = useCallback((newFilters: Partial<SearchFilters>, autoSearch = false) => {
     setFilters(prev => ({ ...prev, ...newFilters }))
     setOptions(prev => ({ ...prev, page: 1 })) // Reset to first page
-  }, [])
+    
+    // Immediate search if requested
+    if (autoSearch) {
+      setTimeout(() => search({ ...filters, ...newFilters }, { ...options, page: 1 }), 0)
+    }
+  }, [filters, options, search])
   
   // Update options
   const updateOptions = useCallback((newOptions: Partial<SearchOptions>) => {
@@ -286,16 +291,8 @@ params.set('featured', searchFilters.featured.toString())
     )
   }, [filters])
   
-  // Auto-search when filters change (debounced)
-  useEffect(() => {
-    if (hasActiveFilters()) {
-      const timeoutId = setTimeout(() => {
-        search()
-      }, 500) // Debounce search
-      
-      return () => clearTimeout(timeoutId)
-    }
-  }, [filters, options, search, hasActiveFilters])
+  // No auto-search - manual control only
+  // Users will trigger search explicitly via search button or enter key
   
   return {
     // State

@@ -3,8 +3,9 @@ import { z } from 'zod'
 
 import { db } from '@/lib/database'
 
-// Mark route as dynamic
+// Mark route as dynamic with short caching
 export const dynamic = 'force-dynamic'
+export const revalidate = 60 // Cache for 60 seconds
 
 // Simplified search schema for mock data
 const searchSchema = z.object({
@@ -70,27 +71,76 @@ export async function GET(request: NextRequest) {
       orderBy = { name: sortOrder as 'asc' | 'desc' } // Simple name sort for now
     }
 
-    // Get events and total count with timeout protection
+    // Get events and total count with timeout protection and optimized query
     const queryTimeout = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Database query timeout')), 30000)
+      setTimeout(() => reject(new Error('Database query timeout')), 10000)
     )
 
-    const [events, total] = (await Promise.race([
-      Promise.all([
-        db.event.findMany({
-          where,
-          take: limit,
-          skip: skip,
-          include: {
-            venues: true,
-            event_prices: true,
+    // First get just the count for performance
+    const total = await db.event.count({ where })
+    
+    // If no results, return early
+    if (total === 0) {
+      return Response.json({
+        data: {
+          events: [],
+          pagination: {
+            page,
+            limit,
+            total: 0,
+            totalPages: 0,
+            hasNext: false,
+            hasPrev: false,
           },
-          orderBy,
-        }),
-        db.event.count({ where }),
-      ]),
+          searchMeta: {
+            query,
+            sorting: { sortBy, sortOrder },
+            filters: { city, country },
+            totalMatches: 0,
+          },
+        },
+        success: true,
+        timestamp: new Date().toISOString(),
+      })
+    }
+
+    // Then get events with minimal includes for better performance
+    const events = await Promise.race([
+      db.event.findMany({
+        where,
+        take: limit,
+        skip: skip,
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          from_date: true,
+          to_date: true,
+          country: true,
+          city: true,
+          website: true,
+          style: true,
+          image_url: true,
+          venues: {
+            select: {
+              name: true,
+              address: true,
+            },
+            take: 1, // Only get first venue
+          },
+          event_prices: {
+            select: {
+              amount: true,
+              currency: true,
+              type: true,
+            },
+            take: 1, // Only get first price for performance
+          },
+        },
+        orderBy,
+      }),
       queryTimeout,
-    ])) as [any[], number]
+    ]) as any[]
 
     // Transform to expected format
     const transformedEvents = events.map(event => {
