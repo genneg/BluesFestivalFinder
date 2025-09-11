@@ -1,8 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
-
-import { useDebounce } from './useDebounce'
+import { useState } from 'react'
 
 export interface SearchFilters {
   query?: string
@@ -84,132 +82,97 @@ export function useAdvancedSearch() {
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  
-  // Debounce search query for suggestions
-  const debouncedQuery = useDebounce(filters.query || '', 300)
-  
-  // Build search URL parameters
-  const buildSearchParams = useCallback((
+
+  // Build search URL parameters - simple function
+  const buildSearchParams = (
     searchFilters: SearchFilters, 
     searchOptions: SearchOptions
   ): URLSearchParams => {
     const params = new URLSearchParams()
     
     // Add pagination
-    if (searchOptions.page) {
-params.set('page', searchOptions.page.toString())
-}
-    if (searchOptions.limit) {
-params.set('limit', searchOptions.limit.toString())
-}
+    if (searchOptions.page) params.set('page', searchOptions.page.toString())
+    if (searchOptions.limit) params.set('limit', searchOptions.limit.toString())
     
     // Add sorting
-    if (searchOptions.sortBy) {
-params.set('sortBy', searchOptions.sortBy)
-}
-    if (searchOptions.sortOrder) {
-params.set('sortOrder', searchOptions.sortOrder)
-}
+    if (searchOptions.sortBy) params.set('sortBy', searchOptions.sortBy)
+    if (searchOptions.sortOrder) params.set('sortOrder', searchOptions.sortOrder)
     
     // Add text query
-    if (searchFilters.query) {
-params.set('query', searchFilters.query)
-}
+    if (searchFilters.query) params.set('query', searchFilters.query)
     
     // Add location filters
-    if (searchFilters.location?.city) {
-params.set('city', searchFilters.location.city)
-}
-    if (searchFilters.location?.country) {
-params.set('country', searchFilters.location.country)
-}
-    if (searchFilters.location?.latitude) {
-params.set('latitude', searchFilters.location.latitude.toString())
-}
-    if (searchFilters.location?.longitude) {
-params.set('longitude', searchFilters.location.longitude.toString())
-}
-    if (searchFilters.location?.radius) {
-params.set('radius', searchFilters.location.radius.toString())
-}
+    if (searchFilters.location?.city) params.set('city', searchFilters.location.city)
+    if (searchFilters.location?.country) params.set('country', searchFilters.location.country)
     
     // Add date range
-    if (searchFilters.dateRange?.start) {
-params.set('startDate', searchFilters.dateRange.start)
-}
-    if (searchFilters.dateRange?.end) {
-params.set('endDate', searchFilters.dateRange.end)
-}
-    
-    // Add filters
-    if (searchFilters.teachers?.length) {
-params.set('teachers', searchFilters.teachers.join(','))
-}
-    if (searchFilters.musicians?.length) {
-params.set('musicians', searchFilters.musicians.join(','))
-}
-    if (searchFilters.eventTypes?.length) {
-params.set('eventTypes', searchFilters.eventTypes.join(','))
-}
-    if (searchFilters.skillLevels?.length) {
-params.set('skillLevels', searchFilters.skillLevels.join(','))
-}
-    
-    // Add price range
-    if (searchFilters.priceRange?.min !== undefined) {
-params.set('priceMin', searchFilters.priceRange.min.toString())
-}
-    if (searchFilters.priceRange?.max !== undefined) {
-params.set('priceMax', searchFilters.priceRange.max.toString())
-}
-    
-    // Add featured filter
-    if (searchFilters.featured !== undefined) {
-params.set('featured', searchFilters.featured.toString())
-}
+    if (searchFilters.dateRange?.start) params.set('startDate', searchFilters.dateRange.start)
+    if (searchFilters.dateRange?.end) params.set('endDate', searchFilters.dateRange.end)
     
     return params
-  }, [])
+  }
   
-  // Perform search - rewritten to be completely stable
-  const search = useCallback(() => {
+  // Simple search function - no complex dependencies
+  const search = async () => {
     setIsLoading(true)
     setError(null)
     
-    // Get current state values to avoid stale closures
-    setFilters(currentFilters => {
-      setOptions(currentOptions => {
-        const params = buildSearchParams(currentFilters, currentOptions)
-        
-        fetch(`/api/search/events?${params.toString()}`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`Search failed: ${response.statusText}`)
-            }
-            return response.json()
-          })
-          .then(data => {
-            if (!data.success) {
-              throw new Error(data.error || 'Search failed')
-            }
-            setResults(data.data)
-          })
-          .catch(err => {
-            setError(err instanceof Error ? err.message : 'Search failed')
-            setResults(null)
-          })
-          .finally(() => {
-            setIsLoading(false)
-          })
-        
-        return currentOptions
-      })
-      return currentFilters
+    try {
+      const params = buildSearchParams(filters, options)
+      const response = await fetch(`/api/search/events?${params.toString()}`)
+      
+      if (!response.ok) {
+        throw new Error(`Search failed: ${response.statusText}`)
+      }
+      
+      const data = await response.json()
+      
+      if (!data.success) {
+        throw new Error(data.error || 'Search failed')
+      }
+      
+      setResults(data.data)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Search failed')
+      setResults(null)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  // Simple update filters function
+  const updateFilters = (newFilters: Partial<SearchFilters>) => {
+    setFilters(prev => ({ ...prev, ...newFilters }))
+    setOptions(prev => ({ ...prev, page: 1 })) // Reset to first page
+  }
+
+  // Simple update options function
+  const updateOptions = (newOptions: Partial<SearchOptions>) => {
+    setOptions(prev => ({ ...prev, ...newOptions }))
+  }
+
+  // Simple clear filters function
+  const clearFilters = () => {
+    setFilters({})
+    setOptions({
+      sortBy: 'relevance',
+      sortOrder: 'desc',
+      page: 1,
+      limit: 20
     })
-  }, [buildSearchParams])
-  
-  // Get search suggestions
-  const getSuggestions = useCallback(async (query: string) => {
+    setResults(null)
+    setError(null)
+  }
+
+  // Simple navigation function
+  const goToPage = async (page: number) => {
+    setOptions(prev => ({ ...prev, page }))
+    // Wait for state update, then search
+    setTimeout(() => search(), 0)
+  }
+
+  // Simple get suggestions function
+  const getSuggestions = async (query: string) => {
     if (!query || query.length < 2) {
       setSuggestions({ events: [], teachers: [], musicians: [], locations: [] })
       return
@@ -236,64 +199,14 @@ params.set('featured', searchFilters.featured.toString())
     } finally {
       setIsLoadingSuggestions(false)
     }
-  }, [])
-  
-  // Auto-load suggestions when query changes
-  useEffect(() => {
-    getSuggestions(debouncedQuery)
-  }, [debouncedQuery, getSuggestions])
-  
-  // Update filters
-  const updateFilters = useCallback((newFilters: Partial<SearchFilters>) => {
-    setFilters(prev => ({ ...prev, ...newFilters }))
-    setOptions(prev => ({ ...prev, page: 1 })) // Reset to first page
-  }, [])
-  
-  // Update options
-  const updateOptions = useCallback((newOptions: Partial<SearchOptions>) => {
-    setOptions(prev => ({ ...prev, ...newOptions }))
-  }, [])
-  
-  // Clear all filters
-  const clearFilters = useCallback(() => {
-    setFilters({})
-    setOptions({
-      sortBy: 'relevance',
-      sortOrder: 'desc',
-      page: 1,
-      limit: 20
-    })
-    setResults(null)
-    setError(null)
-  }, [])
-  
-  // Navigate to page
-  const goToPage = useCallback((page: number) => {
-    const newOptions = { ...options, page }
-    setOptions(newOptions)
-    // Direct API call to avoid dependency issues
-    const params = buildSearchParams(filters, newOptions)
-    setIsLoading(true)
-    fetch(`/api/search/events?${params.toString()}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          setResults(data.data)
-        } else {
-          setError(data.error || 'Search failed')
-        }
-      })
-      .catch(err => setError('Search failed'))
-      .finally(() => setIsLoading(false))
-  }, [filters, options, buildSearchParams])
-  
+  }
+
   // Check if any filters are active
-  const hasActiveFilters = useCallback(() => {
+  const hasActiveFilters = () => {
     return !!(
       filters.query ||
       filters.location?.city ||
       filters.location?.country ||
-      filters.location?.latitude ||
       filters.dateRange?.start ||
       filters.dateRange?.end ||
       filters.teachers?.length ||
@@ -304,11 +217,8 @@ params.set('featured', searchFilters.featured.toString())
       filters.priceRange?.max !== undefined ||
       filters.featured !== undefined
     )
-  }, [filters])
-  
-  // No auto-search - manual control only
-  // Users will trigger search explicitly via search button or enter key
-  
+  }
+
   return {
     // State
     filters,
@@ -319,7 +229,7 @@ params.set('featured', searchFilters.featured.toString())
     isLoadingSuggestions,
     error,
     
-    // Actions
+    // Actions - simple functions, no useCallback
     search,
     getSuggestions,
     updateFilters,
