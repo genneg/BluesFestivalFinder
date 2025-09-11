@@ -232,10 +232,10 @@ params.set('featured', searchFilters.featured.toString())
     }
   }, [])
   
-  // Auto-load suggestions when query changes
-  useEffect(() => {
-    getSuggestions(debouncedQuery)
-  }, [debouncedQuery, getSuggestions])
+  // Auto-load suggestions DISABLED - suggestions only on manual request
+  // useEffect(() => {
+  //   getSuggestions(debouncedQuery)
+  // }, [debouncedQuery, getSuggestions])
   
   // Update filters
   const updateFilters = useCallback((newFilters: Partial<SearchFilters>) => {
@@ -286,16 +286,16 @@ params.set('featured', searchFilters.featured.toString())
     )
   }, [filters])
   
-  // Auto-search when filters change (debounced)
-  useEffect(() => {
-    if (hasActiveFilters()) {
-      const timeoutId = setTimeout(() => {
-        search()
-      }, 500) // Debounce search
-      
-      return () => clearTimeout(timeoutId)
-    }
-  }, [filters, options, search, hasActiveFilters])
+  // Auto-search DISABLED - search only on explicit user action
+  // useEffect(() => {
+  //   if (hasActiveFilters()) {
+  //     const timeoutId = setTimeout(() => {
+  //       search()
+  //     }, 500) // Debounce search
+  //     
+  //     return () => clearTimeout(timeoutId)
+  //   }
+  // }, [filters, options, search, hasActiveFilters])
   
   return {
     // State
