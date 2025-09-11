@@ -41,7 +41,10 @@ export default function SearchPage() {
 
   const handleSearch = async (query: string) => {
     updateFilters({ query })
-    search() // Explicit search call
+    // Wait for state update before searching
+    setTimeout(() => {
+      search()
+    }, 100)
   }
 
   const handleFiltersChange = (newFilters: Partial<FilterOptions>) => {
