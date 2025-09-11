@@ -171,15 +171,19 @@ params.set('featured', searchFilters.featured.toString())
     return params
   }, [])
   
-  // Perform search
+  // Perform search - stable function to avoid loops
   const search = useCallback(async (
-    searchFilters: SearchFilters = filters,
-    searchOptions: SearchOptions = options
+    customFilters?: SearchFilters,
+    customOptions?: SearchOptions
   ) => {
     setIsLoading(true)
     setError(null)
     
     try {
+      // Use current state if no custom filters/options provided
+      const searchFilters = customFilters || filters
+      const searchOptions = customOptions || options
+      
       const params = buildSearchParams(searchFilters, searchOptions)
       const response = await fetch(`/api/search/events?${params.toString()}`)
       
@@ -200,7 +204,7 @@ params.set('featured', searchFilters.featured.toString())
     } finally {
       setIsLoading(false)
     }
-  }, [filters, options, buildSearchParams])
+  }, [buildSearchParams]) // Only buildSearchParams as dependency
   
   // Get search suggestions
   const getSuggestions = useCallback(async (query: string) => {
@@ -237,16 +241,11 @@ params.set('featured', searchFilters.featured.toString())
     getSuggestions(debouncedQuery)
   }, [debouncedQuery, getSuggestions])
   
-  // Update filters
-  const updateFilters = useCallback((newFilters: Partial<SearchFilters>, autoSearch = false) => {
+  // Update filters - simplified to avoid dependency loops
+  const updateFilters = useCallback((newFilters: Partial<SearchFilters>) => {
     setFilters(prev => ({ ...prev, ...newFilters }))
     setOptions(prev => ({ ...prev, page: 1 })) // Reset to first page
-    
-    // Immediate search if requested
-    if (autoSearch) {
-      setTimeout(() => search({ ...filters, ...newFilters }, { ...options, page: 1 }), 0)
-    }
-  }, [filters, options, search])
+  }, [])
   
   // Update options
   const updateOptions = useCallback((newOptions: Partial<SearchOptions>) => {

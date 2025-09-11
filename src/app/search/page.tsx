@@ -40,7 +40,8 @@ export default function SearchPage() {
   } = useAdvancedSearch()
 
   const handleSearch = async (query: string) => {
-    updateFilters({ query }, true) // Enable auto-search for explicit search
+    updateFilters({ query })
+    search() // Explicit search call
   }
 
   const handleFiltersChange = (newFilters: Partial<FilterOptions>) => {
