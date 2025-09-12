@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 
 import { useDebounce } from './useDebounce'
 
@@ -89,7 +89,7 @@ export function useAdvancedSearch() {
   const debouncedQuery = useDebounce(filters.query || '', 300)
   
   // Build search URL parameters
-  const buildSearchParams = (
+  const buildSearchParams = useCallback((
     searchFilters: SearchFilters, 
     searchOptions: SearchOptions
   ): URLSearchParams => {
@@ -169,41 +169,47 @@ params.set('featured', searchFilters.featured.toString())
 }
     
     return params
-  }
+  }, [])
   
-  // Perform search
-  const search = async (
-    searchFilters: SearchFilters = filters,
-    searchOptions: SearchOptions = options
-  ) => {
+  // Perform search - rewritten to be completely stable
+  const search = useCallback(() => {
     setIsLoading(true)
     setError(null)
     
-    try {
-      const params = buildSearchParams(searchFilters, searchOptions)
-      const response = await fetch(`/api/search/events?${params.toString()}`)
-      
-      if (!response.ok) {
-        throw new Error(`Search failed: ${response.statusText}`)
-      }
-      
-      const data = await response.json()
-      
-      if (!data.success) {
-        throw new Error(data.error || 'Search failed')
-      }
-      
-      setResults(data.data)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Search failed')
-      setResults(null)
-    } finally {
-      setIsLoading(false)
-    }
-  }
+    // Get current state values to avoid stale closures
+    setFilters(currentFilters => {
+      setOptions(currentOptions => {
+        const params = buildSearchParams(currentFilters, currentOptions)
+        
+        fetch(`/api/search/events?${params.toString()}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`Search failed: ${response.statusText}`)
+            }
+            return response.json()
+          })
+          .then(data => {
+            if (!data.success) {
+              throw new Error(data.error || 'Search failed')
+            }
+            setResults(data.data)
+          })
+          .catch(err => {
+            setError(err instanceof Error ? err.message : 'Search failed')
+            setResults(null)
+          })
+          .finally(() => {
+            setIsLoading(false)
+          })
+        
+        return currentOptions
+      })
+      return currentFilters
+    })
+  }, [buildSearchParams])
   
   // Get search suggestions
-  const getSuggestions = async (query: string) => {
+  const getSuggestions = useCallback(async (query: string) => {
     if (!query || query.length < 2) {
       setSuggestions({ events: [], teachers: [], musicians: [], locations: [] })
       return
@@ -230,26 +236,26 @@ params.set('featured', searchFilters.featured.toString())
     } finally {
       setIsLoadingSuggestions(false)
     }
-  }
+  }, [])
   
-  // Auto-load suggestions DISABLED - suggestions only on manual request
-  // useEffect(() => {
-  //   getSuggestions(debouncedQuery)
-  // }, [debouncedQuery, getSuggestions])
+  // Auto-load suggestions when query changes
+  useEffect(() => {
+    getSuggestions(debouncedQuery)
+  }, [debouncedQuery, getSuggestions])
   
   // Update filters
-  const updateFilters = (newFilters: Partial<SearchFilters>) => {
+  const updateFilters = useCallback((newFilters: Partial<SearchFilters>) => {
     setFilters(prev => ({ ...prev, ...newFilters }))
     setOptions(prev => ({ ...prev, page: 1 })) // Reset to first page
-  }
+  }, [])
   
   // Update options
-  const updateOptions = (newOptions: Partial<SearchOptions>) => {
+  const updateOptions = useCallback((newOptions: Partial<SearchOptions>) => {
     setOptions(prev => ({ ...prev, ...newOptions }))
-  }
+  }, [])
   
   // Clear all filters
-  const clearFilters = () => {
+  const clearFilters = useCallback(() => {
     setFilters({})
     setOptions({
       sortBy: 'relevance',
@@ -259,16 +265,30 @@ params.set('featured', searchFilters.featured.toString())
     })
     setResults(null)
     setError(null)
-  }
+  }, [])
   
   // Navigate to page
-  const goToPage = (page: number) => {
-    setOptions(prev => ({ ...prev, page }))
-    search(filters, { ...options, page })
-  }
+  const goToPage = useCallback((page: number) => {
+    const newOptions = { ...options, page }
+    setOptions(newOptions)
+    // Direct API call to avoid dependency issues
+    const params = buildSearchParams(filters, newOptions)
+    setIsLoading(true)
+    fetch(`/api/search/events?${params.toString()}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          setResults(data.data)
+        } else {
+          setError(data.error || 'Search failed')
+        }
+      })
+      .catch(err => setError('Search failed'))
+      .finally(() => setIsLoading(false))
+  }, [filters, options, buildSearchParams])
   
   // Check if any filters are active
-  const hasActiveFilters = () => {
+  const hasActiveFilters = useCallback(() => {
     return !!(
       filters.query ||
       filters.location?.city ||
@@ -284,18 +304,10 @@ params.set('featured', searchFilters.featured.toString())
       filters.priceRange?.max !== undefined ||
       filters.featured !== undefined
     )
-  }
+  }, [filters])
   
-  // Auto-search DISABLED - search only on explicit user action
-  // useEffect(() => {
-  //   if (hasActiveFilters()) {
-  //     const timeoutId = setTimeout(() => {
-  //       search()
-  //     }, 500) // Debounce search
-  //     
-  //     return () => clearTimeout(timeoutId)
-  //   }
-  // }, [filters, options, search, hasActiveFilters])
+  // No auto-search - manual control only
+  // Users will trigger search explicitly via search button or enter key
   
   return {
     // State

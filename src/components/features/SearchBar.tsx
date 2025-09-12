@@ -67,12 +67,12 @@ export function SearchBar({
     }
   })
 
-  // Fetch suggestions when debounced query changes
-  useEffect(() => {
-    if (debouncedQuery.length >= 2) {
-      suggestionsApi.get(`/search/suggestions?query=${encodeURIComponent(debouncedQuery)}`)
-    }
-  }, [debouncedQuery, suggestionsApi])
+  // Fetch suggestions DISABLED - causes performance issues
+  // useEffect(() => {
+  //   if (debouncedQuery.length >= 2) {
+  //     suggestionsApi.get(`/search/suggestions?query=${encodeURIComponent(debouncedQuery)}`)
+  //   }
+  // }, [debouncedQuery, suggestionsApi])
 
   // Load recent searches from localStorage
   useEffect(() => {
