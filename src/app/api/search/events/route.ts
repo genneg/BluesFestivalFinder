@@ -39,147 +39,144 @@ export async function GET(request: NextRequest) {
 
     const skip = (page - 1) * limit
 
-    // Build where clause for search
-    const where: any = {}
+    // Use optimized search function for better relevance and performance
+    try {
+      console.log('Using optimized search function for query:', query);
+      
+      const searchResults = await db.$queryRaw<Array<{
+        total_count: bigint
+        id: number
+        name: string
+        description: string | null
+        from_date: Date
+        to_date: Date
+        city: string | null
+        country: string | null
+        website: string | null
+        style: string | null
+        image_url: string | null
+        ai_quality_score: number | null
+        ai_completeness_score: number | null
+        extraction_method: string | null
+        created_at: Date
+        updated_at: Date
+        search_rank: number
+      }>>`
+        SELECT * FROM search_events_optimized(
+          ${query || null}::text,
+          ${city || null}::text, 
+          ${country || null}::text,
+          ${limit}::integer,
+          ${skip}::integer,
+          ${sortBy}::text,
+          ${sortOrder}::text
+        )
+      `;
 
-    // Text search across multiple fields
-    if (query) {
-      where.OR = [
-        { name: { contains: query, mode: 'insensitive' } },
-        { description: { contains: query, mode: 'insensitive' } },
-        { city: { contains: query, mode: 'insensitive' } },
-        { country: { contains: query, mode: 'insensitive' } },
-        { style: { contains: query, mode: 'insensitive' } },
-      ]
-    }
-
-    // Filter by city
-    if (city) {
-      where.city = { contains: city, mode: 'insensitive' }
-    }
-
-    // Filter by country
-    if (country) {
-      where.country = { contains: country, mode: 'insensitive' }
-    }
-
-    // Build order by clause
-    let orderBy: any = { from_date: 'asc' } // Default sort by date
-    if (sortBy === 'date') {
-      orderBy = { from_date: sortOrder as 'asc' | 'desc' }
-    } else if (sortBy === 'popularity') {
-      orderBy = { name: sortOrder as 'asc' | 'desc' } // Simple name sort for now
-    }
-
-    // Get events and total count with timeout protection and optimized query
-    const queryTimeout = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Database query timeout')), 10000)
-    )
-
-    // First get just the count for performance
-    const total = await db.event.count({ where })
-    
-    // If no results, return early
-    if (total === 0) {
-      return Response.json({
-        data: {
-          events: [],
-          pagination: {
-            page,
-            limit,
-            total: 0,
-            totalPages: 0,
-            hasNext: false,
-            hasPrev: false,
-          },
-          searchMeta: {
-            query,
-            sorting: { sortBy, sortOrder },
-            filters: { city, country },
-            totalMatches: 0,
-          },
-        },
-        success: true,
-        timestamp: new Date().toISOString(),
-      })
-    }
-
-    // Then get events with minimal includes for better performance
-    const events = await Promise.race([
-      db.event.findMany({
-        where,
-        take: limit,
-        skip: skip,
-        select: {
-          id: true,
-          name: true,
-          description: true,
-          from_date: true,
-          to_date: true,
-          country: true,
-          city: true,
-          website: true,
-          style: true,
-          image_url: true,
-          venues: {
-            select: {
-              name: true,
-              address: true,
+      const total = searchResults.length > 0 ? Number(searchResults[0].total_count) : 0
+      
+      // If no results, return early
+      if (total === 0) {
+        return Response.json({
+          data: {
+            events: [],
+            pagination: {
+              page,
+              limit,
+              total: 0,
+              totalPages: 0,
+              hasNext: false,
+              hasPrev: false,
             },
-            take: 1, // Only get first venue
-          },
-          event_prices: {
-            select: {
-              amount: true,
-              currency: true,
-              type: true,
+            searchMeta: {
+              query,
+              sorting: { sortBy, sortOrder },
+              filters: { city, country },
+              totalMatches: 0,
+              searchType: 'optimized'
             },
-            take: 1, // Only get first price for performance
           },
-        },
-        orderBy,
-      }),
-      queryTimeout,
-    ]) as any[]
-
-    // Transform to expected format
-    const transformedEvents = events.map(event => {
-      const primaryVenue = event.venues?.[0]
-
-      return {
-        id: event.id.toString(),
-        name: event.name,
-        description: event.description,
-        startDate: event.from_date,
-        endDate: event.to_date,
-        country: event.country,
-        city: event.city,
-        website: event.website,
-        style: event.style,
-        imageUrl: event.image_url?.startsWith('/uploads/')
-          ? `https://tqvvseagpkmdnsiuwabv.supabase.co/storage/v1/object/public/bluesbucket/${event.image_url.replace('/uploads/', '')}`
-          : event.image_url,
-        aiQualityScore: event.ai_quality_score,
-        aiCompletenessScore: event.ai_completeness_score,
-        extractionMethod: event.extraction_method,
-        createdAt: event.created_at,
-        updatedAt: event.updated_at,
-        venue: primaryVenue
-          ? {
-              name: primaryVenue.name,
-              address: primaryVenue.address,
-              city: event.city,
-              country: event.country,
-            }
-          : null,
-        pricing:
-          event.event_prices?.map(price => ({
-            price: Number(price.amount),
-            currency: price.currency,
-            type: price.type,
-          })) || [],
+          success: true,
+          timestamp: new Date().toISOString(),
+        })
       }
-    })
+
+      // Get related data efficiently for each event
+      const events = await Promise.all(
+        searchResults.map(async (event) => {
+          const [venues, prices] = await Promise.all([
+            db.venue.findMany({
+              where: {
+                event_venues: {
+                  some: {
+                    event_id: event.id
+                  }
+                }
+              },
+              select: {
+                name: true,
+                address: true,
+              },
+              take: 1
+            }),
+            db.event_Price.findMany({
+              where: { event_id: event.id },
+              select: {
+                amount: true,
+                currency: true,
+                type: true,
+              },
+              take: 1
+            })
+          ]);
+
+          return {
+            ...event,
+            venues: venues,
+            event_prices: prices
+          };
+        })
+      )
+
+      // Transform to expected format
+      const transformedEvents = events.map(event => {
+        const primaryVenue = event.venues?.[0]
+
+        return {
+          id: event.id.toString(),
+          name: event.name,
+          description: event.description,
+          startDate: event.from_date,
+          endDate: event.to_date,
+          country: event.country,
+          city: event.city,
+          website: event.website,
+          style: event.style,
+          imageUrl: event.image_url?.startsWith('/uploads/')
+            ? `https://tqvvseagpkmdnsiuwabv.supabase.co/storage/v1/object/public/bluesbucket/${event.image_url.replace('/uploads/', '')}`
+            : event.image_url,
+          aiQualityScore: event.ai_quality_score,
+          aiCompletenessScore: event.ai_completeness_score,
+          extractionMethod: event.extraction_method,
+          createdAt: event.created_at,
+          updatedAt: event.updated_at,
+          searchRank: event.search_rank, // Include search rank from optimized function
+          venue: primaryVenue
+            ? {
+                name: primaryVenue.name,
+                address: primaryVenue.address,
+                city: event.city,
+                country: event.country,
+              }
+            : null,
+          pricing:
+            event.event_prices?.map(price => ({
+              price: Number(price.amount),
+              currency: price.currency,
+              type: price.type,
+            })) || [],
+        }
+      })
 
     const totalPages = Math.ceil(total / limit)
 
@@ -199,11 +196,174 @@ export async function GET(request: NextRequest) {
           sorting: { sortBy, sortOrder },
           filters: { city, country },
           totalMatches: total,
+          searchType: 'optimized'
         },
       },
       success: true,
       timestamp: new Date().toISOString(),
     })
+    
+    } catch (optimizedSearchError) {
+      console.log('Optimized search failed, falling back to standard search:', optimizedSearchError.message);
+      
+      // Fallback to original Prisma search
+      const where: any = {}
+
+      // Text search across multiple fields
+      if (query) {
+        where.OR = [
+          { name: { contains: query, mode: 'insensitive' } },
+          { description: { contains: query, mode: 'insensitive' } },
+          { city: { contains: query, mode: 'insensitive' } },
+          { country: { contains: query, mode: 'insensitive' } },
+          { style: { contains: query, mode: 'insensitive' } },
+        ]
+      }
+
+      // Filter by city
+      if (city) {
+        where.city = { contains: city, mode: 'insensitive' }
+      }
+
+      // Filter by country
+      if (country) {
+        where.country = { contains: country, mode: 'insensitive' }
+      }
+
+      // Build order by clause
+      let orderBy: any = { from_date: 'asc' } // Default sort by date
+      if (sortBy === 'date') {
+        orderBy = { from_date: sortOrder as 'asc' | 'desc' }
+      } else if (sortBy === 'popularity') {
+        orderBy = { name: sortOrder as 'asc' | 'desc' } // Simple name sort for now
+      }
+
+      const total = await db.event.count({ where })
+      
+      // If no results, return early
+      if (total === 0) {
+        return Response.json({
+          data: {
+            events: [],
+            pagination: {
+              page,
+              limit,
+              total: 0,
+              totalPages: 0,
+              hasNext: false,
+              hasPrev: false,
+            },
+            searchMeta: {
+              query,
+              sorting: { sortBy, sortOrder },
+              filters: { city, country },
+              totalMatches: 0,
+              searchType: 'fallback'
+            },
+          },
+          success: true,
+          timestamp: new Date().toISOString(),
+        })
+      }
+
+      const events = await db.event.findMany({
+        where,
+        take: limit,
+        skip: skip,
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          from_date: true,
+          to_date: true,
+          country: true,
+          city: true,
+          website: true,
+          style: true,
+          image_url: true,
+          venues: {
+            select: {
+              name: true,
+              address: true,
+            },
+            take: 1,
+          },
+          event_prices: {
+            select: {
+              amount: true,
+              currency: true,
+              type: true,
+            },
+            take: 1,
+          },
+        },
+        orderBy,
+      })
+
+      // Transform fallback results
+      const transformedFallbackEvents = events.map(event => {
+        const primaryVenue = event.venues?.[0]
+
+        return {
+          id: event.id.toString(),
+          name: event.name,
+          description: event.description,
+          startDate: event.from_date,
+          endDate: event.to_date,
+          country: event.country,
+          city: event.city,
+          website: event.website,
+          style: event.style,
+          imageUrl: event.image_url?.startsWith('/uploads/')
+            ? `https://tqvvseagpkmdnsiuwabv.supabase.co/storage/v1/object/public/bluesbucket/${event.image_url.replace('/uploads/', '')}`
+            : event.image_url,
+          aiQualityScore: event.ai_quality_score,
+          aiCompletenessScore: event.ai_completeness_score,
+          extractionMethod: event.extraction_method,
+          createdAt: event.created_at,
+          updatedAt: event.updated_at,
+          venue: primaryVenue
+            ? {
+                name: primaryVenue.name,
+                address: primaryVenue.address,
+                city: event.city,
+                country: event.country,
+              }
+            : null,
+          pricing:
+            event.event_prices?.map(price => ({
+              price: Number(price.amount),
+              currency: price.currency,
+              type: price.type,
+            })) || [],
+        }
+      })
+
+      const totalPages = Math.ceil(total / limit)
+
+      return Response.json({
+        data: {
+          events: transformedFallbackEvents,
+          pagination: {
+            page,
+            limit,
+            total,
+            totalPages,
+            hasNext: page < totalPages,
+            hasPrev: page > 1,
+          },
+          searchMeta: {
+            query,
+            sorting: { sortBy, sortOrder },
+            filters: { city, country },
+            totalMatches: total,
+            searchType: 'fallback'
+          },
+        },
+        success: true,
+        timestamp: new Date().toISOString(),
+      })
+    }
   } catch (error) {
     console.error('Search events error:', error)
 
