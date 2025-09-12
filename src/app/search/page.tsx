@@ -41,9 +41,9 @@ export default function SearchPage() {
 
   const handleSearch = async (query: string) => {
     updateFilters({ query })
-    // Wait for state update before searching
+    // Use the new query directly to avoid stale state issues
     setTimeout(() => {
-      search()
+      search({ ...filters, query })
     }, 100)
   }
 
