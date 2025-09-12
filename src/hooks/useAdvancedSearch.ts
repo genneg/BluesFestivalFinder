@@ -1,8 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-
-import { useDebounce } from './useDebounce'
+import { useState } from 'react'
 
 export interface SearchFilters {
   query?: string
@@ -85,8 +83,8 @@ export function useAdvancedSearch() {
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
   const [error, setError] = useState<string | null>(null)
   
-  // Debounce search query for suggestions
-  const debouncedQuery = useDebounce(filters.query || '', 300)
+  // Debounce search query for suggestions - DISABLED
+  // const debouncedQuery = useDebounce(filters.query || '', 300)
   
   // Build search URL parameters
   const buildSearchParams = (
@@ -180,7 +178,10 @@ params.set('featured', searchFilters.featured.toString())
     setError(null)
     
     try {
+      console.log('Search called with filters:', searchFilters)
+      console.log('Current state filters:', filters)
       const params = buildSearchParams(searchFilters, searchOptions)
+      console.log('Built params:', params.toString())
       const response = await fetch(`/api/search/events?${params.toString()}`)
       
       if (!response.ok) {
