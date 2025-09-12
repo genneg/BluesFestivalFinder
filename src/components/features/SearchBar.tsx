@@ -45,6 +45,9 @@ export function SearchBar({
     suggestions, 
     updateFilters
   } = useAdvancedSearch()
+  
+  // Since suggestions are disabled, isLoadingSuggestions is always false
+  const isLoadingSuggestions = false
 
   // Fetch suggestions DISABLED - causes performance issues
   // useEffect(() => {
