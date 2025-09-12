@@ -39,42 +39,230 @@ export async function GET(request: NextRequest) {
 
     const skip = (page - 1) * limit
 
-    // Use optimized search function for better relevance and performance
+    // Use enhanced search with teachers and musicians for serverless compatibility
     try {
-      console.log('Using optimized search function for query:', query);
-      
-      const searchResults = await db.$queryRaw<Array<{
-        total_count: bigint
-        id: number
-        name: string
-        description: string | null
-        from_date: Date
-        to_date: Date
-        city: string | null
-        country: string | null
-        website: string | null
-        style: string | null
-        image_url: string | null
-        ai_quality_score: number | null
-        ai_completeness_score: number | null
-        extraction_method: string | null
-        created_at: Date
-        updated_at: Date
-        search_rank: number
-      }>>`
-        SELECT * FROM search_events_optimized(
-          ${query || null}::text,
-          ${city || null}::text, 
-          ${country || null}::text,
-          ${limit}::integer,
-          ${skip}::integer,
-          ${sortBy}::text,
-          ${sortOrder}::text
-        )
-      `;
+      console.log('Using enhanced search with teachers/musicians for query:', query)
 
-      const total = searchResults.length > 0 ? Number(searchResults[0].total_count) : 0
-      
+      // Build search query with teachers and musicians
+      let whereClause = ''
+      let searchRankCase = '0.0'
+      let orderByClause = 'ORDER BY e.from_date ASC'
+
+      if (query) {
+        whereClause = `
+          WHERE (
+            LOWER(e.name) LIKE LOWER('%' || $1 || '%') OR
+            LOWER(e.description) LIKE LOWER('%' || $1 || '%') OR
+            LOWER(e.city) LIKE LOWER('%' || $1 || '%') OR
+            LOWER(e.country) LIKE LOWER('%' || $1 || '%') OR
+            LOWER(e.style) LIKE LOWER('%' || $1 || '%') OR
+            EXISTS (
+              SELECT 1 FROM event_teachers et 
+              JOIN teachers t ON et.teacher_id = t.id 
+              WHERE et.event_id = e.id 
+              AND LOWER(t.name) LIKE LOWER('%' || $1 || '%')
+            ) OR
+            EXISTS (
+              SELECT 1 FROM event_musicians em 
+              JOIN musicians m ON em.musician_id = m.id 
+              WHERE em.event_id = e.id 
+              AND LOWER(m.name) LIKE LOWER('%' || $1 || '%')
+            )
+          )
+        `
+
+        searchRankCase = `
+          CASE 
+            WHEN LOWER(e.name) = LOWER($1) THEN 100.0
+            WHEN LOWER(e.name) LIKE LOWER($1 || '%') THEN 80.0
+            WHEN EXISTS (
+              SELECT 1 FROM event_teachers et 
+              JOIN teachers t ON et.teacher_id = t.id 
+              WHERE et.event_id = e.id 
+              AND LOWER(t.name) = LOWER($1)
+            ) THEN 90.0
+            WHEN EXISTS (
+              SELECT 1 FROM event_teachers et 
+              JOIN teachers t ON et.teacher_id = t.id 
+              WHERE et.event_id = e.id 
+              AND LOWER(t.name) LIKE LOWER('%' || $1 || '%')
+            ) THEN 70.0
+            WHEN EXISTS (
+              SELECT 1 FROM event_musicians em 
+              JOIN musicians m ON em.musician_id = m.id 
+              WHERE em.event_id = e.id 
+              AND LOWER(m.name) = LOWER($1)
+            ) THEN 85.0
+            WHEN EXISTS (
+              SELECT 1 FROM event_musicians em 
+              JOIN musicians m ON em.musician_id = m.id 
+              WHERE em.event_id = e.id 
+              AND LOWER(m.name) LIKE LOWER('%' || $1 || '%')
+            ) THEN 65.0
+            WHEN LOWER(e.name) LIKE LOWER('%' || $1 || '%') THEN 60.0
+            WHEN LOWER(e.description) LIKE LOWER('%' || $1 || '%') THEN 40.0
+            WHEN LOWER(e.city) LIKE LOWER('%' || $1 || '%') THEN 30.0
+            WHEN LOWER(e.country) LIKE LOWER('%' || $1 || '%') THEN 20.0
+            WHEN LOWER(e.style) LIKE LOWER('%' || $1 || '%') THEN 25.0
+            ELSE 0.0
+          END
+        `
+
+        if (sortBy === 'relevance') {
+          orderByClause = `ORDER BY (${searchRankCase}) DESC, e.from_date ASC`
+        } else if (sortBy === 'date') {
+          orderByClause = `ORDER BY e.from_date ${sortOrder === 'desc' ? 'DESC' : 'ASC'}`
+        }
+      }
+
+      // Add city filter
+      if (city) {
+        whereClause = whereClause
+          ? whereClause.replace('WHERE (', 'WHERE (') +
+            ` AND LOWER(e.city) LIKE LOWER('%' || $${query ? 2 : 1} || '%')`
+          : `WHERE LOWER(e.city) LIKE LOWER('%' || $1 || '%')`
+      }
+
+      // Add country filter
+      if (country) {
+        const paramNum = (query ? 1 : 0) + (city ? 1 : 0) + 1
+        whereClause = whereClause
+          ? whereClause + ` AND LOWER(e.country) LIKE LOWER('%' || $${paramNum} || '%')`
+          : `WHERE LOWER(e.country) LIKE LOWER('%' || $1 || '%')`
+      }
+
+      // Get total count - use template literals for better compatibility
+      let totalResult
+      if (query && !city && !country) {
+        console.log('Using template literal query for:', query)
+        totalResult = await db.$queryRaw`
+          SELECT COUNT(*) as count FROM events e 
+          WHERE (
+            LOWER(e.name) LIKE LOWER('%' || ${query} || '%') OR
+            LOWER(e.description) LIKE LOWER('%' || ${query} || '%') OR
+            LOWER(e.city) LIKE LOWER('%' || ${query} || '%') OR
+            LOWER(e.country) LIKE LOWER('%' || ${query} || '%') OR
+            LOWER(e.style) LIKE LOWER('%' || ${query} || '%') OR
+            EXISTS (
+              SELECT 1 FROM event_teachers et 
+              JOIN teachers t ON et.teacher_id = t.id 
+              WHERE et.event_id = e.id 
+              AND LOWER(t.name) LIKE LOWER('%' || ${query} || '%')
+            ) OR
+            EXISTS (
+              SELECT 1 FROM event_musicians em 
+              JOIN musicians m ON em.musician_id = m.id 
+              WHERE em.event_id = e.id 
+              AND LOWER(m.name) LIKE LOWER('%' || ${query} || '%')
+            )
+          )
+        `
+      } else {
+        // Fallback to unsafe query for complex cases
+        const countQuery = `SELECT COUNT(*) as count FROM events e ${whereClause}`
+        totalResult = await db.$queryRawUnsafe(
+          countQuery,
+          ...(query ? [query] : []),
+          ...(city ? [city] : []),
+          ...(country ? [country] : [])
+        )
+      }
+
+      const total = Number(totalResult[0].count)
+
+      // Get events if there are results
+      let searchResults = []
+      if (total > 0) {
+        if (query && !city && !country) {
+          // Use template literals for simple query case
+          searchResults = await db.$queryRaw`
+            SELECT 
+              e.id, e.name, e.description, e.from_date, e.to_date,
+              e.city, e.country, e.website, e.style, e.image_url,
+              e.ai_quality_score, e.ai_completeness_score, e.extraction_method,
+              e.created_at, e.updated_at,
+              CASE 
+                WHEN LOWER(e.name) = LOWER(${query}) THEN 100.0
+                WHEN LOWER(e.name) LIKE LOWER(${query} || '%') THEN 80.0
+                WHEN EXISTS (
+                  SELECT 1 FROM event_teachers et 
+                  JOIN teachers t ON et.teacher_id = t.id 
+                  WHERE et.event_id = e.id 
+                  AND LOWER(t.name) = LOWER(${query})
+                ) THEN 90.0
+                WHEN EXISTS (
+                  SELECT 1 FROM event_teachers et 
+                  JOIN teachers t ON et.teacher_id = t.id 
+                  WHERE et.event_id = e.id 
+                  AND LOWER(t.name) LIKE LOWER('%' || ${query} || '%')
+                ) THEN 70.0
+                WHEN EXISTS (
+                  SELECT 1 FROM event_musicians em 
+                  JOIN musicians m ON em.musician_id = m.id 
+                  WHERE em.event_id = e.id 
+                  AND LOWER(m.name) = LOWER(${query})
+                ) THEN 85.0
+                WHEN EXISTS (
+                  SELECT 1 FROM event_musicians em 
+                  JOIN musicians m ON em.musician_id = m.id 
+                  WHERE em.event_id = e.id 
+                  AND LOWER(m.name) LIKE LOWER('%' || ${query} || '%')
+                ) THEN 65.0
+                WHEN LOWER(e.name) LIKE LOWER('%' || ${query} || '%') THEN 60.0
+                WHEN LOWER(e.description) LIKE LOWER('%' || ${query} || '%') THEN 40.0
+                WHEN LOWER(e.city) LIKE LOWER('%' || ${query} || '%') THEN 30.0
+                WHEN LOWER(e.country) LIKE LOWER('%' || ${query} || '%') THEN 20.0
+                WHEN LOWER(e.style) LIKE LOWER('%' || ${query} || '%') THEN 25.0
+                ELSE 0.0
+              END as search_rank
+            FROM events e
+            WHERE (
+              LOWER(e.name) LIKE LOWER('%' || ${query} || '%') OR
+              LOWER(e.description) LIKE LOWER('%' || ${query} || '%') OR
+              LOWER(e.city) LIKE LOWER('%' || ${query} || '%') OR
+              LOWER(e.country) LIKE LOWER('%' || ${query} || '%') OR
+              LOWER(e.style) LIKE LOWER('%' || ${query} || '%') OR
+              EXISTS (
+                SELECT 1 FROM event_teachers et 
+                JOIN teachers t ON et.teacher_id = t.id 
+                WHERE et.event_id = e.id 
+                AND LOWER(t.name) LIKE LOWER('%' || ${query} || '%')
+              ) OR
+              EXISTS (
+                SELECT 1 FROM event_musicians em 
+                JOIN musicians m ON em.musician_id = m.id 
+                WHERE em.event_id = e.id 
+                AND LOWER(m.name) LIKE LOWER('%' || ${query} || '%')
+              )
+            )
+            ORDER BY search_rank DESC, e.from_date ASC
+            LIMIT ${limit} OFFSET ${skip}
+          `
+        } else {
+          // Fallback to unsafe query for complex cases
+          const eventsQuery = `
+            SELECT 
+              e.id, e.name, e.description, e.from_date, e.to_date,
+              e.city, e.country, e.website, e.style, e.image_url,
+              e.ai_quality_score, e.ai_completeness_score, e.extraction_method,
+              e.created_at, e.updated_at,
+              (${searchRankCase}) as search_rank
+            FROM events e
+            ${whereClause}
+            ${orderByClause}
+            LIMIT ${limit} OFFSET ${skip}
+          `
+
+          searchResults = await db.$queryRawUnsafe(
+            eventsQuery,
+            ...(query ? [query] : []),
+            ...(city ? [city] : []),
+            ...(country ? [country] : [])
+          )
+        }
+        console.log(`Enhanced search found ${searchResults.length} events (total: ${total})`)
+      }
+
       // If no results, return early
       if (total === 0) {
         return Response.json({
@@ -93,7 +281,7 @@ export async function GET(request: NextRequest) {
               sorting: { sortBy, sortOrder },
               filters: { city, country },
               totalMatches: 0,
-              searchType: 'optimized'
+              searchType: 'optimized',
             },
           },
           success: true,
@@ -103,38 +291,34 @@ export async function GET(request: NextRequest) {
 
       // Get related data efficiently for each event
       const events = await Promise.all(
-        searchResults.map(async (event) => {
+        searchResults.map(async event => {
           const [venues, prices] = await Promise.all([
-            db.venue.findMany({
+            db.externalEventVenue.findMany({
               where: {
-                event_venues: {
-                  some: {
-                    event_id: event.id
-                  }
-                }
+                event_id: event.id,
               },
               select: {
                 name: true,
                 address: true,
               },
-              take: 1
+              take: 1,
             }),
-            db.event_Price.findMany({
+            db.event_prices.findMany({
               where: { event_id: event.id },
               select: {
                 amount: true,
                 currency: true,
                 type: true,
               },
-              take: 1
-            })
-          ]);
+              take: 1,
+            }),
+          ])
 
           return {
             ...event,
             venues: venues,
-            event_prices: prices
-          };
+            event_prices: prices,
+          }
         })
       )
 
@@ -178,34 +362,36 @@ export async function GET(request: NextRequest) {
         }
       })
 
-    const totalPages = Math.ceil(total / limit)
+      const totalPages = Math.ceil(total / limit)
 
-    return Response.json({
-      data: {
-        events: transformedEvents,
-        pagination: {
-          page,
-          limit,
-          total,
-          totalPages,
-          hasNext: page < totalPages,
-          hasPrev: page > 1,
+      return Response.json({
+        data: {
+          events: transformedEvents,
+          pagination: {
+            page,
+            limit,
+            total,
+            totalPages,
+            hasNext: page < totalPages,
+            hasPrev: page > 1,
+          },
+          searchMeta: {
+            query,
+            sorting: { sortBy, sortOrder },
+            filters: { city, country },
+            totalMatches: total,
+            searchType: 'optimized',
+          },
         },
-        searchMeta: {
-          query,
-          sorting: { sortBy, sortOrder },
-          filters: { city, country },
-          totalMatches: total,
-          searchType: 'optimized'
-        },
-      },
-      success: true,
-      timestamp: new Date().toISOString(),
-    })
-    
+        success: true,
+        timestamp: new Date().toISOString(),
+      })
     } catch (optimizedSearchError) {
-      console.log('Optimized search failed, falling back to standard search:', optimizedSearchError.message);
-      
+      console.log(
+        'Optimized search failed, falling back to standard search:',
+        optimizedSearchError.message
+      )
+
       // Fallback to original Prisma search
       const where: any = {}
 
@@ -239,7 +425,7 @@ export async function GET(request: NextRequest) {
       }
 
       const total = await db.event.count({ where })
-      
+
       // If no results, return early
       if (total === 0) {
         return Response.json({
@@ -258,7 +444,7 @@ export async function GET(request: NextRequest) {
               sorting: { sortBy, sortOrder },
               filters: { city, country },
               totalMatches: 0,
-              searchType: 'fallback'
+              searchType: 'fallback',
             },
           },
           success: true,
@@ -357,7 +543,7 @@ export async function GET(request: NextRequest) {
             sorting: { sortBy, sortOrder },
             filters: { city, country },
             totalMatches: total,
-            searchType: 'fallback'
+            searchType: 'fallback',
           },
         },
         success: true,
