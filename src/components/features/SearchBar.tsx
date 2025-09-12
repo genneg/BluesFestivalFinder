@@ -6,8 +6,6 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { cn } from '@/lib/utils'
 import { useAdvancedSearch } from '@/hooks/useAdvancedSearch'
-import { useApi } from '@/hooks/useApi'
-import { useDebounce } from '@/hooks/useDebounce'
 import { SuggestionItem, SuggestionGroup } from './SearchSuggestions'
 
 interface SearchBarProps {
@@ -41,31 +39,12 @@ export function SearchBar({
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1)
   const [recentSearches, setRecentSearches] = useState<string[]>([])
   
-  const searchRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   
   const { 
     suggestions, 
-    isLoadingSuggestions,
-    updateFilters,
-    search: performSearch 
+    updateFilters
   } = useAdvancedSearch()
-
-  // Debounce the search query to avoid excessive API calls
-  const debouncedQuery = useDebounce(query, 300)
-  
-  // API hook for fetching suggestions
-  const suggestionsApi = useApi<{
-    suggestions: string[]
-    events: any[]
-    teachers: any[]
-    musicians: any[]
-  }>('/search/suggestions', {
-    immediate: false,
-    onError: (error) => {
-      console.error('Search suggestions error:', error)
-    }
-  })
 
   // Fetch suggestions DISABLED - causes performance issues
   // useEffect(() => {
@@ -240,10 +219,11 @@ export function SearchBar({
   const handleClear = () => {
     setQuery('')
     setSelectedSuggestionIndex(-1)
-    if (onSearch) {
-      onSearch('')
-    }
-    updateFilters({ query: undefined })
+    // Don't trigger search automatically - user must click search button
+    // if (onSearch) {
+    //   onSearch('')
+    // }
+    // updateFilters({ query: undefined })
   }
 
   return (
