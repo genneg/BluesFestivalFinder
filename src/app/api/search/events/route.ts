@@ -36,19 +36,53 @@ export async function GET(request: NextRequest) {
     const country = url.searchParams.get('country') || ''
     const sortBy = url.searchParams.get('sortBy') || 'relevance'
     const sortOrder = url.searchParams.get('sortOrder') || 'desc'
+    
+    // Parse teacher and musician filters
+    const teachersParam = url.searchParams.get('teachers')
+    const musiciansParam = url.searchParams.get('musicians')
+    const teachers = teachersParam ? teachersParam.split(',').filter(t => t.trim()) : []
+    const musicians = musiciansParam ? musiciansParam.split(',').filter(m => m.trim()) : []
 
     const skip = (page - 1) * limit
 
     // Use enhanced search with teachers and musicians for serverless compatibility
     try {
       console.log('Using enhanced search with teachers/musicians for query:', query)
+      console.log('Teacher filters:', teachers)
+      console.log('Musician filters:', musicians)
 
       // Build search query with teachers and musicians
       let whereClause = ''
       let searchRankCase = '0.0'
       let orderByClause = 'ORDER BY e.from_date ASC'
 
-      if (query) {
+      // Handle specific teacher/musician filters (from Filter panel)
+      if (teachers.length > 0 || musicians.length > 0) {
+        const teacherConditions = teachers.map((teacher, index) => 
+          `EXISTS (
+            SELECT 1 FROM event_teachers et 
+            JOIN teachers t ON et.teacher_id = t.id 
+            WHERE et.event_id = e.id 
+            AND LOWER(t.name) = LOWER('${teacher.replace(/'/g, "''")}')
+          )`
+        )
+        
+        const musicianConditions = musicians.map((musician, index) => 
+          `EXISTS (
+            SELECT 1 FROM event_musicians em 
+            JOIN musicians m ON em.musician_id = m.id 
+            WHERE em.event_id = e.id 
+            AND LOWER(m.name) = LOWER('${musician.replace(/'/g, "''")}')
+          )`
+        )
+        
+        const allConditions = [...teacherConditions, ...musicianConditions]
+        whereClause = `WHERE (${allConditions.join(' OR ')})`
+        
+        // Set high relevance for exact teacher/musician matches
+        searchRankCase = '90.0'
+        orderByClause = 'ORDER BY e.from_date ASC'
+      } else if (query) {
         whereClause = `
           WHERE (
             LOWER(e.name) LIKE LOWER('%' || $1 || '%') OR
@@ -133,7 +167,12 @@ export async function GET(request: NextRequest) {
 
       // Get total count - use template literals for better compatibility
       let totalResult
-      if (query && !city && !country) {
+      if (teachers.length > 0 || musicians.length > 0) {
+        // Direct query for teacher/musician filters
+        console.log('Using direct teacher/musician filter count')
+        const countQuery = `SELECT COUNT(*) as count FROM events e ${whereClause}`
+        totalResult = await db.$queryRawUnsafe(countQuery)
+      } else if (query && !city && !country) {
         console.log('Using template literal query for:', query)
         totalResult = await db.$queryRaw`
           SELECT COUNT(*) as count FROM events e 
@@ -173,7 +212,24 @@ export async function GET(request: NextRequest) {
       // Get events if there are results
       let searchResults = []
       if (total > 0) {
-        if (query && !city && !country) {
+        if (teachers.length > 0 || musicians.length > 0) {
+          // Direct query for teacher/musician filters
+          console.log('Using direct teacher/musician filter query')
+          const eventsQuery = `
+            SELECT 
+              e.id, e.name, e.description, e.from_date, e.to_date,
+              e.city, e.country, e.website, e.style, e.image_url,
+              e.ai_quality_score, e.ai_completeness_score, e.extraction_method,
+              e.created_at, e.updated_at,
+              ${searchRankCase} as search_rank
+            FROM events e
+            ${whereClause}
+            ${orderByClause}
+            LIMIT ${limit} OFFSET ${skip}
+          `
+          
+          searchResults = await db.$queryRawUnsafe(eventsQuery)
+        } else if (query && !city && !country) {
           // Use template literals for simple query case
           searchResults = await db.$queryRaw`
             SELECT 
