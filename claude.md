@@ -141,10 +141,46 @@ npm run type-check   # TypeScript validation
 
 ### Production Deployment
 
-1. Push to main branch (auto-deploys to Vercel)
-2. Verify database connectivity
-3. Check environment variables in Vercel dashboard
-4. Monitor deployment logs
+⚠️ **CRITICAL: Always Test on Production**
+
+1. **Local Testing**: Test all changes locally first
+2. **Commit & Push**: Push to main branch (auto-deploys to Vercel)
+3. **Wait for Deployment**: Allow 2-3 minutes for Vercel build/deploy
+4. **Production Testing**: **ALWAYS** test on production URL
+   - Test API endpoints: `https://blues-festival-finder.vercel.app/api/...`
+   - Test UI functionality on live site
+   - Verify search, filters, and all features work on production
+5. **Verify Database Connectivity**: Ensure production connects to correct Supabase DB
+6. **Monitor Deployment Logs**: Check Vercel dashboard for errors
+
+**🚨 IMPORTANT**: Never assume local functionality works in production. Different environments can have different database connections, environment variables, or deployment configurations. Always verify critical features work on the live Vercel deployment.
+
+#### Essential Production Tests
+
+After each deployment, test these critical endpoints:
+
+```bash
+# Teacher search (text query)
+curl "https://blues-festival-finder.vercel.app/api/search/events?query=Vicci"
+
+# Teacher filter (specific filter)
+curl "https://blues-festival-finder.vercel.app/api/search/events?teachers=Vicci%20%26%20Adamo"
+
+# General search functionality
+curl "https://blues-festival-finder.vercel.app/api/search/events?query=Blues"
+
+# Homepage loads
+curl "https://blues-festival-finder.vercel.app/"
+
+# Search page loads
+curl "https://blues-festival-finder.vercel.app/search"
+```
+
+**Expected Results:**
+- Teacher searches should return exactly 3 events for Vicci/Vicci & Adamo
+- Search results should have `"searchType": "optimized"` 
+- Teacher matches should have `"searchRank": "70"` or `"90"`
+- No results should return `"total": 0` but still succeed (`"success": true`)
 
 ## Environment Variables Setup
 
