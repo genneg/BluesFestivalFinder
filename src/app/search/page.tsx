@@ -3,6 +3,9 @@
 import { useState } from 'react'
 import { FilterPanel } from '@/components/features/FilterPanel'
 import { SearchBar } from '@/components/features/SearchBar'
+import { EnhancedSearchBar } from '@/components/features/EnhancedSearchBar'
+import { FilterPresets } from '@/components/features/FilterPresets'
+import { EnhancedEventCard } from '@/components/features/EnhancedEventCard'
 import { useAdvancedSearch } from '@/hooks/useAdvancedSearch'
 import {
   ArtDecoLoader,
@@ -32,6 +35,7 @@ interface FilterOptions {
 
 export default function SearchPage() {
   const [showFilters, setShowFilters] = useState(false)
+  const [showPresets, setShowPresets] = useState(false)
   
   const {
     filters,
@@ -82,6 +86,14 @@ export default function SearchPage() {
     clearFilters()
   }
 
+  const handleApplyPreset = (preset: any) => {
+    updateFilters(preset.filters)
+    setShowPresets(false)
+    setTimeout(() => {
+      search({ ...filters, ...preset.filters })
+    }, 100)
+  }
+
   // Convert suggestions to simple array for SearchBar
   const searchSuggestions = [
     ...suggestions.events,
@@ -107,16 +119,40 @@ export default function SearchPage() {
             </div>
           </div>
 
-          {/* Search Bar */}
+          {/* Enhanced Search Bar */}
           <div className="mb-6">
-            <SearchBar
+            <EnhancedSearchBar
               onSearch={handleSearch}
               onToggleFilters={() => setShowFilters(!showFilters)}
               filtersActive={hasActiveFilters}
               searchSuggestions={searchSuggestions}
+              value={filters.query || ''}
               className="max-w-full"
             />
           </div>
+
+          {/* Filter Presets */}
+          {!showFilters && (
+            <div className="mb-6">
+              <button
+                onClick={() => setShowPresets(!showPresets)}
+                className="flex items-center space-x-2 px-4 py-2 bg-gold-100 hover:bg-gold-200 text-navy-900 rounded-lg border border-gold-400/30 transition-colors vintage-button"
+              >
+                <span>🎯</span>
+                <span className="font-medium">Popular Searches</span>
+                {showPresets ? <span>▼</span> : <span>▶</span>}
+              </button>
+
+              {showPresets && (
+                <div className="mt-4 p-6 bg-cream-50 border-2 border-gold-400/30 rounded-xl">
+                  <FilterPresets
+                    onApplyPreset={handleApplyPreset}
+                    currentFilters={hasActiveFilters ? filters : undefined}
+                  />
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Filters Panel */}
           {showFilters && (
@@ -223,63 +259,17 @@ export default function SearchPage() {
                 
                 {results.events.length > 0 ? (
                   <>
-                    {/* Results */}
-                    <div className="space-y-4">
+                    {/* Enhanced Results Grid */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       {results.events.map((event) => (
-                        <div key={event.id} className="border border-gold-600/20 rounded-lg p-4 bg-card/50">
-                          <div className="flex justify-between items-start mb-2">
-                            <h3 className="font-semibold text-gold-600">
-                              {event.name}
-                            </h3>
-                            {event.featured && (
-                              <span className="badge-gold">
-                                Featured
-                              </span>
-                            )}
-                          </div>
-                          
-                          {event.shortDesc && (
-                            <p className="text-white/80 text-sm mb-2">
-                              {event.shortDesc}
-                            </p>
-                          )}
-                          
-                          <div className="flex flex-wrap gap-2 text-xs text-white/60 mb-2">
-                            <span>📅 {new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}</span>
-                            <span>📍 {event.venue?.city || event.city}, {event.venue?.country || event.country}</span>
-                            {event.distance && (
-                              <span>📏 {event.distance.toFixed(1)} km away</span>
-                            )}
-                            {event.prices?.length > 0 && (
-                              <span>💰 From ${event.prices[0].amount}</span>
-                            )}
-                          </div>
-                          
-                          {event.teachers?.length > 0 && (
-                            <div className="text-xs text-white/60 mb-1">
-                              👥 Teachers: {event.teachers.map(t => t.name).join(', ')}
-                            </div>
-                          )}
-                          
-                          {event.musicians?.length > 0 && (
-                            <div className="text-xs text-white/60 mb-1">
-                              🎵 Musicians: {event.musicians.map(m => m.name).join(', ')}
-                            </div>
-                          )}
-                          
-                          {event.tags?.length > 0 && (
-                            <div className="flex flex-wrap gap-1 mt-2">
-                              {event.tags.slice(0, 4).map((tag) => (
-                                <span key={tag} className="badge-secondary">
-                                  {tag}
-                                </span>
-                              ))}
-                              {event.tags.length > 4 && (
-                                <span className="text-xs text-white/60">+{event.tags.length - 4} more</span>
-                              )}
-                            </div>
-                          )}
-                        </div>
+                        <EnhancedEventCard
+                          key={event.id}
+                          event={event}
+                          showDistance={!!event.distance}
+                          highlightQuery={filters.query}
+                          enhanced={true}
+                          className="vintage-card"
+                        />
                       ))}
                     </div>
 

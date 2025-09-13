@@ -108,7 +108,7 @@ export default function EventsPage() {
                   </button>
                 </div>
 
-                <EventList events={results.events} />
+                <EventList events={results.events} enhanced={true} />
 
                 {results.pagination.hasNext && (
                   <div className="text-center mt-6">

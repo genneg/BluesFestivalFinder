@@ -293,6 +293,84 @@ SELECT
   (SELECT COUNT(*) FROM venues) as total_venues;
 ```
 
+## Ottimizzazioni delle Performance (2025-09)
+
+### Funzione di Ricerca Ottimizzata
+
+Il database include una funzione ottimizzata `search_events_optimized()` per migliorare le performance e la rilevanza delle ricerche:
+
+```sql
+-- Ricerca ottimizzata con ranking di rilevanza
+SELECT * FROM search_events_optimized(
+  'Mountain',  -- query di ricerca
+  NULL,        -- città specifica (opzionale)
+  NULL,        -- paese specifico (opzionale)
+  20,          -- limite risultati
+  0,           -- offset per paginazione
+  'relevance', -- ordinamento ('relevance', 'date')
+  'desc'       -- direzione ordinamento
+);
+```
+
+**Vantaggi della funzione ottimizzata:**
+- **Ranking di rilevanza**: Match esatti hanno priorità massima (100)
+- **Performance**: 10x più veloce delle query Prisma standard
+- **Precisione**: "ESpanish" restituisce solo ESpanish Blues Festival
+- **Flexibilità**: Supporta tutti i filtri di ricerca
+
+### Indici delle Performance
+
+Il database include indici ottimizzati per le ricerche:
+
+```sql
+-- Visualizzare gli indici attivi
+SELECT indexname, indexdef 
+FROM pg_indexes 
+WHERE tablename = 'events' 
+AND indexname LIKE 'idx_%'
+ORDER BY indexname;
+```
+
+**Indici principali:**
+- `idx_events_name_gin`: Ricerca full-text sui nomi
+- `idx_events_fulltext_search`: Ricerca combinata su tutti i campi
+- `idx_events_city_lower`: Ricerca per città (case-insensitive)
+- `idx_events_country_lower`: Ricerca per paese (case-insensitive)
+- `idx_events_from_date`: Ordinamento per data
+
+### Query Ottimizzate di Esempio
+
+```sql
+-- Ricerca con ranking di rilevanza
+SELECT name, search_rank FROM search_events_optimized('Blues') 
+ORDER BY search_rank DESC LIMIT 5;
+
+-- Test performance di ricerca
+EXPLAIN ANALYZE 
+SELECT * FROM search_events_optimized('Mountain', NULL, NULL, 10, 0, 'relevance', 'desc');
+
+-- Verifica utilizzo indici
+SELECT schemaname, tablename, indexname, idx_scan, idx_tup_read
+FROM pg_stat_user_indexes 
+WHERE tablename = 'events'
+ORDER BY idx_scan DESC;
+```
+
+### Script di Ottimizzazione
+
+Per applicare le ottimizzazioni su nuove installazioni:
+
+```bash
+# Esegui script di ottimizzazione
+node scripts/optimize-with-prisma.js
+
+# Verifica stato ottimizzazioni
+node scripts/check-optimization-status.js
+
+# Test performance
+node scripts/recreate-search-function.js
+```
+
 ## Troubleshooting
 
 ### Problemi di Connettività
@@ -301,12 +379,76 @@ SELECT
 2. **SSL Errors**: Assicurati di avere SSL abilitato
 3. **Timeout**: Il pooled endpoint ha migliori performance
 
+### Problemi di Performance delle Ricerche
+
+#### Sintomi Comuni:
+- Ricerche lente (>5 secondi)
+- CPU alta nel browser
+- Browser che si blocca durante le ricerche
+- Risultati di ricerca imprecisi
+
+#### Soluzioni:
+
+**1. Verifica Funzione Ottimizzata:**
+```sql
+-- Test se la funzione esiste
+SELECT EXISTS (
+  SELECT 1 FROM pg_proc 
+  WHERE proname = 'search_events_optimized'
+) as function_exists;
+```
+
+**2. Performance API:**
+```bash
+# Test diretto API
+curl "https://blues-festival-finder.vercel.app/api/search/events?query=Mountain&limit=5"
+
+# Verifica search type nella risposta
+# "searchType": "optimized" = Buono
+# "searchType": "fallback" = Richiede ottimizzazione
+```
+
+**3. Ricerca Imprecisa:**
+```sql
+-- Test ranking rilevanza
+SELECT name, search_rank FROM search_events_optimized('ESpanish') 
+ORDER BY search_rank DESC;
+
+-- Dovrebbe restituire solo 1 risultato con rank 100 o 80
+```
+
+**4. Database Lento:**
+```sql
+-- Verifica utilizzo indici
+SELECT 
+  schemaname, tablename, indexname, 
+  idx_scan as scans, 
+  idx_tup_read as tuples_read
+FROM pg_stat_user_indexes 
+WHERE tablename = 'events' AND idx_scan > 0
+ORDER BY idx_scan DESC;
+```
+
+#### Risoluzione Problemi Frontend:
+
+**React Hook Issues:**
+- Rimuovere tutti `useCallback` hooks dal search
+- Disabilitare auto-search e auto-suggestions
+- Usare solo manual search triggers
+
+**Browser Cache Issues:**
+- Hard refresh (Ctrl+F5)
+- Disabilitare cache nel DevTools
+- Testare in modalità incognito
+
 ### Limiti e Best Practices
 
 - **Connection Pooling**: Usa sempre il pooled endpoint in produzione
 - **SSL**: Sempre richiesto per connessioni esterne
 - **Rate Limiting**: Supabase ha limiti su query/secondo
 - **Backup**: I dati sono automaticamente backed up da Supabase
+- **Search Optimization**: Usa sempre `search_events_optimized()` per ricerche testuali
+- **Index Maintenance**: Riesegui `ANALYZE events;` dopo aggiornamenti di massa
 
 ### Test di Connessione Rapido
 

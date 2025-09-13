@@ -10,6 +10,7 @@ import { SmartError, EmptyState } from '@/components/ui/ErrorStates'
 import { NetworkStatus } from '@/components/ui/NetworkStatus'
 
 import { EventCard } from './EventCard'
+import { EnhancedEventCard } from './EnhancedEventCard'
 
 export type SortOption = 'date' | 'name' | 'location' | 'relevance'
 export type ViewMode = 'grid' | 'list'
@@ -23,6 +24,7 @@ interface EventListProps {
   emptyMessage?: string
   className?: string
   totalCount?: number
+  enhanced?: boolean
 }
 
 export function EventList({
@@ -33,7 +35,8 @@ export function EventList({
   onSortChange,
   emptyMessage = "No festivals found matching your criteria.",
   className,
-  totalCount
+  totalCount,
+  enhanced = true
 }: EventListProps) {
   const [loadingMore, setLoadingMore] = useState(false)
   const [viewMode, setViewMode] = useState<ViewMode>('grid')
@@ -156,13 +159,17 @@ export function EventList({
         aria-live="polite"
         aria-label={`${events.length} events displayed in ${viewMode} view`}
       >
-        {events.map((event) => (
-          <EventCard 
-            key={event.id} 
-            event={event} 
-            className={viewMode === 'list' ? "max-w-none" : ""} 
-          />
-        ))}
+        {events.map((event) => {
+          const CardComponent = enhanced ? EnhancedEventCard : EventCard
+          return (
+            <CardComponent
+              key={event.id}
+              event={event}
+              className={viewMode === 'list' ? "max-w-none" : ""}
+              enhanced={enhanced}
+            />
+          )
+        })}
       </div>
 
       {/* Load More */}
