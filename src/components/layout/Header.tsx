@@ -24,86 +24,104 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-200">
+    <header className="sticky top-0 z-50 bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 shadow-elegant border-b border-gold-600/30 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+        <div className="flex justify-between items-center h-20">
+          {/* Enhanced Logo with Vintage Design */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM15.657 6.343a1 1 0 011.414 0A9.972 9.972 0 0119 12a9.972 9.972 0 01-1.929 5.657 1 1 0 11-1.414-1.414A7.971 7.971 0 0017 12c0-1.594-.471-3.077-1.343-4.343a1 1 0 010-1.414zm-2.829 2.829a1 1 0 011.415 0A5.983 5.983 0 0115 12a5.984 5.984 0 01-.757 2.828 1 1 0 01-1.415-1.414A3.989 3.989 0 0013 12a3.988 3.988 0 00-.172-1.172 1 1 0 010-1.415z" clipRule="evenodd" />
-                </svg>
+            <Link href="/" className="flex items-center space-x-3 group">
+              <div className="relative">
+                <div className="vinyl-record w-12 h-12 animate-vinyl-spin group-hover:animate-art-deco-spin transition-all duration-300">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-gold-600 font-bold text-lg">♪</span>
+                  </div>
+                </div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-gold-600 rounded-full animate-pulse"></div>
               </div>
-              <span className="text-xl font-bold text-gray-900 hidden sm:block">
-                Blues Festival Finder
-              </span>
-              <span className="text-lg font-bold text-gray-900 sm:hidden">
-                BFF
-              </span>
+              <div className="hidden sm:block">
+                <div className="font-jazz text-2xl font-bold text-gradient-gold leading-tight">
+                  Blues Festival
+                </div>
+                <div className="font-vintage text-sm text-cream-200 tracking-widest -mt-1">
+                  FINDER
+                </div>
+              </div>
+              <div className="sm:hidden">
+                <span className="font-jazz text-xl font-bold text-gradient-gold">
+                  BFF
+                </span>
+              </div>
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          {/* Enhanced Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-6">
             {mainNavItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'text-sm font-medium transition-colors hover:text-primary-600',
+                  'relative font-vintage text-sm font-medium tracking-wide uppercase transition-all duration-300 hover:text-gold-600 px-3 py-2',
                   isActive(item.href)
-                    ? 'text-primary-600 border-b-2 border-primary-600 pb-4'
-                    : 'text-gray-600'
+                    ? 'text-gold-600'
+                    : 'text-cream-200 hover:scale-105'
                 )}
               >
-                {item.label}
+                <span className="relative z-10">{item.label}</span>
+                {isActive(item.href) && (
+                  <>
+                    <div className="absolute inset-0 bg-gold-600/20 rounded-md -z-1 animate-jazz-glow"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-gold-600 to-transparent"></div>
+                  </>
+                )}
+                <div className="absolute inset-0 bg-gold-600/10 rounded-md opacity-0 hover:opacity-100 transition-opacity duration-300 -z-1"></div>
               </Link>
             ))}
           </nav>
 
-          {/* Search Button - Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Enhanced Search Button */}
+          <div className="hidden md:flex items-center space-x-3">
             <Link href="/search">
-              <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+              <button className="btn-ghost flex items-center space-x-2 px-4 py-2 text-cream-200 hover:text-gold-600 border border-gold-600/30 hover:border-gold-600 rounded-lg transition-all duration-300">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <span>Search</span>
-              </Button>
+                <span className="font-vintage text-sm tracking-wide">SEARCH</span>
+              </button>
             </Link>
           </div>
 
-          {/* User Actions */}
-          <div className="flex items-center space-x-4">
+          {/* Enhanced User Actions */}
+          <div className="flex items-center space-x-3">
             {/* Dashboard Link for logged in users */}
             <Link href="/dashboard" className="hidden md:inline-flex">
-              <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+              <button className="btn-ghost flex items-center space-x-2 px-3 py-2 text-cream-200 hover:text-copper-600 border border-copper-600/30 hover:border-copper-600 rounded-lg transition-all duration-300">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                 </svg>
-                <span>Dashboard</span>
-              </Button>
+                <span className="font-vintage text-sm tracking-wide">STUDIO</span>
+              </button>
             </Link>
 
             <Link href="/auth/signin">
-              <Button variant="ghost" size="sm" className="hidden md:inline-flex">
-                Sign In
-              </Button>
+              <button className="btn-ghost hidden md:inline-flex px-4 py-2 text-cream-200 hover:text-gold-600 font-vintage text-sm tracking-wide transition-all duration-300">
+                SIGN IN
+              </button>
             </Link>
+            
             <Link href="/auth/signup">
-              <Button variant="primary" size="sm">
-                Get Started
-              </Button>
+              <button className="btn-primary px-6 py-2 font-vintage text-sm tracking-wide shadow-gold-lg hover:shadow-gold-xl transition-all duration-300 hover:scale-105">
+                🎭 JOIN US
+              </button>
             </Link>
 
-            {/* Mobile menu button */}
+            {/* Enhanced Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="lg:hidden p-3 text-cream-200 hover:text-gold-600 border border-gold-600/30 hover:border-gold-600 rounded-lg transition-all duration-300 hover:scale-105"
               aria-label="Toggle mobile menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {mobileMenuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -114,19 +132,19 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Enhanced Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-gray-200 bg-white">
-            <nav className="flex flex-col space-y-1">
+          <div className="lg:hidden py-6 border-t border-gold-600/30 bg-gradient-to-b from-navy-800 to-navy-900 backdrop-blur-md">
+            <nav className="flex flex-col space-y-2">
               {mainNavItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'px-3 py-3 text-base font-medium transition-colors rounded-lg',
+                    'px-4 py-3 font-vintage text-base font-medium tracking-wide uppercase transition-all duration-300 rounded-lg mx-2',
                     isActive(item.href)
-                      ? 'bg-primary-50 text-primary-600 border-l-4 border-primary-600'
-                      : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
+                      ? 'bg-gold-600/20 text-gold-600 border-l-4 border-gold-600 shadow-gold'
+                      : 'text-cream-200 hover:text-gold-600 hover:bg-gold-600/10 hover:border-l-4 hover:border-gold-600/50'
                   )}
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -134,45 +152,43 @@ export function Header() {
                 </Link>
               ))}
               
-              <div className="pt-4 mt-4 border-t border-gray-200">
+              <div className="pt-4 mt-4 border-t border-gold-600/30">
                 <Link
                   href="/search"
-                  className="flex items-center px-3 py-3 text-base font-medium text-gray-600 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
+                  className="flex items-center px-4 py-3 font-vintage text-base font-medium text-cream-200 hover:text-gold-600 hover:bg-gold-600/10 rounded-lg transition-all duration-300 mx-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
-                  Search Events
+                  <span className="tracking-wide">SEARCH EVENTS</span>
                 </Link>
                 <Link
                   href="/dashboard"
-                  className="flex items-center px-3 py-3 text-base font-medium text-gray-600 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
+                  className="flex items-center px-4 py-3 font-vintage text-base font-medium text-cream-200 hover:text-copper-600 hover:bg-copper-600/10 rounded-lg transition-all duration-300 mx-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                   </svg>
-                  Dashboard
+                  <span className="tracking-wide">STUDIO</span>
                 </Link>
               </div>
               
-              <div className="pt-4 mt-4 border-t border-gray-200 space-y-2">
+              <div className="pt-4 mt-4 border-t border-gold-600/30 space-y-3 mx-2">
                 <Link href="/auth/signin" className="block">
-                  <Button variant="ghost" size="sm" className="w-full justify-start">
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <button className="w-full btn-ghost flex items-center justify-center space-x-2 px-4 py-3 text-cream-200 hover:text-gold-600 border border-gold-600/30 hover:border-gold-600 rounded-lg transition-all duration-300">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                     </svg>
-                    Sign In
-                  </Button>
+                    <span className="font-vintage tracking-wide">SIGN IN</span>
+                  </button>
                 </Link>
                 <Link href="/auth/signup" className="block">
-                  <Button variant="primary" size="sm" className="w-full justify-start">
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                    </svg>
-                    Get Started
-                  </Button>
+                  <button className="w-full btn-primary flex items-center justify-center space-x-2 px-4 py-3 font-vintage tracking-wide shadow-gold-lg">
+                    <span>🎭</span>
+                    <span>JOIN THE COMMUNITY</span>
+                  </button>
                 </Link>
               </div>
             </nav>

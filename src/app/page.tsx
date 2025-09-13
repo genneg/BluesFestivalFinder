@@ -114,59 +114,82 @@ export default function Home() {
   const renderContent = () => {
     return (
       <div className="space-y-12">
-        {/* Hero Section */}
-        <div className="hero-section relative overflow-hidden rounded-2xl p-12">
-          <div className="hero-overlay"></div>
+        {/* Enhanced Hero Section with Vintage Aesthetics */}
+        <div className="hero-section vintage-spotlight relative overflow-hidden rounded-2xl p-8 md:p-12 mb-8">
+          <div className="hero-overlay vintage-pattern"></div>
+          
+          {/* Art Deco Corner Decorations */}
+          <div className="art-deco-corner absolute top-4 left-4 w-6 h-6 z-20"></div>
+          <div className="art-deco-corner absolute bottom-4 right-4 w-6 h-6 z-20" style={{transform: 'rotate(180deg)'}}></div>
+          
+          {/* Musical Note Decorations */}
+          <div className="musical-notes absolute top-8 right-8 z-20"></div>
+          
+          {/* Main Content */}
           <div className="relative z-10 text-center">
-            <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl mb-6 text-white leading-tight font-bold">
-              Discover the Soul of Blues
+            {/* Main Title with Jazz Typography */}
+            <h1 className="font-jazz text-5xl md:text-6xl lg:text-7xl mb-4 text-gradient-gold leading-tight font-bold tracking-wide">
+              Discover the Soul
             </h1>
-            <p className="text-white text-lg mb-8 leading-relaxed max-w-md mx-auto font-medium">
-              Find authentic festivals, connect with legendary artists, and immerse yourself in the timeless world of blues and jazz.
-            </p>
-            <Link href="/search">
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6 py-2.5">
-                Explore Festivals
-              </Button>
-            </Link>
+            <h2 className="font-vintage text-3xl md:text-4xl lg:text-5xl mb-6 text-cream-200 leading-tight tracking-wider">
+              OF BLUES DANCE
+            </h2>
+            
+            {/* Subtitle with enhanced styling */}
+            <div className="jazz-lines relative mb-8 py-4">
+              <p className="text-cream-100 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto font-medium">
+                Connect with legendary artists, discover authentic festivals worldwide, and immerse yourself in the timeless elegance of blues and jazz culture.
+              </p>
+            </div>
+            
+            {/* Enhanced CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link href="/search">
+                <button className="btn-primary text-lg px-8 py-3 font-semibold tracking-wide shadow-gold-lg hover:shadow-gold-xl transition-all duration-300 hover:scale-105">
+                  🎭 Explore Festivals
+                </button>
+              </Link>
+              <Link href="/teachers">
+                <button className="btn-secondary text-lg px-8 py-3 font-semibold tracking-wide border-cream-300 text-cream-200 hover:bg-cream-100 hover:text-navy-900 transition-all duration-300">
+                  👥 Meet Artists
+                </button>
+              </Link>
+            </div>
+            
           </div>
+          
+          {/* Floating Art Deco Elements */}
+          <div className="absolute top-1/4 left-8 w-4 h-4 border-2 border-gold-600 rotate-45 animate-jazz-glow opacity-60"></div>
+          <div className="absolute bottom-1/3 right-12 w-3 h-3 bg-copper-600 rounded-full animate-vintage-bounce opacity-70"></div>
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-3 gap-6">
-          <div className="stats-card">
-            <Music className="w-5 h-5 text-primary mx-auto mb-2" />
-            <p className="text-2xl font-bold text-primary">127</p>
-            <p className="text-sm font-medium text-white">Festivals</p>
-          </div>
-          <div className="stats-card">
-            <TrendingUp className="w-5 h-5 text-primary mx-auto mb-2" />
-            <p className="text-2xl font-bold text-primary">1.2k</p>
-            <p className="text-sm font-medium text-white">Artists</p>
-          </div>
-          <div className="stats-card">
-            <Sparkles className="w-5 h-5 text-primary mx-auto mb-2" />
-            <p className="text-2xl font-bold text-primary">89k</p>
-            <p className="text-sm font-medium text-white">Music Lovers</p>
-          </div>
-        </div>
 
-        {/* Featured Festivals Section */}
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h3 className="font-playfair text-2xl md:text-3xl font-semibold text-white">Featured Festivals</h3>
-            <Link href="/search">
-              <Button variant="ghost" size="sm" className="text-primary">
-                View All
-              </Button>
-            </Link>
+        {/* Enhanced Featured Festivals Section */}
+        <div className="space-y-8">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center mb-4">
+              <div className="h-px bg-gradient-to-r from-transparent via-gold-600 to-transparent flex-1"></div>
+              <div className="mx-4 w-3 h-3 bg-gold-600 rounded-full"></div>
+              <div className="h-px bg-gradient-to-r from-transparent via-gold-600 to-transparent flex-1"></div>
+            </div>
+            <h3 className="font-jazz text-4xl md:text-5xl font-bold text-gradient-gold mb-2">
+              Featured Festivals
+            </h3>
+            <p className="text-cream-200 text-lg font-medium">Handpicked events from the global blues scene</p>
+            <div className="mt-6 flex justify-center">
+              <Link href="/search">
+                <button className="btn-outline px-6 py-2 text-sm font-semibold tracking-wide border-gold-600 text-gold-600 hover:bg-gold-600 hover:text-navy-900 transition-all duration-300">
+                  🎪 View All Festivals
+                </button>
+              </Link>
+            </div>
           </div>
           <div className="space-y-6">
             {isLoadingFestivals && (
               <div className="card p-8 text-center">
                 <div className="spinner mx-auto mb-4"></div>
                 <p className="text-white/80">Discovering amazing blues festivals worldwide...</p>
-                <p className="text-white/60 text-sm mt-2">Searching through 127+ festivals in 40+ countries</p>
+                <p className="text-white/60 text-sm mt-2">Searching blues dance festivals worldwide</p>
               </div>
             )}
             
@@ -200,15 +223,25 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Teachers Section */}
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h3 className="font-playfair text-2xl md:text-3xl font-semibold text-white">Featured Teachers</h3>
-            <Link href="/teachers">
-              <Button variant="ghost" size="sm" className="text-primary">
-                View All
-              </Button>
-            </Link>
+        {/* Enhanced Teachers Section */}
+        <div className="space-y-8">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center mb-4">
+              <div className="h-px bg-gradient-to-r from-transparent via-copper-600 to-transparent flex-1"></div>
+              <div className="mx-4 w-3 h-3 bg-copper-600 rounded-full animate-pulse"></div>
+              <div className="h-px bg-gradient-to-r from-transparent via-copper-600 to-transparent flex-1"></div>
+            </div>
+            <h3 className="font-jazz text-4xl md:text-5xl font-bold text-copper-600 mb-2">
+              Master Teachers
+            </h3>
+            <p className="text-cream-200 text-lg font-medium">Learn from legendary blues dance instructors</p>
+            <div className="mt-6 flex justify-center">
+              <Link href="/teachers">
+                <button className="btn-outline px-6 py-2 text-sm font-semibold tracking-wide border-copper-600 text-copper-600 hover:bg-copper-600 hover:text-cream-100 transition-all duration-300">
+                  👥 Meet All Teachers
+                </button>
+              </Link>
+            </div>
           </div>
           <div className="space-y-4">
             {isLoadingTeachers && (

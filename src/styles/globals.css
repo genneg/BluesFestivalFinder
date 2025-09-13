@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&family=Abril+Fatface&family=Righteous&family=Oswald:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -46,6 +46,18 @@
   
   .font-playfair {
     font-family: 'Playfair Display', serif;
+  }
+  
+  .font-vintage {
+    font-family: 'Bebas Neue', 'Oswald', system-ui, sans-serif;
+  }
+  
+  .font-jazz {
+    font-family: 'Abril Fatface', 'Playfair Display', Georgia, serif;
+  }
+  
+  .font-retro {
+    font-family: 'Righteous', 'Bebas Neue', system-ui, sans-serif;
   }
 
   /* Typography Base Styles - WCAG AAA Compliant & Improved Hierarchy */
@@ -728,5 +740,114 @@
     border-color: rgba(212, 175, 55, 0.3);
     transform: translateY(-2px);
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(212, 175, 55, 0.1);
+  }
+
+  /* Art Deco & Vintage Elements */
+  .art-deco-border {
+    background: linear-gradient(45deg, transparent 0%, #d4af37 1%, transparent 2%, transparent 98%, #d4af37 99%, transparent 100%);
+    padding: 2px;
+  }
+
+  .art-deco-corner::before,
+  .art-deco-corner::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d4af37;
+  }
+
+  .art-deco-corner::before {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .art-deco-corner::after {
+    bottom: -2px;
+    right: -2px;
+    border-left: none;
+    border-top: none;
+  }
+
+  .vintage-pattern {
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 2px, transparent 2px),
+      radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.1) 2px, transparent 2px);
+    background-size: 40px 40px;
+  }
+
+  .jazz-lines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  }
+
+  .jazz-lines::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  }
+
+  /* Vinyl Record Effect */
+  .vinyl-record {
+    position: relative;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, 
+      #1a1a2e 30%, 
+      #2d2d5a 31%, 
+      #2d2d5a 40%, 
+      #1a1a2e 41%);
+  }
+
+  .vinyl-record::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+    background: #d4af37;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  }
+
+  /* Musical Note Decorations */
+  .musical-notes::before {
+    content: '♪ ♫ ♪';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    color: rgba(212, 175, 55, 0.3);
+    font-size: 1.2rem;
+    animation: vintage-bounce 3s ease-in-out infinite;
+  }
+
+  /* Vintage Spotlight Effect */
+  .vintage-spotlight {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vintage-spotlight::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.1) 0%, transparent 60%);
+    animation: art-deco-spin 12s linear infinite;
+    pointer-events: none;
   }
 }

@@ -87,157 +87,265 @@ export default function TeachersPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-red-600 text-lg mb-4">⚠️ {error}</div>
-          <button 
-            onClick={() => fetchTeachers()} 
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            Try Again
-          </button>
+      <div className="app-container">
+        <div className="max-w-md mx-auto bg-background min-h-screen relative flex items-center justify-center">
+          <div className="card p-8 text-center border-bordeaux-600/30 bg-bordeaux-900/20">
+            <div className="mb-6">
+              <span className="text-6xl">🎭</span>
+            </div>
+            <h3 className="font-jazz text-2xl font-bold text-bordeaux-400 mb-4">
+              Something Went Wrong
+            </h3>
+            <p className="text-cream-200 mb-6">{error}</p>
+            <button 
+              onClick={() => fetchTeachers()} 
+              className="btn-primary px-6 py-3 font-vintage tracking-wide"
+            >
+              🔄 Try Again
+            </button>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-2">
-              <span className="text-2xl">🎵</span>
-              <span className="text-xl font-bold text-gray-900">Blues Festival Finder</span>
-            </Link>
+    <div className="app-container">
+      <div className="max-w-md mx-auto bg-background min-h-screen relative">
+        {/* Vintage Background Pattern */}
+        <div className="absolute inset-0 vintage-pattern opacity-10"></div>
+
+        {/* Enhanced Vintage Page Header */}
+        <div className="content-wrapper">
+          <div className="hero-section vintage-spotlight relative overflow-hidden rounded-2xl p-8 mb-8">
+            <div className="hero-overlay vintage-pattern"></div>
+            
+            {/* Art Deco Corner Decorations */}
+            <div className="art-deco-corner absolute top-4 left-4 w-6 h-6 z-20"></div>
+            <div className="art-deco-corner absolute bottom-4 right-4 w-6 h-6 z-20" style={{transform: 'rotate(180deg)'}}></div>
+            
+            {/* Musical Note Decorations */}
+            <div className="musical-notes absolute top-8 right-8 z-20"></div>
+            
+            {/* Main Content */}
+            <div className="relative z-10 text-center">
+              <h1 className="font-jazz text-5xl md:text-6xl font-bold text-gradient-gold leading-tight mb-4">
+                Master Teachers
+              </h1>
+              <h2 className="font-vintage text-2xl md:text-3xl mb-6 text-cream-200 leading-tight tracking-wider">
+                OF BLUES DANCE
+              </h2>
+              
+              <div className="jazz-lines relative mb-6 py-4">
+                <p className="text-cream-100 text-lg leading-relaxed max-w-xl mx-auto font-medium">
+                  Learn from legendary instructors who carry the authentic spirit of blues dance. 
+                  Connect with masters who've dedicated their lives to this timeless art form.
+                </p>
+              </div>
+              
+            </div>
+            
+            {/* Floating Art Deco Elements */}
+            <div className="absolute top-1/4 left-8 w-4 h-4 border-2 border-copper-600 rotate-45 animate-jazz-glow opacity-60"></div>
+            <div className="absolute bottom-1/3 right-12 w-3 h-3 bg-gold-600 rounded-full animate-vintage-bounce opacity-70"></div>
           </div>
-        </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Page Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Blues Dance Teachers
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Discover amazing blues dance teachers from around the world
-          </p>
-        </div>
-
-        {/* Search */}
-        <div className="mb-8">
-          <SearchBar 
-            onSearch={handleSearch}
-            placeholder="Search teachers by name or bio..."
-            className="max-w-md mx-auto"
-          />
-        </div>
-
-        {/* Loading State */}
-        {isLoading && (
-          <div className="flex justify-center items-center py-12">
-            <LoadingSpinner />
+          {/* Enhanced Search Section */}
+          <div className="mb-8">
+            <div className="card p-6 bg-copper-900/20 border-copper-600/30">
+              <div className="text-center mb-4">
+                <h3 className="font-jazz text-2xl font-bold text-copper-600 mb-2">
+                  Find Your Perfect Instructor
+                </h3>
+                <p className="text-cream-200 text-sm">Search by name, style, or specialization</p>
+              </div>
+              <SearchBar 
+                onSearch={handleSearch}
+                placeholder="Search teachers by name or bio..."
+                className="max-w-full search-elegant"
+              />
+            </div>
           </div>
-        )}
 
-        {/* Teachers Grid */}
-        {!isLoading && teachers.length > 0 && (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-              {teachers.map((teacher) => (
-                <Link 
-                  key={teacher.id} 
-                  href={`/teachers/${teacher.id}`}
-                  className="group"
-                >
-                  <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden">
-                    {/* Teacher Image */}
-                    {teacher.imageUrl ? (
-                      <div className="aspect-w-3 aspect-h-4">
-                        <img
-                          src={teacher.imageUrl}
-                          alt={teacher.name}
-                          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-                        <span className="text-4xl">👨‍🏫</span>
-                      </div>
-                    )}
-                    
-                    {/* Teacher Info */}
-                    <div className="p-4">
-                      <h3 className="font-semibold text-lg text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                        {teacher.name}
-                      </h3>
+          {/* Enhanced Loading State */}
+          {isLoading && (
+            <div className="card p-12 text-center bg-gold-900/20 border-gold-600/30">
+              <div className="vinyl-record w-16 h-16 mx-auto mb-6 animate-vinyl-spin"></div>
+              <h3 className="font-jazz text-2xl font-bold text-gold-600 mb-3">
+                Discovering Masters
+              </h3>
+              <p className="text-cream-200 mb-2">Searching through legendary instructors...</p>
+              <p className="text-cream-300 text-sm">Curating the finest blues dance teachers worldwide</p>
+            </div>
+          )}
+
+          {/* Enhanced Teachers List with Vintage Styling */}
+          {!isLoading && teachers.length > 0 && (
+            <>
+              <div className="space-y-6 mb-8">
+                {teachers.map((teacher) => (
+                  <Link 
+                    key={teacher.id} 
+                    href={`/teachers/${teacher.id}`}
+                    className="group block"
+                  >
+                    <div className="card-hover vintage-spotlight relative overflow-hidden p-6 border-copper-600/30 bg-copper-900/10">
+                      {/* Art Deco Corner */}
+                      <div className="art-deco-corner absolute top-2 left-2 w-4 h-4 z-10 opacity-40"></div>
                       
-                      {teacher.bio && (
-                        <p className="text-gray-600 text-sm mb-3 line-clamp-3">
-                          {teacher.bio.substring(0, 120)}...
-                        </p>
-                      )}
-                      
-                      <div className="flex items-center justify-between text-sm text-gray-500">
-                        <span>{teacher.totalEvents} events</span>
-                        {teacher.specialties.length > 0 && (
-                          <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">
-                            {teacher.specialties[0]}
-                          </span>
-                        )}
+                      <div className="flex items-start space-x-4">
+                        {/* Teacher Avatar */}
+                        <div className="flex-shrink-0">
+                          {teacher.imageUrl ? (
+                            <div className="relative">
+                              <img
+                                src={teacher.imageUrl}
+                                alt={teacher.name}
+                                className="w-20 h-20 rounded-full object-cover border-3 border-copper-600/30 group-hover:border-copper-600 transition-all duration-300"
+                              />
+                              <div className="absolute -top-1 -right-1 w-4 h-4 bg-copper-600 rounded-full animate-pulse"></div>
+                            </div>
+                          ) : (
+                            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-copper-600/30 to-gold-600/30 flex items-center justify-center border-2 border-copper-600/30">
+                              <span className="text-2xl">🎭</span>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Teacher Info */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between mb-2">
+                            <h3 className="font-jazz text-xl font-bold text-copper-600 group-hover:text-gold-600 transition-colors duration-300 truncate">
+                              {teacher.name}
+                            </h3>
+                            {teacher.aiRelevanceScore && teacher.aiRelevanceScore > 80 && (
+                              <div className="badge-gold text-xs px-2 py-1">
+                                ⭐ Master
+                              </div>
+                            )}
+                          </div>
+                          
+                          {teacher.bio && (
+                            <p className="text-cream-200 text-sm mb-3 leading-relaxed line-clamp-2">
+                              {teacher.bio.substring(0, 150)}...
+                            </p>
+                          )}
+                          
+                          {/* Specialties */}
+                          {teacher.specialties.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mb-3">
+                              {teacher.specialties.slice(0, 3).map((specialty, index) => (
+                                <span key={index} className="badge-secondary text-xs">
+                                  {specialty}
+                                </span>
+                              ))}
+                              {teacher.specialties.length > 3 && (
+                                <span className="text-cream-300 text-xs">+{teacher.specialties.length - 3} more</span>
+                              )}
+                            </div>
+                          )}
+                          
+                          {/* Stats */}
+                          <div className="flex items-center justify-between text-sm">
+                            <div className="flex items-center space-x-4 text-cream-300">
+                              <span className="flex items-center space-x-1">
+                                <span>🎪</span>
+                                <span>{teacher.totalEvents} events</span>
+                              </span>
+                              {teacher.upcomingEvents > 0 && (
+                                <span className="flex items-center space-x-1 text-gold-600">
+                                  <span>📅</span>
+                                  <span>{teacher.upcomingEvents} upcoming</span>
+                                </span>
+                              )}
+                            </div>
+                            
+                            <div className="flex items-center space-x-2">
+                              {teacher.website && (
+                                <span className="text-copper-600 text-xs">🌐</span>
+                              )}
+                              <svg className="w-4 h-4 text-cream-400 group-hover:text-copper-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex justify-center items-center space-x-2">
-                <button
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  Previous
-                </button>
-                
-                <span className="px-4 py-2 text-gray-700">
-                  Page {currentPage} of {totalPages}
-                </span>
-                
-                <button
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  Next
-                </button>
+                  </Link>
+                ))}
               </div>
-            )}
-          </>
-        )}
 
-        {/* No Results */}
-        {!isLoading && teachers.length === 0 && (
-          <div className="text-center py-12">
-            <span className="text-6xl mb-4 block">🎭</span>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              No teachers found
-            </h3>
-            <p className="text-gray-600">
-              {searchQuery ? 'Try adjusting your search terms' : 'Teachers will appear here soon'}
-            </p>
-          </div>
-        )}
+              {/* Enhanced Vintage Pagination */}
+              {totalPages > 1 && (
+                <div className="card p-6 bg-gold-900/20 border-gold-600/30">
+                  <div className="flex items-center justify-between">
+                    <button
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="btn-secondary disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2 text-cream-200 border-copper-600/30 hover:border-copper-600"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                      <span className="font-vintage text-sm tracking-wide">PREVIOUS</span>
+                    </button>
+                    
+                    <div className="flex items-center space-x-2">
+                      <span className="font-jazz text-lg text-gold-600">Page {currentPage}</span>
+                      <span className="text-cream-300">of</span>
+                      <span className="font-jazz text-lg text-gold-600">{totalPages}</span>
+                    </div>
+                    
+                    <button
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className="btn-secondary disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2 text-cream-200 border-copper-600/30 hover:border-copper-600"
+                    >
+                      <span className="font-vintage text-sm tracking-wide">NEXT</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+
+          {/* Enhanced No Results State */}
+          {!isLoading && teachers.length === 0 && (
+            <div className="card p-12 text-center bg-bordeaux-900/20 border-bordeaux-600/30">
+              <div className="mb-6">
+                <span className="text-6xl">🎭</span>
+              </div>
+              <h3 className="font-jazz text-3xl font-bold text-bordeaux-400 mb-4">
+                No Masters Found
+              </h3>
+              <p className="text-cream-200 mb-6 leading-relaxed">
+                {searchQuery 
+                  ? `We couldn't find any teachers matching "${searchQuery}". Try adjusting your search terms or explore our full collection of master instructors.`
+                  : 'Our legendary teachers are gathering their wisdom. Check back soon for an incredible collection of blues dance masters.'
+                }
+              </p>
+              {searchQuery && (
+                <button 
+                  onClick={() => {
+                    setSearchQuery('')
+                    setCurrentPage(1)
+                  }}
+                  className="btn-primary px-6 py-3 font-vintage tracking-wide"
+                >
+                  🔍 Browse All Teachers
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Enhanced Bottom Navigation */}
+        <BottomNavigationEnhanced activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
-
-      {/* Bottom Navigation */}
-      <BottomNavigationEnhanced activeTab={activeTab} onTabChange={setActiveTab} />
     </div>
   )
 }

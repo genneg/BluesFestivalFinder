@@ -50,6 +50,48 @@ module.exports = {
           900: '#7a6019',
           950: '#46360b',
         },
+        // Vintage bordeaux/wine colors inspired by jazz clubs
+        bordeaux: {
+          50: '#fdf2f3',
+          100: '#fce7e8',
+          200: '#f9d2d4',
+          300: '#f4aeb1',
+          400: '#ed7d82',
+          500: '#e3535a',
+          600: '#cc2a36', // Deep wine red
+          700: '#a91e2a', // Rich bordeaux
+          800: '#8b1e27',
+          900: '#751f26',
+          950: '#400b0f',
+        },
+        // Warm cream/beige tones for vintage feel
+        cream: {
+          50: '#fefefe',
+          100: '#fefcf7',
+          200: '#fdf7e8',
+          300: '#fbf0d0',
+          400: '#f7e4a6',
+          500: '#f1d16e',
+          600: '#e8bf42',
+          700: '#d4a628', // Warm cream
+          800: '#b08420',
+          900: '#8f6b1e',
+          950: '#523a0f',
+        },
+        // Vintage copper/bronze accents
+        copper: {
+          50: '#fef7f0',
+          100: '#fdeee0',
+          200: '#fad9be',
+          300: '#f6bf91',
+          400: '#f19b61',
+          500: '#ed7d3a',
+          600: '#de6421', // Vintage copper
+          700: '#b84e18',
+          800: '#934019',
+          900: '#773618',
+          950: '#401a0a',
+        },
         // Neutral grays with blues undertone
         neutral: {
           50: '#f8fafc',
@@ -110,6 +152,10 @@ module.exports = {
         display: ['Playfair Display', 'Georgia', 'serif'], // Elegant serif for headings
         serif: ['Playfair Display', 'Georgia', 'serif'],
         mono: ['Fira Code', 'Monaco', 'Cascadia Code', 'Segoe UI Mono', 'Roboto Mono', 'monospace'],
+        // Vintage & Art Deco inspired fonts
+        vintage: ['Bebas Neue', 'Oswald', 'system-ui', 'sans-serif'], // Art Deco style headers
+        jazz: ['Abril Fatface', 'Playfair Display', 'Georgia', 'serif'], // Jazz Age elegance
+        retro: ['Righteous', 'Bebas Neue', 'system-ui', 'sans-serif'], // Retro signage style
       },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1rem' }],
@@ -229,6 +275,36 @@ module.exports = {
             backgroundSize: '200% 100%'
           },
         },
+        // Art Deco vintage animations
+        artDecoSpin: {
+          '0%': { transform: 'rotate(0deg) scale(1)' },
+          '50%': { transform: 'rotate(180deg) scale(1.05)' },
+          '100%': { transform: 'rotate(360deg) scale(1)' },
+        },
+        vintageBounce: {
+          '0%, 100%': { 
+            transform: 'translateY(0) rotate(-2deg)',
+            animationTimingFunction: 'cubic-bezier(0.8,0,1,1)'
+          },
+          '50%': { 
+            transform: 'translateY(-10px) rotate(2deg)',
+            animationTimingFunction: 'cubic-bezier(0,0,0.2,1)'
+          },
+        },
+        jazzGlow: {
+          '0%, 100%': { 
+            boxShadow: '0 0 20px rgba(212, 175, 55, 0.3)',
+            opacity: '1'
+          },
+          '50%': { 
+            boxShadow: '0 0 30px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.2)',
+            opacity: '0.9'
+          },
+        },
+        vinylSpin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         shimmer: 'shimmer 1.5s ease-in-out infinite',
@@ -244,6 +320,11 @@ module.exports = {
         'elegant-pulse': 'elegantPulse 2s ease-in-out infinite',
         'float-up': 'floatUp 0.3s ease-out',
         'gold-shimmer': 'goldShimmer 2s ease-in-out infinite',
+        // Vintage Art Deco animations
+        'art-deco-spin': 'artDecoSpin 8s ease-in-out infinite',
+        'vintage-bounce': 'vintageBounce 2s ease-in-out infinite',
+        'jazz-glow': 'jazzGlow 3s ease-in-out infinite',
+        'vinyl-spin': 'vinylSpin 4s linear infinite',
       },
       backdropBlur: {
         xs: '2px',

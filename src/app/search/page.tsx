@@ -193,7 +193,7 @@ export default function SearchPage() {
               <div className="flex flex-col items-center justify-center py-12">
                 <div className="spinner mb-4"></div>
                 <p className="text-white/80 text-lg mb-2">Searching festivals worldwide...</p>
-                <p className="text-white/60 text-sm">Looking through 127+ festivals in 40+ countries</p>
+                <p className="text-white/60 text-sm">Searching blues dance festivals worldwide</p>
               </div>
             ) : results ? (
               <div>

@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from 'next/font/google'
 import { AuthProvider } from '@/components/providers/AuthProvider'
 import { QueryProvider } from '@/components/providers/QueryProvider'
 import { Header, Footer } from '@/components/layout'
+import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { OfflineBanner } from '@/components/ui/NetworkStatus'
 import '@/styles/globals.css'
 
@@ -36,6 +37,7 @@ export default function RootLayout({
             <div className="min-h-screen flex flex-col">
               <OfflineBanner />
               <Header />
+              <Breadcrumb />
               <main className="flex-1">
                 {children}
               </main>
