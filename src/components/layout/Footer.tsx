@@ -85,6 +85,12 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/locations" className="group flex items-center space-x-2 text-cream-200 hover:text-gold-600 transition-all duration-300">
+                  <span className="w-1.5 h-1.5 bg-current rounded-full opacity-60 group-hover:opacity-100"></span>
+                  <span className="font-vintage text-sm tracking-wide">Dance Locations</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/search" className="group flex items-center space-x-2 text-cream-200 hover:text-gold-600 transition-all duration-300">
                   <span className="w-1.5 h-1.5 bg-current rounded-full opacity-60 group-hover:opacity-100"></span>
                   <span className="font-vintage text-sm tracking-wide">Advanced Search</span>

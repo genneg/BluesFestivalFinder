@@ -86,21 +86,21 @@ interface PersonSchemaProps {
   specialties?: string[]
 }
 
-export function PersonSchema({ person }: { person: PersonSchemaProps }) {
+export function PersonSchema({ person }: { person?: PersonSchemaProps } = {}) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": person.name,
-    "description": person.description,
-    "image": person.imageUrl,
-    "url": person.url,
-    "jobTitle": person.jobTitle || "Blues Dance Teacher",
-    "worksFor": {
+    "name": person?.name,
+    "description": person?.description,
+    "image": person?.imageUrl,
+    "url": person?.url,
+    "jobTitle": person?.jobTitle || "Blues Dance Teacher",
+    "worksFor": person?.worksFor ? {
       "@type": "Organization",
-      "name": person.worksFor || "Blues Dance Community"
-    },
-    "sameAs": person.sameAs,
-    "knowsAbout": person.specialties || ["blues dance", "dance instruction"]
+      "name": person.worksFor
+    } : undefined,
+    "sameAs": person?.sameAs,
+    "knowsAbout": person?.specialties || ["blues dance", "dance instruction"]
   }
 
   return (
@@ -131,29 +131,42 @@ interface OrganizationSchemaProps {
   sameAs?: string[]
 }
 
-export function OrganizationSchema({ org }: { org: OrganizationSchemaProps }) {
+export function OrganizationSchema({ org }: { org?: OrganizationSchemaProps } = {}) {
+  const defaultOrg = {
+    name: "Blues Festival Finder",
+    description: "Comprehensive platform for discovering blues dance festivals and events worldwide",
+    url: "https://blues-festival-finder.vercel.app",
+    logo: "https://blues-festival-finder.vercel.app/logo.png",
+    sameAs: [
+      "https://facebook.com/bluesfestivalfinder",
+      "https://instagram.com/bluesfestivalfinder"
+    ]
+  }
+
+  const organizationData = org || defaultOrg
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": org.name,
-    "description": org.description,
-    "url": org.url,
-    "logo": org.logo,
-    "contactPoint": org.contactPoint ? {
+    "name": organizationData.name,
+    "description": organizationData.description,
+    "url": organizationData.url,
+    "logo": organizationData.logo,
+    "contactPoint": organizationData.contactPoint ? {
       "@type": "ContactPoint",
-      "telephone": org.contactPoint.telephone,
-      "contactType": org.contactPoint.contactType || "customer service",
-      "email": org.contactPoint.email
+      "telephone": organizationData.contactPoint.telephone,
+      "contactType": organizationData.contactPoint.contactType || "customer service",
+      "email": organizationData.contactPoint.email
     } : undefined,
-    "address": org.address ? {
+    "address": organizationData.address ? {
       "@type": "PostalAddress",
-      "streetAddress": org.address.streetAddress,
-      "addressLocality": org.address.addressLocality,
-      "addressRegion": org.address.addressRegion,
-      "postalCode": org.address.postalCode,
-      "addressCountry": org.address.addressCountry
+      "streetAddress": organizationData.address.streetAddress,
+      "addressLocality": organizationData.address.addressLocality,
+      "addressRegion": organizationData.address.addressRegion,
+      "postalCode": organizationData.address.postalCode,
+      "addressCountry": organizationData.address.addressCountry
     } : undefined,
-    "sameAs": org.sameAs
+    "sameAs": organizationData.sameAs
   }
 
   return (
@@ -176,19 +189,27 @@ interface WebsiteSchemaProps {
   }>
 }
 
-export function WebsiteSchema({ site }: { site: WebsiteSchemaProps }) {
+export function WebsiteSchema({ site }: { site?: WebsiteSchemaProps } = {}) {
+  const defaultSite = {
+    name: "Blues Festival Finder",
+    description: "Discover blues dance festivals and events worldwide",
+    url: "https://blues-festival-finder.vercel.app"
+  }
+
+  const siteData = site || defaultSite
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": site.name,
-    "description": site.description,
-    "url": site.url,
-    "potentialAction": site.potentialAction || [
+    "name": siteData.name,
+    "description": siteData.description,
+    "url": siteData.url,
+    "potentialAction": siteData.potentialAction || [
       {
         "@type": "SearchAction",
         "target": {
           "@type": "EntryPoint",
-          "urlTemplate": `${site.url}/search?q={search_term_string}`
+          "urlTemplate": `${siteData.url}/search?q={search_term_string}`
         },
         "query-input": "required name=search_term_string"
       }

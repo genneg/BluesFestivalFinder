@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import InternalLinking from '@/components/seo/InternalLinking'
 import { EventCard } from '@/components/features/EventCard'
 import { BottomNavigationEnhanced } from '@/components/layout/BottomNavigationEnhanced'
 import { Button } from '@/components/ui/Button'
@@ -373,6 +374,15 @@ export default function Home() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Internal Linking Section */}
+        <div className="mb-12">
+          <InternalLinking
+            title="Discover More Blues Dance Content"
+            columns={2}
+            showDescriptions={true}
+          />
         </div>
       </div>
     );
