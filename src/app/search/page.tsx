@@ -4,6 +4,13 @@ import { useState } from 'react'
 import { FilterPanel } from '@/components/features/FilterPanel'
 import { SearchBar } from '@/components/features/SearchBar'
 import { useAdvancedSearch } from '@/hooks/useAdvancedSearch'
+import {
+  ArtDecoLoader,
+  VintageErrorState,
+  VintageSkeleton,
+  VintageEventCardSkeleton
+} from '@/components/ui/VintageLoadingStates'
+import { VintageApiError } from '@/hooks/useVintageApi'
 
 interface FilterOptions {
   dateRange: {
@@ -184,17 +191,20 @@ export default function SearchPage() {
           {/* Search Results */}
           <div className="card p-6">
             {error && (
-              <div className="mb-4 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
-                <p className="text-red-300 text-sm">{error}</p>
-              </div>
+              <VintageErrorState
+                error={error}
+                onRetry={() => search()}
+                retryText="Search Again"
+                className="mb-6"
+              />
             )}
-            
+
             {isLoading ? (
-              <div className="flex flex-col items-center justify-center py-12">
-                <div className="spinner mb-4"></div>
-                <p className="text-white/80 text-lg mb-2">Searching festivals worldwide...</p>
-                <p className="text-white/60 text-sm">Searching blues dance festivals worldwide</p>
-              </div>
+              <ArtDecoLoader
+                text="Searching festivals worldwide..."
+                size="lg"
+                className="py-8"
+              />
             ) : results ? (
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -298,14 +308,20 @@ export default function SearchPage() {
                   </>
                 ) : (
                   <div className="text-center py-12">
-                    <svg className="mx-auto h-12 w-12 text-gold-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    <h3 className="text-lg font-medium text-gold-600 mb-2">
-                      No festivals found
+                    <div className="vintage-microphone-icon w-16 h-16 mx-auto mb-6 relative">
+                      <div className="w-12 h-16 bg-gradient-to-b from-gold-600 to-gold-700 rounded-t-full mx-auto relative">
+                        <div className="absolute inset-2 bg-gradient-to-b from-gold-400 to-gold-500 rounded-t-full"></div>
+                        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 w-6 h-1 bg-navy-900 rounded-full opacity-20"></div>
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 w-4 h-1 bg-navy-900 rounded-full opacity-20"></div>
+                      </div>
+                      <div className="w-6 h-4 bg-gold-700 mx-auto rounded-b-sm"></div>
+                      <div className="w-8 h-2 bg-navy-800 mx-auto rounded-full mt-1"></div>
+                    </div>
+                    <h3 className="jazz-font text-xl text-gold-400 mb-3">
+                      The Stage is Empty
                     </h3>
-                    <p className="text-white/80 mb-4">
-                      Try adjusting your search criteria or filters.
+                    <p className="vintage-text text-cream-200 mb-4">
+                      No festivals match your criteria. Try adjusting your search or explore different terms.
                     </p>
                   </div>
                 )}
