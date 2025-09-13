@@ -1,10 +1,14 @@
-'use client'
-
+import type { Metadata } from 'next'
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Mail, Lock, Eye, EyeOff, User, Music, Users, Calendar, CheckCircle } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, User, CheckCircle, AlertCircle } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'Sign Up - Festival Scout',
+  description: 'Create your Festival Scout account to discover blues dance festivals',
+}
 
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -103,7 +107,7 @@ export default function SignUpPage() {
       } else if (result?.ok) {
         router.push('/dashboard')
       }
-    } catch (error) {
+    } catch {
       setError('An unexpected error occurred. Please try again.')
     } finally {
       setIsLoading(false)
@@ -118,7 +122,7 @@ export default function SignUpPage() {
       await signIn(provider, {
         callbackUrl: '/dashboard'
       })
-    } catch (error) {
+    } catch {
       setError('Social sign in failed. Please try again.')
       setIsLoading(false)
     }
@@ -132,7 +136,7 @@ export default function SignUpPage() {
     if (password.length >= 8) strength += 1
     if (/[a-z]/.test(password)) strength += 1
     if (/[A-Z]/.test(password)) strength += 1
-    if (/\d/.test(password)) strength += 1
+    if (/\d/..test(password)) strength += 1
     if (/[@$!%*?&]/.test(password)) strength += 1
     
     return strength
@@ -155,263 +159,224 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 flex items-center justify-center p-4">
-      <div className="max-w-md w-full space-y-8">
-        {/* Header */}
-        <div className="text-center">
-          <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
-              <Music className="w-8 h-8 text-white" />
-            </div>
+    <div className="space-y-6">
+      {/* Social Login Buttons */}
+      <div className="space-y-3">
+        <button
+          onClick={() => handleSocialSignIn('google')}
+          disabled={isLoading}
+          className="w-full flex items-center justify-center px-4 py-3 border border-navy-300 rounded-lg hover:bg-gold-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          <span className="text-navy-900 font-medium">Continue with Google</span>
+        </button>
+
+        <button
+          onClick={() => handleSocialSignIn('facebook')}
+          disabled={isLoading}
+          className="w-full flex items-center justify-center px-4 py-3 bg-[#1877F2] text-white rounded-lg hover:bg-[#166FE5] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+          <span className="font-medium">Continue with Facebook</span>
+        </button>
+      </div>
+
+      {/* Divider */}
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-gold-300" />
+        </div>
+        <div className="relative flex justify-center text-sm">
+          <span className="px-2 bg-cream-50 text-navy-700 jazz-font">
+            Or create account with email
+          </span>
+        </div>
+      </div>
+
+      {/* Sign Up Form */}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-3 flex items-center space-x-2">
+            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+            <p className="text-red-800 text-sm">{error}</p>
           </div>
-          <h2 className="text-3xl font-bold text-white">Join Festival Scout</h2>
-          <p className="mt-2 text-blue-200">Create your account and start discovering amazing blues festivals</p>
+        )}
+
+        {success && (
+          <div className="bg-green-50 border border-green-200 rounded-lg p-3 flex items-center space-x-2">
+            <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+            <p className="text-green-800 text-sm">{success}</p>
+          </div>
+        )}
+
+        <div>
+          <label htmlFor="name" className="block text-sm font-medium text-navy-700 mb-2">
+            Full name
+          </label>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <User className="h-5 w-5 text-navy-400" />
+            </div>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              value={formData.name}
+              onChange={handleInputChange}
+              className="appearance-none block w-full pl-10 pr-3 py-3 border border-gold-300 rounded-lg placeholder-navy-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent bg-white/50"
+              placeholder="Enter your full name"
+            />
+          </div>
         </div>
 
-        {/* Features Banner */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-          <div className="grid grid-cols-2 gap-4 text-white text-sm">
-            <div className="flex items-center space-x-2">
-              <Calendar className="w-4 h-4 text-blue-300" />
-              <span>Discover Events</span>
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-navy-700 mb-2">
+            Email address
+          </label>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Mail className="h-5 w-5 text-navy-400" />
             </div>
-            <div className="flex items-center space-x-2">
-              <Users className="w-4 h-4 text-blue-300" />
-              <span>Follow Teachers</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Music className="w-4 h-4 text-blue-300" />
-              <span>Track Musicians</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <CheckCircle className="w-4 h-4 text-blue-300" />
-              <span>Get Notifications</span>
-            </div>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              value={formData.email}
+              onChange={handleInputChange}
+              className="appearance-none block w-full pl-10 pr-3 py-3 border border-gold-300 rounded-lg placeholder-navy-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent bg-white/50"
+              placeholder="Enter your email"
+            />
           </div>
         </div>
 
-        {/* Main Form */}
-        <div className="bg-white rounded-lg shadow-xl p-8">
-          {/* Social Login Buttons */}
-          <div className="space-y-3 mb-6">
+        <div>
+          <label htmlFor="password" className="block text-sm font-medium text-navy-700 mb-2">
+            Password
+          </label>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Lock className="h-5 w-5 text-navy-400" />
+            </div>
+            <input
+              id="password"
+              name="password"
+              type={showPassword ? 'text' : 'password'}
+              required
+              value={formData.password}
+              onChange={handleInputChange}
+              className="appearance-none block w-full pl-10 pr-10 py-3 border border-gold-300 rounded-lg placeholder-navy-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent bg-white/50"
+              placeholder="Create a password"
+            />
             <button
-              onClick={() => handleSocialSignIn('google')}
-              disabled={isLoading}
-              className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center"
             >
-              <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-              </svg>
-              Continue with Google
-            </button>
-            
-            <button
-              onClick={() => handleSocialSignIn('facebook')}
-              disabled={isLoading}
-              className="w-full flex items-center justify-center px-4 py-3 bg-[#1877F2] text-white rounded-lg hover:bg-[#166FE5] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-              Continue with Facebook
-            </button>
-          </div>
-
-          {/* Divider */}
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or create account with email</span>
-            </div>
-          </div>
-
-          {/* Sign Up Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {error && (
-              <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-                <p className="text-red-800 text-sm">{error}</p>
-              </div>
-            )}
-
-            {success && (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                <p className="text-green-800 text-sm">{success}</p>
-              </div>
-            )}
-
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Full name
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter your full name"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email address
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter your email"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  className="appearance-none block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Create a password"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400" />
-                  ) : (
-                    <Eye className="h-5 w-5 text-gray-400" />
-                  )}
-                </button>
-              </div>
-              
-              {/* Password Strength Indicator */}
-              {formData.password && (
-                <div className="mt-2">
-                  <div className="flex items-center space-x-2">
-                    <div className="flex-1 bg-gray-200 rounded-full h-2">
-                      <div 
-                        className={`h-2 rounded-full transition-all duration-300 ${getPasswordStrengthColor()}`}
-                        style={{ width: `${(passwordStrength() / 5) * 100}%` }}
-                      />
-                    </div>
-                    <span className="text-sm text-gray-600">{getPasswordStrengthText()}</span>
-                  </div>
-                </div>
+              {showPassword ? (
+                <EyeOff className="h-5 w-5 text-navy-400" />
+              ) : (
+                <Eye className="h-5 w-5 text-navy-400" />
               )}
-            </div>
+            </button>
+          </div>
 
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
-                Confirm password
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
+          {/* Password Strength Indicator */}
+          {formData.password && (
+            <div className="mt-2">
+              <div className="flex items-center space-x-2">
+                <div className="flex-1 bg-gold-200 rounded-full h-2">
+                  <div
+                    className={`h-2 rounded-full transition-all duration-300 ${getPasswordStrengthColor()}`}
+                    style={{ width: `${(passwordStrength() / 5) * 100}%` }}
+                  />
                 </div>
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  required
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  className="appearance-none block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Confirm your password"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                >
-                  {showConfirmPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400" />
-                  ) : (
-                    <Eye className="h-5 w-5 text-gray-400" />
-                  )}
-                </button>
+                <span className="text-sm text-navy-600">{getPasswordStrengthText()}</span>
               </div>
             </div>
+          )}
+        </div>
 
-            <div className="flex items-center">
-              <input
-                id="terms"
-                name="terms"
-                type="checkbox"
-                required
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
-                I agree to the{' '}
-                <Link href="/terms" className="text-blue-600 hover:text-blue-500">
-                  Terms of Service
-                </Link>{' '}
-                and{' '}
-                <Link href="/privacy" className="text-blue-600 hover:text-blue-500">
-                  Privacy Policy
-                </Link>
-              </label>
+        <div>
+          <label htmlFor="confirmPassword" className="block text-sm font-medium text-navy-700 mb-2">
+            Confirm password
+          </label>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Lock className="h-5 w-5 text-navy-400" />
             </div>
-
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type={showConfirmPassword ? 'text' : 'password'}
+              required
+              value={formData.confirmPassword}
+              onChange={handleInputChange}
+              className="appearance-none block w-full pl-10 pr-10 py-3 border border-gold-300 rounded-lg placeholder-navy-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent bg-white/50"
+              placeholder="Confirm your password"
+            />
             <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center"
             >
-              {isLoading ? 'Creating account...' : 'Create account'}
+              {showConfirmPassword ? (
+                <EyeOff className="h-5 w-5 text-navy-400" />
+              ) : (
+                <Eye className="h-5 w-5 text-navy-400" />
+              )}
             </button>
-          </form>
-
-          {/* Sign In Link */}
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
-              Already have an account?{' '}
-              <Link
-                href="/auth/signin"
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
-                Sign in here
-              </Link>
-            </p>
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="text-center text-blue-200 text-sm">
-          <p>© 2024 Festival Scout. All rights reserved.</p>
+        <div className="flex items-start">
+          <input
+            id="terms"
+            name="terms"
+            type="checkbox"
+            required
+            className="h-4 w-4 text-gold-600 focus:ring-gold-500 border-gold-300 rounded mt-1"
+          />
+          <label htmlFor="terms" className="ml-2 block text-sm text-navy-700">
+            I agree to the{' '}
+            <Link href="/terms" className="text-gold-600 hover:text-gold-500 jazz-font">
+              Terms of Service
+            </Link>{' '}
+            and{' '}
+            <Link href="/privacy" className="text-gold-600 hover:text-gold-500 jazz-font">
+              Privacy Policy
+            </Link>
+          </label>
         </div>
+
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-navy-900 bg-gold-600 hover:bg-gold-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors vintage-button"
+        >
+          {isLoading ? 'Creating account...' : 'Create Account'}
+        </button>
+      </form>
+
+      {/* Sign In Link */}
+      <div className="text-center">
+        <p className="text-sm text-navy-700">
+          Already have an account?{' '}
+          <Link
+            href="/auth/signin"
+            className="font-medium text-gold-600 hover:text-gold-500 jazz-font"
+          >
+            Sign in here
+          </Link>
+        </p>
       </div>
     </div>
   )

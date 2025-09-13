@@ -1,45 +1,37 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-import { cn } from '@/lib/utils'
-
-// Import all Phase 4 components
-import {
-  SkipNavigation,
-  MainContent,
-  Landmark,
-  AccessibleHeading,
-  useSkipNavigation
-} from '@/components/ui/SkipNavigation'
+import { useCallback, useEffect, useState } from 'react'
 
 import {
-  KeyboardNavigation,
-  FocusTrap,
-  AccessibleTabs,
-  useKeyboardNavigation
-} from '@/components/ui/KeyboardNavigation'
-
-import {
-  TouchOptimization,
-  PullToRefresh,
-  TouchButton,
-  SwipeableCard,
-  useTouchDetection,
-  useGestures
-} from '@/components/ui/TouchOptimization'
-
-import {
+  BeginnerGlossary,
   ContentClarity,
   SimplifiedContent,
-  BeginnerGlossary,
-  useContentClarity
+  useContentClarity,
 } from '@/components/ui/ContentClarity'
-
+import { ContextualHelp, HelpSystem, useHelpSystem } from '@/components/ui/HelpSystem'
 import {
-  HelpSystem,
-  ContextualHelp,
-  useHelpSystem
-} from '@/components/ui/HelpSystem'
+  AccessibleTabs,
+  FocusTrap,
+  KeyboardNavigation,
+  useKeyboardNavigation,
+} from '@/components/ui/KeyboardNavigation'
+// Import all Phase 4 components
+import {
+  AccessibleHeading,
+  Landmark,
+  MainContent,
+  SkipNavigation,
+  useSkipNavigation,
+} from '@/components/ui/SkipNavigation'
+import {
+  PullToRefresh,
+  SwipeableCard,
+  TouchButton,
+  TouchOptimization,
+  useGestures,
+  useTouchDetection,
+} from '@/components/ui/TouchOptimization'
+import { cn } from '@/lib/utils'
 
 interface Phase4IntegrationProps {
   enableSkipNav?: boolean
@@ -67,7 +59,7 @@ export function Phase4Integration({
   enableContentClarity = true,
   enableHelpSystem = true,
   children,
-  className
+  className,
 }: Phase4IntegrationProps) {
   // Hook states
   const { skipNavVisible } = useSkipNavigation()
@@ -80,7 +72,7 @@ export function Phase4Integration({
     textToSpeech,
     toggleBeginnerMode,
     toggleSimplifiedText,
-    toggleTextToSpeech
+    toggleTextToSpeech,
   } = useContentClarity()
   const { helpEnabled, toursCompleted, completeTour, toggleHelp } = useHelpSystem()
 
@@ -90,7 +82,7 @@ export function Phase4Integration({
     touchOptimized: false,
     screenReaderReady: false,
     colorContrast: true,
-    contentAccessible: false
+    contentAccessible: false,
   })
 
   const [showAccessibilityPanel, setShowAccessibilityPanel] = useState(false)
@@ -103,30 +95,39 @@ export function Phase4Integration({
       touchOptimized: enableTouchOptimization && isTouchDevice,
       screenReaderReady: enableSkipNav,
       colorContrast: true, // Already implemented
-      contentAccessible: enableContentClarity
+      contentAccessible: enableContentClarity,
     }
     setStats(newStats)
-  }, [enableSkipNav, enableKeyboardNav, enableTouchOptimization, enableContentClarity, isTouchDevice])
+  }, [
+    enableSkipNav,
+    enableKeyboardNav,
+    enableTouchOptimization,
+    enableContentClarity,
+    isTouchDevice,
+  ])
 
   // Global keyboard shortcuts
-  const handleGlobalShortcut = useCallback((shortcut: any) => {
-    switch (shortcut.action) {
-      case 'toggleHelp':
-        toggleHelp()
-        announce('Help center toggled')
-        break
-      case 'toggleAccessibility':
-        setShowAccessibilityPanel(prev => !prev)
-        announce('Accessibility panel toggled')
-        break
-      case 'themeToggle':
-        // Theme toggle functionality would be implemented here
-        announce('Theme toggled')
-        break
-      default:
-        announce(`Action: ${shortcut.action}`)
-    }
-  }, [toggleHelp, announce])
+  const handleGlobalShortcut = useCallback(
+    (shortcut: any) => {
+      switch (shortcut.action) {
+        case 'toggleHelp':
+          toggleHelp()
+          announce('Help center toggled')
+          break
+        case 'toggleAccessibility':
+          setShowAccessibilityPanel(prev => !prev)
+          announce('Accessibility panel toggled')
+          break
+        case 'themeToggle':
+          // Theme toggle functionality would be implemented here
+          announce('Theme toggled')
+          break
+        default:
+          announce(`Action: ${shortcut.action}`)
+      }
+    },
+    [toggleHelp, announce]
+  )
 
   // Handle pull to refresh
   const handleRefresh = useCallback(async () => {
@@ -158,10 +159,7 @@ export function Phase4Integration({
 
       {/* 2. Keyboard Navigation */}
       {enableKeyboardNav && (
-        <KeyboardNavigation
-          onShortcut={handleGlobalShortcut}
-          focusIndicators={true}
-        />
+        <KeyboardNavigation onShortcut={handleGlobalShortcut} focusIndicators />
       )}
 
       {/* 3. Touch Optimization with Pull to Refresh */}
@@ -173,7 +171,7 @@ export function Phase4Integration({
               swipe: true,
               pinch: false,
               doubleTap: true,
-              longPress: false
+              longPress: false,
             }}
             onSwipeLeft={handleSwipeLeft}
             onSwipeRight={handleSwipeRight}
@@ -190,7 +188,7 @@ export function Phase4Integration({
       {enableContentClarity && (
         <ContentClarity
           beginnerMode={beginnerMode}
-          showDifficulty={true}
+          showDifficulty
           enableTextToSpeech={textToSpeech}
         >
           {/* This wraps the entire content with jargon tooltips and clarity features */}
@@ -218,14 +216,12 @@ export function Phase4Integration({
 
               {/* Accessibility Stats */}
               <div className="mb-8 bg-white p-6 rounded-lg border border-gold-200">
-                <h3 className="jazz-font text-xl text-navy-900 mb-4">Current Accessibility Score</h3>
+                <h3 className="jazz-font text-xl text-navy-900 mb-4">
+                  Current Accessibility Score
+                </h3>
                 <div className="flex items-center justify-between">
-                  <div className="text-4xl jazz-font text-gold-600">
-                    {stats.wcagCompliance}%
-                  </div>
-                  <div className="text-sm text-navy-600">
-                    WCAG 2.1 AA Compliance
-                  </div>
+                  <div className="text-4xl jazz-font text-gold-600">{stats.wcagCompliance}%</div>
+                  <div className="text-sm text-navy-600">WCAG 2.1 AA Compliance</div>
                 </div>
                 <div className="mt-4 space-y-2">
                   {Object.entries({
@@ -233,7 +229,7 @@ export function Phase4Integration({
                     'Touch Optimization': stats.touchOptimized,
                     'Screen Reader Ready': stats.screenReaderReady,
                     'Color Contrast': stats.colorContrast,
-                    'Content Accessibility': stats.contentAccessible
+                    'Content Accessibility': stats.contentAccessible,
                   }).map(([key, value]) => (
                     <div key={key} className="flex items-center justify-between">
                       <span className="text-navy-700">{key}</span>
@@ -253,7 +249,9 @@ export function Phase4Integration({
                   <div className="flex items-center justify-between">
                     <div>
                       <h4 className="jazz-font text-navy-900">Beginner Mode</h4>
-                      <p className="text-sm text-navy-600">Simplify interface and show helpful tooltips</p>
+                      <p className="text-sm text-navy-600">
+                        Simplify interface and show helpful tooltips
+                      </p>
                     </div>
                     <button
                       onClick={toggleBeginnerMode}
@@ -305,9 +303,12 @@ export function Phase4Integration({
                     { key: 'H', desc: 'Toggle help' },
                     { key: 'Esc', desc: 'Close modals' },
                     { key: '↑/↓', desc: 'Navigate results' },
-                    { key: 'Enter', desc: 'Select item' }
+                    { key: 'Enter', desc: 'Select item' },
                   ].map((shortcut, index) => (
-                    <div key={index} className="flex items-center justify-between p-2 bg-gold-50 rounded">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-2 bg-gold-50 rounded"
+                    >
                       <kbd className="px-2 py-1 bg-navy-100 text-navy-900 rounded text-sm font-mono">
                         {shortcut.key}
                       </kbd>
@@ -321,27 +322,19 @@ export function Phase4Integration({
         </div>
       )}
 
-      {/* Accessibility Toggle Button */}
+      {/* Accessibility Toggle Button - Fixed Bottom */}
       <button
         onClick={() => setShowAccessibilityPanel(!showAccessibilityPanel)}
-        className="fixed top-20 right-4 z-40 bg-gold-600 hover:bg-gold-500 text-navy-900 px-4 py-2 rounded-lg shadow-lg jazz-font font-bold flex items-center space-x-2"
+        className="fixed bottom-4 right-4 z-40 bg-gold-600 hover:bg-gold-500 text-navy-900 w-12 h-12 rounded-full shadow-lg jazz-font font-bold flex items-center justify-center transition-all duration-200 hover:scale-110"
         aria-label="Open accessibility settings"
       >
-        <span>♿</span>
-        <span>Accessibility</span>
+        <span className="text-xl">♿</span>
       </button>
 
       {/* Beginner Mode Indicator */}
       {beginnerMode && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 bg-gold-600 text-navy-900 px-6 py-2 rounded-lg shadow-lg jazz-font font-bold animate-pulse">
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 bg-gold-600 text-navy-900 px-4 py-2 rounded-lg shadow-lg jazz-font font-bold animate-pulse">
           Beginner Mode Active - Click terms for explanations
-        </div>
-      )}
-
-      {/* Touch Device Indicator */}
-      {isTouchDevice && (
-        <div className="fixed bottom-4 left-4 z-40 bg-bordeaux-600 text-cream-200 px-4 py-2 rounded-lg shadow-lg jazz-font text-sm">
-          Touch Mode: Swipe to navigate, pull to refresh
         </div>
       )}
     </div>
@@ -354,7 +347,7 @@ export function AccessiblePage({
   description,
   children,
   showBreadcrumbs = true,
-  showGlossary = true
+  showGlossary = true,
 }: {
   title: string
   description?: string
@@ -369,26 +362,30 @@ export function AccessiblePage({
           {/* Page Header */}
           <header className="mb-8">
             <AccessibleHeading level={1}>{title}</AccessibleHeading>
-            {description && (
-              <p className="text-lg text-navy-700 mt-2">{description}</p>
-            )}
+            {description && <p className="text-lg text-navy-700 mt-2">{description}</p>}
           </header>
 
           {/* Breadcrumbs */}
           {showBreadcrumbs && (
             <nav className="mb-6" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-navy-600">
-                <li><a href="/" className="hover:text-gold-600">Home</a></li>
-                <li><span>/</span></li>
-                <li><span className="text-navy-900">{title}</span></li>
+                <li>
+                  <a href="/" className="hover:text-gold-600">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <span>/</span>
+                </li>
+                <li>
+                  <span className="text-navy-900">{title}</span>
+                </li>
               </ol>
             </nav>
           )}
 
           {/* Main Content */}
-          <main>
-            {children}
-          </main>
+          <main>{children}</main>
 
           {/* Beginner Glossary */}
           {showGlossary && (
@@ -423,9 +420,7 @@ export function Phase4Demo() {
               Press <kbd className="px-2 py-1 bg-navy-100 rounded">H</kbd> to open help,
               <kbd className="px-2 py-1 bg-navy-100 rounded">/</kbd> to focus search
             </p>
-            <TouchButton className="bg-gold-600 text-navy-900">
-              Test Accessible Button
-            </TouchButton>
+            <TouchButton className="bg-gold-600 text-navy-900">Test Accessible Button</TouchButton>
           </div>
         </section>
 
@@ -438,8 +433,8 @@ export function Phase4Demo() {
             <ContentClarity>
               <p className="text-navy-700">
                 Learning blues dance involves understanding different styles like blues dance,
-                social dance, and techniques such as connection and pulse.
-                Workshops and social events are great for beginners.
+                social dance, and techniques such as connection and pulse. Workshops and social
+                events are great for beginners.
               </p>
             </ContentClarity>
           </div>
@@ -485,7 +480,7 @@ export function Phase4Demo() {
                         <li>• Comprehensive help system</li>
                       </ul>
                     </div>
-                  )
+                  ),
                 },
                 {
                   id: 'stats',
@@ -501,8 +496,8 @@ export function Phase4Demo() {
                         <p>• Color contrast: AAA compliant</p>
                       </div>
                     </div>
-                  )
-                }
+                  ),
+                },
               ]}
             />
           </div>
