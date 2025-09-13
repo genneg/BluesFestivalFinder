@@ -1,7 +1,22 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
+import { generateMetadata } from '@/components/seo/SEOMetadata'
 
-export default function AboutPage() {
+export const metadata: Metadata = generateMetadata({
+  title: 'About Blues Festival Finder',
+  description: 'Learn about our mission to connect blues dancers with festivals worldwide. Discover our story, values, and commitment to the blues dance community.',
+  keywords: [
+    'about blues festival finder',
+    'blues dance community',
+    'festival discovery platform',
+    'blues dance mission',
+    'dance festival app',
+    'blues music community',
+    'dance event platform'
+  ],
+  ogUrl: '/about'
+})
   return (
     <div className="app-container">
       <div className="max-w-md mx-auto bg-background min-h-screen relative">

@@ -36,7 +36,8 @@
       "Bash(vercel:*)",
       "Bash(HUSKY=0 git commit -m \"Fix Client Component and syntax errors in auth pages\n\n- Add ''use client'' directive to auth pages that use useState\n- Remove metadata exports from Client Components (handled in layout)\n- Fix syntax error in passwordStrength function (.. -> .test)\n- Resolve Next.js build errors for deployment\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
       "Bash(npm run lint)",
-      "Bash(npx eslint:*)"
+      "Bash(npx eslint:*)",
+      "Bash(HUSKY=0 git commit -m \"Fix linting errors in authentication pages\n\n- Remove unused Metadata import from Client Components\n- Replace || with ?? for nullish coalescing operator\n- Fix TypeScript linting issues for deployment\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")"
     ],
     "deny": [],
     "ask": []

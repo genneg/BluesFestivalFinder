@@ -1,0 +1,61 @@
+# Blues Festival Finder - robots.txt
+# Website: https://blues-festival-finder.vercel.app/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://blues-festival-finder.vercel.app/sitemap.xml
+
+# Crawl delay to avoid server overload
+Crawl-delay: 1
+
+# Block common bot paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /auth/
+Disallow: /dashboard/
+Disallow: /profile/
+Disallow: /demo-figma/
+Disallow: /demo-price-types/
+Disallow: /test-*
+
+# Allow specific bot paths for search engines
+User-agent: Googlebot
+Allow: /api/events/
+Allow: /api/teachers/
+Allow: /api/musicians/
+
+User-agent: Bingbot
+Allow: /api/events/
+Allow: /api/teachers/
+Allow: /api/musicians/
+
+# Block bad bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Additional SEO directives
+User-agent: *
+Disallow: /*.json$
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.xml$
+
+# Allow specific file types
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /favicon.ico
+
+# LLM optimization file
+User-agent: *
+Allow: /llms.txt

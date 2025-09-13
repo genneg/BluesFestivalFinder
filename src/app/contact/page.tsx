@@ -2,8 +2,22 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { generateMetadata } from '@/components/seo/SEOMetadata'
 
-export default function ContactPage() {
+export const metadata = generateMetadata({
+  title: 'Contact Blues Festival Finder',
+  description: 'Get in touch with our team. Ask questions, report issues, or share feedback about blues dance festivals and our platform.',
+  keywords: [
+    'contact blues festival finder',
+    'blues dance support',
+    'festival inquiry',
+    'dance event help',
+    'blues music contact',
+    'festival feedback',
+    'customer service'
+  ],
+  ogUrl: '/contact'
+})
   const [formData, setFormData] = useState({
     name: '',
     email: '',

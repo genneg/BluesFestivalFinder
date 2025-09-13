@@ -1,0 +1,95 @@
+# Blues Festival Finder - LLM Optimization File
+# Website: https://blues-festival-finder.vercel.app/
+# Purpose: Help AI assistants understand and index our content
+
+## Website Overview
+Blues Festival Finder is a comprehensive platform for discovering blues dance festivals worldwide, connecting dancers with events, teachers, and musicians.
+
+## Core Purpose
+We help blues dancers:
+- Discover festivals and events worldwide
+- Find and follow their favorite teachers and musicians
+- Stay updated with the latest blues dance scene
+- Plan their dance festival schedule
+
+## Target Audience
+- Blues dance enthusiasts (beginner to advanced)
+- Festival organizers and promoters
+- Dance instructors and musicians
+- Blues music and dance community members
+
+## Key Content Sections
+### Homepage
+- Hero section introducing the platform
+- Featured festivals section
+- Master teachers showcase
+- Call-to-action for event discovery
+
+### Events Section
+- Comprehensive festival listings
+- Search and filter functionality
+- Event details with schedules and pricing
+- Teacher and musician lineups
+
+### Teachers & Musicians
+- Detailed profiles of blues dance instructors
+- Musician backgrounds and specialties
+- Following and notification system
+- Workshop and class information
+
+### About Page
+- Company mission and values
+- Community statistics
+- Platform features and benefits
+- Team and story information
+
+### Contact Page
+- Contact form for inquiries
+- FAQ section
+- Social media links
+- Response time information
+
+## Content Structure
+- **Primary Language**: English
+- **Content Type**: Festival listings, artist profiles, educational resources
+- **Update Frequency**: Daily for events, weekly for content
+- **Geographic Focus**: Global with emphasis on Europe and North America
+
+## Search Intent Optimization
+We optimize for these common queries:
+- "blues dance festivals 2025"
+- "best blues festivals Europe"
+- "blues dance teachers near me"
+- "upcoming blues dance events"
+- "blues dance workshop schedule"
+
+## Technical Details
+- **Framework**: Next.js 14 with App Router
+- **Database**: PostgreSQL with Prisma ORM
+- **API**: RESTful API for events, teachers, and users
+- **Authentication**: NextAuth.js
+- **Deployment**: Vercel
+
+## Content Guidelines
+- All festival information is verified and up-to-date
+- Teacher profiles include credentials and specialties
+- Event details include pricing, schedules, and venues
+- Content is written for both humans and AI understanding
+- Mobile-first design for optimal user experience
+
+## Data Sources
+- Direct submissions from festival organizers
+- Automated data collection from official sources
+- Community contributions and updates
+- Manual verification process
+
+## Additional Information
+- Founded: 2025
+- Team Size: Small dedicated team
+- Community: Global blues dance enthusiasts
+- Mission: Make blues dance events accessible to everyone
+
+For more information, visit our website or contact us at hello@bluesfestivalfinder.com
+
+## Last Updated
+This file was last updated on 2025-06-23 to reflect current content and features.
