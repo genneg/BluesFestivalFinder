@@ -227,7 +227,7 @@ export function HelpSystem({
       <button
         onClick={() => setShowHelp(!showHelp)}
         className={cn(
-          'fixed bottom-6 right-6 z-40 w-14 h-14 bg-gold-600 hover:bg-gold-500 text-navy-900 rounded-full shadow-lg',
+          'fixed bottom-6 left-6 z-40 w-14 h-14 bg-gold-600 hover:bg-gold-500 text-navy-900 rounded-full shadow-lg',
           'flex items-center justify-center transition-all duration-200 hover:scale-110',
           'focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2',
           'animate-bounce hover:animate-none'
