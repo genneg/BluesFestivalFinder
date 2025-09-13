@@ -5,6 +5,13 @@ import Link from 'next/link'
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner'
 import { SearchBar } from '@/components/features/SearchBar'
 import { BottomNavigationEnhanced } from '@/components/layout/BottomNavigationEnhanced'
+import {
+  ArtDecoLoader,
+  VintageErrorState,
+  VintageSkeleton,
+  VintageEventCardSkeleton
+} from '@/components/ui/VintageLoadingStates'
+import { VintageApiError } from '@/hooks/useVintageApi'
 
 interface Teacher {
   id: string
@@ -89,21 +96,12 @@ export default function TeachersPage() {
     return (
       <div className="app-container">
         <div className="max-w-md mx-auto bg-background min-h-screen relative flex items-center justify-center">
-          <div className="card p-8 text-center border-bordeaux-600/30 bg-bordeaux-900/20">
-            <div className="mb-6">
-              <span className="text-6xl">🎭</span>
-            </div>
-            <h3 className="font-jazz text-2xl font-bold text-bordeaux-400 mb-4">
-              Something Went Wrong
-            </h3>
-            <p className="text-cream-200 mb-6">{error}</p>
-            <button 
-              onClick={() => fetchTeachers()} 
-              className="btn-primary px-6 py-3 font-vintage tracking-wide"
-            >
-              🔄 Try Again
-            </button>
-          </div>
+          <VintageErrorState
+            error={new VintageApiError('ServerError', 'The artist directory hit a sour note')}
+            onRetry={() => fetchTeachers()}
+            retryText="Tune Up the Connection"
+            className="max-w-md mx-auto"
+          />
         </div>
       </div>
     )
@@ -169,14 +167,11 @@ export default function TeachersPage() {
 
           {/* Enhanced Loading State */}
           {isLoading && (
-            <div className="card p-12 text-center bg-gold-900/20 border-gold-600/30">
-              <div className="vinyl-record w-16 h-16 mx-auto mb-6 animate-vinyl-spin"></div>
-              <h3 className="font-jazz text-2xl font-bold text-gold-600 mb-3">
-                Discovering Masters
-              </h3>
-              <p className="text-cream-200 mb-2">Searching through legendary instructors...</p>
-              <p className="text-cream-300 text-sm">Curating the finest blues dance teachers worldwide</p>
-            </div>
+            <ArtDecoLoader
+              text="Discovering legendary instructors..."
+              size="lg"
+              className="py-12"
+            />
           )}
 
           {/* Enhanced Teachers List with Vintage Styling */}

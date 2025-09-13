@@ -7,6 +7,14 @@ import { EventCard } from '@/components/features/EventCard'
 import { BottomNavigationEnhanced } from '@/components/layout/BottomNavigationEnhanced'
 import { Button } from '@/components/ui/Button'
 import { Music, Sparkles, TrendingUp } from 'lucide-react'
+import {
+  ArtDecoLoader,
+  VintageErrorState,
+  VintageSkeleton,
+  VintageEventCardSkeleton,
+  InlineJazzLoading
+} from '@/components/ui/VintageLoadingStates'
+import { VintageApiError } from '@/hooks/useVintageApi'
 
 // Types for API responses
 interface Festival {
@@ -186,29 +194,42 @@ export default function Home() {
           </div>
           <div className="space-y-6">
             {isLoadingFestivals && (
-              <div className="card p-8 text-center">
-                <div className="spinner mx-auto mb-4"></div>
-                <p className="text-white/80">Discovering amazing blues festivals worldwide...</p>
-                <p className="text-white/60 text-sm mt-2">Searching blues dance festivals worldwide</p>
-              </div>
+              <ArtDecoLoader
+                text="Discovering amazing blues festivals worldwide..."
+                size="lg"
+                className="py-8"
+              />
             )}
-            
+
             {festivalsError && (
-              <div className="card p-6 border-red-600/30 bg-red-900/20">
-                <div className="flex items-center mb-3">
-                  <svg className="w-5 h-5 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                  <h4 className="text-red-300 font-medium">Unable to load festivals</h4>
-                </div>
-                <p className="text-red-200 text-sm mb-3">We're having trouble connecting to our festival database.</p>
-                <button 
-                  onClick={() => window.location.reload()} 
-                  className="btn-secondary btn-sm"
-                >
-                  Try Again
-                </button>
-              </div>
+              <VintageErrorState
+                error={new VintageApiError('ServerError', 'The festival stage is having technical difficulties')}
+                onRetry={() => {
+                  setFestivalsError(null)
+                  // Refetch festivals
+                  const fetchFestivals = async () => {
+                    try {
+                      setIsLoadingFestivals(true)
+                      const response = await fetch('/api/events?limit=3')
+                      const data = await response.json()
+
+                      if (data.success) {
+                        setFestivals(data.data.events)
+                      } else {
+                        setFestivalsError('Failed to load festivals')
+                      }
+                    } catch (error) {
+                      setFestivalsError('Failed to load festivals')
+                      console.error('Error fetching festivals:', error)
+                    } finally {
+                      setIsLoadingFestivals(false)
+                    }
+                  }
+                  fetchFestivals()
+                }}
+                retryText="Resume the Show"
+                className="my-6"
+              />
             )}
             
             {!isLoadingFestivals && !festivalsError && festivals.map((festival) => (
@@ -216,8 +237,22 @@ export default function Home() {
             ))}
             
             {!isLoadingFestivals && !festivalsError && festivals.length === 0 && (
-              <div className="card p-8 text-center">
-                <p className="text-white/80">No festivals found</p>
+              <div className="text-center py-12">
+                <div className="vintage-microphone-icon w-16 h-16 mx-auto mb-6 relative">
+                  <div className="w-12 h-16 bg-gradient-to-b from-gold-600 to-gold-700 rounded-t-full mx-auto relative">
+                    <div className="absolute inset-2 bg-gradient-to-b from-gold-400 to-gold-500 rounded-t-full"></div>
+                    <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 w-6 h-1 bg-navy-900 rounded-full opacity-20"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 w-4 h-1 bg-navy-900 rounded-full opacity-20"></div>
+                  </div>
+                  <div className="w-6 h-4 bg-gold-700 mx-auto rounded-b-sm"></div>
+                  <div className="w-8 h-2 bg-navy-800 mx-auto rounded-full mt-1"></div>
+                </div>
+                <h3 className="jazz-font text-xl text-gold-400 mb-3">
+                  No Shows Tonight
+                </h3>
+                <p className="vintage-text text-cream-200 mb-4">
+                  The festival calendar is currently empty. Check back soon for new events!
+                </p>
               </div>
             )}
           </div>
@@ -245,29 +280,41 @@ export default function Home() {
           </div>
           <div className="space-y-4">
             {isLoadingTeachers && (
-              <div className="card p-8 text-center">
-                <div className="spinner mx-auto mb-4"></div>
-                <p className="text-white/80">Finding legendary blues teachers...</p>
-                <p className="text-white/60 text-sm mt-2">Curating profiles from the global blues community</p>
+              <div className="space-y-4">
+                <VintageSkeleton lines={2} showAvatar={true} />
+                <VintageSkeleton lines={2} showAvatar={true} />
               </div>
             )}
-            
+
             {teachersError && (
-              <div className="card p-6 border-red-600/30 bg-red-900/20">
-                <div className="flex items-center mb-3">
-                  <svg className="w-5 h-5 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                  <h4 className="text-red-300 font-medium">Unable to load teachers</h4>
-                </div>
-                <p className="text-red-200 text-sm mb-3">We're having trouble connecting to our teacher database.</p>
-                <button 
-                  onClick={() => window.location.reload()} 
-                  className="btn-secondary btn-sm"
-                >
-                  Try Again
-                </button>
-              </div>
+              <VintageErrorState
+                error={new VintageApiError('NetworkError', 'The artist lounge connection dropped')}
+                onRetry={() => {
+                  setTeachersError(null)
+                  // Refetch teachers
+                  const fetchTeachers = async () => {
+                    try {
+                      setIsLoadingTeachers(true)
+                      const response = await fetch('/api/teachers?limit=2')
+                      const data = await response.json()
+
+                      if (data.success) {
+                        setTeachers(data.data.teachers)
+                      } else {
+                        setTeachersError('Failed to load teachers')
+                      }
+                    } catch (error) {
+                      setTeachersError('Failed to load teachers')
+                      console.error('Error fetching teachers:', error)
+                    } finally {
+                      setIsLoadingTeachers(false)
+                    }
+                  }
+                  fetchTeachers()
+                }}
+                retryText="Reconnect to Artists"
+                className="my-6"
+              />
             )}
             
             {!isLoadingTeachers && !teachersError && teachers.map((teacher) => (
@@ -302,8 +349,21 @@ export default function Home() {
             ))}
             
             {!isLoadingTeachers && !teachersError && teachers.length === 0 && (
-              <div className="card p-8 text-center">
-                <p className="text-white/80">No teachers found</p>
+              <div className="text-center py-12">
+                <div className="vintage-saxophone-icon w-16 h-16 mx-auto mb-6 relative">
+                  <div className="w-8 h-12 bg-gradient-to-b from-copper-600 to-copper-700 rounded-t-lg mx-auto relative">
+                    <div className="absolute inset-1 bg-gradient-to-b from-copper-400 to-copper-500 rounded-t-lg"></div>
+                    <div className="absolute top-2 right-1 w-2 h-2 bg-gold-600 rounded-full"></div>
+                    <div className="absolute bottom-2 left-1 w-1 h-1 bg-gold-600 rounded-full"></div>
+                  </div>
+                  <div className="w-6 h-2 bg-copper-700 mx-auto rounded-full mt-1"></div>
+                </div>
+                <h3 className="jazz-font text-xl text-copper-400 mb-3">
+                  Artists Taking a Break
+                </h3>
+                <p className="vintage-text text-cream-200 mb-4">
+                  No master teachers available at the moment. New artists join our community regularly!
+                </p>
               </div>
             )}
           </div>
