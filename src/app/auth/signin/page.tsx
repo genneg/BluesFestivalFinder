@@ -1,3 +1,5 @@
+'use client'
+
 import type { Metadata } from 'next'
 import { useState } from 'react'
 import { signIn, getSession } from 'next-auth/react'
@@ -5,10 +7,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: 'Sign In - Festival Scout',
-  description: 'Sign in to your Festival Scout account to discover blues dance festivals',
-}
+// Metadata is handled in the layout.tsx file
 
 export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false)

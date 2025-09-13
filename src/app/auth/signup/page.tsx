@@ -1,14 +1,12 @@
-import type { Metadata } from 'next'
+'use client'
+
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Mail, Lock, Eye, EyeOff, User, CheckCircle, AlertCircle } from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: 'Sign Up - Festival Scout',
-  description: 'Create your Festival Scout account to discover blues dance festivals',
-}
+// Metadata is handled in the layout.tsx file
 
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -136,7 +134,7 @@ export default function SignUpPage() {
     if (password.length >= 8) strength += 1
     if (/[a-z]/.test(password)) strength += 1
     if (/[A-Z]/.test(password)) strength += 1
-    if (/\d/..test(password)) strength += 1
+    if (/\d/.test(password)) strength += 1
     if (/[@$!%*?&]/.test(password)) strength += 1
     
     return strength
