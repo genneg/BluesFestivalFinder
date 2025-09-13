@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline'
 import { FAQSchema } from '@/components/seo/SchemaMarkup'
 // FAQ data with comprehensive blues dance questions
 const faqData = [
@@ -161,9 +160,13 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
           {question}
         </h3>
         {isOpen ? (
-          <ChevronUpIcon className="w-5 h-5 text-gold-600 flex-shrink-0 ml-4" />
+          <svg className="w-5 h-5 text-gold-600 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+          </svg>
         ) : (
-          <ChevronDownIcon className="w-5 h-5 text-gold-600 flex-shrink-0 ml-4" />
+          <svg className="w-5 h-5 text-gold-600 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
         )}
       </button>
 
