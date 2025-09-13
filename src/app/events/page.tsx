@@ -5,6 +5,12 @@ import { SearchBarSimple } from '@/components/features/SearchBarSimple'
 import { FilterPanel } from '@/components/features/FilterPanel'
 import { EventList } from '@/components/features/EventList'
 import { useAdvancedSearch } from '@/hooks/useAdvancedSearch'
+import {
+  ArtDecoLoader,
+  VintageErrorState,
+  InlineJazzLoading
+} from '@/components/ui/VintageLoadingStates'
+import { VintageApiError } from '@/hooks/useVintageApi'
 
 export default function EventsPage() {
   const { 
@@ -69,16 +75,20 @@ export default function EventsPage() {
           {/* Events List */}
           <div className="space-y-6">
             {error && (
-              <div className="card p-4 border-error-600/30 bg-error-900/20">
-                <p className="text-error-300 text-sm">{error}</p>
-              </div>
+              <VintageErrorState
+                error={new VintageApiError('ServerError', 'The event orchestra is out of tune')}
+                onRetry={() => search()}
+                retryText="Start the Concert"
+                className="mb-6"
+              />
             )}
 
             {isLoading && !results && (
-              <div className="card p-8 text-center">
-                <div className="spinner mx-auto mb-4"></div>
-                <p className="text-white/80">Loading events...</p>
-              </div>
+              <ArtDecoLoader
+                text="Loading amazing blues events..."
+                size="lg"
+                className="py-12"
+              />
             )}
 
             {results && (
@@ -117,13 +127,24 @@ export default function EventsPage() {
             )}
 
             {!isLoading && results && results.events.length === 0 && (
-              <div className="card p-8 text-center">
-                <svg className="mx-auto h-12 w-12 text-gold-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <h3 className="text-xl font-semibold text-primary mb-3">No events found</h3>
-                <p className="text-white text-base font-medium">
-                  Try adjusting your search criteria or removing some filters.
+              <div className="text-center py-12">
+                <div className="vintage-calendar-icon w-16 h-16 mx-auto mb-6 relative">
+                  <div className="w-12 h-14 bg-gradient-to-b from-gold-600 to-gold-700 rounded-lg mx-auto relative">
+                    <div className="absolute inset-1 bg-gradient-to-b from-gold-400 to-gold-500 rounded-lg"></div>
+                    <div className="absolute top-1 left-2 w-2 h-2 bg-navy-900 rounded-sm opacity-30"></div>
+                    <div className="absolute top-1 right-2 w-2 h-2 bg-navy-900 rounded-sm opacity-30"></div>
+                    <div className="absolute top-4 left-1.5 w-3 h-0.5 bg-navy-900 opacity-20"></div>
+                    <div className="absolute top-6 left-1.5 w-3 h-0.5 bg-navy-900 opacity-20"></div>
+                    <div className="absolute top-8 left-1.5 w-3 h-0.5 bg-navy-900 opacity-20"></div>
+                  </div>
+                  <div className="absolute -top-1 left-3 w-1 h-3 bg-copper-600 rounded-t-full"></div>
+                  <div className="absolute -top-1 right-3 w-1 h-3 bg-copper-600 rounded-t-full"></div>
+                </div>
+                <h3 className="jazz-font text-2xl text-gold-400 mb-3">
+                  Calendar is Empty
+                </h3>
+                <p className="vintage-text text-cream-200 mb-4">
+                  No events match your current search. Try adjusting your filters or exploring different dates.
                 </p>
               </div>
             )}
