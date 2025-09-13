@@ -222,7 +222,7 @@ export function EventDetails({ event, className }: EventDetailsProps) {
                         
                         <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
                           <Link href={`/teachers/${teacher.id}`}>
-                            <Button variant="outline" size="sm" className="btn-secondary text-base px-8 py-3 w-full sm:w-auto">
+                            <Button variant="outline" size="sm" className="btn-secondary text-base px-10 py-4 w-full sm:w-auto">
                               View Profile
                             </Button>
                           </Link>
@@ -302,7 +302,7 @@ export function EventDetails({ event, className }: EventDetailsProps) {
                         
                         <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
                           <Link href={`/musicians/${musician.id}`}>
-                            <Button variant="outline" size="sm" className="btn-secondary text-base px-8 py-3 w-full sm:w-auto">
+                            <Button variant="outline" size="sm" className="btn-secondary text-base px-10 py-4 w-full sm:w-auto">
                               View Profile
                             </Button>
                           </Link>

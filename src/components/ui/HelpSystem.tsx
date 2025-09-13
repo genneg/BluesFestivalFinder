@@ -29,7 +29,7 @@ interface HelpSystemProps {
 }
 
 export function HelpSystem({
-  tooltips = true,
+  tooltips = false,
   guidedTours = ['search', 'filters', 'events'],
   beginnerChecklist = true,
   className
@@ -344,12 +344,7 @@ export function HelpSystem({
         />
       )}
 
-      {/* Contextual tooltips */}
-      {tooltips && (
-        <div className="fixed bottom-4 left-4 z-30 bg-gold-600 text-navy-900 px-4 py-2 rounded-lg jazz-font text-sm">
-          💡 Need help? Press H or click the help button
-        </div>
-      )}
+      {/* Contextual tooltips removed - only help button remains */}
     </>
   )
 }
