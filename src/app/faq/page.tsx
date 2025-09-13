@@ -3,8 +3,6 @@
 import { useState } from 'react'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline'
 import { FAQSchema } from '@/components/seo/SchemaMarkup'
-import { generateMetadata } from '@/components/seo/SEOMetadata'
-
 // FAQ data with comprehensive blues dance questions
 const faqData = [
   {
@@ -142,22 +140,7 @@ const allQuestions = faqData.flatMap(category =>
   }))
 )
 
-export const metadata = generateMetadata({
-  title: 'Blues Dance FAQ - Everything You Need to Know',
-  description: 'Comprehensive FAQ about blues dance festivals, getting started, finding events, and using Blues Festival Finder. Your complete guide to the blues dance community.',
-  keywords: [
-    'blues dance FAQ',
-    'blues dance festivals guide',
-    'how to start blues dancing',
-    'blues dance for beginners',
-    'blues festival guide',
-    'blues dance community',
-    'blues dance workshops',
-    'blues dance events',
-    'social dancing tips'
-  ],
-  type: 'article'
-})
+// Metadata will be handled by layout since this is a client component
 
 interface FAQItemProps {
   question: string

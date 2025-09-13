@@ -17,6 +17,8 @@ export const metadata: Metadata = generateMetadata({
   ],
   ogUrl: '/about'
 })
+
+export default function AboutPage() {
   return (
     <div className="app-container">
       <div className="max-w-md mx-auto bg-background min-h-screen relative">
