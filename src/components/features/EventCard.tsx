@@ -209,7 +209,7 @@ export function EventCard({
         {event.website && (
           <a href={event.website} target="_blank" rel="noopener noreferrer" className="flex-1">
             <Button variant="primary" size="lg" className="w-full btn-primary">
-              Register
+  Visit Website
             </Button>
           </a>
         )}

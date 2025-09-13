@@ -365,7 +365,7 @@ export function EnhancedEventCard({
         {event.website && (
           <a href={event.website} target="_blank" rel="noopener noreferrer" className="flex-1">
             <Button variant="primary" size="lg" className="w-full vintage-button bg-gold-600 hover:bg-gold-500 text-navy-900 font-bold">
-              🎭 Register Now
+              🌐 Visit Website
             </Button>
           </a>
         )}

@@ -166,7 +166,7 @@ export function EventCard({ event, className }: EventCardProps) {
         {event.registrationUrl && (
           <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
             <Button variant="primary" size="sm">
-              Register
+              Visit Website
             </Button>
           </a>
         )}

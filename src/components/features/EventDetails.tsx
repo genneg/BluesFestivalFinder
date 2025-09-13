@@ -128,7 +128,7 @@ export function EventDetails({ event, className }: EventDetailsProps) {
                 {event.website && !isRegistrationClosed(event.registrationDeadline) && (
                   <a href={event.website} target="_blank" rel="noopener noreferrer">
                     <Button size="lg" className="w-full lg:w-auto btn-primary text-lg px-8 py-4">
-                      Register Now
+                      Visit Website
                     </Button>
                   </a>
                 )}
