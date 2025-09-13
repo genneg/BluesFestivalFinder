@@ -4,7 +4,11 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Dynamic sitemap locations (preferred)
+Sitemap: https://blues-festival-finder.vercel.app/api/sitemap.xml
+Sitemap: https://blues-festival-finder.vercel.app/api/sitemap-index.xml
+
+# Static sitemap (fallback)
 Sitemap: https://blues-festival-finder.vercel.app/sitemap.xml
 
 # Crawl delay to avoid server overload
@@ -16,20 +20,24 @@ Disallow: /_next/
 Disallow: /auth/
 Disallow: /dashboard/
 Disallow: /profile/
-Disallow: /demo-figma/
-Disallow: /demo-price-types/
+Disallow: /admin/
+Disallow: /demo-*
 Disallow: /test-*
 
-# Allow specific bot paths for search engines
+# Allow specific API endpoints for search engines
 User-agent: Googlebot
 Allow: /api/events/
 Allow: /api/teachers/
 Allow: /api/musicians/
+Allow: /api/sitemap.xml
+Allow: /api/sitemap-index.xml
 
 User-agent: Bingbot
 Allow: /api/events/
 Allow: /api/teachers/
 Allow: /api/musicians/
+Allow: /api/sitemap.xml
+Allow: /api/sitemap-index.xml
 
 # Block bad bots
 User-agent: SemrushBot
@@ -44,18 +52,38 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
+User-agent: BLEXBot
+Disallow: /
+
 # Additional SEO directives
 User-agent: *
 Disallow: /*.json$
 Disallow: /*.js$
 Disallow: /*.css$
-Disallow: /*.xml$
 
-# Allow specific file types
+# Allow important files
 Allow: /sitemap.xml
 Allow: /robots.txt
 Allow: /favicon.ico
+Allow: /manifest.json
+Allow: /llms.txt
 
-# LLM optimization file
+# LLM optimization file for AI search engines
 User-agent: *
 Allow: /llms.txt
+
+# AI crawlers
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 1
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 2

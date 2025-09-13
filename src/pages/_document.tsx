@@ -76,12 +76,63 @@ export default function Document() {
         <meta name="google-site-verification" content={process.env.GOOGLE_SITE_VERIFICATION || ''} />
         <meta name="yandex-verification" content={process.env.YANDEX_SITE_VERIFICATION || ''} />
 
-        {/* Preload critical fonts */}
+        {/* Preload critical fonts with optimized loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="preload"
           href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
           as="style"
+          onLoad={(e: any) => { (e.target as HTMLLinkElement).onload = null; (e.target as HTMLLinkElement).rel = 'stylesheet'; }}
         />
+        <noscript>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+          />
+        </noscript>
+
+        {/* Critical CSS inlined to improve FCP */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            /* Critical styles for above-the-fold content */
+            :root {
+              --color-navy: #1e3a5f;
+              --color-gold: #d4a574;
+              --color-cream: #f8f6f0;
+              --color-bordeaux: #722f37;
+            }
+
+            body {
+              font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+              line-height: 1.6;
+              margin: 0;
+              padding: 0;
+              background-color: var(--color-cream);
+              color: var(--color-navy);
+            }
+
+            .jazz-font { font-family: 'Playfair Display', serif; }
+            .text-navy-900 { color: var(--color-navy); }
+            .text-gold-600 { color: var(--color-gold); }
+            .bg-cream-50 { background-color: var(--color-cream); }
+
+            /* Loading spinner for better UX */
+            .loading-spinner {
+              border: 2px solid var(--color-cream);
+              border-top: 2px solid var(--color-gold);
+              border-radius: 50%;
+              width: 20px;
+              height: 20px;
+              animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `
+        }} />
 
         {/* Structured data for organization */}
         <Script
@@ -159,19 +210,55 @@ export default function Document() {
         <Main />
         <NextScript />
 
-        {/* Analytics scripts */}
-        {process.env.NODE_ENV === 'production' && (
+        {/* Google Analytics 4 */}
+        {process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_GA_ID && (
           <>
-            <Script src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID" strategy="afterInteractive" />
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+              strategy="afterInteractive"
+            />
             <Script id="google-analytics" strategy="afterInteractive">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'GA_TRACKING_ID');
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                  page_title: document.title,
+                  page_location: window.location.href,
+                  // Enhanced ecommerce settings
+                  custom_map: {
+                    'custom_parameter_1': 'event_type'
+                  },
+                  // Privacy settings
+                  anonymize_ip: true,
+                  allow_google_signals: false,
+                  allow_ad_personalization_signals: false
+                });
+
+                // Track Web Vitals to Google Analytics
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                  custom_map: {
+                    'metric_id': 'dimension1',
+                    'metric_value': 'dimension2',
+                    'metric_delta': 'dimension3'
+                  }
+                });
               `}
             </Script>
           </>
+        )}
+
+        {/* Google Tag Manager (alternative/additional) */}
+        {process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_GTM_ID && (
+          <Script id="google-tag-manager" strategy="afterInteractive">
+            {`
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');
+            `}
+          </Script>
         )}
       </body>
     </Html>

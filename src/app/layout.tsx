@@ -7,6 +7,7 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { OfflineBanner } from '@/components/ui/NetworkStatus'
 import { Phase4Integration } from '@/components/features/Phase4Integration'
 import { OrganizationSchema, WebsiteSchema } from '@/components/seo/SchemaMarkup'
+import { WebVitalsReporter } from '@/components/performance/WebVitalsReporter'
 import '@/styles/globals.css'
 
 const inter = Inter({
@@ -114,6 +115,7 @@ export default function RootLayout({
         <QueryProvider>
           <AuthProvider>
             <Phase4Integration>
+              <WebVitalsReporter debug={process.env.NODE_ENV === 'development'} />
               <div className="min-h-screen flex flex-col">
                 <OfflineBanner />
                 <Header />
