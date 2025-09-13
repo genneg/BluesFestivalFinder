@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import SEOMetadata from '@/components/seo/SEOMetadata'
 import BreadcrumbNavigation from '@/components/ui/BreadcrumbNavigation'
 import { OrganizationSchema, WebsiteSchema, FAQSchema } from '@/components/seo/SchemaMarkup'
 
@@ -111,13 +110,6 @@ const locationData = [
 export default function LocationsPage() {
   return (
     <>
-      <SEOMetadata
-        title="Blues Dance Location Guides - Best Scenes Worldwide"
-        description="Discover the best blues dance scenes worldwide. Comprehensive guides to major blues communities, venues, teachers, and events in Europe, North America, and beyond."
-        canonical="/locations"
-        keywords={['blues dance locations', 'blues dance scenes', 'blues communities', 'blues venues', 'blues dance cities', 'blues dance worldwide']}
-        type="website"
-      />
 
       <OrganizationSchema />
       <WebsiteSchema />
