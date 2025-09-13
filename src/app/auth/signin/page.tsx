@@ -1,11 +1,10 @@
 'use client'
 
-import type { Metadata } from 'next'
-import { useState } from 'react'
-import { signIn, getSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import { Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { signIn, getSession } from 'next-auth/react'
+import { useState } from 'react'
 
 // Metadata is handled in the layout.tsx file
 
@@ -26,7 +25,9 @@ export default function SignInPage() {
       [name]: value
     }))
     // Clear error when user starts typing
-    if (error) setError('')
+    if (error) {
+setError('')
+}
   }
 
   const handleSubmit = async (e: React.FormEvent) => {

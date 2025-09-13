@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
-import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import { Mail, Lock, Eye, EyeOff, User, CheckCircle, AlertCircle } from 'lucide-react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
+import { useState } from 'react'
 
 // Metadata is handled in the layout.tsx file
 
@@ -29,7 +29,9 @@ export default function SignUpPage() {
       [name]: value
     }))
     // Clear error when user starts typing
-    if (error) setError('')
+    if (error) {
+setError('')
+}
   }
 
   const validateForm = () => {
@@ -87,7 +89,7 @@ export default function SignUpPage() {
       const data = await response.json()
 
       if (!response.ok) {
-        setError(data.error || 'Registration failed')
+        setError(data.error ?? 'Registration failed')
         return
       }
 
@@ -128,31 +130,55 @@ export default function SignUpPage() {
 
   const passwordStrength = () => {
     const { password } = formData
-    if (!password) return 0
+    if (!password) {
+return 0
+}
     
     let strength = 0
-    if (password.length >= 8) strength += 1
-    if (/[a-z]/.test(password)) strength += 1
-    if (/[A-Z]/.test(password)) strength += 1
-    if (/\d/.test(password)) strength += 1
-    if (/[@$!%*?&]/.test(password)) strength += 1
+    if (password.length >= 8) {
+strength += 1
+}
+    if (/[a-z]/.test(password)) {
+strength += 1
+}
+    if (/[A-Z]/.test(password)) {
+strength += 1
+}
+    if (/\d/.test(password)) {
+strength += 1
+}
+    if (/[@$!%*?&]/.test(password)) {
+strength += 1
+}
     
     return strength
   }
 
   const getPasswordStrengthColor = () => {
     const strength = passwordStrength()
-    if (strength <= 2) return 'bg-red-500'
-    if (strength <= 3) return 'bg-yellow-500'
-    if (strength <= 4) return 'bg-blue-500'
+    if (strength <= 2) {
+return 'bg-red-500'
+}
+    if (strength <= 3) {
+return 'bg-yellow-500'
+}
+    if (strength <= 4) {
+return 'bg-blue-500'
+}
     return 'bg-green-500'
   }
 
   const getPasswordStrengthText = () => {
     const strength = passwordStrength()
-    if (strength <= 2) return 'Weak'
-    if (strength <= 3) return 'Fair'
-    if (strength <= 4) return 'Good'
+    if (strength <= 2) {
+return 'Weak'
+}
+    if (strength <= 3) {
+return 'Fair'
+}
+    if (strength <= 4) {
+return 'Good'
+}
     return 'Strong'
   }
 
