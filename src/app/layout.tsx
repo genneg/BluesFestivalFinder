@@ -5,6 +5,7 @@ import { QueryProvider } from '@/components/providers/QueryProvider'
 import { Header, Footer } from '@/components/layout'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { OfflineBanner } from '@/components/ui/NetworkStatus'
+import { Phase4Integration } from '@/components/features/Phase4Integration'
 import '@/styles/globals.css'
 
 const inter = Inter({ 
@@ -34,15 +35,17 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gradient-to-br from-navy-900 via-primary-900 to-primary-950 text-gray-100`}>
         <QueryProvider>
           <AuthProvider>
-            <div className="min-h-screen flex flex-col">
-              <OfflineBanner />
-              <Header />
-              <Breadcrumb />
-              <main className="flex-1">
-                {children}
-              </main>
-              <Footer />
-            </div>
+            <Phase4Integration>
+              <div className="min-h-screen flex flex-col">
+                <OfflineBanner />
+                <Header />
+                <Breadcrumb />
+                <main className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+            </Phase4Integration>
           </AuthProvider>
         </QueryProvider>
       </body>

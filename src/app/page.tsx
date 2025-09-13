@@ -8,6 +8,12 @@ import { BottomNavigationEnhanced } from '@/components/layout/BottomNavigationEn
 import { Button } from '@/components/ui/Button'
 import { Music, Sparkles, TrendingUp } from 'lucide-react'
 import {
+  MainContent,
+  AccessibleHeading,
+  Landmark
+} from '@/components/ui/SkipNavigation'
+import { ContentClarity } from '@/components/ui/ContentClarity'
+import {
   ArtDecoLoader,
   VintageErrorState,
   VintageSkeleton,
@@ -373,16 +379,20 @@ export default function Home() {
   };
 
   return (
-    <div className="app-container">
-      <div className="max-w-md mx-auto bg-background min-h-screen relative">
-        {/* Main Content */}
-        <div className="content-wrapper">
-          {renderContent()}
-        </div>
+    <MainContent>
+      <div className="app-container">
+        <div className="max-w-md mx-auto bg-background min-h-screen relative">
+          {/* Main Content */}
+          <div className="content-wrapper">
+            <ContentClarity>
+              {renderContent()}
+            </ContentClarity>
+          </div>
 
-        {/* Bottom Navigation */}
-        <BottomNavigationEnhanced activeTab={activeTab} onTabChange={setActiveTab} />
+          {/* Bottom Navigation */}
+          <BottomNavigationEnhanced activeTab={activeTab} onTabChange={setActiveTab} />
+        </div>
       </div>
-    </div>
+    </MainContent>
   )
 }

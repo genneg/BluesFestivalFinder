@@ -7,12 +7,7 @@ import {
   HeartIcon,
   StarIcon,
   BookmarkIcon,
-  ShareIcon,
-  BellIcon,
-  GiftIcon,
   UsersIcon,
-  TrendingUpIcon,
-  ClockIcon,
   MapPinIcon,
   CalendarIcon
 } from '@/components/ui/Icon'
@@ -61,7 +56,6 @@ export function EngagementFeatures({
   const [recommendations, setRecommendations] = useState<RecommendationData[]>([])
   const [showWishlistModal, setShowWishlistModal] = useState(false)
   const [showRecommendationsModal, setShowRecommendationsModal] = useState(false)
-  const [selectedItem, setSelectedItem] = useState<string | null>(null)
 
   // Mock data - in real app this would come from API
   useEffect(() => {
@@ -146,20 +140,20 @@ export function EngagementFeatures({
     ])
   }, [])
 
-  const addToWishlist = (eventId: string, eventData: any) => {
-    const newItem: WishlistItem = {
-      id: `wishlist-${Date.now()}`,
-      eventId,
-      eventName: eventData.name,
-      eventDate: eventData.startDate,
-      location: eventData.location,
-      priceRange: eventData.priceRange,
-      imageUrl: eventData.imageUrl,
-      addedAt: new Date().toISOString(),
-      priority: 'medium'
-    }
-    setWishlist(prev => [...prev, newItem])
-  }
+  // const addToWishlist = (eventId: string, eventData: any) => {
+  //   const newItem: WishlistItem = {
+  //     id: `wishlist-${Date.now()}`,
+  //     eventId,
+  //     eventName: eventData.name,
+  //     eventDate: eventData.startDate,
+  //     location: eventData.location,
+  //     priceRange: eventData.priceRange,
+  //     imageUrl: eventData.imageUrl,
+  //     addedAt: new Date().toISOString(),
+  //     priority: 'medium'
+  //   }
+  //   setWishlist(prev => [...prev, newItem])
+  // }
 
   const removeFromWishlist = (itemId: string) => {
     setWishlist(prev => prev.filter(item => item.id !== itemId))
