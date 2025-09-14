@@ -11,6 +11,7 @@ import { NetworkStatus } from '@/components/ui/NetworkStatus'
 
 import { EventCard } from './EventCard'
 import { EnhancedEventCard } from './EnhancedEventCard'
+import { memo } from 'react'
 
 export type SortOption = 'date' | 'name' | 'location' | 'relevance'
 export type ViewMode = 'grid' | 'list'
@@ -160,7 +161,7 @@ export function EventList({
         aria-label={`${events.length} events displayed in ${viewMode} view`}
       >
         {events.map((event) => {
-          const CardComponent = enhanced ? EnhancedEventCard : EventCard
+          const CardComponent = enhanced ? memo(EnhancedEventCard) : memo(EventCard)
           return (
             <CardComponent
               key={event.id}

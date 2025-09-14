@@ -28,7 +28,14 @@ export function EventCard({
 
   const getLowestPrice = () => {
     if (!event.prices || event.prices.length === 0) return null
-    return Math.min(...event.prices.map(p => p.amount))
+    const validPrices = event.prices
+      .map(p => {
+        // Handle both string and number amounts
+        const amount = typeof p.amount === 'string' ? parseFloat(p.amount) : p.amount
+        return isNaN(amount) ? null : amount
+      })
+      .filter(p => p !== null)
+    return validPrices.length > 0 ? Math.min(...validPrices) : null
   }
 
   // Get image URL from either imageUrl or image property

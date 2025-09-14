@@ -83,9 +83,11 @@ export default function Home() {
     const fetchFestivals = async () => {
       try {
         setIsLoadingFestivals(true)
-        const response = await fetch('/api/events?limit=3')
+        const response = await fetch('/api/events?limit=3', {
+          priority: 'high' // High priority for main content
+        })
         const data = await response.json()
-        
+
         if (data.success) {
           setFestivals(data.data.events)
         } else {
@@ -107,9 +109,11 @@ export default function Home() {
     const fetchTeachers = async () => {
       try {
         setIsLoadingTeachers(true)
-        const response = await fetch('/api/teachers?limit=2')
+        const response = await fetch('/api/teachers?limit=2', {
+          priority: 'low' // Lower priority for secondary content
+        })
         const data = await response.json()
-        
+
         if (data.success) {
           setTeachers(data.data.teachers)
         } else {
@@ -123,7 +127,9 @@ export default function Home() {
       }
     }
 
-    fetchTeachers()
+    // Delay teacher loading to prioritize main content
+    const timer = setTimeout(fetchTeachers, 500)
+    return () => clearTimeout(timer)
   }, [])
 
   const renderContent = () => {
