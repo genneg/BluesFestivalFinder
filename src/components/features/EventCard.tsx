@@ -130,19 +130,19 @@ export function EventCard({
           )}
 
           {/* Event Title and Price */}
-          <div className="flex items-start justify-between mb-4">
-            <h3 
+          <div className="flex items-start justify-between mb-4 gap-3 overflow-hidden">
+            <h3
               id={`event-title-${event.id}`}
-              className="text-xl md:text-2xl font-bold text-white line-clamp-2 pr-3 leading-tight"
+              className="text-xl md:text-2xl font-bold text-white line-clamp-2 leading-tight flex-1 min-w-0 overflow-hidden"
             >
               {event.name}
             </h3>
             {getLowestPrice() && (
-              <div className="flex-shrink-0 bg-black/30 backdrop-blur-sm rounded-lg px-3 py-2 price-container">
-                <span className="text-lg font-bold text-primary price-text">
+              <div className="flex-shrink-0 bg-black/30 backdrop-blur-sm rounded-lg px-2 py-1.5 md:px-3 md:py-2 price-container max-w-[100px] md:max-w-[120px] overflow-hidden">
+                <div className="text-base md:text-lg font-bold text-primary price-text whitespace-nowrap overflow-hidden text-ellipsis">
                   €{getLowestPrice()}
-                </span>
-                <span className="text-sm text-white/90 block text-right font-medium">from</span>
+                </div>
+                <div className="text-xs md:text-sm text-white/90 text-right font-medium whitespace-nowrap">from</div>
               </div>
             )}
           </div>
