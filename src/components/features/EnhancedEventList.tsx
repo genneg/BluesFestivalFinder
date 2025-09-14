@@ -123,12 +123,8 @@ export function EnhancedEventList({
             <div className="h-8 bg-gray-200 rounded w-24 animate-pulse" />
           </div>
         </div>
-        <div className={
-          viewMode === 'grid'
-            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
-            : "space-y-4"
-        }>
-          {Array.from({ length: pageSize }).map((_, i) => (
+        <div className="space-y-6">
+          {Array.from({ length: 1 }).map((_, i) => (
             <EventCardSkeleton key={i} />
           ))}
         </div>
@@ -263,20 +259,16 @@ export function EnhancedEventList({
       )}
 
       {/* Events Display */}
-      <div 
-        className={
-          viewMode === 'grid' 
-            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
-            : "space-y-4"
-        }
+      <div
+        className="space-y-6"
         aria-live="polite"
-        aria-label={`${events.length} events displayed in ${viewMode} view`}
+        aria-label={`${events.length} events displayed in single column view`}
       >
         {events.map((event) => (
-          <EventCard 
-            key={event.id} 
-            event={event} 
-            className={viewMode === 'list' ? "max-w-none" : ""} 
+          <EventCard
+            key={event.id}
+            event={event}
+            className="max-w-none"
           />
         ))}
       </div>
@@ -298,12 +290,8 @@ export function EnhancedEventList({
 
       {/* Loading More Indicator */}
       {loading && events.length > 0 && (
-        <div className={`mt-6 ${
-          viewMode === 'grid' 
-            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
-            : "space-y-4"
-        }`}>
-          {Array.from({ length: Math.min(pageSize, 4) }).map((_, i) => (
+        <div className="mt-6 space-y-6">
+          {Array.from({ length: 1 }).map((_, i) => (
             <EventCardSkeleton key={`loading-${i}`} />
           ))}
         </div>

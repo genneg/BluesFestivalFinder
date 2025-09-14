@@ -151,14 +151,10 @@ export function EventList({
       </div>
 
       {/* Events Display */}
-      <div 
-        className={
-          viewMode === 'grid' 
-            ? "grid grid-cols-1 gap-6" 
-            : "space-y-6"
-        }
+      <div
+        className="space-y-6"
         aria-live="polite"
-        aria-label={`${events.length} events displayed in ${viewMode} view`}
+        aria-label={`${events.length} events displayed in single column view`}
       >
         {events.map((event) => {
           const CardComponent = enhanced ? memo(EnhancedEventCard) : memo(EventCard)
@@ -189,12 +185,8 @@ export function EventList({
 
       {/* Loading More Indicator */}
       {loadingMore && (
-        <div className={`mt-6 ${
-          viewMode === 'grid' 
-            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
-            : "space-y-4"
-        }`}>
-          {[...Array(viewMode === 'grid' ? 4 : 3)].map((_, i) => (
+        <div className="mt-6 space-y-6">
+          {[...Array(1)].map((_, i) => (
             <EventCardSkeleton key={`loading-${i}`} />
           ))}
         </div>
