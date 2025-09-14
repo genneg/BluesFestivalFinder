@@ -36,7 +36,7 @@ interface FilterOptions {
 export default function SearchPage() {
   const [showFilters, setShowFilters] = useState(false)
   const [showPresets, setShowPresets] = useState(false)
-  
+
   const {
     filters,
     results,
@@ -52,14 +52,12 @@ export default function SearchPage() {
 
   const handleSearch = async (query: string) => {
     updateFilters({ query })
-    // Use the new query directly to avoid stale state issues
     setTimeout(() => {
       search({ ...filters, query })
     }, 100)
   }
 
   const handleFiltersChange = (newFilters: Partial<FilterOptions>) => {
-    // Convert FilterOptions to SearchFilters format
     const searchFilters = {
       dateRange: newFilters.dateRange ? {
         start: newFilters.dateRange.start,
@@ -74,7 +72,7 @@ export default function SearchPage() {
       musicians: newFilters.musicians,
       priceRange: newFilters.priceRange
     }
-    
+
     updateFilters(searchFilters)
   }
 
@@ -94,7 +92,6 @@ export default function SearchPage() {
     }, 100)
   }
 
-  // Convert suggestions to simple array for SearchBar
   const searchSuggestions = [
     ...suggestions.events,
     ...suggestions.teachers,
@@ -106,18 +103,16 @@ export default function SearchPage() {
     <div className="app-container">
       <div className="max-w-md mx-auto bg-background min-h-screen relative">
         <div className="content-wrapper">
-          {/* Header */}
           <div className="hero-multi-style rounded-2xl p-8 mb-6">
             <div className="hero-overlay vintage-pattern"></div>
             <div className="relative z-10 text-center">
               <h1 className="font-jazz text-3xl mb-3 text-gradient-gold leading-tight font-bold">
-                SwingCompass Search
+                SwingRadar Search
               </h1>
               <p className="text-white/90 mb-4 leading-relaxed max-w-sm mx-auto font-medium">
-                Discover events across all swing dance styles. Follow your favorite instructors and musicians worldwide.
+                Detect events across all swing dance styles. Track your favorite instructors and musicians worldwide.
               </p>
 
-              {/* Dance Styles Quick Pills */}
               <div className="flex flex-wrap justify-center gap-2 mb-4">
                 <div className="px-3 py-1 rounded-full bg-navy-800/30 text-amber-400 text-xs border border-amber-400/20">🎺 Blues</div>
                 <div className="px-3 py-1 rounded-full bg-emerald-800/30 text-emerald-400 text-xs border border-emerald-400/20">🎷 Swing</div>
@@ -128,7 +123,6 @@ export default function SearchPage() {
             </div>
           </div>
 
-          {/* Enhanced Search Bar */}
           <div className="mb-6">
             <EnhancedSearchBar
               onSearch={handleSearch}
@@ -140,7 +134,6 @@ export default function SearchPage() {
             />
           </div>
 
-          {/* Filter Presets */}
           {!showFilters && (
             <div className="mb-6">
               <button
@@ -163,7 +156,6 @@ export default function SearchPage() {
             </div>
           )}
 
-          {/* Filters Panel */}
           {showFilters && (
             <div className="card p-6 mb-6">
               <FilterPanel
@@ -181,7 +173,6 @@ export default function SearchPage() {
             </div>
           )}
 
-          {/* Active Filters Summary */}
           {hasActiveFilters && (
             <div className="card p-4 mb-6">
               <div className="flex items-center justify-between mb-2">
@@ -233,7 +224,6 @@ export default function SearchPage() {
             </div>
           )}
 
-          {/* Search Results */}
           <div className="card p-6">
             {error && (
               <VintageErrorState
@@ -265,10 +255,9 @@ export default function SearchPage() {
                     Found {results.pagination.total} events
                   </span>
                 </div>
-                
+
                 {results.events.length > 0 ? (
                   <>
-                    {/* Enhanced Results Grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       {results.events.map((event) => (
                         <EnhancedEventCard
@@ -282,20 +271,19 @@ export default function SearchPage() {
                       ))}
                     </div>
 
-                    {/* Pagination */}
                     <div className="flex items-center justify-between mt-6 pt-4 border-t border-gold-600/20">
                       <span className="text-sm text-white/60">
                         Showing {((results.pagination.page - 1) * results.pagination.limit) + 1}-{Math.min(results.pagination.page * results.pagination.limit, results.pagination.total)} of {results.pagination.total} results
                       </span>
                       <div className="flex space-x-2">
-                        <button 
+                        <button
                           disabled={!results.pagination.hasPrev}
                           onClick={() => goToPage(results.pagination.page - 1)}
                           className="btn-secondary btn-sm"
                         >
                           Previous
                         </button>
-                        <button 
+                        <button
                           disabled={!results.pagination.hasNext}
                           onClick={() => goToPage(results.pagination.page + 1)}
                           className="btn-secondary btn-sm"
@@ -373,7 +361,6 @@ export default function SearchPage() {
                 </p>
 
                 <div className="space-y-3">
-                  {/* Dance Style Quick Search */}
                   <div>
                     <p className="text-xs text-gold-400 mb-2 font-medium">🎭 By Dance Style:</p>
                     <div className="flex flex-wrap justify-center gap-2">
@@ -395,7 +382,6 @@ export default function SearchPage() {
                     </div>
                   </div>
 
-                  {/* Popular Searches */}
                   <div>
                     <p className="text-xs text-gold-400 mb-2 font-medium">🔥 Popular Searches:</p>
                     <div className="flex flex-wrap justify-center gap-2">
@@ -410,9 +396,9 @@ export default function SearchPage() {
                       ))}
                     </div>
                   </div>
-                )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
