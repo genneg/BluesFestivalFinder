@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { FilterPanel } from '@/components/features/FilterPanel'
+import { MultiStyleFilterPanel } from '@/components/features/MultiStyleFilterPanel'
 import { SearchBar } from '@/components/features/SearchBar'
 import { EnhancedSearchBar } from '@/components/features/EnhancedSearchBar'
 import { FilterPresets } from '@/components/features/FilterPresets'
@@ -31,6 +32,9 @@ interface FilterOptions {
     min: number
     max: number
   }
+  danceStyles: string[]
+  eventTypes: string[]
+  difficultyLevel: string
 }
 
 export default function SearchPage() {
@@ -70,7 +74,10 @@ export default function SearchPage() {
       } : undefined,
       teachers: newFilters.teachers,
       musicians: newFilters.musicians,
-      priceRange: newFilters.priceRange
+      priceRange: newFilters.priceRange,
+      danceStyles: newFilters.danceStyles,
+      eventTypes: newFilters.eventTypes,
+      difficultyLevel: newFilters.difficultyLevel
     }
 
     updateFilters(searchFilters)
@@ -158,13 +165,16 @@ export default function SearchPage() {
 
           {showFilters && (
             <div className="card p-6 mb-6">
-              <FilterPanel
+              <MultiStyleFilterPanel
                 filters={{
                   dateRange: filters.dateRange,
                   location: filters.location,
                   teachers: filters.teachers || [],
                   musicians: filters.musicians || [],
                   priceRange: filters.priceRange,
+                  danceStyles: filters.danceStyles || ['blues'],
+                  eventTypes: filters.eventTypes || ['festival'],
+                  difficultyLevel: filters.difficultyLevel || 'all',
                 }}
                 onFiltersChange={handleFiltersChange}
                 onApply={handleApplyFilters}
@@ -220,6 +230,21 @@ export default function SearchPage() {
                     Musician: {musician}
                   </span>
                 ))}
+                {filters.danceStyles?.map(style => (
+                  <span key={style} className="badge-secondary">
+                    Style: {style}
+                  </span>
+                ))}
+                {filters.eventTypes?.map(type => (
+                  <span key={type} className="badge-secondary">
+                    Type: {type}
+                  </span>
+                ))}
+                {filters.difficultyLevel && (
+                  <span key="difficulty" className="badge-secondary">
+                    Level: {filters.difficultyLevel}
+                  </span>
+                )}
               </div>
             </div>
           )}

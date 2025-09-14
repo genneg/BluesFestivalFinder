@@ -130,7 +130,7 @@ export default function Home() {
     return (
       <div className="space-y-12">
         {/* Enhanced Hero Section with Vintage Aesthetics */}
-        <div className="hero-section vintage-spotlight relative overflow-hidden rounded-2xl p-8 md:p-12 mb-8">
+        <div className="hero-section vintage-spotlight relative overflow-hidden rounded-2xl p-6 md:p-12 mb-8">
           <div className="hero-overlay vintage-pattern"></div>
           
           {/* Art Deco Corner Decorations */}
@@ -143,7 +143,7 @@ export default function Home() {
           {/* Main Content */}
           <div className="relative z-10 text-center">
             {/* Main Title with Jazz Typography */}
-            <h1 className="font-jazz text-5xl md:text-6xl lg:text-7xl mb-4 text-gradient-gold leading-tight font-bold tracking-wide">
+            <h1 className="font-jazz text-4xl md:text-6xl lg:text-7xl mb-4 text-gradient-gold leading-tight font-bold tracking-wide">
               SwingRadar
             </h1>
             <h2 className="font-vintage text-3xl md:text-4xl lg:text-5xl mb-6 text-cream-200 leading-tight tracking-wider">
