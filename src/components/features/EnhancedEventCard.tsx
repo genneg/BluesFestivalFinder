@@ -33,25 +33,53 @@ export function EnhancedEventCard({
 
   const getLowestPrice = () => {
     if (!event.prices || event.prices.length === 0) return null
+
     const validPrices = event.prices
       .map(p => {
-        // Handle both string and number amounts
-        const amount = typeof p.amount === 'string' ? parseFloat(p.amount) : p.amount
-        return isNaN(amount) ? null : amount
+        // Handle different price object structures
+        let amount = null
+
+        if (p && typeof p === 'object') {
+          // Check for amount property
+          if ('amount' in p) {
+            amount = typeof p.amount === 'string' ? parseFloat(p.amount) : p.amount
+          }
+          // Check for price property (alternative structure)
+          else if ('price' in p) {
+            amount = typeof p.price === 'string' ? parseFloat(p.price) : p.price
+          }
+        }
+
+        return amount !== null && !isNaN(amount) ? amount : null
       })
       .filter(p => p !== null)
+
     return validPrices.length > 0 ? Math.min(...validPrices) : null
   }
 
   const getHighestPrice = () => {
     if (!event.prices || event.prices.length === 0) return null
+
     const validPrices = event.prices
       .map(p => {
-        // Handle both string and number amounts
-        const amount = typeof p.amount === 'string' ? parseFloat(p.amount) : p.amount
-        return isNaN(amount) ? null : amount
+        // Handle different price object structures
+        let amount = null
+
+        if (p && typeof p === 'object') {
+          // Check for amount property
+          if ('amount' in p) {
+            amount = typeof p.amount === 'string' ? parseFloat(p.amount) : p.amount
+          }
+          // Check for price property (alternative structure)
+          else if ('price' in p) {
+            amount = typeof p.price === 'string' ? parseFloat(p.price) : p.price
+          }
+        }
+
+        return amount !== null && !isNaN(amount) ? amount : null
       })
       .filter(p => p !== null)
+
     return validPrices.length > 0 ? Math.max(...validPrices) : null
   }
 

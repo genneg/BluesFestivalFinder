@@ -60,7 +60,8 @@
       "Bash(nslookup:*)",
       "WebFetch(domain:swingcompass.com)",
       "Bash(start:*)",
-      "Bash(PGPASSWORD=mVVzMkwCK6fP4RG psql:*)"
+      "Bash(PGPASSWORD=mVVzMkwCK6fP4RG psql:*)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []
