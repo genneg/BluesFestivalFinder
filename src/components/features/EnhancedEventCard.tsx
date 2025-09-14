@@ -111,7 +111,8 @@ export function EnhancedEventCard({
             </div>
           )}
 
-          {/* Attendance Social Proof */}
+          {/* Attendance Social Proof - Temporarily Disabled */}
+          {/*
           {enhanced && attendanceInfo.currentAttendees > 100 && (
             <div className="absolute top-4 right-16 bg-bordeaux-600/90 backdrop-blur-sm rounded-xl px-3 py-2 border border-bordeaux-400/30">
               <div className="text-cream-200 text-xs font-medium">
@@ -122,6 +123,7 @@ export function EnhancedEventCard({
               </div>
             </div>
           )}
+          */}
 
           {/* Enhanced Follow Button */}
           <div className="absolute top-4 right-4">
@@ -139,12 +141,14 @@ export function EnhancedEventCard({
             </div>
           )}
 
-          {/* Popularity Score */}
+          {/* Popularity Score - Temporarily Disabled */}
+          {/*
           {enhanced && attendanceInfo.popularityScore > 85 && (
             <div className="absolute bottom-4 right-4 bg-cream-100/90 text-navy-900 px-3 py-1 rounded-full text-sm font-bold">
               🔥 {attendanceInfo.popularityScore}% Hot
             </div>
           )}
+          */}
         </div>
 
         {/* Enhanced Event Content */}
