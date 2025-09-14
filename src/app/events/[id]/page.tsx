@@ -133,11 +133,26 @@ export default function EventDetailPage() {
                 name: event.venue?.name || `${event.city} Blues Festival`,
                 url: event.website
               },
-              offers: event.prices?.map(price => ({
-                price: parseFloat(price.amount.replace(/[^0-9.]/g, '')),
-                currency: price.currency,
-                availability: "InStock"
-              })),
+              offers: event.prices?.map(price => {
+                // Handle both string and number amounts safely
+                let amount = null
+                if (price && typeof price === 'object') {
+                  if ('amount' in price) {
+                    amount = typeof price.amount === 'string'
+                      ? parseFloat(price.amount.replace(/[^0-9.]/g, ''))
+                      : price.amount
+                  } else if ('price' in price) {
+                    amount = typeof price.price === 'string'
+                      ? parseFloat(price.price.replace(/[^0-9.]/g, ''))
+                      : price.price
+                  }
+                }
+                return {
+                  price: amount !== null && !isNaN(amount) ? amount : 0,
+                  currency: price.currency || 'EUR',
+                  availability: "InStock"
+                }
+              }),
               performers: [
                 ...event.teachers.map(teacher => ({
                   name: teacher.name,

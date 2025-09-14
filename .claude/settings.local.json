@@ -61,7 +61,8 @@
       "WebFetch(domain:swingcompass.com)",
       "Bash(start:*)",
       "Bash(PGPASSWORD=mVVzMkwCK6fP4RG psql:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "mcp__playwright__browser_evaluate"
     ],
     "deny": [],
     "ask": []
