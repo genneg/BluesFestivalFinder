@@ -28,7 +28,7 @@ export function EventDetails({ event, className }: EventDetailsProps) {
   const [showAllMusicians, setShowAllMusicians] = useState(false)
 
   return (
-    <div className={`space-y-12 ${className}`}>
+    <div className={`space-y-8 lg:space-y-12 event-details-container ${className}`}>
       {/* Hero Section */}
       <Card className="stats-card">
         <CardContent className="p-0">
@@ -61,14 +61,14 @@ export function EventDetails({ event, className }: EventDetailsProps) {
           </div>
 
           {/* Event Header */}
-          <div className="p-12">
-            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-8">
+          <div className="p-6 lg:p-8">
+            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-8 mb-6">
               <div className="flex-1">
-                <h1 className="font-playfair text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+                <h1 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 lg:mb-6 leading-tight event-heading">
                   {event.name}
                 </h1>
                 
-                <div className="flex flex-wrap items-center gap-8 text-white mb-8 text-xl">
+                <div className="flex flex-wrap items-center gap-6 lg:gap-8 text-white mb-6 text-lg lg:text-xl">
                   <div className="flex items-center">
                     <svg className="w-8 h-8 mr-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -143,16 +143,16 @@ export function EventDetails({ event, className }: EventDetailsProps) {
       </Card>
 
       {/* Event Details Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 event-details-grid">
         {/* Main Content */}
-        <div className="lg:col-span-2 space-y-12">
+        <div className="lg:col-span-2 space-y-6 lg:space-y-8">
           {/* Description */}
           <Card className="stats-card">
             <CardHeader>
               <CardTitle className="text-3xl font-semibold text-primary mb-6">About This Festival</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-white text-lg leading-relaxed whitespace-pre-line font-medium">
+              <p className="text-white text-lg leading-relaxed whitespace-pre-line font-medium event-description">
                 {event.description}
               </p>
             </CardContent>
@@ -162,7 +162,7 @@ export function EventDetails({ event, className }: EventDetailsProps) {
           {event.teachers.length > 0 && (
             <Card className="stats-card">
               <CardHeader>
-                <CardTitle className="flex items-center text-4xl font-bold text-primary mb-8">
+                <CardTitle className="flex items-center text-3xl font-bold text-primary mb-8">
                   <svg className="w-10 h-10 mr-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>

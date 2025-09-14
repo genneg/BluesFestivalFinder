@@ -1136,3 +1136,49 @@
 .event-price-text {
   @apply break-words whitespace-normal;
 }
+
+/* Responsive Design Optimizations for Event Details */
+.event-details-header {
+  @apply p-4 lg:p-6;
+}
+
+.event-details-title {
+  @apply text-3xl lg:text-4xl;
+}
+
+.event-details-grid {
+  @apply gap-4 lg:gap-6;
+}
+
+.event-details-meta {
+  @apply gap-4 lg:gap-6 text-base lg:text-lg;
+}
+
+.event-details-icons {
+  @apply w-5 h-5 lg:w-6 lg:h-7;
+}
+
+/* Better text overflow prevention */
+.event-heading {
+  @apply break-words hyphens-auto;
+}
+
+.event-description {
+  @apply break-words whitespace-pre-wrap;
+}
+
+/* Optimize card layouts for desktop */
+.event-card {
+  @apply max-w-full overflow-hidden;
+}
+
+.event-content {
+  @apply max-w-full;
+}
+
+/* Responsive spacing for event details */
+@media (min-width: 1024px) {
+  .event-details-container {
+    @apply max-w-7xl mx-auto;
+  }
+}
