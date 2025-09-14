@@ -150,7 +150,7 @@ export function EventCard({
                   {(event.teachers || []).slice(0, 2).filter(teacher => teacher && teacher.name).map((teacher) => (
                     <span
                       key={teacher.id}
-                      className="inline-block bg-primary/20 text-primary text-sm px-3 py-1.5 rounded-full hover:bg-primary/30 transition-colors cursor-pointer font-medium"
+                      className="inline-block bg-primary/20 text-primary text-xs md:text-sm px-2 py-1.5 md:px-3 rounded-full hover:bg-primary/30 transition-colors cursor-pointer font-medium break-words max-w-[150px] md:max-w-[200px] truncate"
                       role="button"
                       tabIndex={0}
                       aria-label={`View teacher ${teacher.name}`}
@@ -159,7 +159,7 @@ export function EventCard({
                     </span>
                   ))}
                   {event.teachers && event.teachers.length > 2 && (
-                    <span className="inline-block bg-white/10 text-white text-sm px-3 py-1.5 rounded-full font-medium">
+                    <span className="inline-block bg-white/10 text-white text-xs md:text-sm px-2 py-1.5 md:px-3 rounded-full font-medium">
                       +{event.teachers.length - 2} more
                     </span>
                   )}
@@ -179,7 +179,7 @@ export function EventCard({
                   {(event.musicians || []).slice(0, 2).filter(musician => musician && musician.name).map((musician) => (
                     <span
                       key={musician.id}
-                      className="inline-block bg-primary/20 text-primary text-sm px-3 py-1.5 rounded-full hover:bg-primary/30 transition-colors cursor-pointer font-medium"
+                      className="inline-block bg-primary/20 text-primary text-xs md:text-sm px-2 py-1.5 md:px-3 rounded-full hover:bg-primary/30 transition-colors cursor-pointer font-medium break-words max-w-[150px] md:max-w-[200px] truncate"
                       role="button"
                       tabIndex={0}
                       aria-label={`View musician ${musician.name}`}
@@ -188,7 +188,7 @@ export function EventCard({
                     </span>
                   ))}
                   {event.musicians && event.musicians.length > 2 && (
-                    <span className="inline-block bg-white/10 text-white text-sm px-3 py-1.5 rounded-full font-medium">
+                    <span className="inline-block bg-white/10 text-white text-xs md:text-sm px-2 py-1.5 md:px-3 rounded-full font-medium">
                       +{event.musicians.length - 2} more
                     </span>
                   )}

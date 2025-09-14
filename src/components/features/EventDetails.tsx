@@ -205,18 +205,9 @@ export function EventDetails({ event, className }: EventDetailsProps) {
                       
                       <div className="flex-1 min-w-0">
                         <Link href={`/teachers/${teacher.id}`} className="block hover:text-primary transition-colors">
-                          <h4 className="text-2xl font-bold text-white hover:text-primary mb-3 leading-tight">{teacher.name}</h4>
+                          <h4 className="text-xl md:text-2xl font-bold text-white hover:text-primary mb-3 leading-snug break-words truncate">{teacher.name}</h4>
                           {teacher.bio && (
-                            <p className="text-lg text-white/90 line-clamp-2 mb-4 font-medium">{teacher.bio}</p>
-                          )}
-                          {teacher.specialties && teacher.specialties.length > 0 && (
-                            <div className="flex flex-wrap gap-3 mb-6">
-                              {teacher.specialties.slice(0, 2).map((specialty, idx) => (
-                                <span key={idx} className="text-sm bg-primary/20 text-primary px-4 py-2 rounded-full font-semibold">
-                                  {specialty}
-                                </span>
-                              ))}
-                            </div>
+                            <p className="text-base md:text-lg text-white/90 line-clamp-3 mb-6 leading-relaxed font-medium">{teacher.bio}</p>
                           )}
                         </Link>
                         
@@ -285,18 +276,9 @@ export function EventDetails({ event, className }: EventDetailsProps) {
                       
                       <div className="flex-1 min-w-0">
                         <Link href={`/musicians/${musician.id}`} className="block hover:text-primary transition-colors">
-                          <h4 className="text-2xl font-bold text-white hover:text-primary mb-3 leading-tight">{musician.name}</h4>
+                          <h4 className="text-xl md:text-2xl font-bold text-white hover:text-primary mb-3 leading-snug break-words truncate">{musician.name}</h4>
                           {musician.bio && (
-                            <p className="text-lg text-white/90 line-clamp-2 mb-4 font-medium">{musician.bio}</p>
-                          )}
-                          {musician.genre && musician.genre.length > 0 && (
-                            <div className="flex flex-wrap gap-3 mb-6">
-                              {musician.genre.slice(0, 2).map((genre, idx) => (
-                                <span key={idx} className="text-sm bg-primary/20 text-primary px-4 py-2 rounded-full font-semibold">
-                                  {genre}
-                                </span>
-                              ))}
-                            </div>
+                            <p className="text-base md:text-lg text-white/90 line-clamp-3 mb-6 leading-relaxed font-medium">{musician.bio}</p>
                           )}
                         </Link>
                         
