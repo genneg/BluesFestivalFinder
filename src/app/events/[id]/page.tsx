@@ -5,6 +5,8 @@ import { useParams } from 'next/navigation'
 import { EventDetails } from '@/components/features/EventDetails'
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner'
 import { Festival } from '@/types'
+import { EventSchema, OrganizationSchema, WebsiteSchema } from '@/components/seo/SchemaMarkup'
+import BreadcrumbNavigation from '@/components/ui/BreadcrumbNavigation'
 
 export default function EventDetailPage() {
   const params = useParams()
@@ -100,6 +102,57 @@ export default function EventDetailPage() {
     <div className="app-container">
       <div className="max-w-4xl mx-auto bg-background min-h-screen relative">
         <div className="content-wrapper">
+          {/* Enhanced Breadcrumb Navigation */}
+          {event && (
+            <BreadcrumbNavigation
+              items={[
+                { name: 'Home', url: '/' },
+                { name: 'Events', url: '/events' },
+                { name: event.name, url: `/events/${event.id}`, current: true }
+              ]}
+              className="mb-6"
+            />
+          )}
+
+          {/* Enhanced Schema Markup for SEO */}
+          <EventSchema
+            event={{
+              name: event.name,
+              description: event.description,
+              startDate: event.startDate.toISOString(),
+              endDate: event.endDate.toISOString(),
+              location: {
+                city: event.city,
+                country: event.country,
+                address: event.venue?.address,
+                name: event.venue?.name
+              },
+              imageUrl: event.imageUrl || event.image,
+              url: `https://blues-festival-finder.vercel.app/events/${event.id}`,
+              organizer: {
+                name: event.venue?.name || `${event.city} Blues Festival`,
+                url: event.website
+              },
+              offers: event.prices?.map(price => ({
+                price: parseFloat(price.amount.replace(/[^0-9.]/g, '')),
+                currency: price.currency,
+                availability: "InStock"
+              })),
+              performers: [
+                ...event.teachers.map(teacher => ({
+                  name: teacher.name,
+                  type: "Person"
+                })),
+                ...event.musicians.map(musician => ({
+                  name: musician.name,
+                  type: "Person"
+                }))
+              ]
+            }}
+          />
+          <OrganizationSchema />
+          <WebsiteSchema />
+
           <EventDetails event={event} />
         </div>
       </div>

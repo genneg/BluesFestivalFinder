@@ -18,10 +18,10 @@ interface SEOProps {
 
 export function generateMetadata(props: SEOProps): Metadata {
   const {
-    title = 'Blues Festival Finder',
-    description = 'Discover blues dance festivals worldwide and follow your favorite teachers and musicians.',
-    keywords = ['blues dance', 'festivals', 'dance events', 'blues music', 'dance workshops'],
-    ogImage = 'https://blues-festival-finder.vercel.app/og-default.jpg',
+    title = 'SwingRadar',
+    description = 'Detect swing culture worldwide with precision radar. Discover swing dance festivals across Blues, Swing, Balboa, Shag, and Boogie Woogie. Track your favorite instructors and musicians.',
+    keywords = ['swing radar', 'swing dance detection', 'blues dance', 'lindy hop', 'balboa', 'shag', 'boogie woogie', 'festivals radar', 'dance event tracking', 'vintage swing culture radar'],
+    ogImage = 'https://swingradar.com/og-default.jpg',
     ogUrl,
     canonicalUrl,
     noIndex = false,
@@ -33,20 +33,20 @@ export function generateMetadata(props: SEOProps): Metadata {
     tags
   } = props
 
-  const siteUrl = 'https://blues-festival-finder.vercel.app'
+  const siteUrl = 'https://swingradar.com'
   const fullUrl = canonicalUrl || ogUrl || siteUrl
   const fullOgUrl = ogUrl ? `${siteUrl}${ogUrl}` : siteUrl
 
   const metadata: Metadata = {
     title: {
       default: title,
-      template: '%s | Blues Festival Finder'
+      template: '%s | SwingRadar'
     },
     description,
     keywords: keywords.join(', '),
     authors: authors ? [{ name: authors[0] }] : undefined,
-    creator: 'Blues Festival Finder',
-    publisher: 'Blues Festival Finder',
+    creator: 'SwingRadar',
+    publisher: 'SwingRadar',
     robots: {
       index: !noIndex,
       follow: !noIndex,
@@ -63,7 +63,7 @@ export function generateMetadata(props: SEOProps): Metadata {
       title,
       description,
       url: fullOgUrl,
-      siteName: 'Blues Festival Finder',
+      siteName: 'SwingRadar',
       images: [
         {
           url: ogImage,
@@ -79,8 +79,8 @@ export function generateMetadata(props: SEOProps): Metadata {
       title,
       description,
       images: [ogImage],
-      creator: '@BluesFestival',
-      site: '@BluesFestival',
+      creator: '@SwingRadar',
+      site: '@SwingRadar',
     },
     alternates: {
       canonical: fullUrl,
@@ -117,29 +117,36 @@ export function generateEventMetadata(event: {
   country: string
   startDate: string
   imageUrl?: string
+  danceStyles?: string[]
 }): Metadata {
-  const title = `${event.name} - Blues Dance Festival`
+  const styles = event.danceStyles || ['blues', 'swing']
+  const styleText = styles.length > 1 ? styles.slice(0, -1).join(', ') + ' and ' + styles.slice(-1) : styles[0]
+
+  const title = `${event.name} - ${styleText.charAt(0).toUpperCase() + styleText.slice(1)} Dance Festival`
   const description = event.description ||
-    `Join ${event.name} in ${event.city}, ${event.country}. Experience the best blues dance festival with workshops, social dancing, and live music.`
+    `Join ${event.name} in ${event.city}, ${event.country}. Experience the best ${styleText} dance festival with workshops, social dancing, and live music. Detect swing culture with SwingRadar precision.`
 
   return generateMetadata({
     title,
     description,
     keywords: [
       event.name,
-      'blues festival',
-      'blues dance',
+      ...styles.map(style => `${style} festival`),
+      ...styles.map(style => `${style} dance`),
+      'swing dance festival',
+      'swing radar',
+      'festival detection',
       event.city,
       event.country,
       'dance workshop',
       'social dancing',
       'live music',
-      'blues music'
+      'vintage swing culture'
     ],
-    ogImage: event.imageUrl || 'https://blues-festival-finder.vercel.app/og-event.jpg',
+    ogImage: event.imageUrl || 'https://swingradar.com/og-event.jpg',
     type: 'article',
     publishedTime: event.startDate,
-    tags: ['blues festival', 'dance event', 'workshop']
+    tags: [...styles.map(style => `${style} festival`), 'dance event', 'workshop', 'swing culture']
   })
 }
 
@@ -149,21 +156,30 @@ export function generateTeacherMetadata(teacher: {
   specialties?: string[]
   imageUrl?: string
 }): Metadata {
-  const title = `${teacher.name} - Blues Dance Teacher`
+  const specialties = teacher.specialties || ['swing dance']
+  const primaryStyle = specialties[0] || 'swing dance'
+
+  const title = `${teacher.name} - ${primaryStyle.charAt(0).toUpperCase() + primaryStyle.slice(1)} Instructor`
   const description = teacher.bio ||
-    `Learn blues dance from ${teacher.name}.${teacher.specialties ? ` Specializing in ${teacher.specialties.join(', ')}.` : ''}`
+    `Track ${teacher.name} on SwingRadar.${specialties ? ` Specializing in ${specialties.join(', ')}.` : ''} Follow your favorite swing dance instructor with precision radar alerts and never miss their festival appearances.`
 
   return generateMetadata({
     title,
     description,
     keywords: [
       teacher.name,
-      'blues dance teacher',
-      'dance instructor',
-      'blues dance lessons',
-      ...(teacher.specialties || [])
+      'swing dance instructor',
+      'dance teacher',
+      'swing radar',
+      'track swing teachers',
+      'radar swing instructors',
+      ...(specialties || []),
+      'blues dance',
+      'lindy hop',
+      'balboa',
+      'vintage swing culture'
     ],
-    ogImage: teacher.imageUrl || 'https://blues-festival-finder.vercel.app/og-teacher.jpg',
+    ogImage: teacher.imageUrl || 'https://swingradar.com/og-teacher.jpg',
     type: 'profile',
     authors: [teacher.name]
   })

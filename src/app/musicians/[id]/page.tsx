@@ -9,6 +9,8 @@ import { LoadingSpinner } from '@/components/ui/LoadingSpinner'
 import { Button } from '@/components/ui/Button'
 import { BottomNavigationEnhanced } from '@/components/layout/BottomNavigationEnhanced'
 import { Musician } from '@/types'
+import { PersonSchema, OrganizationSchema, WebsiteSchema } from '@/components/seo/SchemaMarkup'
+import BreadcrumbNavigation from '@/components/ui/BreadcrumbNavigation'
 
 export default function MusicianProfilePage() {
   const params = useParams()
@@ -101,6 +103,33 @@ export default function MusicianProfilePage() {
   return (
     <div className="app-container">
       <div className="max-w-md mx-auto bg-background min-h-screen relative">
+        {/* Enhanced Schema Markup for SEO */}
+        <PersonSchema
+          person={{
+            name: musician.name,
+            description: musician.bio,
+            imageUrl: musician.imageUrl,
+            url: `https://blues-festival-finder.vercel.app/musicians/${musician.id}`,
+            jobTitle: "Blues Musician",
+            specialties: musician.genres,
+            sameAs: musician.website ? [musician.website] : undefined
+          }}
+        />
+        <OrganizationSchema />
+        <WebsiteSchema />
+
+        {/* Enhanced Breadcrumb Navigation */}
+        {musician && (
+          <BreadcrumbNavigation
+            items={[
+              { name: 'Home', url: '/' },
+              { name: 'Musicians', url: '/musicians' },
+              { name: musician.name, url: `/musicians/${musician.id}`, current: true }
+            ]}
+            className="mb-6"
+          />
+        )}
+
         <div className="content-wrapper">
         {/* Musician Header */}
         <div className="card mb-8 p-8">

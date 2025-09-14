@@ -9,6 +9,8 @@ import { LoadingSpinner } from '@/components/ui/LoadingSpinner'
 import { Button } from '@/components/ui/Button'
 import { BottomNavigationEnhanced } from '@/components/layout/BottomNavigationEnhanced'
 import { Teacher } from '@/types'
+import { PersonSchema, OrganizationSchema, WebsiteSchema } from '@/components/seo/SchemaMarkup'
+import BreadcrumbNavigation from '@/components/ui/BreadcrumbNavigation'
 
 export default function TeacherProfilePage() {
   const params = useParams()
@@ -92,6 +94,33 @@ export default function TeacherProfilePage() {
   return (
     <div className="app-container">
       <div className="max-w-md mx-auto bg-background min-h-screen relative">
+        {/* Enhanced Schema Markup for SEO */}
+        <PersonSchema
+          person={{
+            name: teacher.name,
+            description: teacher.bio,
+            imageUrl: teacher.imageUrl,
+            url: `https://blues-festival-finder.vercel.app/teachers/${teacher.id}`,
+            jobTitle: "Blues Dance Teacher",
+            specialties: teacher.specialties,
+            sameAs: teacher.website ? [teacher.website] : undefined
+          }}
+        />
+        <OrganizationSchema />
+        <WebsiteSchema />
+
+        {/* Enhanced Breadcrumb Navigation */}
+        {teacher && (
+          <BreadcrumbNavigation
+            items={[
+              { name: 'Home', url: '/' },
+              { name: 'Teachers', url: '/teachers' },
+              { name: teacher.name, url: `/teachers/${teacher.id}`, current: true }
+            ]}
+            className="mb-6"
+          />
+        )}
+
         {/* Main Content */}
         <div className="content-wrapper space-y-6">
           {/* Teacher Header */}

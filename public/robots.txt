@@ -1,5 +1,6 @@
-# Blues Festival Finder - robots.txt
-# Website: https://blues-festival-finder.vercel.app/
+# SwingRadar - robots.txt
+# Website: https://blues-festival-finder.vercel.app/ (migrating to swingradar.com)
+# Multi-style swing dance detection platform: Blues, Swing, Balboa, Shag, Boogie Woogie
 
 User-agent: *
 Allow: /
@@ -31,6 +32,7 @@ Allow: /api/teachers/
 Allow: /api/musicians/
 Allow: /api/sitemap.xml
 Allow: /api/sitemap-index.xml
+Allow: /api/search/
 
 User-agent: Bingbot
 Allow: /api/events/
@@ -38,6 +40,7 @@ Allow: /api/teachers/
 Allow: /api/musicians/
 Allow: /api/sitemap.xml
 Allow: /api/sitemap-index.xml
+Allow: /api/search/
 
 # Block bad bots
 User-agent: SemrushBot
@@ -72,18 +75,43 @@ Allow: /llms.txt
 User-agent: *
 Allow: /llms.txt
 
-# AI crawlers
+# AI crawlers - SwingRadar multi-style content optimization
 User-agent: GPTBot
 Allow: /
+Allow: /swing-dance-festivals/
+Allow: /balboa-festivals/
+Allow: /lindy-hop-events/
+Allow: /collegiate-shag-workshops/
+Allow: /boogie-woogie-festivals/
 Crawl-delay: 1
 
 User-agent: ChatGPT-User
 Allow: /
+Allow: /api/search/
 
 User-agent: Claude-Web
 Allow: /
+Allow: /api/search/
 Crawl-delay: 1
 
 User-agent: CCBot
 Allow: /
+Allow: /api/search/
 Crawl-delay: 2
+
+User-agent: Bard
+Allow: /
+Crawl-delay: 1
+
+User-agent: Gemini
+Allow: /
+Crawl-delay: 1
+
+# Additional AI search engines
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: You.com
+Allow: /
+Crawl-delay: 1

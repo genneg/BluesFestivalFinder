@@ -9,8 +9,8 @@ interface BottomNavigationProps {
 }
 
 const navItems = [
-  { id: "home", icon: Home, label: "Discover", href: "/" },
-  { id: "search", icon: Search, label: "Search", href: "/search" },
+  { id: "home", icon: Home, label: "Compass", href: "/" },
+  { id: "search", icon: Search, label: "Explore", href: "/search" },
   { id: "following", icon: Heart, label: "Following", href: "/dashboard" },
   { id: "profile", icon: User, label: "Profile", href: "/profile" }
 ];

@@ -107,15 +107,24 @@ export default function SearchPage() {
       <div className="max-w-md mx-auto bg-background min-h-screen relative">
         <div className="content-wrapper">
           {/* Header */}
-          <div className="hero-section rounded-2xl p-8 mb-6">
-            <div className="hero-overlay"></div>
+          <div className="hero-multi-style rounded-2xl p-8 mb-6">
+            <div className="hero-overlay vintage-pattern"></div>
             <div className="relative z-10 text-center">
-              <h1 className="font-playfair text-3xl mb-3 text-white leading-tight">
-                Find Your Perfect Blues Festival
+              <h1 className="font-jazz text-3xl mb-3 text-gradient-gold leading-tight font-bold">
+                SwingCompass Search
               </h1>
-              <p className="text-white/90 mb-6 leading-relaxed max-w-sm mx-auto">
-                Search thousands of blues dance festivals worldwide. Follow your favorite teachers and musicians.
+              <p className="text-white/90 mb-4 leading-relaxed max-w-sm mx-auto font-medium">
+                Discover events across all swing dance styles. Follow your favorite instructors and musicians worldwide.
               </p>
+
+              {/* Dance Styles Quick Pills */}
+              <div className="flex flex-wrap justify-center gap-2 mb-4">
+                <div className="px-3 py-1 rounded-full bg-navy-800/30 text-amber-400 text-xs border border-amber-400/20">🎺 Blues</div>
+                <div className="px-3 py-1 rounded-full bg-emerald-800/30 text-emerald-400 text-xs border border-emerald-400/20">🎷 Swing</div>
+                <div className="px-3 py-1 rounded-full bg-orange-800/30 text-amber-400 text-xs border border-amber-400/20">💃 Balboa</div>
+                <div className="px-3 py-1 rounded-full bg-teal-800/30 text-teal-400 text-xs border border-teal-400/20">🕺 Shag</div>
+                <div className="px-3 py-1 rounded-full bg-purple-800/30 text-purple-400 text-xs border border-purple-400/20">🎹 Boogie</div>
+              </div>
             </div>
           </div>
 
@@ -237,7 +246,7 @@ export default function SearchPage() {
 
             {isLoading ? (
               <ArtDecoLoader
-                text="Searching festivals worldwide..."
+                text="Searching swing dance events worldwide..."
                 size="lg"
                 className="py-8"
               />
@@ -253,7 +262,7 @@ export default function SearchPage() {
                     )}
                   </h2>
                   <span className="text-sm text-white/60">
-                    Found {results.pagination.total} festivals
+                    Found {results.pagination.total} events
                   </span>
                 </div>
                 
@@ -298,21 +307,41 @@ export default function SearchPage() {
                   </>
                 ) : (
                   <div className="text-center py-12">
-                    <div className="vintage-microphone-icon w-16 h-16 mx-auto mb-6 relative">
-                      <div className="w-12 h-16 bg-gradient-to-b from-gold-600 to-gold-700 rounded-t-full mx-auto relative">
-                        <div className="absolute inset-2 bg-gradient-to-b from-gold-400 to-gold-500 rounded-t-full"></div>
-                        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 w-6 h-1 bg-navy-900 rounded-full opacity-20"></div>
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 w-4 h-1 bg-navy-900 rounded-full opacity-20"></div>
+                    <div className="vintage-radar-icon w-16 h-16 mx-auto mb-6 relative">
+                      <div className="w-16 h-16 bg-gradient-to-b from-green-600 to-green-700 rounded-full mx-auto relative border-4 border-green-500">
+                        <div className="absolute inset-2 bg-gradient-to-b from-green-400 to-green-500 rounded-full opacity-50"></div>
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-8 bg-green-300 rounded-full animate-radar-sweep"></div>
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45 w-1 h-6 bg-green-300 rounded-full opacity-60"></div>
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-90 w-1 h-6 bg-green-300 rounded-full opacity-40"></div>
+                        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-xs text-green-300 font-bold">📡</div>
                       </div>
-                      <div className="w-6 h-4 bg-gold-700 mx-auto rounded-b-sm"></div>
-                      <div className="w-8 h-2 bg-navy-800 mx-auto rounded-full mt-1"></div>
                     </div>
-                    <h3 className="jazz-font text-xl text-gold-400 mb-3">
-                      The Stage is Empty
+                    <h3 className="font-jazz text-xl text-green-400 mb-3">
+                      No Targets Detected
                     </h3>
-                    <p className="vintage-text text-cream-200 mb-4">
-                      No festivals match your criteria. Try adjusting your search or explore different terms.
+                    <p className="text-cream-200 mb-4">
+                      Our radar couldn't detect events matching your criteria. Try exploring different dance styles or locations.
                     </p>
+                    <div className="flex flex-wrap justify-center gap-2 mt-4">
+                      <button
+                        onClick={() => handleSearch('Blues')}
+                        className="filter-style-indicator style-blues text-xs"
+                      >
+                        🎺 Try Blues
+                      </button>
+                      <button
+                        onClick={() => handleSearch('Swing')}
+                        className="filter-style-indicator style-swing text-xs"
+                      >
+                        🎷 Try Swing
+                      </button>
+                      <button
+                        onClick={() => handleSearch('Europe')}
+                        className="filter-style-indicator text-xs"
+                      >
+                        🌍 Try Europe
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -340,18 +369,45 @@ export default function SearchPage() {
                   Start Your Search
                 </h3>
                 <p className="text-white/80 mb-4">
-                  Search for festivals, teachers, musicians, or locations to get started.
+                  Search for events, instructors, musicians, or locations across all swing dance styles.
                 </p>
-                <div className="flex flex-wrap justify-center gap-2">
-                  {['Damon Stone', 'London', 'This Weekend', 'Beginner Friendly'].map((suggestion) => (
-                    <button
-                      key={suggestion}
-                      onClick={() => handleSearch(suggestion)}
-                      className="btn-secondary btn-sm"
-                    >
-                      {suggestion}
-                    </button>
-                  ))}
+
+                <div className="space-y-3">
+                  {/* Dance Style Quick Search */}
+                  <div>
+                    <p className="text-xs text-gold-400 mb-2 font-medium">🎭 By Dance Style:</p>
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {[
+                        { name: 'Blues', icon: '🎺', class: 'style-blues' },
+                        { name: 'Swing', icon: '🎷', class: 'style-swing' },
+                        { name: 'Balboa', icon: '💃', class: 'style-balboa' },
+                        { name: 'Shag', icon: '🕺', class: 'style-shag' },
+                        { name: 'Boogie Woogie', icon: '🎹', class: 'style-boogie' }
+                      ].map((style) => (
+                        <button
+                          key={style.name}
+                          onClick={() => handleSearch(style.name)}
+                          className={`filter-style-indicator ${style.class} text-xs`}
+                        >
+                          {style.icon} {style.name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Popular Searches */}
+                  <div>
+                    <p className="text-xs text-gold-400 mb-2 font-medium">🔥 Popular Searches:</p>
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {['This Weekend', 'Europe', 'Beginner Friendly', 'Workshops'].map((suggestion) => (
+                        <button
+                          key={suggestion}
+                          onClick={() => handleSearch(suggestion)}
+                          className="btn-secondary btn-sm"
+                        >
+                          {suggestion}
+                        </button>
+                      ))}
                 </div>
               </div>
             )}

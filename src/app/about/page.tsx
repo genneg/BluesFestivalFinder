@@ -4,16 +4,16 @@ import { Button } from '@/components/ui/Button'
 import { generateMetadata } from '@/components/seo/SEOMetadata'
 
 export const metadata: Metadata = generateMetadata({
-  title: 'About Blues Festival Finder',
-  description: 'Learn about our mission to connect blues dancers with festivals worldwide. Discover our story, values, and commitment to the blues dance community.',
+  title: 'About SwingRadar - Detect Swing Culture Worldwide',
+  description: 'Discover SwingRadar, your precision radar for swing dance culture worldwide. Detect festivals, instructors, and musicians across Blues, Swing, Balboa, Shag, and Boogie Woogie.',
   keywords: [
-    'about blues festival finder',
-    'blues dance community',
-    'festival discovery platform',
-    'blues dance mission',
-    'dance festival app',
-    'blues music community',
-    'dance event platform'
+    'about swingradar',
+    'swing dance community',
+    'blues swing balboa shag boogie festivals',
+    'dance festival discovery',
+    'swing dance platform',
+    'vintage dance community',
+    'multi-style dance events'
   ],
   ogUrl: '/about'
 })
@@ -24,28 +24,51 @@ export default function AboutPage() {
       <div className="max-w-md mx-auto bg-background min-h-screen relative">
         <div className="content-wrapper">
           {/* Hero Section */}
-          <div className="hero-section rounded-2xl p-8 mb-6">
-            <div className="hero-overlay"></div>
+          <div className="hero-multi-style rounded-2xl p-8 mb-6">
+            <div className="hero-overlay vintage-pattern"></div>
             <div className="relative z-10 text-center">
-              <h1 className="font-playfair text-3xl mb-3 text-white leading-tight">
-                About Blues Dance Festival Finder
+              <div className="radar-screen w-16 h-16 mx-auto mb-4 animate-radar-sweep">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-600 to-green-700 border-2 border-green-500"></div>
+                <div className="absolute inset-2 rounded-full bg-gradient-to-br from-green-400 to-green-500 opacity-30"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-8 bg-green-300 rounded-full animate-radar-sweep"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45 w-1 h-6 bg-green-300 rounded-full opacity-60"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-90 w-1 h-6 bg-green-300 rounded-full opacity-40"></div>
+                <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-xs text-green-300 font-bold">📡</div>
+              </div>
+
+              <h1 className="font-jazz text-4xl mb-3 text-gradient-gold leading-tight font-bold">
+                About SwingRadar
               </h1>
-              <p className="text-white/90 mb-6 leading-relaxed max-w-sm mx-auto">
-                Your centralized platform for discovering blues dance festivals worldwide and staying connected with the global blues community.
+              <p className="text-white/90 mb-4 leading-relaxed max-w-sm mx-auto font-medium">
+                Detect swing culture worldwide. Your precision radar for swing dance across the globe.
               </p>
+
+              {/* Dance Styles Showcase */}
+              <div className="flex flex-wrap justify-center gap-2 mb-4">
+                <div className="px-3 py-1 rounded-full bg-navy-800/30 text-amber-400 text-xs border border-amber-400/20">🎺 Blues</div>
+                <div className="px-3 py-1 rounded-full bg-emerald-800/30 text-emerald-400 text-xs border border-emerald-400/20">🎷 Swing</div>
+                <div className="px-3 py-1 rounded-full bg-orange-800/30 text-amber-400 text-xs border border-amber-400/20">💃 Balboa</div>
+                <div className="px-3 py-1 rounded-full bg-teal-800/30 text-teal-400 text-xs border border-teal-400/20">🕺 Shag</div>
+                <div className="px-3 py-1 rounded-full bg-purple-800/30 text-purple-400 text-xs border border-purple-400/20">🎹 Boogie Woogie</div>
+              </div>
             </div>
           </div>
 
           {/* Mission Section */}
           <div className="card p-6 mb-6">
-            <h2 className="font-playfair text-xl text-gold-600 mb-4">Our Mission</h2>
+            <h2 className="font-jazz text-xl text-gold-600 mb-4">📡 Our Mission</h2>
             <div className="space-y-4">
               <p className="text-white/90 leading-relaxed">
-                Blues Dance Festival Finder was born from the passion of blues dancers who found themselves constantly searching across multiple websites, social media platforms, and forums just to find information about upcoming festivals. We believe that discovering your next dance adventure shouldn't be a treasure hunt.
+                SwingRadar was born from the passion of swing dancers who found themselves constantly scanning multiple websites, social media platforms, and forums just to detect information about festivals across Blues, Swing, Balboa, Shag, and Boogie Woogie. We believe that detecting your next dance adventure shouldn't require endless searching.
               </p>
               <p className="text-white/90 leading-relaxed">
-                Our mission is to create the most comprehensive, up-to-date, and user-friendly platform for blues dance festival discovery, making it easier than ever for dancers to connect with events, teachers, and musicians they love.
+                Our mission is to create the most comprehensive, up-to-date, and precise radar for swing dance culture detection, making it easier than ever for dancers to connect with events, instructors, and musicians across all vintage dance styles they love.
               </p>
+              <div className="mt-4 p-4 bg-gold-600/10 rounded-lg border border-gold-600/20">
+                <p className="text-gold-400 text-sm font-medium italic">
+                  "Detect swing culture with precision radar technology and vintage aesthetics."
+                </p>
+              </div>
             </div>
           </div>
 
@@ -56,10 +79,10 @@ export default function AboutPage() {
                 <svg className="w-6 h-6 text-gold-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <h3 className="font-playfair text-lg text-gold-600">Comprehensive Search</h3>
+                <h3 className="font-playfair text-lg text-gold-600">Precision Detection</h3>
               </div>
               <p className="text-white/80">
-                Find festivals by location, dates, teachers, musicians, and more with our advanced search and filtering system.
+                Detect festivals by location, dates, teachers, musicians, and more with our advanced radar detection and filtering system.
               </p>
             </div>
 
@@ -68,10 +91,10 @@ export default function AboutPage() {
                 <svg className="w-6 h-6 text-gold-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                <h3 className="font-playfair text-lg text-gold-600">Follow Your Favorites</h3>
+                <h3 className="font-jazz text-lg text-gold-600">Track Your Targets</h3>
               </div>
               <p className="text-white/80">
-                Follow teachers and musicians to get notified when they announce new workshops and performances.
+                Track instructors and musicians across all styles to get radar alerts when they announce new workshops and performances.
               </p>
             </div>
 
@@ -80,10 +103,10 @@ export default function AboutPage() {
                 <svg className="w-6 h-6 text-gold-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
-                <h3 className="font-playfair text-lg text-gold-600">Always Up-to-Date</h3>
+                <h3 className="font-jazz text-lg text-gold-600">Real-Time Scanning</h3>
               </div>
               <p className="text-white/80">
-                Our automated data collection ensures you always have the latest festival information and announcements.
+                Our automated radar scanning ensures you always have the latest festival information and announcements in real-time.
               </p>
             </div>
 
@@ -105,13 +128,13 @@ export default function AboutPage() {
             <h2 className="font-playfair text-xl text-gold-600 mb-4">Our Story</h2>
             <div className="space-y-4">
               <p className="text-white/90 leading-relaxed">
-                Founded in 2025, Blues Dance Festival Finder emerged from the frustration of dancers spending hours trying to piece together information about festivals from scattered sources. As passionate blues dancers ourselves, we understood the pain of missing out on amazing events simply because the information wasn't easily accessible.
+                Founded in 2025, SwingRadar emerged from the frustration of dancers spending hours trying to scan information about festivals from scattered sources. As passionate swing dancers ourselves, we understood the challenge of missing amazing events simply because the information wasn't easily detectable.
               </p>
               <p className="text-white/90 leading-relaxed">
-                We started by manually collecting festival information and quickly realized that this problem affected thousands of dancers worldwide. What began as a simple list soon evolved into a comprehensive platform that now serves the global blues dance community.
+                We started by manually scanning festival information and quickly realized that this detection problem affected thousands of dancers worldwide. What began as a simple detection system soon evolved into a comprehensive radar platform that now serves the global swing dance community.
               </p>
               <p className="text-white/90 leading-relaxed">
-                Today, we're proud to be the go-to resource for blues dancers seeking their next adventure, whether it's a weekend workshop in their hometown or an international festival in a dream destination.
+                Today, we're proud to be the go-to radar system for swing dancers seeking their next adventure, whether it's a weekend workshop in their hometown or an international festival in a dream destination.
               </p>
             </div>
           </div>
@@ -120,20 +143,30 @@ export default function AboutPage() {
           <div className="card p-6 mb-6">
             <h2 className="font-playfair text-xl text-gold-600 mb-4">Join Our Community</h2>
             <p className="text-white/90 leading-relaxed mb-6">
-              Blues Dance Festival Finder is more than just a search platform—it's a community of passionate dancers helping each other discover amazing experiences. Join thousands of blues dancers who rely on us to stay connected with the global blues scene.
+              SwingRadar is more than just a detection platform—it's a community of passionate dancers helping each other detect amazing experiences across all swing dance styles. Join thousands of swing dancers who rely on our radar to scan the global swing dance scene.
             </p>
-            <div className="grid grid-cols-3 gap-4 text-center">
+            <div className="grid grid-cols-2 gap-4 text-center mb-4">
               <div className="stats-card">
-                <div className="text-2xl font-bold text-gold-600">500+</div>
-                <div className="text-white/60 text-xs">Festivals Listed</div>
+                <div className="text-2xl font-bold text-gold-600">800+</div>
+                <div className="text-white/60 text-xs">Events Listed</div>
               </div>
               <div className="stats-card">
-                <div className="text-2xl font-bold text-gold-600">1000+</div>
+                <div className="text-2xl font-bold text-gold-600">2500+</div>
                 <div className="text-white/60 text-xs">Active Users</div>
               </div>
+            </div>
+            <div className="grid grid-cols-3 gap-4 text-center">
               <div className="stats-card">
-                <div className="text-2xl font-bold text-gold-600">50+</div>
+                <div className="text-lg font-bold text-copper-600">5</div>
+                <div className="text-white/60 text-xs">Dance Styles</div>
+              </div>
+              <div className="stats-card">
+                <div className="text-lg font-bold text-emerald-600">60+</div>
                 <div className="text-white/60 text-xs">Countries</div>
+              </div>
+              <div className="stats-card">
+                <div className="text-lg font-bold text-purple-600">1000+</div>
+                <div className="text-white/60 text-xs">Instructors</div>
               </div>
             </div>
           </div>
@@ -143,41 +176,41 @@ export default function AboutPage() {
             <h2 className="font-playfair text-xl text-gold-600 mb-4">Our Values</h2>
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold text-gold-600 mb-2">Community First</h3>
-                <p className="text-white/80">We prioritize the needs of the blues dance community in every decision we make.</p>
+                <h3 className="font-semibold text-gold-600 mb-2">🎭 Community First</h3>
+                <p className="text-white/80">We prioritize the needs of the swing dance community across all styles in every decision we make.</p>
               </div>
               <div>
-                <h3 className="font-semibold text-gold-600 mb-2">Accuracy & Reliability</h3>
-                <p className="text-white/80">We're committed to providing accurate, up-to-date information you can trust.</p>
+                <h3 className="font-semibold text-gold-600 mb-2">🎯 Accuracy & Reliability</h3>
+                <p className="text-white/80">We're committed to providing accurate, up-to-date information you can trust across all vintage dance styles.</p>
               </div>
               <div>
-                <h3 className="font-semibold text-gold-600 mb-2">Accessibility</h3>
-                <p className="text-white/80">Information about blues dance should be accessible to everyone, everywhere.</p>
+                <h3 className="font-semibold text-gold-600 mb-2">🌍 Accessibility</h3>
+                <p className="text-white/80">Information about swing dance culture should be accessible to everyone, everywhere, regardless of style preference.</p>
               </div>
               <div>
-                <h3 className="font-semibold text-gold-600 mb-2">Continuous Improvement</h3>
-                <p className="text-white/80">We constantly evolve based on community feedback and changing needs.</p>
+                <h3 className="font-semibold text-gold-600 mb-2">⚡ Continuous Innovation</h3>
+                <p className="text-white/80">We constantly evolve with vintage style and modern convenience, based on community feedback.</p>
               </div>
             </div>
           </div>
 
           {/* CTA Section */}
           <div className="card p-6 text-center">
-            <h2 className="font-playfair text-xl text-gold-600 mb-4">
-              Ready to discover your next dance adventure?
+            <h2 className="font-jazz text-xl text-gradient-gold mb-4">
+              📡 Ready to detect your next dance adventure?
             </h2>
             <p className="text-white/80 mb-6">
-              Join thousands of blues dancers who use Festival Finder to stay connected with the global blues community.
+              Join thousands of swing dancers who use SwingRadar to scan the global swing dance scene across Blues, Swing, Balboa, Shag, and Boogie Woogie.
             </p>
             <div className="space-y-3">
               <Link href="/auth/signup">
                 <button className="btn-primary w-full">
-                  Sign Up Free
+                  🎭 Start Detection
                 </button>
               </Link>
               <Link href="/search">
                 <button className="btn-secondary w-full">
-                  Explore Festivals
+                  📡 Scan Events
                 </button>
               </Link>
             </div>

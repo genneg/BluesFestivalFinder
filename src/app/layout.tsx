@@ -6,7 +6,7 @@ import { Header, Footer } from '@/components/layout'
 import BreadcrumbNavigation from '@/components/ui/BreadcrumbNavigation'
 import { OfflineBanner } from '@/components/ui/NetworkStatus'
 import { Phase4Integration } from '@/components/features/Phase4Integration'
-import { OrganizationSchema, WebsiteSchema } from '@/components/seo/SchemaMarkup'
+import { OrganizationSchema, WebsiteSchema, SwingRadarOrganizationSchema } from '@/components/seo/SchemaMarkup'
 import { WebVitalsReporter } from '@/components/performance/WebVitalsReporter'
 import '@/styles/globals.css'
 
@@ -23,23 +23,26 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Blues Dance Festival Finder',
-  description: 'Discover blues dance festivals worldwide and follow your favorite teachers and musicians.',
+  title: 'SwingRadar - Detect Swing Culture Worldwide',
+  description: 'Detect swing culture with precision worldwide. Discover Blues, Swing, Balboa, Shag, and Boogie Woogie festivals on your radar. Track your favorite instructors and musicians.',
   keywords: [
-    'blues dance festivals',
-    'blues festivals 2025',
-    'blues dance events',
-    'blues dance workshops',
-    'blues music festivals',
-    'dance festivals Europe',
-    'blues teachers',
-    'blues musicians',
-    'social dancing',
-    'dance workshops'
+    'swing radar',
+    'swing dance detection',
+    'swing dance festivals',
+    'blues dance festivals radar',
+    'lindy hop festival tracking',
+    'balboa dance event detection',
+    'collegiate shag radar',
+    'boogie woogie detection',
+    'vintage swing culture radar',
+    'swing dance instructor tracking',
+    'radar swing teachers',
+    'dance festivals radar 2025',
+    'Art Deco radar platform'
   ],
-  authors: [{ name: 'Blues Festival Finder Team' }],
-  creator: 'Blues Festival Finder',
-  publisher: 'Blues Festival Finder',
+  authors: [{ name: 'SwingRadar Team' }],
+  creator: 'SwingRadar',
+  publisher: 'SwingRadar',
   robots: {
     index: true,
     follow: true,
@@ -55,12 +58,12 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://blues-festival-finder.vercel.app',
-    siteName: 'Blues Festival Finder',
+    siteName: 'SwingRadar',
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@BluesFestival',
-    creator: '@BluesFestival',
+    site: '@SwingRadar',
+    creator: '@SwingRadar',
   },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
@@ -79,34 +82,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <head>
-        {/* Organization Schema */}
-        <OrganizationSchema
-          org={{
-            name: 'Blues Festival Finder',
-            description: 'Discover blues dance festivals worldwide and follow your favorite teachers and musicians.',
-            url: 'https://blues-festival-finder.vercel.app',
-            logo: 'https://blues-festival-finder.vercel.app/logo.png',
-            contactPoint: {
-              email: 'hello@bluesfestivalfinder.com',
-              contactType: 'Customer Service'
-            },
-            address: {
-              addressLocality: 'Online',
-              addressCountry: 'Worldwide'
-            },
-            sameAs: [
-              'https://facebook.com/bluesfestivalfinder',
-              'https://twitter.com/BluesFestival',
-              'https://instagram.com/bluesfestivalfinder'
-            ]
-          }}
-        />
+        {/* Enhanced SwingRadar Organization Schema */}
+        <SwingRadarOrganizationSchema />
 
         {/* Website Schema */}
         <WebsiteSchema
           site={{
-            name: 'Blues Festival Finder',
-            description: 'Discover blues dance festivals worldwide and follow your favorite teachers and musicians.',
+            name: 'SwingRadar',
+            description: 'Detect swing culture worldwide - discover swing dance festivals with precision radar across Blues, Swing, Balboa, Shag, and Boogie Woogie',
             url: 'https://blues-festival-finder.vercel.app'
           }}
         />

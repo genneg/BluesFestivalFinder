@@ -144,24 +144,43 @@ export default function Home() {
           <div className="relative z-10 text-center">
             {/* Main Title with Jazz Typography */}
             <h1 className="font-jazz text-5xl md:text-6xl lg:text-7xl mb-4 text-gradient-gold leading-tight font-bold tracking-wide">
-              Discover the Soul
+              SwingRadar
             </h1>
             <h2 className="font-vintage text-3xl md:text-4xl lg:text-5xl mb-6 text-cream-200 leading-tight tracking-wider">
-              OF BLUES DANCE
+              YOUR RADAR FOR SWING DANCE
             </h2>
-            
+
             {/* Subtitle with enhanced styling */}
             <div className="jazz-lines relative mb-8 py-4">
               <p className="text-cream-100 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto font-medium">
-                Connect with legendary artists, discover authentic festivals worldwide, and immerse yourself in the timeless elegance of blues and jazz culture.
+                Detect authentic festivals and track legendary artists across Blues, Swing, Balboa, Shag, and Boogie Woogie worldwide. Your precision radar for swing dance culture with vintage style and modern technology.
               </p>
+            </div>
+
+            {/* Dance Styles Showcase */}
+            <div className="flex flex-wrap justify-center gap-3 mb-8">
+              <div className="style-blues px-4 py-2 rounded-full bg-navy-800/50 border border-amber-400/30 text-amber-400 text-sm font-medium">
+                🎺 Blues
+              </div>
+              <div className="style-swing px-4 py-2 rounded-full bg-emerald-800/50 border border-emerald-400/30 text-emerald-400 text-sm font-medium">
+                🎷 Swing
+              </div>
+              <div className="style-balboa px-4 py-2 rounded-full bg-orange-800/50 border border-amber-400/30 text-amber-400 text-sm font-medium">
+                💃 Balboa
+              </div>
+              <div className="style-shag px-4 py-2 rounded-full bg-teal-800/50 border border-teal-400/30 text-teal-400 text-sm font-medium">
+                🕺 Shag
+              </div>
+              <div className="style-boogie px-4 py-2 rounded-full bg-purple-800/50 border border-purple-400/30 text-purple-400 text-sm font-medium">
+                🎹 Boogie Woogie
+              </div>
             </div>
             
             {/* Enhanced CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/search">
                 <button className="btn-primary text-lg px-8 py-3 font-semibold tracking-wide shadow-gold-lg hover:shadow-gold-xl transition-all duration-300 hover:scale-105">
-                  🎭 Explore Festivals
+                  📡 Start Detection
                 </button>
               </Link>
               <Link href="/teachers">
@@ -179,22 +198,33 @@ export default function Home() {
         </div>
 
 
-        {/* Enhanced Featured Festivals Section */}
+        {/* Enhanced Featured Events Section */}
         <div className="space-y-8">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-4">
               <div className="h-px bg-gradient-to-r from-transparent via-gold-600 to-transparent flex-1"></div>
-              <div className="mx-4 w-3 h-3 bg-gold-600 rounded-full"></div>
+              <div className="mx-4 w-3 h-3 bg-gold-600 rounded-full animate-jazz-glow"></div>
               <div className="h-px bg-gradient-to-r from-transparent via-gold-600 to-transparent flex-1"></div>
             </div>
             <h3 className="font-jazz text-4xl md:text-5xl font-bold text-gradient-gold mb-2">
-              Featured Festivals
+              Featured Events
             </h3>
-            <p className="text-cream-200 text-lg font-medium">Handpicked events from the global blues scene</p>
+            <p className="text-cream-200 text-lg font-medium">Handpicked festivals and workshops from the global swing dance community</p>
+
+            {/* Style Filter Indicators */}
+            <div className="flex flex-wrap justify-center gap-2 mt-4 mb-6">
+              <div className="text-xs text-cream-300 mr-2">Featuring:</div>
+              <div className="filter-style-indicator style-blues text-xs">Blues</div>
+              <div className="filter-style-indicator style-swing text-xs">Swing</div>
+              <div className="filter-style-indicator style-balboa text-xs">Balboa</div>
+              <div className="filter-style-indicator style-shag text-xs">Shag</div>
+              <div className="filter-style-indicator style-boogie text-xs">Boogie</div>
+            </div>
+
             <div className="mt-6 flex justify-center">
               <Link href="/search">
                 <button className="btn-outline px-6 py-2 text-sm font-semibold tracking-wide border-gold-600 text-gold-600 hover:bg-gold-600 hover:text-navy-900 transition-all duration-300">
-                  🎪 View All Festivals
+                  📡 View All Events
                 </button>
               </Link>
             </div>
@@ -202,7 +232,7 @@ export default function Home() {
           <div className="space-y-6">
             {isLoadingFestivals && (
               <ArtDecoLoader
-                text="Discovering amazing blues festivals worldwide..."
+                text="Discovering amazing swing dance events worldwide..."
                 size="lg"
                 className="py-8"
               />
@@ -210,7 +240,7 @@ export default function Home() {
 
             {festivalsError && (
               <VintageErrorState
-                error={new VintageApiError('ServerError', 'The festival stage is having technical difficulties')}
+                error={new VintageApiError('ServerError', 'The dance floor connection dropped')}
                 onRetry={() => {
                   setFestivalsError(null)
                   // Refetch festivals
@@ -223,10 +253,10 @@ export default function Home() {
                       if (data.success) {
                         setFestivals(data.data.events)
                       } else {
-                        setFestivalsError('Failed to load festivals')
+                        setFestivalsError('Failed to load events')
                       }
                     } catch (error) {
-                      setFestivalsError('Failed to load festivals')
+                      setFestivalsError('Failed to load events')
                       console.error('Error fetching festivals:', error)
                     } finally {
                       setIsLoadingFestivals(false)
@@ -234,7 +264,7 @@ export default function Home() {
                   }
                   fetchFestivals()
                 }}
-                retryText="Resume the Show"
+                retryText="Reconnect to Events"
                 className="my-6"
               />
             )}
@@ -245,20 +275,19 @@ export default function Home() {
             
             {!isLoadingFestivals && !festivalsError && festivals.length === 0 && (
               <div className="text-center py-12">
-                <div className="vintage-microphone-icon w-16 h-16 mx-auto mb-6 relative">
-                  <div className="w-12 h-16 bg-gradient-to-b from-gold-600 to-gold-700 rounded-t-full mx-auto relative">
-                    <div className="absolute inset-2 bg-gradient-to-b from-gold-400 to-gold-500 rounded-t-full"></div>
-                    <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 w-6 h-1 bg-navy-900 rounded-full opacity-20"></div>
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 w-4 h-1 bg-navy-900 rounded-full opacity-20"></div>
+                <div className="vintage-radar-icon w-16 h-16 mx-auto mb-6 relative">
+                  <div className="w-16 h-16 bg-gradient-to-b from-green-600 to-green-700 rounded-full mx-auto relative border-4 border-green-500">
+                    <div className="absolute inset-2 bg-gradient-to-b from-green-400 to-green-500 rounded-full opacity-50"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-8 bg-green-300 rounded-full animate-radar-sweep"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45 w-1 h-6 bg-green-300 rounded-full opacity-60"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-90 w-1 h-6 bg-green-300 rounded-full opacity-40"></div>
                   </div>
-                  <div className="w-6 h-4 bg-gold-700 mx-auto rounded-b-sm"></div>
-                  <div className="w-8 h-2 bg-navy-800 mx-auto rounded-full mt-1"></div>
                 </div>
-                <h3 className="jazz-font text-xl text-gold-400 mb-3">
-                  No Shows Tonight
+                <h3 className="jazz-font text-xl text-green-400 mb-3">
+                  Radar Scanning
                 </h3>
                 <p className="vintage-text text-cream-200 mb-4">
-                  The festival calendar is currently empty. Check back soon for new events!
+                  Our dance radar is detecting new events across all swing styles. Check back soon for exciting discoveries!
                 </p>
               </div>
             )}
@@ -270,17 +299,28 @@ export default function Home() {
           <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-4">
               <div className="h-px bg-gradient-to-r from-transparent via-copper-600 to-transparent flex-1"></div>
-              <div className="mx-4 w-3 h-3 bg-copper-600 rounded-full animate-pulse"></div>
+              <div className="mx-4 w-3 h-3 bg-copper-600 rounded-full animate-vintage-bounce"></div>
               <div className="h-px bg-gradient-to-r from-transparent via-copper-600 to-transparent flex-1"></div>
             </div>
             <h3 className="font-jazz text-4xl md:text-5xl font-bold text-copper-600 mb-2">
-              Master Teachers
+              Master Instructors
             </h3>
-            <p className="text-cream-200 text-lg font-medium">Learn from legendary blues dance instructors</p>
+            <p className="text-cream-200 text-lg font-medium">Connect with legendary teachers across all swing dance styles</p>
+
+            {/* Multi-Style Teacher Specializations */}
+            <div className="flex flex-wrap justify-center gap-2 mt-4 mb-6">
+              <div className="text-xs text-cream-300 mr-2">Specializing in:</div>
+              <div className="px-3 py-1 rounded-full bg-navy-800/30 border border-amber-400/20 text-amber-400 text-xs">Blues Masters</div>
+              <div className="px-3 py-1 rounded-full bg-emerald-800/30 border border-emerald-400/20 text-emerald-400 text-xs">Swing Legends</div>
+              <div className="px-3 py-1 rounded-full bg-orange-800/30 border border-amber-400/20 text-amber-400 text-xs">Balboa Experts</div>
+              <div className="px-3 py-1 rounded-full bg-teal-800/30 border border-teal-400/20 text-teal-400 text-xs">Shag Specialists</div>
+              <div className="px-3 py-1 rounded-full bg-purple-800/30 border border-purple-400/20 text-purple-400 text-xs">Boogie Pros</div>
+            </div>
+
             <div className="mt-6 flex justify-center">
               <Link href="/teachers">
                 <button className="btn-outline px-6 py-2 text-sm font-semibold tracking-wide border-copper-600 text-copper-600 hover:bg-copper-600 hover:text-cream-100 transition-all duration-300">
-                  👥 Meet All Teachers
+                  👥 Meet All Instructors
                 </button>
               </Link>
             </div>
@@ -295,7 +335,7 @@ export default function Home() {
 
             {teachersError && (
               <VintageErrorState
-                error={new VintageApiError('NetworkError', 'The artist lounge connection dropped')}
+                error={new VintageApiError('NetworkError', 'The instructor studio connection dropped')}
                 onRetry={() => {
                   setTeachersError(null)
                   // Refetch teachers
@@ -308,10 +348,10 @@ export default function Home() {
                       if (data.success) {
                         setTeachers(data.data.teachers)
                       } else {
-                        setTeachersError('Failed to load teachers')
+                        setTeachersError('Failed to load instructors')
                       }
                     } catch (error) {
-                      setTeachersError('Failed to load teachers')
+                      setTeachersError('Failed to load instructors')
                       console.error('Error fetching teachers:', error)
                     } finally {
                       setIsLoadingTeachers(false)
@@ -319,7 +359,7 @@ export default function Home() {
                   }
                   fetchTeachers()
                 }}
-                retryText="Reconnect to Artists"
+                retryText="Reconnect to Instructors"
                 className="my-6"
               />
             )}
@@ -357,19 +397,20 @@ export default function Home() {
             
             {!isLoadingTeachers && !teachersError && teachers.length === 0 && (
               <div className="text-center py-12">
-                <div className="vintage-saxophone-icon w-16 h-16 mx-auto mb-6 relative">
-                  <div className="w-8 h-12 bg-gradient-to-b from-copper-600 to-copper-700 rounded-t-lg mx-auto relative">
-                    <div className="absolute inset-1 bg-gradient-to-b from-copper-400 to-copper-500 rounded-t-lg"></div>
-                    <div className="absolute top-2 right-1 w-2 h-2 bg-gold-600 rounded-full"></div>
-                    <div className="absolute bottom-2 left-1 w-1 h-1 bg-gold-600 rounded-full"></div>
+                <div className="vintage-dancer-icon w-16 h-16 mx-auto mb-6 relative">
+                  <div className="w-8 h-14 bg-gradient-to-b from-copper-600 to-copper-700 rounded-t-full mx-auto relative">
+                    <div className="absolute inset-1 bg-gradient-to-b from-copper-400 to-copper-500 rounded-t-full"></div>
+                    <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gold-600 rounded-full"></div>
                   </div>
-                  <div className="w-6 h-2 bg-copper-700 mx-auto rounded-full mt-1"></div>
+                  <div className="w-6 h-4 bg-copper-700 mx-auto rounded-full mt-1"></div>
+                  <div className="absolute bottom-2 left-2 w-3 h-1 bg-copper-600 rounded-full transform rotate-12"></div>
+                  <div className="absolute bottom-2 right-2 w-3 h-1 bg-copper-600 rounded-full transform -rotate-12"></div>
                 </div>
                 <h3 className="jazz-font text-xl text-copper-400 mb-3">
-                  Artists Taking a Break
+                  Instructors in Session
                 </h3>
                 <p className="vintage-text text-cream-200 mb-4">
-                  No master teachers available at the moment. New artists join our community regularly!
+                  Our master instructors are currently teaching across the dance floors. New profiles added regularly!
                 </p>
               </div>
             )}
@@ -379,7 +420,7 @@ export default function Home() {
         {/* Internal Linking Section */}
         <div className="mb-12">
           <InternalLinking
-            title="Discover More Blues Dance Content"
+            title="Explore the World of Swing Dance"
             columns={2}
             showDescriptions={true}
           />

@@ -104,6 +104,126 @@ const locationData = [
     bestTime: 'Year-round',
     communitySize: 'Large (200+ active dancers)',
     level: 'All levels'
+  },
+  {
+    city: 'Portland',
+    country: 'USA',
+    continent: 'North America',
+    description: 'Home to one of America\'s most innovative blues dance communities, known for experimental styles and strong musical connections.',
+    venues: [
+      { name: 'The Viscount Ballroom', description: 'Elegant venue with regular blues nights' },
+      { name: 'Secret Ballroom', description: 'Intimate space for blues dancing' }
+    ],
+    teachers: ['Brenda Russell', 'Charlie Fuller', 'Heather Mitchell'],
+    events: ['Portland Blues Exchange', 'Rose City Blues'],
+    bestTime: 'Year-round, best September-May',
+    communitySize: 'Large (180+ active dancers)',
+    level: 'Intermediate to advanced'
+  },
+  {
+    city: 'Milan',
+    country: 'Italy',
+    continent: 'Europe',
+    description: 'Italy\'s blues dance capital with a passionate community and strong connections to the European blues festival circuit.',
+    venues: [
+      { name: 'Blues Kitchen', description: 'Dedicated blues dance studio' },
+      { name: 'Swing Italian Style', description: 'Regular blues and swing events' }
+    ],
+    teachers: ['Marco Ferrigno', 'Silvia Grassi', 'Luca Fadda'],
+    events: ['Milan Blues Festival', 'Blues Italian Style'],
+    bestTime: 'October - June',
+    communitySize: 'Medium (120+ active dancers)',
+    level: 'All levels'
+  },
+  {
+    city: 'Paris',
+    country: 'France',
+    continent: 'Europe',
+    description: 'A sophisticated blues scene with French influences and regular international exchanges.',
+    venues: [
+      { name: 'Swing Jam', description: 'Popular blues and swing venue' },
+      { name: 'Le Dancing', description: 'Historic ballroom with blues nights' }
+    ],
+    teachers: ['Julien & Manon', 'Sophie & Romain', 'Camille & Thomas'],
+    events: ['Paris Blues Festival', 'Swing de Paris'],
+    bestTime: 'Year-round, peak September-May',
+    communitySize: 'Medium (150+ active dancers)',
+    level: 'All levels welcome'
+  },
+  {
+    city: 'Seoul',
+    country: 'South Korea',
+    continent: 'Asia',
+    description: 'Asia\'s fastest-growing blues dance scene with dedicated dancers and unique cultural influences.',
+    venues: [
+      { name: 'Blues Seoul', description: 'Primary blues dance studio' },
+      { name: 'Swing Korea', description: 'Blues and swing dance community' }
+    ],
+    teachers: ['Minji Kim', 'Joon Park', 'Soyoung Lee'],
+    events: ['Seoul Blues Festival', 'Korea Blues Exchange'],
+    bestTime: 'Year-round, indoor venues',
+    communitySize: 'Medium (80+ active dancers)',
+    level: 'Beginner to intermediate'
+  },
+  {
+    city: 'Melbourne',
+    country: 'Australia',
+    continent: 'Oceania',
+    description: 'Australia\'s blues dance hub with a vibrant community and strong connections to the Asian scene.',
+    venues: [
+      { name: 'Blues Melbourne', description: 'Regular blues dance events' },
+      { name: 'The Swingtime', description: 'Historic venue with blues nights' }
+    ],
+    teachers: ['Chris & Jules', 'Sarah & Mike', 'Emma & Tom'],
+    events: ['Melbourne Blues Festival', 'Blues Down Under'],
+    bestTime: 'March - November',
+    communitySize: 'Medium (100+ active dancers)',
+    level: 'All levels'
+  },
+  {
+    city: 'New Orleans',
+    country: 'USA',
+    continent: 'North America',
+    description: 'The birthplace of blues music, offering authentic experiences and deep cultural connections to blues history.',
+    venues: [
+      { name: 'The Spotted Cat', description: 'Live blues music venue in French Quarter' },
+      { name: 'd.b.a.', description: 'Local favorite for live blues and jazz' }
+    ],
+    teachers: ['Marcus Brown', 'Lisa Johnson', 'Andre Williams'],
+    events: ['New Orleans Jazz & Heritage Festival', 'French Quarter Festival'],
+    bestTime: 'Year-round, best spring and fall',
+    communitySize: 'Small but dedicated (50+ active dancers)',
+    level: 'All levels, strong musical focus'
+  },
+  {
+    city: 'Tokyo',
+    country: 'Japan',
+    continent: 'Asia',
+    description: 'A highly technical blues dance scene with precision dancing and strong community organization.',
+    venues: [
+      { name: 'Blues Tokyo', description: 'Primary blues dance studio' },
+      { name: 'Swing Tokyo', description: 'Regular blues events in central Tokyo' }
+    ],
+    teachers: ['Yuki Tanaka', 'Kenji Yamamoto', 'Aiko Sato'],
+    events: ['Tokyo Blues Festival', 'Japan Blues Exchange'],
+    bestTime: 'Year-round',
+    communitySize: 'Medium (90+ active dancers)',
+    level: 'Intermediate to advanced'
+  },
+  {
+    city: 'Buenos Aires',
+    country: 'Argentina',
+    continent: 'South America',
+    description: 'South America\'s emerging blues scene with tango influences and passionate dancers.',
+    venues: [
+      { name: 'Blues Buenos Aires', description: 'Dedicated blues dance space' },
+      { name: 'La Nacional', description: 'Historic ballroom with blues nights' }
+    ],
+    teachers: ['Carlos Mendoza', 'Isabella Rodriguez', 'Pedro Garcia'],
+    events: ['Buenos Aires Blues Festival', 'Tango & Blues Week'],
+    bestTime: 'March - November',
+    communitySize: 'Small but growing (40+ active dancers)',
+    level: 'Beginner to intermediate'
   }
 ]
 
@@ -123,7 +243,7 @@ export default function LocationsPage() {
               Blues Dance Locations
             </h1>
             <p className="text-xl md:text-2xl text-cream-100 max-w-3xl mx-auto leading-relaxed">
-              Explore the world&apos;s most vibrant blues dance scenes
+              Explore 15+ major blues dance scenes across 6 continents
             </p>
           </div>
         </section>
