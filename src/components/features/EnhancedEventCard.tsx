@@ -143,8 +143,8 @@ export function EnhancedEventCard({
 
           {/* Enhanced Price Badge */}
           {getPriceRange() && (
-            <div className="absolute top-4 left-4 bg-gold-600/90 backdrop-blur-sm rounded-xl px-4 py-2 border border-gold-400/30">
-              <div className="text-navy-900 font-bold text-lg">
+            <div className="absolute top-4 left-4 bg-gold-600/90 backdrop-blur-sm rounded-xl px-4 py-2 border border-gold-400/30 price-badge">
+              <div className="text-navy-900 font-bold text-lg price-text">
                 {getPriceRange()}
               </div>
               <div className="text-navy-900/80 text-xs font-medium">

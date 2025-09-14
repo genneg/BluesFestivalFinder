@@ -138,8 +138,8 @@ export function EventCard({
               {event.name}
             </h3>
             {getLowestPrice() && (
-              <div className="flex-shrink-0 bg-black/30 backdrop-blur-sm rounded-lg px-3 py-2">
-                <span className="text-xl font-bold text-primary">
+              <div className="flex-shrink-0 bg-black/30 backdrop-blur-sm rounded-lg px-3 py-2 price-container">
+                <span className="text-lg font-bold text-primary price-text">
                   €{getLowestPrice()}
                 </span>
                 <span className="text-sm text-white/90 block text-right font-medium">from</span>

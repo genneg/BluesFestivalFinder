@@ -392,8 +392,8 @@ export function EventDetails({ event, className }: EventDetailsProps) {
                             <p className="text-base text-white/80 font-medium">{price.description}</p>
                           )}
                         </div>
-                        <div className="text-right sm:ml-6 min-w-0 flex-shrink-0">
-                          <p className="text-3xl sm:text-4xl font-bold text-primary break-words">
+                        <div className="text-right sm:ml-6 event-price-display">
+                          <p className="text-3xl sm:text-4xl font-bold text-primary event-price-text">
                             {displayAmount}
                           </p>
                           <p className="text-lg text-white font-semibold">

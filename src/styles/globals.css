@@ -1110,3 +1110,29 @@
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
   }
 }
+
+/* Pricing Display Utilities - Prevent Overflow */
+.price-container {
+  @apply min-w-0 flex-shrink-0 break-words;
+}
+
+.price-text {
+  @apply break-words whitespace-normal;
+}
+
+.price-badge {
+  @apply min-w-0 max-w-[200px] break-words;
+}
+
+.price-amount {
+  @apply break-words text-ellipsis overflow-hidden;
+}
+
+/* Ensure price displays don't overflow their containers */
+.event-price-display {
+  @apply min-w-0 flex-shrink-0;
+}
+
+.event-price-text {
+  @apply break-words whitespace-normal;
+}
