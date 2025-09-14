@@ -105,8 +105,8 @@ export function FollowButton({
       )}
     >
       {!isLoading && getIcon()}
-      <span className={size === 'sm' ? 'hidden sm:inline' : ''}>
-        {size === 'sm' && !isLoading ? (isFollowing ? 'Following' : 'Follow') : getButtonText()}
+      <span className={size === 'sm' && (targetType === 'event' || targetType === 'venue') ? 'hidden sm:inline' : ''}>
+        {size === 'sm' && !isLoading && (targetType === 'event' || targetType === 'venue') ? (isFollowing ? 'Following' : 'Follow') : getButtonText()}
       </span>
     </Button>
   )

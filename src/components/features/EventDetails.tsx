@@ -172,9 +172,9 @@ export function EventDetails({ event, className }: EventDetailsProps) {
               <CardContent>
                 <div className="grid grid-cols-1 gap-8">
                   {(showAllTeachers ? event.teachers : event.teachers.slice(0, 4)).map((teacher) => (
-                    <div key={teacher.id} className="flex items-start p-8 border border-primary/30 rounded-xl bg-white/5 hover:bg-white/10 hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
+                    <div key={teacher.id} className="flex items-start p-4 sm:p-8 border border-primary/30 rounded-xl bg-white/5 hover:bg-white/10 hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
                       {/* Teacher Avatar */}
-                      <div className="w-24 h-24 bg-gradient-to-br from-primary/30 to-primary/10 rounded-full flex items-center justify-center overflow-hidden mr-6 flex-shrink-0">
+                      <div className="w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-br from-primary/30 to-primary/10 rounded-full flex items-center justify-center overflow-hidden mr-4 sm:mr-6 flex-shrink-0">
                         {teacher.image_url ? (
                           <img 
                             src={teacher.image_url} 
@@ -205,13 +205,10 @@ export function EventDetails({ event, className }: EventDetailsProps) {
                       
                       <div className="flex-1 min-w-0">
                         <Link href={`/teachers/${teacher.id}`} className="block hover:text-primary transition-colors">
-                          <h4 className="text-xl md:text-2xl font-bold text-white hover:text-primary mb-3 leading-snug break-words truncate">{teacher.name}</h4>
-                          {teacher.bio && (
-                            <p className="text-base md:text-lg text-white/90 line-clamp-3 mb-6 leading-relaxed font-medium">{teacher.bio}</p>
-                          )}
+                          <h4 className="text-xl md:text-2xl font-bold text-white hover:text-primary mb-3 leading-snug break-words">{teacher.name}</h4>
                         </Link>
-                        
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
+
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mt-4 sm:mt-6">
                           <Link href={`/teachers/${teacher.id}`}>
                             <Button variant="outline" size="sm" className="btn-secondary text-base px-10 py-4 min-h-[48px] w-full sm:w-auto">
                               View Profile
@@ -258,9 +255,9 @@ export function EventDetails({ event, className }: EventDetailsProps) {
               <CardContent>
                 <div className="grid grid-cols-1 gap-8">
                   {(showAllMusicians ? event.musicians : event.musicians.slice(0, 4)).map((musician) => (
-                    <div key={musician.id} className="flex items-start p-8 border border-primary/30 rounded-xl bg-white/5 hover:bg-white/10 hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
+                    <div key={musician.id} className="flex items-start p-4 sm:p-8 border border-primary/30 rounded-xl bg-white/5 hover:bg-white/10 hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
                       {/* Musician Avatar */}
-                      <div className="w-24 h-24 bg-gradient-to-br from-primary/30 to-primary/10 rounded-full flex items-center justify-center overflow-hidden mr-6 flex-shrink-0">
+                      <div className="w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-br from-primary/30 to-primary/10 rounded-full flex items-center justify-center overflow-hidden mr-4 sm:mr-6 flex-shrink-0">
                         {musician.image_url ? (
                           <img 
                             src={musician.image_url} 
@@ -276,13 +273,10 @@ export function EventDetails({ event, className }: EventDetailsProps) {
                       
                       <div className="flex-1 min-w-0">
                         <Link href={`/musicians/${musician.id}`} className="block hover:text-primary transition-colors">
-                          <h4 className="text-xl md:text-2xl font-bold text-white hover:text-primary mb-3 leading-snug break-words truncate">{musician.name}</h4>
-                          {musician.bio && (
-                            <p className="text-base md:text-lg text-white/90 line-clamp-3 mb-6 leading-relaxed font-medium">{musician.bio}</p>
-                          )}
+                          <h4 className="text-xl md:text-2xl font-bold text-white hover:text-primary mb-3 leading-snug break-words">{musician.name}</h4>
                         </Link>
-                        
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
+
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mt-4 sm:mt-6">
                           <Link href={`/musicians/${musician.id}`}>
                             <Button variant="outline" size="sm" className="btn-secondary text-base px-10 py-4 min-h-[48px] w-full sm:w-auto">
                               View Profile
