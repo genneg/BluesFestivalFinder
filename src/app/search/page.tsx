@@ -408,9 +408,11 @@ export default function SearchPage() {
                           {suggestion}
                         </button>
                       ))}
-                </div>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
         </div>
       </div>
