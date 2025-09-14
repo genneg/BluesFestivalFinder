@@ -385,15 +385,15 @@ export function EventDetails({ event, className }: EventDetailsProps) {
                     }
 
                     return (
-                      <div key={price.id} className="flex justify-between items-center p-6 bg-white/5 rounded-lg border border-primary/30 hover:border-primary/50 hover:bg-white/10 transition-all duration-300">
-                        <div className="flex-1">
+                      <div key={price.id} className="flex flex-col sm:flex-row justify-between items-start p-6 bg-white/5 rounded-lg border border-primary/30 hover:border-primary/50 hover:bg-white/10 transition-all duration-300">
+                        <div className="flex-1 mb-4 sm:mb-0">
                           <p className="text-xl font-bold text-white mb-2">{price.category}</p>
                           {price.description && (
                             <p className="text-base text-white/80 font-medium">{price.description}</p>
                           )}
                         </div>
-                        <div className="text-right ml-6">
-                          <p className="text-4xl font-bold text-primary">
+                        <div className="text-right sm:ml-6 min-w-0 flex-shrink-0">
+                          <p className="text-3xl sm:text-4xl font-bold text-primary break-words">
                             {displayAmount}
                           </p>
                           <p className="text-lg text-white font-semibold">
