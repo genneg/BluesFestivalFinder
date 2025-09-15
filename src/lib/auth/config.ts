@@ -63,16 +63,18 @@ export const authOptions: NextAuthOptions = {
       id: 'credentials',
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          console.error('Missing credentials')
+          console.error('NextAuth authorize: Missing credentials')
           return null
         }
 
         try {
+          console.log('NextAuth authorize: Attempting to authenticate user:', credentials.email)
+
           // Find user by email with account information using direct PostgreSQL
           const user = await findUserByEmail(credentials.email)
 
           if (!user) {
-            console.error('No user found with email:', credentials.email)
+            console.error('NextAuth authorize: No user found with email:', credentials.email)
             return null
           }
 
@@ -82,7 +84,7 @@ export const authOptions: NextAuthOptions = {
           )
 
           if (!credentialsAccount?.password) {
-            console.error('No credentials account found for user:', user.email)
+            console.error('NextAuth authorize: No credentials account found for user:', user.email)
             return null
           }
 
@@ -93,22 +95,25 @@ export const authOptions: NextAuthOptions = {
           )
 
           if (!passwordMatch) {
-            console.error('Password mismatch for user:', user.email)
+            console.error('NextAuth authorize: Password mismatch for user:', user.email)
             return null
           }
 
-          // console.log('User authenticated successfully:', user.email)
+          console.log('NextAuth authorize: User authenticated successfully:', user.email)
 
           // Return user object for NextAuth
-          return {
+          const authUser = {
             id: user.id.toString(),
             email: user.email,
             name: user.name,
             image: user.avatar,
             verified: user.verified,
           }
+
+          console.log('NextAuth authorize: Returning user object:', authUser)
+          return authUser
         } catch (error) {
-          console.error('Authorization error:', error)
+          console.error('NextAuth authorize: Authorization error:', error)
           return null
         }
       },
@@ -149,7 +154,7 @@ export const authOptions: NextAuthOptions = {
     // Called when session is checked (JWT strategy)
     async session({ session, token }) {
       if (session.user && token) {
-        session.user.id = token.sub as string
+        session.user.id = token.id as string || token.sub as string
         session.user.verified = token.verified as boolean || false
       }
       return session
@@ -158,8 +163,11 @@ export const authOptions: NextAuthOptions = {
     // Called when JWT token is created (JWT strategy)
     async jwt({ token, user }) {
       if (user) {
+        // Store user data in token
         token.id = user.id
         token.verified = user.verified || false
+        // Also store in sub for compatibility
+        token.sub = user.id
       }
       return token
     },

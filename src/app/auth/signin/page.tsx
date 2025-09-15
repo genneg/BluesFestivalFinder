@@ -37,19 +37,23 @@ export default function SignInPage() {
     setError('')
 
     try {
-      // Use NextAuth with proper redirect handling
+      // Use NextAuth with manual redirect handling for better debugging
       const result = await signIn('credentials', {
         email: formData.email,
         password: formData.password,
-        callbackUrl: '/dashboard',
-        redirect: true // Let NextAuth handle the redirect
+        redirect: false
       })
 
-      // This code will only run if redirect is false or there's an error
-      if (result?.error) {
-        setError(result.error === 'CredentialsSignin'
+      console.log('SignIn result:', result)
+
+      if (result?.ok && !result?.error) {
+        // Authentication successful, redirect to dashboard
+        router.push('/dashboard')
+      } else {
+        // Authentication failed
+        setError(result?.error === 'CredentialsSignin'
           ? 'Invalid email or password'
-          : 'Authentication failed. Please try again.')
+          : result?.error || 'Authentication failed. Please try again.')
       }
     } catch (err: unknown) {
       console.error('Login error:', err)

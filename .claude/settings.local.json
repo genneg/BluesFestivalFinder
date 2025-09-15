@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(HUSKY=0 git commit -m \"Fix health endpoint routing - move outside auth namespace to avoid NextAuth conflicts\")"
+      "Bash(HUSKY=0 git commit -m \"Fix health endpoint routing - move outside auth namespace to avoid NextAuth conflicts\")",
+      "mcp__playwright__browser_console_messages"
     ],
     "deny": [],
     "ask": []
