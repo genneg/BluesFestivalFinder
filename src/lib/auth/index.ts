@@ -104,60 +104,38 @@ export async function createUserWithPassword(userData: {
   name?: string
 }) {
   const { email, password, name } = userData
-  
+
   // Validate inputs
   if (!validateEmail(email)) {
     throw new Error('Invalid email format')
   }
-  
+
   const passwordValidation = validatePassword(password)
   if (!passwordValidation.isValid) {
     throw new Error(`Password validation failed: ${passwordValidation.errors.join(', ')}`)
   }
-  
+
   // Hash password
   const hashedPassword = await hashPassword(password)
-  
-  // Create user with credentials account
-  const { db } = await import('../../../packages/database/src')
-  
+
+  // Create user with credentials account using direct PostgreSQL
+  const { createUserWithCredentials, findUserByEmail } = await import('../db/postgres')
+
   try {
     // Check if user already exists
-    const existingUser = await db.user.findUnique({
-      where: { email }
-    })
-    
+    const existingUser = await findUserByEmail(email)
+
     if (existingUser) {
       throw new Error('User with this email already exists')
     }
-    
-    // Create user with preferences and credentials account
-    const user = await db.user.create({
-      data: {
-        email,
-        name: name || email.split('@')[0],
-        verified: false,
-        preferences: {
-          create: {
-            email_notifications: true,
-            push_notifications: true,
-            new_event_notifications: true
-          }
-        },
-        accounts: {
-          create: {
-            type: 'credentials',
-            provider: 'credentials',
-            providerAccountId: email,
-            password: hashedPassword
-          }
-        }
-      },
-      include: {
-        preferences: true
-      }
-    })
-    
+
+    // Create user with credentials account
+    const user = await createUserWithCredentials(
+      email,
+      name || email.split('@')[0],
+      hashedPassword
+    )
+
     return user
   } catch (error) {
     console.error('Error creating user:', error)

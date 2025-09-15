@@ -2,13 +2,11 @@
 // This file configures authentication providers and session management
 
 import { NextAuthOptions } from 'next-auth'
-import { PrismaAdapter } from '@auth/prisma-adapter'
-import type { Adapter } from 'next-auth/adapters'
 import GoogleProvider from 'next-auth/providers/google'
 import FacebookProvider from 'next-auth/providers/facebook'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
-import { db } from '../../../packages/database/src'
+import { findUserByEmail } from '../db/postgres'
 
 export const authOptions: NextAuthOptions = {
   // Note: PrismaAdapter commented out for JWT session strategy
@@ -55,24 +53,17 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Email and password are required')
+          console.error('Missing credentials')
+          return null
         }
 
         try {
-          // Find user by email with account information
-          const user = await db.user.findUnique({
-            where: { email: credentials.email },
-            include: {
-              accounts: {
-                where: {
-                  provider: 'credentials'
-                }
-              }
-            }
-          })
+          // Find user by email with account information using direct PostgreSQL
+          const user = await findUserByEmail(credentials.email)
 
           if (!user) {
-            throw new Error('No user found with this email')
+            console.error('No user found with email:', credentials.email)
+            return null
           }
 
           // Find the credentials account for this user
@@ -81,7 +72,8 @@ export const authOptions: NextAuthOptions = {
           )
 
           if (!credentialsAccount || !credentialsAccount.password) {
-            throw new Error('Invalid authentication method')
+            console.error('No credentials account found for user:', user.email)
+            return null
           }
 
           // Verify password
@@ -91,15 +83,19 @@ export const authOptions: NextAuthOptions = {
           )
 
           if (!passwordMatch) {
-            throw new Error('Invalid password')
+            console.error('Password mismatch for user:', user.email)
+            return null
           }
+
+          console.log('User authenticated successfully:', user.email)
 
           // Return user object for NextAuth
           return {
             id: user.id.toString(),
             email: user.email,
             name: user.name,
-            image: user.avatar
+            image: user.avatar,
+            verified: user.verified
           }
         } catch (error) {
           console.error('Authorization error:', error)
