@@ -1,11 +1,12 @@
 // NextAuth.js configuration for SwingRadar
 // This file configures authentication providers and session management
-
-import { NextAuthOptions } from 'next-auth'
-import GoogleProvider from 'next-auth/providers/google'
-import FacebookProvider from 'next-auth/providers/facebook'
-import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
+import { NextAuthOptions } from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import FacebookProvider from 'next-auth/providers/facebook'
+import GoogleProvider from 'next-auth/providers/google'
+
+
 import { findUserByEmail } from '../db/postgres'
 
 export const authOptions: NextAuthOptions = {
@@ -23,36 +24,36 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
       authorization: {
         params: {
-          scope: 'openid email profile'
-        }
-      }
+          scope: 'openid email profile',
+        },
+      },
     }),
-    
+
     // Facebook OAuth provider
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID ?? '',
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET ?? '',
       authorization: {
         params: {
-          scope: 'email'
-        }
-      }
+          scope: 'email',
+        },
+      },
     }),
-    
+
     // Email/password credentials provider
     CredentialsProvider({
       name: 'credentials',
       credentials: {
-        email: { 
-          label: 'Email', 
+        email: {
+          label: 'Email',
           type: 'email',
-          placeholder: 'your@email.com' 
+          placeholder: 'your@email.com',
         },
-        password: { 
-          label: 'Password', 
+        password: {
+          label: 'Password',
           type: 'password',
-          placeholder: 'Enter your password' 
-        }
+          placeholder: 'Enter your password',
+        },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -74,7 +75,7 @@ export const authOptions: NextAuthOptions = {
             account => account.provider === 'credentials'
           )
 
-          if (!credentialsAccount || !credentialsAccount.password) {
+          if (!credentialsAccount?.password) {
             console.error('No credentials account found for user:', user.email)
             return null
           }
@@ -98,14 +99,14 @@ export const authOptions: NextAuthOptions = {
             email: user.email,
             name: user.name,
             image: user.avatar,
-            verified: user.verified
+            verified: user.verified,
           }
         } catch (error) {
           console.error('Authorization error:', error)
           return null
         }
-      }
-    })
+      },
+    }),
   ],
 
   // Configure session strategy - using JWT for now
@@ -126,80 +127,110 @@ export const authOptions: NextAuthOptions = {
     signIn: '/auth/signin',
     error: '/auth/error',
     verifyRequest: '/auth/verify',
-    newUser: '/auth/welcome'
+    newUser: '/auth/welcome',
   },
 
   // Callbacks for customizing behavior
   callbacks: {
     // Called when user signs in
     async signIn({ user, account: _account, profile: _profile }) {
+      // eslint-disable-next-line no-console
+      console.log('NextAuth signIn callback:', { email: user?.email, provider: _account?.provider })
+
       if (!user.email) {
+        // eslint-disable-next-line no-console
+        console.error('NextAuth signIn failed: No email provided')
         return false
       }
 
       // For OAuth providers, PrismaAdapter handles user creation
       // For credentials provider, user is already validated
+      // eslint-disable-next-line no-console
+      console.log('NextAuth signIn successful:', user.email)
       return true
     },
 
     // Called when session is checked (JWT strategy)
     async session({ session, token }) {
+      // eslint-disable-next-line no-console
+      console.log('NextAuth session callback:', { session: session?.user, token })
+
       if (session.user && token) {
-        session.user.id = token.id as string
-        session.user.verified = token.verified as boolean
+        session.user.id = token.id
+        session.user.verified = token.verified
+        // eslint-disable-next-line no-console
+        console.log('NextAuth session enhanced with user data:', {
+          id: token.id,
+          verified: token.verified,
+        })
       }
       return session
     },
 
     // Called when JWT token is created (JWT strategy)
     async jwt({ token, user }) {
+      // eslint-disable-next-line no-console
+      console.log('NextAuth JWT callback:', { token, user })
+
       if (user) {
         token.id = user.id
         token.verified = user.verified || false
+        // eslint-disable-next-line no-console
+        console.log('NextAuth JWT enhanced with user data:', {
+          id: user.id,
+          verified: user.verified,
+        })
       }
       return token
-    }
+    },
   },
 
   // Event handlers
   events: {
     async signIn({ user, account, profile: _profile, isNewUser: _isNewUser }) {
-      // console.log(`User signed in: ${user.email} via ${account?.provider}`)
+      // eslint-disable-next-line no-console
+      console.log(`NextAuth event: User signed in: ${user.email} via ${account?.provider}`)
+      // eslint-disable-next-line no-console
+      console.log('NextAuth event details:', { user, account, isNewUser })
 
       // You can add analytics, logging, or other side effects here
-      // if (_isNewUser) {
-      //   console.log(`New user registered: ${user.email}`)
-      //   // Could send welcome email, analytics event, etc.
-      // }
+      if (_isNewUser) {
+        // eslint-disable-next-line no-console
+        console.log(`NextAuth event: New user registered: ${user.email}`)
+        // Could send welcome email, analytics event, etc.
+      }
       return true
     },
 
     async signOut({ session: _session }) {
-      // console.log(`User signed out: ${_session?.user?.email}`)
+      // eslint-disable-next-line no-console
+      console.log(`NextAuth event: User signed out: ${_session?.user?.email}`)
     },
 
     async createUser({ user: _user }) {
-      // console.log(`New user created: ${_user.email}`)
+      // eslint-disable-next-line no-console
+      console.log(`NextAuth event: New user created: ${_user.email}`)
       // Could send welcome email, analytics event, etc.
-    }
+    },
   },
 
   // Enable debug mode in development
-  debug: process.env.NODE_ENV === 'development',
+  debug: true,
 
   // Configure logger
   logger: {
     error(code, metadata) {
-      // console.error(`NextAuth Error [${code}]:`, metadata)
+      // eslint-disable-next-line no-console
+      console.error(`NextAuth Error [${code}]:`, metadata)
     },
     warn(code) {
+      // eslint-disable-next-line no-console
       console.warn(`NextAuth Warning [${code}]`)
     },
     debug(code, metadata) {
-      if (process.env.NODE_ENV === 'development') {
-        console.debug(`NextAuth Debug [${code}]:`, metadata)
-      }
-    }
+      // eslint-disable-next-line no-console
+      console.debug(`NextAuth Debug [${code}]:`, metadata)
+    },
   },
 
   // Security configuration
@@ -212,10 +243,10 @@ export const authOptions: NextAuthOptions = {
         sameSite: 'lax',
         path: '/',
         secure: process.env.NODE_ENV === 'production',
-        domain: process.env.NODE_ENV === 'production' ? 'www.swingradar.com' : undefined
-      }
-    }
-  }
+        domain: process.env.NODE_ENV === 'production' ? '.swingradar.com' : undefined,
+      },
+    },
+  },
 }
 
 export default authOptions

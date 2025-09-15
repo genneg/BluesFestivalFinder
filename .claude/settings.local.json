@@ -90,7 +90,8 @@
       "Bash(HUSKY=0 git commit -m \"Replace Prisma with direct PostgreSQL connection for authentication\n\n🔧 Authentication System Overhaul:\n- Remove Prisma dependency from NextAuth configuration\n- Add direct PostgreSQL connection utility (pg library)\n- Create findUserByEmail and createUserWithCredentials functions\n- Update CredentialsProvider to use direct SQL queries\n- Add comprehensive error logging for authentication flow\n\n🚀 Benefits:\n- No more Prisma binary deployment issues\n- Direct database connectivity without engine dependencies\n- Faster authentication queries\n- Simpler deployment to Vercel\n\n✅ Ready for immediate testing on production\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
       "Bash(git pull:*)",
       "Bash(HUSKY=0 git commit -m \"Force deployment: authentication still using old Prisma code\n\n- Production deployment failed to update authentication system\n- Current deployment still shows Prisma Query Engine errors\n- New PostgreSQL direct connection not active\n- Force redeploy to apply PostgreSQL authentication fix\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
-      "Bash(npx:*)"
+      "Bash(npx:*)",
+      "Bash(npm run type-check:*)"
     ],
     "deny": [],
     "ask": []
