@@ -2,30 +2,23 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    // Basic health check
-    const timestamp = new Date().toISOString()
-    
-    // TODO: Add database and Redis connectivity checks when Prisma is set up
-    // const dbStatus = await checkDatabaseConnection()
-    // const redisStatus = await checkRedisConnection()
-    
+    const hasSecret = !!process.env.NEXTAUTH_SECRET
+    const environment = process.env.NODE_ENV
+
     return NextResponse.json({
       status: 'healthy',
-      timestamp,
-      service: 'blues-dance-festival-finder',
-      version: '0.1.0',
-      environment: process.env.NODE_ENV || 'development',
-      // database: dbStatus,
-      // redis: redisStatus,
+      timestamp: new Date().toISOString(),
+      environment,
+      authentication: {
+        secretConfigured: hasSecret,
+        nextAuthUrl: process.env.NEXTAUTH_URL || 'auto-detected',
+      }
     })
   } catch (error) {
-    return NextResponse.json(
-      {
-        status: 'unhealthy',
-        timestamp: new Date().toISOString(),
-        error: error instanceof Error ? error.message : 'Unknown error',
-      },
-      { status: 500 }
-    )
+    return NextResponse.json({
+      status: 'error',
+      error: 'Health check failed',
+      timestamp: new Date().toISOString()
+    }, { status: 500 })
   }
 }
