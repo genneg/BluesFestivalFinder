@@ -6,6 +6,47 @@ import { authOptions } from '@/lib/auth/config'
 // Force dynamic runtime
 export const dynamic = 'force-dynamic'
 
+async function testDatabase() {
+  try {
+    const { db } = await import('../../../../../packages/database/src')
+
+    // Test basic connectivity
+    const userCount = await db.user.count()
+    const accountCount = await db.account.count()
+
+    // Test specific user
+    const testUser = await db.user.findUnique({
+      where: { email: 'test@swingradar.com' },
+      include: {
+        accounts: {
+          where: {
+            provider: 'credentials'
+          }
+        }
+      }
+    })
+
+    return {
+      connected: true,
+      userCount,
+      accountCount,
+      testUser: testUser ? {
+        id: testUser.id,
+        email: testUser.email,
+        name: testUser.name,
+        verified: testUser.verified,
+        hasCredentialsAccount: testUser.accounts.length > 0,
+        credentialsAccountId: testUser.accounts[0]?.id || null
+      } : null
+    }
+  } catch (error) {
+    return {
+      connected: false,
+      error: error instanceof Error ? error.message : 'Unknown database error'
+    }
+  }
+}
+
 export async function GET(request: NextRequest) {
   try {
     // Test configuration
@@ -47,9 +88,12 @@ export async function GET(request: NextRequest) {
         nodeEnv: process.env.NODE_ENV,
         nextAuthUrl: process.env.NEXTAUTH_URL,
         hasNextAuthSecret: !!process.env.NEXTAUTH_SECRET,
+        nextAuthSecretLength: process.env.NEXTAUTH_SECRET?.length || 0,
         hasGoogleOAuth: !!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET),
-        hasFacebookOAuth: !!(process.env.FACEBOOK_CLIENT_ID && process.env.FACEBOOK_CLIENT_SECRET)
-      }
+        hasFacebookOAuth: !!(process.env.FACEBOOK_CLIENT_ID && process.env.FACEBOOK_CLIENT_SECRET),
+        hasDatabaseUrl: !!process.env.DATABASE_URL
+      },
+      database: await testDatabase()
     })
 
   } catch (error) {
