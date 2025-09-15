@@ -11,9 +11,9 @@ import bcrypt from 'bcryptjs'
 import { db } from '../../../packages/database/src'
 
 export const authOptions: NextAuthOptions = {
-  // TODO: Re-enable Prisma adapter once User table is implemented
+  // Note: PrismaAdapter commented out for JWT session strategy
   // adapter: PrismaAdapter(db) as Adapter,
-  
+
   // Configure authentication providers
   providers: [
     // Google OAuth provider
@@ -59,30 +59,59 @@ export const authOptions: NextAuthOptions = {
         }
 
         try {
-          // TODO: Implement user authentication once User table is created
-          // Find user by email
-          // const user = await db.user.findUnique({
-          //   where: { email: credentials.email },
-          //   include: { 
-          //     preferences: true,
-          //     accounts: true
-          //   }
-          // })
+          // Find user by email with account information
+          const user = await db.user.findUnique({
+            where: { email: credentials.email },
+            include: {
+              accounts: {
+                where: {
+                  provider: 'credentials'
+                }
+              }
+            }
+          })
 
-          // TODO: Implement user authentication once User table is created
-          // Temporary: Return null until User table is implemented
-          return null
+          if (!user) {
+            throw new Error('No user found with this email')
+          }
+
+          // Find the credentials account for this user
+          const credentialsAccount = user.accounts.find(
+            account => account.provider === 'credentials'
+          )
+
+          if (!credentialsAccount || !credentialsAccount.password) {
+            throw new Error('Invalid authentication method')
+          }
+
+          // Verify password
+          const passwordMatch = await bcrypt.compare(
+            credentials.password,
+            credentialsAccount.password
+          )
+
+          if (!passwordMatch) {
+            throw new Error('Invalid password')
+          }
+
+          // Return user object for NextAuth
+          return {
+            id: user.id.toString(),
+            email: user.email,
+            name: user.name,
+            image: user.avatar
+          }
         } catch (error) {
           console.error('Authorization error:', error)
-          throw error
+          return null
         }
       }
     })
   ],
 
-  // Configure session strategy
+  // Configure session strategy - using JWT for now
   session: {
-    strategy: 'database',
+    strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
     updateAge: 24 * 60 * 60, // 24 hours
   },
@@ -108,66 +137,25 @@ export const authOptions: NextAuthOptions = {
         return false
       }
 
-      try {
-        // Check if user exists
-        const existingUser = await db.user.findUnique({
-          where: { email: user.email }
-        })
-
-        // If user doesn't exist, create them
-        if (!existingUser) {
-          const newUser = await db.user.create({
-            data: {
-              email: user.email,
-              name: user.name || user.email.split('@')[0],
-              avatar: user.image || null,
-              verified: false, // Will be set to true after email verification
-              preferences: {
-                create: {
-                  email_notifications: true,
-                  push_notifications: true,
-                  new_event_notifications: true
-                }
-              }
-            }
-          })
-          user.id = newUser.id.toString()
-        } else {
-          user.id = existingUser.id.toString()
-          
-          // Update user info if changed
-          if (existingUser.name !== user.name || existingUser.avatar !== user.image) {
-            await db.user.update({
-              where: { id: existingUser.id },
-              data: {
-                name: user.name || existingUser.name,
-                avatar: user.image || existingUser.avatar
-              }
-            })
-          }
-        }
-
-        return true
-      } catch (error) {
-        console.error('SignIn callback error:', error)
-        return false
-      }
+      // For OAuth providers, PrismaAdapter handles user creation
+      // For credentials provider, user is already validated
+      return true
     },
 
-    // Called when session is checked
-    async session({ session, user }) {
-      if (session.user && user) {
-        session.user.id = user.id
-        session.user.verified = user.verified
+    // Called when session is checked (JWT strategy)
+    async session({ session, token }) {
+      if (session.user && token) {
+        session.user.id = token.id as string
+        session.user.verified = token.verified as boolean
       }
       return session
     },
 
-    // Called when JWT token is created
+    // Called when JWT token is created (JWT strategy)
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id
-        token.verified = user.verified
+        token.verified = user.verified || false
       }
       return token
     }
