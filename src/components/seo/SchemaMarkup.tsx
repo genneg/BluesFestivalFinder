@@ -135,8 +135,8 @@ export function OrganizationSchema({ org }: { org?: OrganizationSchemaProps } = 
   const defaultOrg = {
     name: "SwingRadar",
     description: "Detect swing culture with precision worldwide. Comprehensive radar platform for discovering Blues, Swing, Balboa, Shag, and Boogie Woogie festivals and events.",
-    url: "https://blues-festival-finder.vercel.app",
-    logo: "https://blues-festival-finder.vercel.app/logo.png",
+    url: "https://www.swingradar.com",
+    logo: "https://www.swingradar.com/logo.png",
     sameAs: [
       "https://facebook.com/SwingRadar",
       "https://instagram.com/SwingRadar",
@@ -194,7 +194,7 @@ export function WebsiteSchema({ site }: { site?: WebsiteSchemaProps } = {}) {
   const defaultSite = {
     name: "SwingRadar",
     description: "Detect swing culture worldwide - discover swing dance festivals with precision radar across Blues, Swing, Balboa, Shag, and Boogie Woogie",
-    url: "https://blues-festival-finder.vercel.app"
+    url: "https://www.swingradar.com"
   }
 
   const siteData = site || defaultSite
@@ -286,8 +286,8 @@ export function SwingRadarOrganizationSchema() {
   const swingRadarOrg = {
     name: "SwingRadar",
     description: "Detect swing culture with precision worldwide. The premier radar platform for discovering Blues, Swing, Balboa, Shag, and Boogie Woogie festivals, instructors, and musicians globally.",
-    url: "https://blues-festival-finder.vercel.app",
-    logo: "https://blues-festival-finder.vercel.app/logo.png",
+    url: "https://www.swingradar.com",
+    logo: "https://www.swingradar.com/logo.png",
     contactPoint: {
       email: "hello@swingradar.com",
       contactType: "customer service"
