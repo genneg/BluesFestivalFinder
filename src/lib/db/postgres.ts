@@ -8,11 +8,13 @@ export function getPostgresPool(): Pool {
   if (!pool) {
     let connectionString = process.env.DATABASE_URL ?? ''
 
-    // Try a different approach: completely bypass SSL validation in production
+    // For production, use the original pooled connection but disable SSL
     if (process.env.NODE_ENV === 'production') {
-      // Replace with non-SSL connection if available, or disable SSL validation
+      // Don't replace the hostname, just modify SSL parameters
       if (connectionString.includes('sslmode=require')) {
         connectionString = connectionString.replace('sslmode=require', 'sslmode=disable')
+      } else if (connectionString.includes('sslmode')) {
+        connectionString = connectionString.replace(/sslmode=[^&]+/, 'sslmode=disable')
       } else {
         connectionString += connectionString.includes('?') ? '&sslmode=disable' : '?sslmode=disable'
       }
