@@ -1,4 +1,4 @@
-// NextAuth.js configuration for Festival Scout
+// NextAuth.js configuration for SwingRadar
 // This file configures authentication providers and session management
 
 import { NextAuthOptions } from 'next-auth'
@@ -12,12 +12,15 @@ export const authOptions: NextAuthOptions = {
   // Note: PrismaAdapter commented out for JWT session strategy
   // adapter: PrismaAdapter(db) as Adapter,
 
+  // Secret key for JWT and session encryption
+  secret: process.env.NEXTAUTH_SECRET ?? 'fallback-secret-key-change-in-production',
+
   // Configure authentication providers
   providers: [
     // Google OAuth provider
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+      clientId: process.env.GOOGLE_CLIENT_ID ?? '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
       authorization: {
         params: {
           scope: 'openid email profile'
@@ -27,8 +30,8 @@ export const authOptions: NextAuthOptions = {
     
     // Facebook OAuth provider
     FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID || '',
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET || '',
+      clientId: process.env.FACEBOOK_CLIENT_ID ?? '',
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET ?? '',
       authorization: {
         params: {
           scope: 'email'
@@ -87,7 +90,7 @@ export const authOptions: NextAuthOptions = {
             return null
           }
 
-          console.log('User authenticated successfully:', user.email)
+          // console.log('User authenticated successfully:', user.email)
 
           // Return user object for NextAuth
           return {
@@ -115,6 +118,7 @@ export const authOptions: NextAuthOptions = {
   // Configure JWT tokens (when using JWT strategy)
   jwt: {
     maxAge: 30 * 24 * 60 * 60, // 30 days
+    secret: process.env.NEXTAUTH_SECRET ?? 'fallback-secret-key-change-in-production',
   },
 
   // Custom pages
@@ -128,7 +132,7 @@ export const authOptions: NextAuthOptions = {
   // Callbacks for customizing behavior
   callbacks: {
     // Called when user signs in
-    async signIn({ user, account, profile }) {
+    async signIn({ user, account: _account, profile: _profile }) {
       if (!user.email) {
         return false
       }
@@ -163,18 +167,18 @@ export const authOptions: NextAuthOptions = {
       console.log(`User signed in: ${user.email} via ${account?.provider}`)
       
       // You can add analytics, logging, or other side effects here
-      if (isNewUser) {
-        console.log(`New user registered: ${user.email}`)
-        // Could send welcome email, analytics event, etc.
-      }
+      // if (isNewUser) {
+      //   console.log(`New user registered: ${user.email}`)
+      //   // Could send welcome email, analytics event, etc.
+      // }
     },
 
-    async signOut({ session, token }) {
-      console.log(`User signed out: ${session?.user?.email}`)
+    async signOut({ session }) {
+      // console.log(`User signed out: ${session?.user?.email}`)
     },
 
     async createUser({ user }) {
-      console.log(`New user created: ${user.email}`)
+      // console.log(`New user created: ${user.email}`)
       // Could send welcome email, analytics event, etc.
     }
   },
@@ -201,12 +205,13 @@ export const authOptions: NextAuthOptions = {
   useSecureCookies: process.env.NODE_ENV === 'production',
   cookies: {
     sessionToken: {
-      name: 'festival-scout-session',
+      name: 'swingradar-session',
       options: {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        secure: process.env.NODE_ENV === 'production'
+        secure: process.env.NODE_ENV === 'production',
+        domain: process.env.NODE_ENV === 'production' ? '.swingradar.com' : undefined
       }
     }
   }
