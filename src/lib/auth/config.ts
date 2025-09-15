@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
   // adapter: PrismaAdapter(db) as Adapter,
 
   // Secret key for JWT and session encryption
-  secret: process.env.NEXTAUTH_SECRET ?? 'fallback-secret-key-change-in-production',
+  secret: process.env.NEXTAUTH_SECRET,
 
   // Configure authentication providers
   providers: [
@@ -22,11 +22,15 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
+      // Force redirect mode instead of popup
       authorization: {
         params: {
           scope: 'openid email profile',
-        },
-      },
+          prompt: "select_account",
+          access_type: "offline",
+          response_type: "code"
+        }
+      }
     }),
 
     // Facebook OAuth provider
@@ -55,6 +59,8 @@ export const authOptions: NextAuthOptions = {
           placeholder: 'Enter your password',
         },
       },
+      // Force form-based authentication instead of popup
+      id: 'credentials',
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           console.error('Missing credentials')
@@ -109,17 +115,16 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
 
-  // Configure session strategy - using JWT for now
+  // Configure session strategy - using JWT for credentials compatibility
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-    updateAge: 24 * 60 * 60, // 24 hours
+    maxAge: 7 * 24 * 60 * 60, // 7 days for better security
+    updateAge: 24 * 60 * 60, // 24 hours - refresh session daily
   },
 
   // Configure JWT tokens (when using JWT strategy)
   jwt: {
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-    secret: process.env.NEXTAUTH_SECRET ?? 'fallback-secret-key-change-in-production',
+    maxAge: 7 * 24 * 60 * 60, // 7 days matching session
   },
 
   // Custom pages
@@ -133,120 +138,55 @@ export const authOptions: NextAuthOptions = {
   // Callbacks for customizing behavior
   callbacks: {
     // Called when user signs in
-    async signIn({ user, account: _account, profile: _profile }) {
-      // eslint-disable-next-line no-console
-      console.log('NextAuth signIn callback:', { email: user?.email, provider: _account?.provider })
-
+    async signIn({ user, account: _account }) {
       if (!user.email) {
-        // eslint-disable-next-line no-console
         console.error('NextAuth signIn failed: No email provided')
         return false
       }
-
-      // For OAuth providers, PrismaAdapter handles user creation
-      // For credentials provider, user is already validated
-      // eslint-disable-next-line no-console
-      console.log('NextAuth signIn successful:', user.email)
       return true
     },
 
     // Called when session is checked (JWT strategy)
     async session({ session, token }) {
-      // eslint-disable-next-line no-console
-      console.log('NextAuth session callback:', { session: session?.user, token })
-
       if (session.user && token) {
-        session.user.id = token.id
-        session.user.verified = token.verified
-        // eslint-disable-next-line no-console
-        console.log('NextAuth session enhanced with user data:', {
-          id: token.id,
-          verified: token.verified,
-        })
+        session.user.id = token.sub as string
+        session.user.verified = token.verified as boolean || false
       }
       return session
     },
 
     // Called when JWT token is created (JWT strategy)
     async jwt({ token, user }) {
-      // eslint-disable-next-line no-console
-      console.log('NextAuth JWT callback:', { token, user })
-
       if (user) {
         token.id = user.id
         token.verified = user.verified || false
-        // eslint-disable-next-line no-console
-        console.log('NextAuth JWT enhanced with user data:', {
-          id: user.id,
-          verified: user.verified,
-        })
       }
       return token
     },
   },
 
-  // Event handlers
-  events: {
-    async signIn({ user, account, profile: _profile, isNewUser: _isNewUser }) {
-      // eslint-disable-next-line no-console
-      console.log(`NextAuth event: User signed in: ${user.email} via ${account?.provider}`)
-      // eslint-disable-next-line no-console
-      console.log('NextAuth event details:', { user, account, isNewUser })
-
-      // You can add analytics, logging, or other side effects here
-      if (_isNewUser) {
-        // eslint-disable-next-line no-console
-        console.log(`NextAuth event: New user registered: ${user.email}`)
-        // Could send welcome email, analytics event, etc.
-      }
-      return true
-    },
-
-    async signOut({ session: _session }) {
-      // eslint-disable-next-line no-console
-      console.log(`NextAuth event: User signed out: ${_session?.user?.email}`)
-    },
-
-    async createUser({ user: _user }) {
-      // eslint-disable-next-line no-console
-      console.log(`NextAuth event: New user created: ${_user.email}`)
-      // Could send welcome email, analytics event, etc.
-    },
-  },
-
-  // Enable debug mode in development
-  debug: true,
+  // Enable debug mode in development only
+  debug: process.env.NODE_ENV === 'development',
 
   // Configure logger
   logger: {
     error(code, metadata) {
-      // eslint-disable-next-line no-console
       console.error(`NextAuth Error [${code}]:`, metadata)
     },
     warn(code) {
-      // eslint-disable-next-line no-console
-      console.warn(`NextAuth Warning [${code}]`)
+      if (process.env.NODE_ENV === 'development') {
+        console.warn(`NextAuth Warning [${code}]`)
+      }
     },
     debug(code, metadata) {
-      // eslint-disable-next-line no-console
-      console.debug(`NextAuth Debug [${code}]:`, metadata)
+      if (process.env.NODE_ENV === 'development') {
+        console.debug(`NextAuth Debug [${code}]:`, metadata)
+      }
     },
   },
 
-  // Security configuration
+  // Security configuration - Let NextAuth handle cookies automatically
   useSecureCookies: process.env.NODE_ENV === 'production',
-  cookies: {
-    sessionToken: {
-      name: 'swingradar-session',
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
-        domain: process.env.NODE_ENV === 'production' ? '.swingradar.com' : undefined,
-      },
-    },
-  },
 }
 
 export default authOptions
