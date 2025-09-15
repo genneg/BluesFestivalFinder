@@ -47,8 +47,61 @@ export default function SignInPage() {
       console.log('SignIn result:', result)
 
       if (result?.ok && !result?.error) {
-        // Authentication successful, redirect to dashboard
-        router.push('/dashboard')
+        // Authentication successful, verify session was created
+        console.log('Authentication successful, verifying session...')
+
+        // Wait a moment for session to be established
+        await new Promise(resolve => setTimeout(resolve, 1000))
+
+        // Try to verify the session was actually created
+        try {
+          const sessionResponse = await fetch('/api/auth/session')
+          const session = await sessionResponse.json()
+          console.log('Session verification:', session)
+
+          if (session && Object.keys(session).length > 0) {
+            // Session exists, safe to redirect
+            console.log('Session confirmed, redirecting to dashboard')
+            router.push('/dashboard')
+          } else {
+            // Session not created, force retry with exponential backoff
+            console.log('Session not found, retrying...')
+            let retryCount = 0
+            const maxRetries = 3
+
+            const retryAuth = async (): Promise<void> => {
+              if (retryCount >= maxRetries) {
+                setError('Authentication completed but session could not be established. Please try refreshing the page.')
+                return
+              }
+
+              retryCount++
+              console.log(`Retry attempt ${retryCount}/${maxRetries}`)
+
+              // Wait with exponential backoff
+              await new Promise(resolve => setTimeout(resolve, 1000 * retryCount))
+
+              // Check session again
+              const retrySessionResponse = await fetch('/api/auth/session')
+              const retrySession = await retrySessionResponse.json()
+              console.log(`Retry ${retryCount} session:`, retrySession)
+
+              if (retrySession && Object.keys(retrySession).length > 0) {
+                console.log('Session established on retry, redirecting')
+                router.push('/dashboard')
+              } else {
+                // Try again
+                return retryAuth()
+              }
+            }
+
+            await retryAuth()
+          }
+        } catch (sessionError) {
+          console.error('Session verification error:', sessionError)
+          // If session verification fails, still attempt redirect
+          router.push('/dashboard')
+        }
       } else {
         // Authentication failed
         setError(result?.error === 'CredentialsSignin'
