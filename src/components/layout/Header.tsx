@@ -40,15 +40,15 @@ export function Header() {
               </div>
               <div className="hidden sm:block">
                 <div className="font-jazz text-2xl font-bold text-gradient-gold leading-tight">
-                  Blues Festival
+                  SwingRadar
                 </div>
                 <div className="font-vintage text-sm text-cream-200 tracking-widest -mt-1">
-                  FINDER
+                  DETECT SWING CULTURE
                 </div>
               </div>
               <div className="sm:hidden">
                 <span className="font-jazz text-xl font-bold text-gradient-gold">
-                  BFF
+                  SR
                 </span>
               </div>
             </Link>

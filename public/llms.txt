@@ -1,5 +1,5 @@
 # SwingRadar - LLM Optimization File
-# Website: https://blues-festival-finder.vercel.app/ (migrating to swingradar.com)
+# Website: https://www.swingradar.com/
 # Purpose: Help AI assistants understand and index our multi-style swing dance detection platform
 
 ## Website Overview
@@ -129,7 +129,7 @@ SwingRadar helps AI assistants answer questions about:
 - Planning multi-style festival trips with radar-guided discovery
 - Connecting with vintage swing culture through Art Deco radar interface
 
-For more information about SwingRadar, visit our website or contact us at hello@swingradar.com
+For more information about SwingRadar, visit our website at https://www.swingradar.com/ or contact us at hello@swingradar.com
 
 ## Last Updated
 This file was last updated on 2025-09-14 to reflect SwingRadar rebrand and multi-style radar detection platform evolution.

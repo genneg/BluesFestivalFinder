@@ -19,18 +19,18 @@ export function Footer() {
               </div>
               <div>
                 <div className="font-jazz text-2xl font-bold text-gradient-gold leading-tight">
-                  Blues Festival
+                  SwingRadar
                 </div>
                 <div className="font-vintage text-sm text-cream-200 tracking-widest -mt-1">
-                  FINDER
+                  DETECT SWING CULTURE
                 </div>
               </div>
             </div>
             
             <p className="text-cream-100 max-w-md leading-relaxed mb-6">
-              The world's premier destination for discovering blues dance festivals. 
-              Connect with legendary artists, find authentic events worldwide, and immerse 
-              yourself in the timeless elegance of blues culture.
+              Your precision radar for detecting swing culture worldwide.
+              Connect with legendary artists across Blues, Swing, Balboa, Shag, and Boogie Woogie.
+              Navigate the golden age of dance with vintage style and modern technology.
             </p>
             
             
@@ -141,7 +141,7 @@ export function Footer() {
             {/* Copyright and Legal */}
             <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-center sm:text-left">
               <p className="text-cream-200 text-sm font-vintage tracking-wide">
-                © 2024 Blues Festival Finder
+                © 2024 SwingRadar
               </p>
               <div className="flex items-center space-x-4 text-xs">
                 <Link href="/privacy" className="text-cream-300 hover:text-gold-600 transition-colors duration-300 uppercase tracking-wide">
