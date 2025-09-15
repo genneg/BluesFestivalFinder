@@ -385,14 +385,14 @@ export function EventDetails({ event, className }: EventDetailsProps) {
                     }
 
                     return (
-                      <div key={price.id} className="flex flex-col sm:flex-row justify-between items-start p-6 bg-white/5 rounded-lg border border-primary/30 hover:border-primary/50 hover:bg-white/10 transition-all duration-300 overflow-hidden">
-                        <div className="flex-1 mb-4 sm:mb-0 min-w-0 pr-4">
+                      <div key={price.id} className="flex flex-col sm:flex-row lg:flex-col justify-between sm:items-start lg:items-stretch p-6 bg-white/5 rounded-lg border border-primary/30 hover:border-primary/50 hover:bg-white/10 transition-all duration-300 overflow-hidden">
+                        <div className="flex-1 mb-4 sm:mb-0 lg:mb-4 sm:min-w-0 sm:pr-4 lg:pr-0 lg:w-full">
                           <p className="text-xl font-bold text-white mb-2">{price.category}</p>
                           {price.description && (
                             <p className="text-base text-white/80 font-medium">{price.description}</p>
                           )}
                         </div>
-                        <div className="text-right flex-shrink-0 event-price-display w-[100px] sm:w-[120px] overflow-hidden">
+                        <div className="text-right sm:flex-shrink-0 sm:w-[100px] sm:w-[120px] lg:text-center lg:w-full lg:flex-shrink-0 event-price-display overflow-hidden">
                           <p className="text-2xl sm:text-3xl font-bold text-primary event-price-text whitespace-nowrap overflow-hidden text-ellipsis">
                             {displayAmount}
                           </p>
