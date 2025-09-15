@@ -119,7 +119,7 @@ export async function createUserWithPassword(userData: {
   const hashedPassword = await hashPassword(password)
   
   // Create user with credentials account
-  const { db } = await import('@festival-scout/database')
+  const { db } = await import('../../../packages/database/src')
   
   try {
     // Check if user already exists
