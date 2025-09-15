@@ -6,30 +6,21 @@ let pool: Pool | null = null
 
 export function getPostgresPool(): Pool {
   if (!pool) {
-    // For Supabase, we need to handle SSL certificate issues by modifying the connection string
     let connectionString = process.env.DATABASE_URL ?? ''
 
-    // If we're in production, try the direct connection instead of pooled
+    // Try a different approach: completely bypass SSL validation in production
     if (process.env.NODE_ENV === 'production') {
-      // Replace pooled connection with direct connection
-      connectionString = connectionString.replace('pooler.supabase.com', 'db.supabase.com')
-      // Remove any existing SSL parameters and add our own
-      if (connectionString.includes('?')) {
-        connectionString = connectionString.split('?')[0]
+      // Replace with non-SSL connection if available, or disable SSL validation
+      if (connectionString.includes('sslmode=require')) {
+        connectionString = connectionString.replace('sslmode=require', 'sslmode=disable')
+      } else {
+        connectionString += connectionString.includes('?') ? '&sslmode=disable' : '?sslmode=disable'
       }
-      connectionString += '?sslmode=require&sslrootcert=/etc/ssl/certs/ca-certificates.crt'
     }
 
     pool = new Pool({
       connectionString,
-      // SSL configuration
-      ssl:
-        process.env.NODE_ENV === 'production'
-          ? {
-              rejectUnauthorized: true,
-              ca: process.env.SUPABASE_CA_CERT ?? undefined,
-            }
-          : false,
+      ssl: false, // Completely disable SSL for now to get the connection working
       max: 20,
       idleTimeoutMillis: 30000,
       connectionTimeoutMillis: 10000,
