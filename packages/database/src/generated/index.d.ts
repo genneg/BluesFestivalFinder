@@ -2388,6 +2388,8 @@ export namespace Prisma {
     city: string | null
     website: string | null
     style: string | null
+    primary_style: string | null
+    difficulty_level: string | null
     description: string | null
     ai_quality_score: number | null
     ai_completeness_score: number | null
@@ -2406,6 +2408,8 @@ export namespace Prisma {
     city: string | null
     website: string | null
     style: string | null
+    primary_style: string | null
+    difficulty_level: string | null
     description: string | null
     ai_quality_score: number | null
     ai_completeness_score: number | null
@@ -2424,6 +2428,10 @@ export namespace Prisma {
     city: number
     website: number
     style: number
+    dance_styles: number
+    primary_style: number
+    difficulty_level: number
+    event_types: number
     description: number
     ai_quality_score: number
     ai_completeness_score: number
@@ -2456,6 +2464,8 @@ export namespace Prisma {
     city?: true
     website?: true
     style?: true
+    primary_style?: true
+    difficulty_level?: true
     description?: true
     ai_quality_score?: true
     ai_completeness_score?: true
@@ -2474,6 +2484,8 @@ export namespace Prisma {
     city?: true
     website?: true
     style?: true
+    primary_style?: true
+    difficulty_level?: true
     description?: true
     ai_quality_score?: true
     ai_completeness_score?: true
@@ -2492,6 +2504,10 @@ export namespace Prisma {
     city?: true
     website?: true
     style?: true
+    dance_styles?: true
+    primary_style?: true
+    difficulty_level?: true
+    event_types?: true
     description?: true
     ai_quality_score?: true
     ai_completeness_score?: true
@@ -2597,6 +2613,10 @@ export namespace Prisma {
     city: string
     website: string | null
     style: string | null
+    dance_styles: string[]
+    primary_style: string | null
+    difficulty_level: string | null
+    event_types: string[]
     description: string | null
     ai_quality_score: number | null
     ai_completeness_score: number | null
@@ -2634,6 +2654,10 @@ export namespace Prisma {
     city?: boolean
     website?: boolean
     style?: boolean
+    dance_styles?: boolean
+    primary_style?: boolean
+    difficulty_level?: boolean
+    event_types?: boolean
     description?: boolean
     ai_quality_score?: boolean
     ai_completeness_score?: boolean
@@ -2658,6 +2682,10 @@ export namespace Prisma {
     city?: boolean
     website?: boolean
     style?: boolean
+    dance_styles?: boolean
+    primary_style?: boolean
+    difficulty_level?: boolean
+    event_types?: boolean
     description?: boolean
     ai_quality_score?: boolean
     ai_completeness_score?: boolean
@@ -2676,6 +2704,10 @@ export namespace Prisma {
     city?: boolean
     website?: boolean
     style?: boolean
+    dance_styles?: boolean
+    primary_style?: boolean
+    difficulty_level?: boolean
+    event_types?: boolean
     description?: boolean
     ai_quality_score?: boolean
     ai_completeness_score?: boolean
@@ -2713,6 +2745,10 @@ export namespace Prisma {
       city: string
       website: string | null
       style: string | null
+      dance_styles: string[]
+      primary_style: string | null
+      difficulty_level: string | null
+      event_types: string[]
       description: string | null
       ai_quality_score: number | null
       ai_completeness_score: number | null
@@ -3126,6 +3162,10 @@ export namespace Prisma {
     readonly city: FieldRef<"Event", 'String'>
     readonly website: FieldRef<"Event", 'String'>
     readonly style: FieldRef<"Event", 'String'>
+    readonly dance_styles: FieldRef<"Event", 'String[]'>
+    readonly primary_style: FieldRef<"Event", 'String'>
+    readonly difficulty_level: FieldRef<"Event", 'String'>
+    readonly event_types: FieldRef<"Event", 'String[]'>
     readonly description: FieldRef<"Event", 'String'>
     readonly ai_quality_score: FieldRef<"Event", 'Int'>
     readonly ai_completeness_score: FieldRef<"Event", 'Int'>
@@ -5515,11 +5555,13 @@ export namespace Prisma {
   export type TeacherAvgAggregateOutputType = {
     id: number | null
     ai_relevance_score: number | null
+    teaching_since: number | null
   }
 
   export type TeacherSumAggregateOutputType = {
     id: number | null
     ai_relevance_score: number | null
+    teaching_since: number | null
   }
 
   export type TeacherMinAggregateOutputType = {
@@ -5530,6 +5572,7 @@ export namespace Prisma {
     ai_bio_summary: string | null
     ai_relevance_score: number | null
     image_url: string | null
+    teaching_since: number | null
   }
 
   export type TeacherMaxAggregateOutputType = {
@@ -5540,6 +5583,7 @@ export namespace Prisma {
     ai_bio_summary: string | null
     ai_relevance_score: number | null
     image_url: string | null
+    teaching_since: number | null
   }
 
   export type TeacherCountAggregateOutputType = {
@@ -5550,6 +5594,11 @@ export namespace Prisma {
     ai_bio_summary: number
     ai_relevance_score: number
     image_url: number
+    specializations: number
+    experience_levels: number
+    teaching_since: number
+    credentials: number
+    preferred_events: number
     _all: number
   }
 
@@ -5557,11 +5606,13 @@ export namespace Prisma {
   export type TeacherAvgAggregateInputType = {
     id?: true
     ai_relevance_score?: true
+    teaching_since?: true
   }
 
   export type TeacherSumAggregateInputType = {
     id?: true
     ai_relevance_score?: true
+    teaching_since?: true
   }
 
   export type TeacherMinAggregateInputType = {
@@ -5572,6 +5623,7 @@ export namespace Prisma {
     ai_bio_summary?: true
     ai_relevance_score?: true
     image_url?: true
+    teaching_since?: true
   }
 
   export type TeacherMaxAggregateInputType = {
@@ -5582,6 +5634,7 @@ export namespace Prisma {
     ai_bio_summary?: true
     ai_relevance_score?: true
     image_url?: true
+    teaching_since?: true
   }
 
   export type TeacherCountAggregateInputType = {
@@ -5592,6 +5645,11 @@ export namespace Prisma {
     ai_bio_summary?: true
     ai_relevance_score?: true
     image_url?: true
+    specializations?: true
+    experience_levels?: true
+    teaching_since?: true
+    credentials?: true
+    preferred_events?: true
     _all?: true
   }
 
@@ -5689,6 +5747,11 @@ export namespace Prisma {
     ai_bio_summary: string | null
     ai_relevance_score: number | null
     image_url: string | null
+    specializations: string[]
+    experience_levels: JsonValue | null
+    teaching_since: number | null
+    credentials: string[]
+    preferred_events: string[]
     _count: TeacherCountAggregateOutputType | null
     _avg: TeacherAvgAggregateOutputType | null
     _sum: TeacherSumAggregateOutputType | null
@@ -5718,6 +5781,11 @@ export namespace Prisma {
     ai_bio_summary?: boolean
     ai_relevance_score?: boolean
     image_url?: boolean
+    specializations?: boolean
+    experience_levels?: boolean
+    teaching_since?: boolean
+    credentials?: boolean
+    preferred_events?: boolean
     event_teachers?: boolean | Teacher$event_teachersArgs<ExtArgs>
     followers?: boolean | Teacher$followersArgs<ExtArgs>
     _count?: boolean | TeacherCountOutputTypeDefaultArgs<ExtArgs>
@@ -5731,6 +5799,11 @@ export namespace Prisma {
     ai_bio_summary?: boolean
     ai_relevance_score?: boolean
     image_url?: boolean
+    specializations?: boolean
+    experience_levels?: boolean
+    teaching_since?: boolean
+    credentials?: boolean
+    preferred_events?: boolean
   }, ExtArgs["result"]["teacher"]>
 
   export type TeacherSelectScalar = {
@@ -5741,6 +5814,11 @@ export namespace Prisma {
     ai_bio_summary?: boolean
     ai_relevance_score?: boolean
     image_url?: boolean
+    specializations?: boolean
+    experience_levels?: boolean
+    teaching_since?: boolean
+    credentials?: boolean
+    preferred_events?: boolean
   }
 
   export type TeacherInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5764,6 +5842,11 @@ export namespace Prisma {
       ai_bio_summary: string | null
       ai_relevance_score: number | null
       image_url: string | null
+      specializations: string[]
+      experience_levels: Prisma.JsonValue | null
+      teaching_since: number | null
+      credentials: string[]
+      preferred_events: string[]
     }, ExtArgs["result"]["teacher"]>
     composites: {}
   }
@@ -6166,6 +6249,11 @@ export namespace Prisma {
     readonly ai_bio_summary: FieldRef<"Teacher", 'String'>
     readonly ai_relevance_score: FieldRef<"Teacher", 'Int'>
     readonly image_url: FieldRef<"Teacher", 'String'>
+    readonly specializations: FieldRef<"Teacher", 'String[]'>
+    readonly experience_levels: FieldRef<"Teacher", 'Json'>
+    readonly teaching_since: FieldRef<"Teacher", 'Int'>
+    readonly credentials: FieldRef<"Teacher", 'String[]'>
+    readonly preferred_events: FieldRef<"Teacher", 'String[]'>
   }
     
 
@@ -6567,6 +6655,7 @@ export namespace Prisma {
     bio: string | null
     avatar: string | null
     verified: boolean | null
+    primary_genre: string | null
     yearsActive: number | null
     website: string | null
     email: string | null
@@ -6584,6 +6673,7 @@ export namespace Prisma {
     bio: string | null
     avatar: string | null
     verified: boolean | null
+    primary_genre: string | null
     yearsActive: number | null
     website: string | null
     email: string | null
@@ -6602,6 +6692,9 @@ export namespace Prisma {
     avatar: number
     verified: number
     instruments: number
+    music_genres: number
+    primary_genre: number
+    performance_types: number
     yearsActive: number
     website: number
     email: number
@@ -6635,6 +6728,7 @@ export namespace Prisma {
     bio?: true
     avatar?: true
     verified?: true
+    primary_genre?: true
     yearsActive?: true
     website?: true
     email?: true
@@ -6652,6 +6746,7 @@ export namespace Prisma {
     bio?: true
     avatar?: true
     verified?: true
+    primary_genre?: true
     yearsActive?: true
     website?: true
     email?: true
@@ -6670,6 +6765,9 @@ export namespace Prisma {
     avatar?: true
     verified?: true
     instruments?: true
+    music_genres?: true
+    primary_genre?: true
+    performance_types?: true
     yearsActive?: true
     website?: true
     email?: true
@@ -6775,6 +6873,9 @@ export namespace Prisma {
     avatar: string | null
     verified: boolean | null
     instruments: string[]
+    music_genres: string[]
+    primary_genre: string | null
+    performance_types: string[]
     yearsActive: number | null
     website: string | null
     email: string | null
@@ -6812,6 +6913,9 @@ export namespace Prisma {
     avatar?: boolean
     verified?: boolean
     instruments?: boolean
+    music_genres?: boolean
+    primary_genre?: boolean
+    performance_types?: boolean
     yearsActive?: boolean
     website?: boolean
     email?: boolean
@@ -6833,6 +6937,9 @@ export namespace Prisma {
     avatar?: boolean
     verified?: boolean
     instruments?: boolean
+    music_genres?: boolean
+    primary_genre?: boolean
+    performance_types?: boolean
     yearsActive?: boolean
     website?: boolean
     email?: boolean
@@ -6851,6 +6958,9 @@ export namespace Prisma {
     avatar?: boolean
     verified?: boolean
     instruments?: boolean
+    music_genres?: boolean
+    primary_genre?: boolean
+    performance_types?: boolean
     yearsActive?: boolean
     website?: boolean
     email?: boolean
@@ -6882,6 +6992,9 @@ export namespace Prisma {
       avatar: string | null
       verified: boolean | null
       instruments: string[]
+      music_genres: string[]
+      primary_genre: string | null
+      performance_types: string[]
       yearsActive: number | null
       website: string | null
       email: string | null
@@ -7292,6 +7405,9 @@ export namespace Prisma {
     readonly avatar: FieldRef<"Musician", 'String'>
     readonly verified: FieldRef<"Musician", 'Boolean'>
     readonly instruments: FieldRef<"Musician", 'String[]'>
+    readonly music_genres: FieldRef<"Musician", 'String[]'>
+    readonly primary_genre: FieldRef<"Musician", 'String'>
+    readonly performance_types: FieldRef<"Musician", 'String[]'>
     readonly yearsActive: FieldRef<"Musician", 'Int'>
     readonly website: FieldRef<"Musician", 'String'>
     readonly email: FieldRef<"Musician", 'String'>
@@ -11928,6 +12044,7 @@ export namespace Prisma {
     defaultCity: string | null
     searchRadius: number | null
     timezone: string | null
+    experience_level: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -11947,6 +12064,7 @@ export namespace Prisma {
     defaultCity: string | null
     searchRadius: number | null
     timezone: string | null
+    experience_level: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -11966,6 +12084,10 @@ export namespace Prisma {
     defaultCity: number
     searchRadius: number
     timezone: number
+    preferred_dance_styles: number
+    experience_level: number
+    preferred_event_types: number
+    skill_levels: number
     created_at: number
     updated_at: number
     _all: number
@@ -11999,6 +12121,7 @@ export namespace Prisma {
     defaultCity?: true
     searchRadius?: true
     timezone?: true
+    experience_level?: true
     created_at?: true
     updated_at?: true
   }
@@ -12018,6 +12141,7 @@ export namespace Prisma {
     defaultCity?: true
     searchRadius?: true
     timezone?: true
+    experience_level?: true
     created_at?: true
     updated_at?: true
   }
@@ -12037,6 +12161,10 @@ export namespace Prisma {
     defaultCity?: true
     searchRadius?: true
     timezone?: true
+    preferred_dance_styles?: true
+    experience_level?: true
+    preferred_event_types?: true
+    skill_levels?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -12143,6 +12271,10 @@ export namespace Prisma {
     defaultCity: string | null
     searchRadius: number | null
     timezone: string | null
+    preferred_dance_styles: string[]
+    experience_level: string | null
+    preferred_event_types: string[]
+    skill_levels: JsonValue | null
     created_at: Date
     updated_at: Date
     _count: UserPreferencesCountAggregateOutputType | null
@@ -12181,6 +12313,10 @@ export namespace Prisma {
     defaultCity?: boolean
     searchRadius?: boolean
     timezone?: boolean
+    preferred_dance_styles?: boolean
+    experience_level?: boolean
+    preferred_event_types?: boolean
+    skill_levels?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -12201,6 +12337,10 @@ export namespace Prisma {
     defaultCity?: boolean
     searchRadius?: boolean
     timezone?: boolean
+    preferred_dance_styles?: boolean
+    experience_level?: boolean
+    preferred_event_types?: boolean
+    skill_levels?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -12221,6 +12361,10 @@ export namespace Prisma {
     defaultCity?: boolean
     searchRadius?: boolean
     timezone?: boolean
+    preferred_dance_styles?: boolean
+    experience_level?: boolean
+    preferred_event_types?: boolean
+    skill_levels?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
@@ -12252,6 +12396,10 @@ export namespace Prisma {
       defaultCity: string | null
       searchRadius: number | null
       timezone: string | null
+      preferred_dance_styles: string[]
+      experience_level: string | null
+      preferred_event_types: string[]
+      skill_levels: Prisma.JsonValue | null
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["userPreferences"]>
@@ -12662,6 +12810,10 @@ export namespace Prisma {
     readonly defaultCity: FieldRef<"UserPreferences", 'String'>
     readonly searchRadius: FieldRef<"UserPreferences", 'Int'>
     readonly timezone: FieldRef<"UserPreferences", 'String'>
+    readonly preferred_dance_styles: FieldRef<"UserPreferences", 'String[]'>
+    readonly experience_level: FieldRef<"UserPreferences", 'String'>
+    readonly preferred_event_types: FieldRef<"UserPreferences", 'String[]'>
+    readonly skill_levels: FieldRef<"UserPreferences", 'Json'>
     readonly created_at: FieldRef<"UserPreferences", 'DateTime'>
     readonly updated_at: FieldRef<"UserPreferences", 'DateTime'>
   }
@@ -18820,6 +18972,10 @@ export namespace Prisma {
     city: 'city',
     website: 'website',
     style: 'style',
+    dance_styles: 'dance_styles',
+    primary_style: 'primary_style',
+    difficulty_level: 'difficulty_level',
+    event_types: 'event_types',
     description: 'description',
     ai_quality_score: 'ai_quality_score',
     ai_completeness_score: 'ai_completeness_score',
@@ -18859,7 +19015,12 @@ export namespace Prisma {
     website: 'website',
     ai_bio_summary: 'ai_bio_summary',
     ai_relevance_score: 'ai_relevance_score',
-    image_url: 'image_url'
+    image_url: 'image_url',
+    specializations: 'specializations',
+    experience_levels: 'experience_levels',
+    teaching_since: 'teaching_since',
+    credentials: 'credentials',
+    preferred_events: 'preferred_events'
   };
 
   export type TeacherScalarFieldEnum = (typeof TeacherScalarFieldEnum)[keyof typeof TeacherScalarFieldEnum]
@@ -18873,6 +19034,9 @@ export namespace Prisma {
     avatar: 'avatar',
     verified: 'verified',
     instruments: 'instruments',
+    music_genres: 'music_genres',
+    primary_genre: 'primary_genre',
+    performance_types: 'performance_types',
     yearsActive: 'yearsActive',
     website: 'website',
     email: 'email',
@@ -18956,6 +19120,10 @@ export namespace Prisma {
     defaultCity: 'defaultCity',
     searchRadius: 'searchRadius',
     timezone: 'timezone',
+    preferred_dance_styles: 'preferred_dance_styles',
+    experience_level: 'experience_level',
+    preferred_event_types: 'preferred_event_types',
+    skill_levels: 'skill_levels',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -19038,6 +19206,14 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
   export const JsonNullValueInput: {
     JsonNull: typeof JsonNull
   };
@@ -19118,6 +19294,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -19135,13 +19318,6 @@ export namespace Prisma {
    * Reference to a field of type 'Decimal[]'
    */
   export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Json'
-   */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
     
 
 
@@ -19174,6 +19350,10 @@ export namespace Prisma {
     city?: StringFilter<"Event"> | string
     website?: StringNullableFilter<"Event"> | string | null
     style?: StringNullableFilter<"Event"> | string | null
+    dance_styles?: StringNullableListFilter<"Event">
+    primary_style?: StringNullableFilter<"Event"> | string | null
+    difficulty_level?: StringNullableFilter<"Event"> | string | null
+    event_types?: StringNullableListFilter<"Event">
     description?: StringNullableFilter<"Event"> | string | null
     ai_quality_score?: IntNullableFilter<"Event"> | number | null
     ai_completeness_score?: IntNullableFilter<"Event"> | number | null
@@ -19197,6 +19377,10 @@ export namespace Prisma {
     city?: SortOrder
     website?: SortOrderInput | SortOrder
     style?: SortOrderInput | SortOrder
+    dance_styles?: SortOrder
+    primary_style?: SortOrderInput | SortOrder
+    difficulty_level?: SortOrderInput | SortOrder
+    event_types?: SortOrder
     description?: SortOrderInput | SortOrder
     ai_quality_score?: SortOrderInput | SortOrder
     ai_completeness_score?: SortOrderInput | SortOrder
@@ -19223,6 +19407,10 @@ export namespace Prisma {
     city?: StringFilter<"Event"> | string
     website?: StringNullableFilter<"Event"> | string | null
     style?: StringNullableFilter<"Event"> | string | null
+    dance_styles?: StringNullableListFilter<"Event">
+    primary_style?: StringNullableFilter<"Event"> | string | null
+    difficulty_level?: StringNullableFilter<"Event"> | string | null
+    event_types?: StringNullableListFilter<"Event">
     description?: StringNullableFilter<"Event"> | string | null
     ai_quality_score?: IntNullableFilter<"Event"> | number | null
     ai_completeness_score?: IntNullableFilter<"Event"> | number | null
@@ -19246,6 +19434,10 @@ export namespace Prisma {
     city?: SortOrder
     website?: SortOrderInput | SortOrder
     style?: SortOrderInput | SortOrder
+    dance_styles?: SortOrder
+    primary_style?: SortOrderInput | SortOrder
+    difficulty_level?: SortOrderInput | SortOrder
+    event_types?: SortOrder
     description?: SortOrderInput | SortOrder
     ai_quality_score?: SortOrderInput | SortOrder
     ai_completeness_score?: SortOrderInput | SortOrder
@@ -19272,6 +19464,10 @@ export namespace Prisma {
     city?: StringWithAggregatesFilter<"Event"> | string
     website?: StringNullableWithAggregatesFilter<"Event"> | string | null
     style?: StringNullableWithAggregatesFilter<"Event"> | string | null
+    dance_styles?: StringNullableListFilter<"Event">
+    primary_style?: StringNullableWithAggregatesFilter<"Event"> | string | null
+    difficulty_level?: StringNullableWithAggregatesFilter<"Event"> | string | null
+    event_types?: StringNullableListFilter<"Event">
     description?: StringNullableWithAggregatesFilter<"Event"> | string | null
     ai_quality_score?: IntNullableWithAggregatesFilter<"Event"> | number | null
     ai_completeness_score?: IntNullableWithAggregatesFilter<"Event"> | number | null
@@ -19400,6 +19596,11 @@ export namespace Prisma {
     ai_bio_summary?: StringNullableFilter<"Teacher"> | string | null
     ai_relevance_score?: IntNullableFilter<"Teacher"> | number | null
     image_url?: StringNullableFilter<"Teacher"> | string | null
+    specializations?: StringNullableListFilter<"Teacher">
+    experience_levels?: JsonNullableFilter<"Teacher">
+    teaching_since?: IntNullableFilter<"Teacher"> | number | null
+    credentials?: StringNullableListFilter<"Teacher">
+    preferred_events?: StringNullableListFilter<"Teacher">
     event_teachers?: ExternalEventTeacherListRelationFilter
     followers?: UserFollowTeacherListRelationFilter
   }
@@ -19412,6 +19613,11 @@ export namespace Prisma {
     ai_bio_summary?: SortOrderInput | SortOrder
     ai_relevance_score?: SortOrderInput | SortOrder
     image_url?: SortOrderInput | SortOrder
+    specializations?: SortOrder
+    experience_levels?: SortOrderInput | SortOrder
+    teaching_since?: SortOrderInput | SortOrder
+    credentials?: SortOrder
+    preferred_events?: SortOrder
     event_teachers?: ExternalEventTeacherOrderByRelationAggregateInput
     followers?: UserFollowTeacherOrderByRelationAggregateInput
   }
@@ -19427,6 +19633,11 @@ export namespace Prisma {
     ai_bio_summary?: StringNullableFilter<"Teacher"> | string | null
     ai_relevance_score?: IntNullableFilter<"Teacher"> | number | null
     image_url?: StringNullableFilter<"Teacher"> | string | null
+    specializations?: StringNullableListFilter<"Teacher">
+    experience_levels?: JsonNullableFilter<"Teacher">
+    teaching_since?: IntNullableFilter<"Teacher"> | number | null
+    credentials?: StringNullableListFilter<"Teacher">
+    preferred_events?: StringNullableListFilter<"Teacher">
     event_teachers?: ExternalEventTeacherListRelationFilter
     followers?: UserFollowTeacherListRelationFilter
   }, "id">
@@ -19439,6 +19650,11 @@ export namespace Prisma {
     ai_bio_summary?: SortOrderInput | SortOrder
     ai_relevance_score?: SortOrderInput | SortOrder
     image_url?: SortOrderInput | SortOrder
+    specializations?: SortOrder
+    experience_levels?: SortOrderInput | SortOrder
+    teaching_since?: SortOrderInput | SortOrder
+    credentials?: SortOrder
+    preferred_events?: SortOrder
     _count?: TeacherCountOrderByAggregateInput
     _avg?: TeacherAvgOrderByAggregateInput
     _max?: TeacherMaxOrderByAggregateInput
@@ -19457,6 +19673,11 @@ export namespace Prisma {
     ai_bio_summary?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
     ai_relevance_score?: IntNullableWithAggregatesFilter<"Teacher"> | number | null
     image_url?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
+    specializations?: StringNullableListFilter<"Teacher">
+    experience_levels?: JsonNullableWithAggregatesFilter<"Teacher">
+    teaching_since?: IntNullableWithAggregatesFilter<"Teacher"> | number | null
+    credentials?: StringNullableListFilter<"Teacher">
+    preferred_events?: StringNullableListFilter<"Teacher">
   }
 
   export type MusicianWhereInput = {
@@ -19470,6 +19691,9 @@ export namespace Prisma {
     avatar?: StringNullableFilter<"Musician"> | string | null
     verified?: BoolNullableFilter<"Musician"> | boolean | null
     instruments?: StringNullableListFilter<"Musician">
+    music_genres?: StringNullableListFilter<"Musician">
+    primary_genre?: StringNullableFilter<"Musician"> | string | null
+    performance_types?: StringNullableListFilter<"Musician">
     yearsActive?: IntNullableFilter<"Musician"> | number | null
     website?: StringNullableFilter<"Musician"> | string | null
     email?: StringNullableFilter<"Musician"> | string | null
@@ -19490,6 +19714,9 @@ export namespace Prisma {
     avatar?: SortOrderInput | SortOrder
     verified?: SortOrderInput | SortOrder
     instruments?: SortOrder
+    music_genres?: SortOrder
+    primary_genre?: SortOrderInput | SortOrder
+    performance_types?: SortOrder
     yearsActive?: SortOrderInput | SortOrder
     website?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
@@ -19513,6 +19740,9 @@ export namespace Prisma {
     avatar?: StringNullableFilter<"Musician"> | string | null
     verified?: BoolNullableFilter<"Musician"> | boolean | null
     instruments?: StringNullableListFilter<"Musician">
+    music_genres?: StringNullableListFilter<"Musician">
+    primary_genre?: StringNullableFilter<"Musician"> | string | null
+    performance_types?: StringNullableListFilter<"Musician">
     yearsActive?: IntNullableFilter<"Musician"> | number | null
     website?: StringNullableFilter<"Musician"> | string | null
     email?: StringNullableFilter<"Musician"> | string | null
@@ -19533,6 +19763,9 @@ export namespace Prisma {
     avatar?: SortOrderInput | SortOrder
     verified?: SortOrderInput | SortOrder
     instruments?: SortOrder
+    music_genres?: SortOrder
+    primary_genre?: SortOrderInput | SortOrder
+    performance_types?: SortOrder
     yearsActive?: SortOrderInput | SortOrder
     website?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
@@ -19559,6 +19792,9 @@ export namespace Prisma {
     avatar?: StringNullableWithAggregatesFilter<"Musician"> | string | null
     verified?: BoolNullableWithAggregatesFilter<"Musician"> | boolean | null
     instruments?: StringNullableListFilter<"Musician">
+    music_genres?: StringNullableListFilter<"Musician">
+    primary_genre?: StringNullableWithAggregatesFilter<"Musician"> | string | null
+    performance_types?: StringNullableListFilter<"Musician">
     yearsActive?: IntNullableWithAggregatesFilter<"Musician"> | number | null
     website?: StringNullableWithAggregatesFilter<"Musician"> | string | null
     email?: StringNullableWithAggregatesFilter<"Musician"> | string | null
@@ -19892,6 +20128,10 @@ export namespace Prisma {
     defaultCity?: StringNullableFilter<"UserPreferences"> | string | null
     searchRadius?: IntNullableFilter<"UserPreferences"> | number | null
     timezone?: StringNullableFilter<"UserPreferences"> | string | null
+    preferred_dance_styles?: StringNullableListFilter<"UserPreferences">
+    experience_level?: StringNullableFilter<"UserPreferences"> | string | null
+    preferred_event_types?: StringNullableListFilter<"UserPreferences">
+    skill_levels?: JsonNullableFilter<"UserPreferences">
     created_at?: DateTimeFilter<"UserPreferences"> | Date | string
     updated_at?: DateTimeFilter<"UserPreferences"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -19912,6 +20152,10 @@ export namespace Prisma {
     defaultCity?: SortOrderInput | SortOrder
     searchRadius?: SortOrderInput | SortOrder
     timezone?: SortOrderInput | SortOrder
+    preferred_dance_styles?: SortOrder
+    experience_level?: SortOrderInput | SortOrder
+    preferred_event_types?: SortOrder
+    skill_levels?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -19935,6 +20179,10 @@ export namespace Prisma {
     defaultCity?: StringNullableFilter<"UserPreferences"> | string | null
     searchRadius?: IntNullableFilter<"UserPreferences"> | number | null
     timezone?: StringNullableFilter<"UserPreferences"> | string | null
+    preferred_dance_styles?: StringNullableListFilter<"UserPreferences">
+    experience_level?: StringNullableFilter<"UserPreferences"> | string | null
+    preferred_event_types?: StringNullableListFilter<"UserPreferences">
+    skill_levels?: JsonNullableFilter<"UserPreferences">
     created_at?: DateTimeFilter<"UserPreferences"> | Date | string
     updated_at?: DateTimeFilter<"UserPreferences"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -19955,6 +20203,10 @@ export namespace Prisma {
     defaultCity?: SortOrderInput | SortOrder
     searchRadius?: SortOrderInput | SortOrder
     timezone?: SortOrderInput | SortOrder
+    preferred_dance_styles?: SortOrder
+    experience_level?: SortOrderInput | SortOrder
+    preferred_event_types?: SortOrder
+    skill_levels?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: UserPreferencesCountOrderByAggregateInput
@@ -19982,6 +20234,10 @@ export namespace Prisma {
     defaultCity?: StringNullableWithAggregatesFilter<"UserPreferences"> | string | null
     searchRadius?: IntNullableWithAggregatesFilter<"UserPreferences"> | number | null
     timezone?: StringNullableWithAggregatesFilter<"UserPreferences"> | string | null
+    preferred_dance_styles?: StringNullableListFilter<"UserPreferences">
+    experience_level?: StringNullableWithAggregatesFilter<"UserPreferences"> | string | null
+    preferred_event_types?: StringNullableListFilter<"UserPreferences">
+    skill_levels?: JsonNullableWithAggregatesFilter<"UserPreferences">
     created_at?: DateTimeWithAggregatesFilter<"UserPreferences"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"UserPreferences"> | Date | string
   }
@@ -20351,6 +20607,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -20374,6 +20634,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -20396,6 +20660,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20419,6 +20687,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20442,6 +20714,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -20459,6 +20735,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20477,6 +20757,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20585,6 +20869,11 @@ export namespace Prisma {
     ai_bio_summary?: string | null
     ai_relevance_score?: number | null
     image_url?: string | null
+    specializations?: TeacherCreatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: number | null
+    credentials?: TeacherCreatecredentialsInput | string[]
+    preferred_events?: TeacherCreatepreferred_eventsInput | string[]
     event_teachers?: ExternalEventTeacherCreateNestedManyWithoutTeachersInput
     followers?: UserFollowTeacherCreateNestedManyWithoutTeacherInput
   }
@@ -20597,6 +20886,11 @@ export namespace Prisma {
     ai_bio_summary?: string | null
     ai_relevance_score?: number | null
     image_url?: string | null
+    specializations?: TeacherCreatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: number | null
+    credentials?: TeacherCreatecredentialsInput | string[]
+    preferred_events?: TeacherCreatepreferred_eventsInput | string[]
     event_teachers?: ExternalEventTeacherUncheckedCreateNestedManyWithoutTeachersInput
     followers?: UserFollowTeacherUncheckedCreateNestedManyWithoutTeacherInput
   }
@@ -20608,6 +20902,11 @@ export namespace Prisma {
     ai_bio_summary?: NullableStringFieldUpdateOperationsInput | string | null
     ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    specializations?: TeacherUpdatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: NullableIntFieldUpdateOperationsInput | number | null
+    credentials?: TeacherUpdatecredentialsInput | string[]
+    preferred_events?: TeacherUpdatepreferred_eventsInput | string[]
     event_teachers?: ExternalEventTeacherUpdateManyWithoutTeachersNestedInput
     followers?: UserFollowTeacherUpdateManyWithoutTeacherNestedInput
   }
@@ -20620,6 +20919,11 @@ export namespace Prisma {
     ai_bio_summary?: NullableStringFieldUpdateOperationsInput | string | null
     ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    specializations?: TeacherUpdatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: NullableIntFieldUpdateOperationsInput | number | null
+    credentials?: TeacherUpdatecredentialsInput | string[]
+    preferred_events?: TeacherUpdatepreferred_eventsInput | string[]
     event_teachers?: ExternalEventTeacherUncheckedUpdateManyWithoutTeachersNestedInput
     followers?: UserFollowTeacherUncheckedUpdateManyWithoutTeacherNestedInput
   }
@@ -20632,6 +20936,11 @@ export namespace Prisma {
     ai_bio_summary?: string | null
     ai_relevance_score?: number | null
     image_url?: string | null
+    specializations?: TeacherCreatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: number | null
+    credentials?: TeacherCreatecredentialsInput | string[]
+    preferred_events?: TeacherCreatepreferred_eventsInput | string[]
   }
 
   export type TeacherUpdateManyMutationInput = {
@@ -20641,6 +20950,11 @@ export namespace Prisma {
     ai_bio_summary?: NullableStringFieldUpdateOperationsInput | string | null
     ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    specializations?: TeacherUpdatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: NullableIntFieldUpdateOperationsInput | number | null
+    credentials?: TeacherUpdatecredentialsInput | string[]
+    preferred_events?: TeacherUpdatepreferred_eventsInput | string[]
   }
 
   export type TeacherUncheckedUpdateManyInput = {
@@ -20651,6 +20965,11 @@ export namespace Prisma {
     ai_bio_summary?: NullableStringFieldUpdateOperationsInput | string | null
     ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    specializations?: TeacherUpdatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: NullableIntFieldUpdateOperationsInput | number | null
+    credentials?: TeacherUpdatecredentialsInput | string[]
+    preferred_events?: TeacherUpdatepreferred_eventsInput | string[]
   }
 
   export type MusicianCreateInput = {
@@ -20660,6 +20979,9 @@ export namespace Prisma {
     avatar?: string | null
     verified?: boolean | null
     instruments?: MusicianCreateinstrumentsInput | string[]
+    music_genres?: MusicianCreatemusic_genresInput | string[]
+    primary_genre?: string | null
+    performance_types?: MusicianCreateperformance_typesInput | string[]
     yearsActive?: number | null
     website?: string | null
     email?: string | null
@@ -20680,6 +21002,9 @@ export namespace Prisma {
     avatar?: string | null
     verified?: boolean | null
     instruments?: MusicianCreateinstrumentsInput | string[]
+    music_genres?: MusicianCreatemusic_genresInput | string[]
+    primary_genre?: string | null
+    performance_types?: MusicianCreateperformance_typesInput | string[]
     yearsActive?: number | null
     website?: string | null
     email?: string | null
@@ -20699,6 +21024,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     instruments?: MusicianUpdateinstrumentsInput | string[]
+    music_genres?: MusicianUpdatemusic_genresInput | string[]
+    primary_genre?: NullableStringFieldUpdateOperationsInput | string | null
+    performance_types?: MusicianUpdateperformance_typesInput | string[]
     yearsActive?: NullableIntFieldUpdateOperationsInput | number | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20719,6 +21047,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     instruments?: MusicianUpdateinstrumentsInput | string[]
+    music_genres?: MusicianUpdatemusic_genresInput | string[]
+    primary_genre?: NullableStringFieldUpdateOperationsInput | string | null
+    performance_types?: MusicianUpdateperformance_typesInput | string[]
     yearsActive?: NullableIntFieldUpdateOperationsInput | number | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20739,6 +21070,9 @@ export namespace Prisma {
     avatar?: string | null
     verified?: boolean | null
     instruments?: MusicianCreateinstrumentsInput | string[]
+    music_genres?: MusicianCreatemusic_genresInput | string[]
+    primary_genre?: string | null
+    performance_types?: MusicianCreateperformance_typesInput | string[]
     yearsActive?: number | null
     website?: string | null
     email?: string | null
@@ -20756,6 +21090,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     instruments?: MusicianUpdateinstrumentsInput | string[]
+    music_genres?: MusicianUpdatemusic_genresInput | string[]
+    primary_genre?: NullableStringFieldUpdateOperationsInput | string | null
+    performance_types?: MusicianUpdateperformance_typesInput | string[]
     yearsActive?: NullableIntFieldUpdateOperationsInput | number | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20774,6 +21111,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     instruments?: MusicianUpdateinstrumentsInput | string[]
+    music_genres?: MusicianUpdatemusic_genresInput | string[]
+    primary_genre?: NullableStringFieldUpdateOperationsInput | string | null
+    performance_types?: MusicianUpdateperformance_typesInput | string[]
     yearsActive?: NullableIntFieldUpdateOperationsInput | number | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21110,6 +21450,10 @@ export namespace Prisma {
     defaultCity?: string | null
     searchRadius?: number | null
     timezone?: string | null
+    preferred_dance_styles?: UserPreferencesCreatepreferred_dance_stylesInput | string[]
+    experience_level?: string | null
+    preferred_event_types?: UserPreferencesCreatepreferred_event_typesInput | string[]
+    skill_levels?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutPreferencesInput
@@ -21130,6 +21474,10 @@ export namespace Prisma {
     defaultCity?: string | null
     searchRadius?: number | null
     timezone?: string | null
+    preferred_dance_styles?: UserPreferencesCreatepreferred_dance_stylesInput | string[]
+    experience_level?: string | null
+    preferred_event_types?: UserPreferencesCreatepreferred_event_typesInput | string[]
+    skill_levels?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -21147,6 +21495,10 @@ export namespace Prisma {
     defaultCity?: NullableStringFieldUpdateOperationsInput | string | null
     searchRadius?: NullableIntFieldUpdateOperationsInput | number | null
     timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferred_dance_styles?: UserPreferencesUpdatepreferred_dance_stylesInput | string[]
+    experience_level?: NullableStringFieldUpdateOperationsInput | string | null
+    preferred_event_types?: UserPreferencesUpdatepreferred_event_typesInput | string[]
+    skill_levels?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPreferencesNestedInput
@@ -21167,6 +21519,10 @@ export namespace Prisma {
     defaultCity?: NullableStringFieldUpdateOperationsInput | string | null
     searchRadius?: NullableIntFieldUpdateOperationsInput | number | null
     timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferred_dance_styles?: UserPreferencesUpdatepreferred_dance_stylesInput | string[]
+    experience_level?: NullableStringFieldUpdateOperationsInput | string | null
+    preferred_event_types?: UserPreferencesUpdatepreferred_event_typesInput | string[]
+    skill_levels?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21186,6 +21542,10 @@ export namespace Prisma {
     defaultCity?: string | null
     searchRadius?: number | null
     timezone?: string | null
+    preferred_dance_styles?: UserPreferencesCreatepreferred_dance_stylesInput | string[]
+    experience_level?: string | null
+    preferred_event_types?: UserPreferencesCreatepreferred_event_typesInput | string[]
+    skill_levels?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -21203,6 +21563,10 @@ export namespace Prisma {
     defaultCity?: NullableStringFieldUpdateOperationsInput | string | null
     searchRadius?: NullableIntFieldUpdateOperationsInput | number | null
     timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferred_dance_styles?: UserPreferencesUpdatepreferred_dance_stylesInput | string[]
+    experience_level?: NullableStringFieldUpdateOperationsInput | string | null
+    preferred_event_types?: UserPreferencesUpdatepreferred_event_typesInput | string[]
+    skill_levels?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21222,6 +21586,10 @@ export namespace Prisma {
     defaultCity?: NullableStringFieldUpdateOperationsInput | string | null
     searchRadius?: NullableIntFieldUpdateOperationsInput | number | null
     timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferred_dance_styles?: UserPreferencesUpdatepreferred_dance_stylesInput | string[]
+    experience_level?: NullableStringFieldUpdateOperationsInput | string | null
+    preferred_event_types?: UserPreferencesUpdatepreferred_event_typesInput | string[]
+    skill_levels?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21604,6 +21972,14 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -21690,6 +22066,10 @@ export namespace Prisma {
     city?: SortOrder
     website?: SortOrder
     style?: SortOrder
+    dance_styles?: SortOrder
+    primary_style?: SortOrder
+    difficulty_level?: SortOrder
+    event_types?: SortOrder
     description?: SortOrder
     ai_quality_score?: SortOrder
     ai_completeness_score?: SortOrder
@@ -21714,6 +22094,8 @@ export namespace Prisma {
     city?: SortOrder
     website?: SortOrder
     style?: SortOrder
+    primary_style?: SortOrder
+    difficulty_level?: SortOrder
     description?: SortOrder
     ai_quality_score?: SortOrder
     ai_completeness_score?: SortOrder
@@ -21732,6 +22114,8 @@ export namespace Prisma {
     city?: SortOrder
     website?: SortOrder
     style?: SortOrder
+    primary_style?: SortOrder
+    difficulty_level?: SortOrder
     description?: SortOrder
     ai_quality_score?: SortOrder
     ai_completeness_score?: SortOrder
@@ -21924,6 +22308,28 @@ export namespace Prisma {
     id?: SortOrder
     event_id?: SortOrder
   }
+  export type JsonNullableFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type UserFollowTeacherListRelationFilter = {
     every?: UserFollowTeacherWhereInput
@@ -21943,11 +22349,17 @@ export namespace Prisma {
     ai_bio_summary?: SortOrder
     ai_relevance_score?: SortOrder
     image_url?: SortOrder
+    specializations?: SortOrder
+    experience_levels?: SortOrder
+    teaching_since?: SortOrder
+    credentials?: SortOrder
+    preferred_events?: SortOrder
   }
 
   export type TeacherAvgOrderByAggregateInput = {
     id?: SortOrder
     ai_relevance_score?: SortOrder
+    teaching_since?: SortOrder
   }
 
   export type TeacherMaxOrderByAggregateInput = {
@@ -21958,6 +22370,7 @@ export namespace Prisma {
     ai_bio_summary?: SortOrder
     ai_relevance_score?: SortOrder
     image_url?: SortOrder
+    teaching_since?: SortOrder
   }
 
   export type TeacherMinOrderByAggregateInput = {
@@ -21968,24 +22381,43 @@ export namespace Prisma {
     ai_bio_summary?: SortOrder
     ai_relevance_score?: SortOrder
     image_url?: SortOrder
+    teaching_since?: SortOrder
   }
 
   export type TeacherSumOrderByAggregateInput = {
     id?: SortOrder
     ai_relevance_score?: SortOrder
+    teaching_since?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type BoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
   }
 
   export type UserFollowMusicianListRelationFilter = {
@@ -22006,6 +22438,9 @@ export namespace Prisma {
     avatar?: SortOrder
     verified?: SortOrder
     instruments?: SortOrder
+    music_genres?: SortOrder
+    primary_genre?: SortOrder
+    performance_types?: SortOrder
     yearsActive?: SortOrder
     website?: SortOrder
     email?: SortOrder
@@ -22030,6 +22465,7 @@ export namespace Prisma {
     bio?: SortOrder
     avatar?: SortOrder
     verified?: SortOrder
+    primary_genre?: SortOrder
     yearsActive?: SortOrder
     website?: SortOrder
     email?: SortOrder
@@ -22047,6 +22483,7 @@ export namespace Prisma {
     bio?: SortOrder
     avatar?: SortOrder
     verified?: SortOrder
+    primary_genre?: SortOrder
     yearsActive?: SortOrder
     website?: SortOrder
     email?: SortOrder
@@ -22346,6 +22783,10 @@ export namespace Prisma {
     defaultCity?: SortOrder
     searchRadius?: SortOrder
     timezone?: SortOrder
+    preferred_dance_styles?: SortOrder
+    experience_level?: SortOrder
+    preferred_event_types?: SortOrder
+    skill_levels?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -22371,6 +22812,7 @@ export namespace Prisma {
     defaultCity?: SortOrder
     searchRadius?: SortOrder
     timezone?: SortOrder
+    experience_level?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -22390,6 +22832,7 @@ export namespace Prisma {
     defaultCity?: SortOrder
     searchRadius?: SortOrder
     timezone?: SortOrder
+    experience_level?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -22680,6 +23123,14 @@ export namespace Prisma {
     follower_count?: SortOrder
   }
 
+  export type EventCreatedance_stylesInput = {
+    set: string[]
+  }
+
+  export type EventCreateevent_typesInput = {
+    set: string[]
+  }
+
   export type event_musiciansCreateNestedManyWithoutEventsInput = {
     create?: XOR<event_musiciansCreateWithoutEventsInput, event_musiciansUncheckedCreateWithoutEventsInput> | event_musiciansCreateWithoutEventsInput[] | event_musiciansUncheckedCreateWithoutEventsInput[]
     connectOrCreate?: event_musiciansCreateOrConnectWithoutEventsInput | event_musiciansCreateOrConnectWithoutEventsInput[]
@@ -22760,6 +23211,16 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type EventUpdatedance_stylesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type EventUpdateevent_typesInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -22966,6 +23427,18 @@ export namespace Prisma {
     update?: XOR<XOR<EventUpdateToOneWithWhereWithoutVenuesInput, EventUpdateWithoutVenuesInput>, EventUncheckedUpdateWithoutVenuesInput>
   }
 
+  export type TeacherCreatespecializationsInput = {
+    set: string[]
+  }
+
+  export type TeacherCreatecredentialsInput = {
+    set: string[]
+  }
+
+  export type TeacherCreatepreferred_eventsInput = {
+    set: string[]
+  }
+
   export type ExternalEventTeacherCreateNestedManyWithoutTeachersInput = {
     create?: XOR<ExternalEventTeacherCreateWithoutTeachersInput, ExternalEventTeacherUncheckedCreateWithoutTeachersInput> | ExternalEventTeacherCreateWithoutTeachersInput[] | ExternalEventTeacherUncheckedCreateWithoutTeachersInput[]
     connectOrCreate?: ExternalEventTeacherCreateOrConnectWithoutTeachersInput | ExternalEventTeacherCreateOrConnectWithoutTeachersInput[]
@@ -22992,6 +23465,21 @@ export namespace Prisma {
     connectOrCreate?: UserFollowTeacherCreateOrConnectWithoutTeacherInput | UserFollowTeacherCreateOrConnectWithoutTeacherInput[]
     createMany?: UserFollowTeacherCreateManyTeacherInputEnvelope
     connect?: UserFollowTeacherWhereUniqueInput | UserFollowTeacherWhereUniqueInput[]
+  }
+
+  export type TeacherUpdatespecializationsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type TeacherUpdatecredentialsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type TeacherUpdatepreferred_eventsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type ExternalEventTeacherUpdateManyWithoutTeachersNestedInput = {
@@ -23054,6 +23542,14 @@ export namespace Prisma {
     set: string[]
   }
 
+  export type MusicianCreatemusic_genresInput = {
+    set: string[]
+  }
+
+  export type MusicianCreateperformance_typesInput = {
+    set: string[]
+  }
+
   export type event_musiciansCreateNestedManyWithoutMusiciansInput = {
     create?: XOR<event_musiciansCreateWithoutMusiciansInput, event_musiciansUncheckedCreateWithoutMusiciansInput> | event_musiciansCreateWithoutMusiciansInput[] | event_musiciansUncheckedCreateWithoutMusiciansInput[]
     connectOrCreate?: event_musiciansCreateOrConnectWithoutMusiciansInput | event_musiciansCreateOrConnectWithoutMusiciansInput[]
@@ -23087,6 +23583,16 @@ export namespace Prisma {
   }
 
   export type MusicianUpdateinstrumentsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type MusicianUpdatemusic_genresInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type MusicianUpdateperformance_typesInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -23514,10 +24020,28 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAccountsInput, UserUpdateWithoutAccountsInput>, UserUncheckedUpdateWithoutAccountsInput>
   }
 
+  export type UserPreferencesCreatepreferred_dance_stylesInput = {
+    set: string[]
+  }
+
+  export type UserPreferencesCreatepreferred_event_typesInput = {
+    set: string[]
+  }
+
   export type UserCreateNestedOneWithoutPreferencesInput = {
     create?: XOR<UserCreateWithoutPreferencesInput, UserUncheckedCreateWithoutPreferencesInput>
     connectOrCreate?: UserCreateOrConnectWithoutPreferencesInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type UserPreferencesUpdatepreferred_dance_stylesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserPreferencesUpdatepreferred_event_typesInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type UserUpdateOneRequiredWithoutPreferencesNestedInput = {
@@ -23826,6 +24350,28 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
@@ -24169,6 +24715,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -24191,6 +24741,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -24216,6 +24770,11 @@ export namespace Prisma {
     ai_bio_summary?: string | null
     ai_relevance_score?: number | null
     image_url?: string | null
+    specializations?: TeacherCreatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: number | null
+    credentials?: TeacherCreatecredentialsInput | string[]
+    preferred_events?: TeacherCreatepreferred_eventsInput | string[]
     followers?: UserFollowTeacherCreateNestedManyWithoutTeacherInput
   }
 
@@ -24227,6 +24786,11 @@ export namespace Prisma {
     ai_bio_summary?: string | null
     ai_relevance_score?: number | null
     image_url?: string | null
+    specializations?: TeacherCreatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: number | null
+    credentials?: TeacherCreatecredentialsInput | string[]
+    preferred_events?: TeacherCreatepreferred_eventsInput | string[]
     followers?: UserFollowTeacherUncheckedCreateNestedManyWithoutTeacherInput
   }
 
@@ -24254,6 +24818,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24276,6 +24844,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24307,6 +24879,11 @@ export namespace Prisma {
     ai_bio_summary?: NullableStringFieldUpdateOperationsInput | string | null
     ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    specializations?: TeacherUpdatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: NullableIntFieldUpdateOperationsInput | number | null
+    credentials?: TeacherUpdatecredentialsInput | string[]
+    preferred_events?: TeacherUpdatepreferred_eventsInput | string[]
     followers?: UserFollowTeacherUpdateManyWithoutTeacherNestedInput
   }
 
@@ -24318,6 +24895,11 @@ export namespace Prisma {
     ai_bio_summary?: NullableStringFieldUpdateOperationsInput | string | null
     ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    specializations?: TeacherUpdatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: NullableIntFieldUpdateOperationsInput | number | null
+    credentials?: TeacherUpdatecredentialsInput | string[]
+    preferred_events?: TeacherUpdatepreferred_eventsInput | string[]
     followers?: UserFollowTeacherUncheckedUpdateManyWithoutTeacherNestedInput
   }
 
@@ -24329,6 +24911,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -24351,6 +24937,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -24388,6 +24978,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24410,6 +25004,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24598,6 +25196,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -24620,6 +25222,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -24645,6 +25251,9 @@ export namespace Prisma {
     avatar?: string | null
     verified?: boolean | null
     instruments?: MusicianCreateinstrumentsInput | string[]
+    music_genres?: MusicianCreatemusic_genresInput | string[]
+    primary_genre?: string | null
+    performance_types?: MusicianCreateperformance_typesInput | string[]
     yearsActive?: number | null
     website?: string | null
     email?: string | null
@@ -24664,6 +25273,9 @@ export namespace Prisma {
     avatar?: string | null
     verified?: boolean | null
     instruments?: MusicianCreateinstrumentsInput | string[]
+    music_genres?: MusicianCreatemusic_genresInput | string[]
+    primary_genre?: string | null
+    performance_types?: MusicianCreateperformance_typesInput | string[]
     yearsActive?: number | null
     website?: string | null
     email?: string | null
@@ -24699,6 +25311,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24721,6 +25337,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24752,6 +25372,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     instruments?: MusicianUpdateinstrumentsInput | string[]
+    music_genres?: MusicianUpdatemusic_genresInput | string[]
+    primary_genre?: NullableStringFieldUpdateOperationsInput | string | null
+    performance_types?: MusicianUpdateperformance_typesInput | string[]
     yearsActive?: NullableIntFieldUpdateOperationsInput | number | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24771,6 +25394,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     instruments?: MusicianUpdateinstrumentsInput | string[]
+    music_genres?: MusicianUpdatemusic_genresInput | string[]
+    primary_genre?: NullableStringFieldUpdateOperationsInput | string | null
+    performance_types?: MusicianUpdateperformance_typesInput | string[]
     yearsActive?: NullableIntFieldUpdateOperationsInput | number | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24790,6 +25416,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -24812,6 +25442,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -24849,6 +25483,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24871,6 +25509,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24897,6 +25539,10 @@ export namespace Prisma {
     defaultCity?: string | null
     searchRadius?: number | null
     timezone?: string | null
+    preferred_dance_styles?: UserPreferencesCreatepreferred_dance_stylesInput | string[]
+    experience_level?: string | null
+    preferred_event_types?: UserPreferencesCreatepreferred_event_typesInput | string[]
+    skill_levels?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -24915,6 +25561,10 @@ export namespace Prisma {
     defaultCity?: string | null
     searchRadius?: number | null
     timezone?: string | null
+    preferred_dance_styles?: UserPreferencesCreatepreferred_dance_stylesInput | string[]
+    experience_level?: string | null
+    preferred_event_types?: UserPreferencesCreatepreferred_event_typesInput | string[]
+    skill_levels?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -25087,6 +25737,10 @@ export namespace Prisma {
     defaultCity?: NullableStringFieldUpdateOperationsInput | string | null
     searchRadius?: NullableIntFieldUpdateOperationsInput | number | null
     timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferred_dance_styles?: UserPreferencesUpdatepreferred_dance_stylesInput | string[]
+    experience_level?: NullableStringFieldUpdateOperationsInput | string | null
+    preferred_event_types?: UserPreferencesUpdatepreferred_event_typesInput | string[]
+    skill_levels?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25105,6 +25759,10 @@ export namespace Prisma {
     defaultCity?: NullableStringFieldUpdateOperationsInput | string | null
     searchRadius?: NullableIntFieldUpdateOperationsInput | number | null
     timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferred_dance_styles?: UserPreferencesUpdatepreferred_dance_stylesInput | string[]
+    experience_level?: NullableStringFieldUpdateOperationsInput | string | null
+    preferred_event_types?: UserPreferencesUpdatepreferred_event_typesInput | string[]
+    skill_levels?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25520,6 +26178,11 @@ export namespace Prisma {
     ai_bio_summary?: string | null
     ai_relevance_score?: number | null
     image_url?: string | null
+    specializations?: TeacherCreatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: number | null
+    credentials?: TeacherCreatecredentialsInput | string[]
+    preferred_events?: TeacherCreatepreferred_eventsInput | string[]
     event_teachers?: ExternalEventTeacherCreateNestedManyWithoutTeachersInput
   }
 
@@ -25531,6 +26194,11 @@ export namespace Prisma {
     ai_bio_summary?: string | null
     ai_relevance_score?: number | null
     image_url?: string | null
+    specializations?: TeacherCreatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: number | null
+    credentials?: TeacherCreatecredentialsInput | string[]
+    preferred_events?: TeacherCreatepreferred_eventsInput | string[]
     event_teachers?: ExternalEventTeacherUncheckedCreateNestedManyWithoutTeachersInput
   }
 
@@ -25599,6 +26267,11 @@ export namespace Prisma {
     ai_bio_summary?: NullableStringFieldUpdateOperationsInput | string | null
     ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    specializations?: TeacherUpdatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: NullableIntFieldUpdateOperationsInput | number | null
+    credentials?: TeacherUpdatecredentialsInput | string[]
+    preferred_events?: TeacherUpdatepreferred_eventsInput | string[]
     event_teachers?: ExternalEventTeacherUpdateManyWithoutTeachersNestedInput
   }
 
@@ -25610,6 +26283,11 @@ export namespace Prisma {
     ai_bio_summary?: NullableStringFieldUpdateOperationsInput | string | null
     ai_relevance_score?: NullableIntFieldUpdateOperationsInput | number | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    specializations?: TeacherUpdatespecializationsInput | string[]
+    experience_levels?: NullableJsonNullValueInput | InputJsonValue
+    teaching_since?: NullableIntFieldUpdateOperationsInput | number | null
+    credentials?: TeacherUpdatecredentialsInput | string[]
+    preferred_events?: TeacherUpdatepreferred_eventsInput | string[]
     event_teachers?: ExternalEventTeacherUncheckedUpdateManyWithoutTeachersNestedInput
   }
 
@@ -25656,6 +26334,9 @@ export namespace Prisma {
     avatar?: string | null
     verified?: boolean | null
     instruments?: MusicianCreateinstrumentsInput | string[]
+    music_genres?: MusicianCreatemusic_genresInput | string[]
+    primary_genre?: string | null
+    performance_types?: MusicianCreateperformance_typesInput | string[]
     yearsActive?: number | null
     website?: string | null
     email?: string | null
@@ -25675,6 +26356,9 @@ export namespace Prisma {
     avatar?: string | null
     verified?: boolean | null
     instruments?: MusicianCreateinstrumentsInput | string[]
+    music_genres?: MusicianCreatemusic_genresInput | string[]
+    primary_genre?: string | null
+    performance_types?: MusicianCreateperformance_typesInput | string[]
     yearsActive?: number | null
     website?: string | null
     email?: string | null
@@ -25751,6 +26435,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     instruments?: MusicianUpdateinstrumentsInput | string[]
+    music_genres?: MusicianUpdatemusic_genresInput | string[]
+    primary_genre?: NullableStringFieldUpdateOperationsInput | string | null
+    performance_types?: MusicianUpdateperformance_typesInput | string[]
     yearsActive?: NullableIntFieldUpdateOperationsInput | number | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25770,6 +26457,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     instruments?: MusicianUpdateinstrumentsInput | string[]
+    music_genres?: MusicianUpdatemusic_genresInput | string[]
+    primary_genre?: NullableStringFieldUpdateOperationsInput | string | null
+    performance_types?: MusicianUpdateperformance_typesInput | string[]
     yearsActive?: NullableIntFieldUpdateOperationsInput | number | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25825,6 +26515,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -25847,6 +26541,10 @@ export namespace Prisma {
     city: string
     website?: string | null
     style?: string | null
+    dance_styles?: EventCreatedance_stylesInput | string[]
+    primary_style?: string | null
+    difficulty_level?: string | null
+    event_types?: EventCreateevent_typesInput | string[]
     description?: string | null
     ai_quality_score?: number | null
     ai_completeness_score?: number | null
@@ -25926,6 +26624,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null
@@ -25948,6 +26650,10 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     website?: NullableStringFieldUpdateOperationsInput | string | null
     style?: NullableStringFieldUpdateOperationsInput | string | null
+    dance_styles?: EventUpdatedance_stylesInput | string[]
+    primary_style?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty_level?: NullableStringFieldUpdateOperationsInput | string | null
+    event_types?: EventUpdateevent_typesInput | string[]
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ai_quality_score?: NullableIntFieldUpdateOperationsInput | number | null
     ai_completeness_score?: NullableIntFieldUpdateOperationsInput | number | null

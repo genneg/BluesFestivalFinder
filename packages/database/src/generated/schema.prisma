@@ -18,6 +18,10 @@ model Event {
   city                  String                 @db.VarChar(100)
   website               String?                @db.VarChar(500)
   style                 String?                @db.VarChar(100)
+  dance_styles          String[]               @default(["blues"]) // ['blues', 'swing', 'balboa', 'shag', 'boogie']
+  primary_style         String?                @default("blues") @db.VarChar(50) // Primary dance style
+  difficulty_level      String?                @default("all") @db.VarChar(20) // 'beginner', 'intermediate', 'advanced', 'all'
+  event_types           String[]               @default(["festival"]) // ['workshop', 'social', 'competition', 'festival']
   description           String?
   ai_quality_score      Int?
   ai_completeness_score Int?
@@ -35,6 +39,8 @@ model Event {
   @@index([created_at], map: "idx_events_created_at")
   @@index([from_date, to_date], map: "idx_events_dates")
   @@index([name], map: "idx_events_name")
+  @@index([dance_styles], map: "idx_events_dance_styles")
+  @@index([primary_style], map: "idx_events_primary_style")
   @@map("events")
 }
 
@@ -68,31 +74,42 @@ model Teacher {
   ai_bio_summary     String?
   ai_relevance_score Int?
   image_url          String?
+  specializations    String[]               @default(["blues"]) // ['blues', 'swing', 'balboa', 'shag', 'boogie']
+  experience_levels  Json? // {blues: 'advanced', swing: 'intermediate', balboa: 'beginner'}
+  teaching_since     Int? // Year when started teaching
+  credentials        String[]               @default([]) // Certifications, achievements, etc.
+  preferred_events   String[]               @default(["workshop", "festival"]) // Types of events they prefer
   event_teachers     ExternalEventTeacher[]
   followers          UserFollowTeacher[]
 
+  @@index([specializations], map: "idx_teachers_specializations")
   @@map("teachers")
 }
 
 model Musician {
-  id              Int                  @id @default(autoincrement())
-  name            String               @db.VarChar(255)
-  slug            String               @unique @db.VarChar(255)
-  bio             String?
-  avatar          String?              @db.VarChar(500)
-  verified        Boolean?             @default(false)
-  instruments     String[]
-  yearsActive     Int?
-  website         String?              @db.VarChar(500)
-  email           String?              @db.VarChar(255)
-  followerCount   Int?                 @default(0)
-  eventCount      Int?                 @default(0)
-  createdAt       DateTime?            @default(now()) @db.Timestamptz(6)
-  updatedAt       DateTime?            @default(now()) @updatedAt @db.Timestamptz(6)
-  image_url       String?
-  event_musicians event_musicians[]
-  followers       UserFollowMusician[]
+  id                Int                  @id @default(autoincrement())
+  name              String               @db.VarChar(255)
+  slug              String               @unique @db.VarChar(255)
+  bio               String?
+  avatar            String?              @db.VarChar(500)
+  verified          Boolean?             @default(false)
+  instruments       String[]
+  music_genres      String[]             @default(["blues"]) // ['blues', 'swing', 'balboa', 'shag', 'boogie', 'jazz', 'rhythm-and-blues']
+  primary_genre     String?              @default("blues") @db.VarChar(50) // Primary music genre
+  performance_types String[]             @default(["live"]) // ['live', 'dj', 'recorded', 'band', 'solo']
+  yearsActive       Int?
+  website           String?              @db.VarChar(500)
+  email             String?              @db.VarChar(255)
+  followerCount     Int?                 @default(0)
+  eventCount        Int?                 @default(0)
+  createdAt         DateTime?            @default(now()) @db.Timestamptz(6)
+  updatedAt         DateTime?            @default(now()) @updatedAt @db.Timestamptz(6)
+  image_url         String?
+  event_musicians   event_musicians[]
+  followers         UserFollowMusician[]
 
+  @@index([music_genres], map: "idx_musicians_genres")
+  @@index([primary_genre], map: "idx_musicians_primary_genre")
   @@map("musicians")
 }
 
@@ -174,11 +191,16 @@ model UserPreferences {
   defaultCity             String?  @db.VarChar(100)
   searchRadius            Int?     @default(50)
   timezone                String?  @default("UTC") @db.VarChar(50)
+  preferred_dance_styles  String[] @default(["blues"]) // User's preferred dance styles
+  experience_level        String?  @default("intermediate") @db.VarChar(20) // 'beginner', 'intermediate', 'advanced'
+  preferred_event_types   String[] @default(["festival", "workshop"]) // Preferred types of events
+  skill_levels            Json? // {blues: 'advanced', swing: 'beginner'} - per-style skill levels
   created_at              DateTime @default(now()) @db.Timestamptz(6)
   updated_at              DateTime @default(now()) @db.Timestamptz(6)
 
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
+  @@index([preferred_dance_styles], map: "idx_preferences_dance_styles")
   @@map("user_preferences")
 }
 

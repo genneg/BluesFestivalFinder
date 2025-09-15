@@ -131,6 +131,10 @@ exports.Prisma.EventScalarFieldEnum = {
   city: 'city',
   website: 'website',
   style: 'style',
+  dance_styles: 'dance_styles',
+  primary_style: 'primary_style',
+  difficulty_level: 'difficulty_level',
+  event_types: 'event_types',
   description: 'description',
   ai_quality_score: 'ai_quality_score',
   ai_completeness_score: 'ai_completeness_score',
@@ -161,7 +165,12 @@ exports.Prisma.TeacherScalarFieldEnum = {
   website: 'website',
   ai_bio_summary: 'ai_bio_summary',
   ai_relevance_score: 'ai_relevance_score',
-  image_url: 'image_url'
+  image_url: 'image_url',
+  specializations: 'specializations',
+  experience_levels: 'experience_levels',
+  teaching_since: 'teaching_since',
+  credentials: 'credentials',
+  preferred_events: 'preferred_events'
 };
 
 exports.Prisma.MusicianScalarFieldEnum = {
@@ -172,6 +181,9 @@ exports.Prisma.MusicianScalarFieldEnum = {
   avatar: 'avatar',
   verified: 'verified',
   instruments: 'instruments',
+  music_genres: 'music_genres',
+  primary_genre: 'primary_genre',
+  performance_types: 'performance_types',
   yearsActive: 'yearsActive',
   website: 'website',
   email: 'email',
@@ -240,6 +252,10 @@ exports.Prisma.UserPreferencesScalarFieldEnum = {
   defaultCity: 'defaultCity',
   searchRadius: 'searchRadius',
   timezone: 'timezone',
+  preferred_dance_styles: 'preferred_dance_styles',
+  experience_level: 'experience_level',
+  preferred_event_types: 'preferred_event_types',
+  skill_levels: 'skill_levels',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -296,6 +312,11 @@ exports.Prisma.Social_mediaScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.JsonNullValueInput = {
