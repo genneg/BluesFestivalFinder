@@ -75,8 +75,8 @@ interface Teacher {
 
 async function getSwingEvents() {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/events?limit=6`, {
-      cache: 'no-store',
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/events?limit=6`, {
+      next: { revalidate: 3600 } // Revalidate every hour
     })
 
     if (!response.ok) {
@@ -85,7 +85,7 @@ async function getSwingEvents() {
 
     const data = await response.json()
 
-    if (data.success) {
+    if (data.success && data.data && data.data.events) {
       // Filter for swing-related events
       const swingEvents = data.data.events.filter((event: any) =>
         event.dance_styles?.includes('swing') ||
@@ -107,8 +107,8 @@ async function getSwingEvents() {
 
 async function getSwingTeachers() {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/teachers?limit=4`, {
-      cache: 'no-store',
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/teachers?limit=4`, {
+      next: { revalidate: 3600 } // Revalidate every hour
     })
 
     if (!response.ok) {
@@ -117,7 +117,7 @@ async function getSwingTeachers() {
 
     const data = await response.json()
 
-    if (data.success) {
+    if (data.success && data.data && data.data.teachers) {
       // Filter for swing-related teachers
       const swingTeachers = data.data.teachers.filter((teacher: any) =>
         teacher.specializations?.includes('swing') ||
