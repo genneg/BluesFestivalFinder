@@ -163,22 +163,23 @@ export const authOptions: NextAuthOptions = {
 
   // Event handlers
   events: {
-    async signIn({ user, account, profile, isNewUser }) {
-      console.log(`User signed in: ${user.email} via ${account?.provider}`)
-      
+    async signIn({ user, account, profile: _profile, isNewUser: _isNewUser }) {
+      // console.log(`User signed in: ${user.email} via ${account?.provider}`)
+
       // You can add analytics, logging, or other side effects here
-      // if (isNewUser) {
+      // if (_isNewUser) {
       //   console.log(`New user registered: ${user.email}`)
       //   // Could send welcome email, analytics event, etc.
       // }
+      return true
     },
 
-    async signOut({ session }) {
-      // console.log(`User signed out: ${session?.user?.email}`)
+    async signOut({ session: _session }) {
+      // console.log(`User signed out: ${_session?.user?.email}`)
     },
 
-    async createUser({ user }) {
-      // console.log(`New user created: ${user.email}`)
+    async createUser({ user: _user }) {
+      // console.log(`New user created: ${_user.email}`)
       // Could send welcome email, analytics event, etc.
     }
   },
@@ -189,7 +190,7 @@ export const authOptions: NextAuthOptions = {
   // Configure logger
   logger: {
     error(code, metadata) {
-      console.error(`NextAuth Error [${code}]:`, metadata)
+      // console.error(`NextAuth Error [${code}]:`, metadata)
     },
     warn(code) {
       console.warn(`NextAuth Warning [${code}]`)
@@ -211,7 +212,7 @@ export const authOptions: NextAuthOptions = {
         sameSite: 'lax',
         path: '/',
         secure: process.env.NODE_ENV === 'production',
-        domain: process.env.NODE_ENV === 'production' ? '.swingradar.com' : undefined
+        domain: process.env.NODE_ENV === 'production' ? 'www.swingradar.com' : undefined
       }
     }
   }
