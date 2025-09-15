@@ -133,6 +133,7 @@ setError('')
               id="email"
               name="email"
               type="email"
+              autoComplete="email"
               required
               value={formData.email}
               onChange={handleInputChange}
@@ -154,6 +155,7 @@ setError('')
               id="password"
               name="password"
               type={showPassword ? 'text' : 'password'}
+              autoComplete="current-password"
               required
               value={formData.password}
               onChange={handleInputChange}

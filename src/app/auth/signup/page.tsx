@@ -252,6 +252,7 @@ return 'Good'
               id="name"
               name="name"
               type="text"
+              autoComplete="name"
               required
               value={formData.name}
               onChange={handleInputChange}
@@ -273,6 +274,7 @@ return 'Good'
               id="email"
               name="email"
               type="email"
+              autoComplete="email"
               required
               value={formData.email}
               onChange={handleInputChange}
@@ -294,6 +296,7 @@ return 'Good'
               id="password"
               name="password"
               type={showPassword ? 'text' : 'password'}
+              autoComplete="new-password"
               required
               value={formData.password}
               onChange={handleInputChange}
@@ -341,6 +344,7 @@ return 'Good'
               id="confirmPassword"
               name="confirmPassword"
               type={showConfirmPassword ? 'text' : 'password'}
+              autoComplete="new-password"
               required
               value={formData.confirmPassword}
               onChange={handleInputChange}
