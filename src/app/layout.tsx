@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://blues-festival-finder.vercel.app',
+    url: 'https://www.swingradar.com',
     siteName: 'SwingRadar',
   },
   twitter: {
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     yandex: process.env.YANDEX_SITE_VERIFICATION,
   },
   alternates: {
-    canonical: 'https://blues-festival-finder.vercel.app',
+    canonical: 'https://www.swingradar.com',
   },
 }
 

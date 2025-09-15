@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button'
 import { generateMetadata } from '@/components/seo/SEOMetadata'
 
 export const metadata: Metadata = generateMetadata({
-  title: 'About SwingRadar - Detect Swing Culture Worldwide',
+  title: 'About SwingRadar | Precision Radar for Global Swing Dance Culture',
   description: 'Discover SwingRadar, your precision radar for swing dance culture worldwide. Detect festivals, instructors, and musicians across Blues, Swing, Balboa, Shag, and Boogie Woogie.',
   keywords: [
     'about swingradar',

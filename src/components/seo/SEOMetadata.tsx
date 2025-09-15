@@ -21,7 +21,7 @@ export function generateMetadata(props: SEOProps): Metadata {
     title = 'SwingRadar',
     description = 'Detect swing culture worldwide with precision radar. Discover swing dance festivals across Blues, Swing, Balboa, Shag, and Boogie Woogie. Track your favorite instructors and musicians.',
     keywords = ['swing radar', 'swing dance detection', 'blues dance', 'lindy hop', 'balboa', 'shag', 'boogie woogie', 'festivals radar', 'dance event tracking', 'vintage swing culture radar'],
-    ogImage = 'https://swingradar.com/og-default.jpg',
+    ogImage = 'https://www.swingradar.com/og-default.jpg',
     ogUrl,
     canonicalUrl,
     noIndex = false,
@@ -33,7 +33,7 @@ export function generateMetadata(props: SEOProps): Metadata {
     tags
   } = props
 
-  const siteUrl = 'https://swingradar.com'
+  const siteUrl = 'https://www.swingradar.com'
   const fullUrl = canonicalUrl || ogUrl || siteUrl
   const fullOgUrl = ogUrl ? `${siteUrl}${ogUrl}` : siteUrl
 
@@ -143,7 +143,7 @@ export function generateEventMetadata(event: {
       'live music',
       'vintage swing culture'
     ],
-    ogImage: event.imageUrl || 'https://swingradar.com/og-event.jpg',
+    ogImage: event.imageUrl || 'https://www.swingradar.com/og-event.jpg',
     type: 'article',
     publishedTime: event.startDate,
     tags: [...styles.map(style => `${style} festival`), 'dance event', 'workshop', 'swing culture']
@@ -179,7 +179,7 @@ export function generateTeacherMetadata(teacher: {
       'balboa',
       'vintage swing culture'
     ],
-    ogImage: teacher.imageUrl || 'https://swingradar.com/og-teacher.jpg',
+    ogImage: teacher.imageUrl || 'https://www.swingradar.com/og-teacher.jpg',
     type: 'profile',
     authors: [teacher.name]
   })
