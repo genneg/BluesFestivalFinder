@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(HUSKY=0 git commit -m \"Fix health endpoint routing - move outside auth namespace to avoid NextAuth conflicts\")",
-      "mcp__playwright__browser_console_messages"
+      "mcp__playwright__browser_console_messages",
+      "Bash(HUSKY=0 git commit -m \"Debug NextAuth session creation: Add detailed logging and fix JWT callbacks\n\n- Add comprehensive logging to credentials authorize function\n- Fix JWT callback to properly store user.id in both token.id and token.sub\n- Change signin to use redirect: false for better error handling\n- Add console logging for debugging authentication flow\n- Ensure session callback uses correct token fields\")",
+      "Bash(git push:*)",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_network_requests",
+      "mcp__playwright__browser_evaluate",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
