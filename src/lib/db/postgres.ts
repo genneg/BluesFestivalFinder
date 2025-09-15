@@ -5,12 +5,29 @@ import { Pool } from 'pg'
 let pool: Pool | null = null
 
 export function getPostgresPool(): Pool {
+  // For Supabase, we need to handle SSL certificate issues by modifying the connection string
+  let connectionString = process.env.DATABASE_URL ?? ''
+
+  // If we're in production, add SSL parameters to handle certificate issues
+  if (process.env.NODE_ENV === 'production') {
+    // Ensure sslmode=require and rejectUnauthorized=false are in the connection string
+    if (!connectionString.includes('sslmode')) {
+      connectionString += connectionString.includes('?') ? '&' : '?'
+      connectionString += 'sslmode=require'
+    }
+    if (!connectionString.includes('rejectUnauthorized')) {
+      connectionString += '&rejectUnauthorized=false'
+    }
+  }
+
   pool ??= new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-      sslmode: 'require',
-    },
+    connectionString,
+    ssl:
+      process.env.NODE_ENV === 'production'
+        ? {
+            rejectUnauthorized: false,
+          }
+        : false,
     max: 20,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 10000,
