@@ -5,15 +5,18 @@ import { Pool } from 'pg'
 let pool: Pool | null = null
 
 export function getPostgresPool(): Pool {
-  if (!pool) {
-    pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
-      max: 10,
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 5000,
-    })
-  }
+  pool ??= new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+      sslmode: 'require',
+    },
+    max: 20,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 10000,
+    keepAlive: true,
+    keepAliveInitialDelayMillis: 10000,
+  })
   return pool
 }
 
@@ -38,7 +41,9 @@ export interface Account {
   updated_at: Date
 }
 
-export async function findUserByEmail(email: string): Promise<(User & { accounts: Account[] }) | null> {
+export async function findUserByEmail(
+  email: string
+): Promise<(User & { accounts: Account[] }) | null> {
   const pool = getPostgresPool()
 
   try {
@@ -62,7 +67,7 @@ export async function findUserByEmail(email: string): Promise<(User & { accounts
 
     return {
       ...user,
-      accounts: accountsResult.rows as Account[]
+      accounts: accountsResult.rows as Account[],
     }
   } catch (error) {
     console.error('Database query error:', error)
@@ -70,7 +75,11 @@ export async function findUserByEmail(email: string): Promise<(User & { accounts
   }
 }
 
-export async function createUserWithCredentials(email: string, name: string, hashedPassword: string): Promise<User> {
+export async function createUserWithCredentials(
+  email: string,
+  name: string,
+  hashedPassword: string
+): Promise<User> {
   const pool = getPostgresPool()
   const client = await pool.connect()
 
@@ -110,5 +119,54 @@ export async function testConnection(): Promise<boolean> {
   } catch (error) {
     console.error('Database connection test failed:', error)
     return false
+  }
+}
+
+export async function testConnectionDetailed(): Promise<{
+  success: boolean
+  error?: string
+  details?: Record<string, unknown>
+}> {
+  try {
+    const pool = getPostgresPool()
+    const client = await pool.connect()
+
+    try {
+      // Test basic connection
+      const pingResult = await client.query('SELECT NOW() as timestamp')
+
+      // Test users table
+      const userCountResult = await client.query('SELECT COUNT(*) as count FROM users')
+
+      // Test accounts table
+      const accountCountResult = await client.query('SELECT COUNT(*) as count FROM accounts')
+
+      return {
+        success: true,
+        details: {
+          timestamp: pingResult.rows[0].timestamp,
+          userCount: parseInt(userCountResult.rows[0].count),
+          accountCount: parseInt(accountCountResult.rows[0].count),
+          databaseUrl:
+            process.env.DATABASE_URL?.substring(0, 20) +
+            '...' +
+            process.env.DATABASE_URL?.substring(process.env.DATABASE_URL?.lastIndexOf('@') || 0),
+        },
+      }
+    } finally {
+      client.release()
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      details: {
+        databaseUrl:
+          process.env.DATABASE_URL?.substring(0, 20) +
+          '...' +
+          process.env.DATABASE_URL?.substring(process.env.DATABASE_URL?.lastIndexOf('@') || 0),
+        env: process.env.NODE_ENV,
+      },
+    }
   }
 }
